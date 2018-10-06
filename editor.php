@@ -1049,7 +1049,7 @@
 
     <script src="inputWall.js?<?=$vrs?>"></script>
     <script src="dragWindowDoorUI.js?<?=$vrs?>"></script>
-    <script src="changeTexture.js?<?=$vrs?>"></script>
+    
   	<script src="loadPopObj.js?<?=$vrs?>"></script>
 	
 	<script src="clickActiveObj.js?<?=$vrs?>"></script>

@@ -573,9 +573,6 @@ function upLineUU(line1, line2, s1, s2, pointC)
 
 	line1.geometry.verticesNeedUpdate = true;	
 	line2.geometry.verticesNeedUpdate = true;
-
-	upUvs_1( line1 );
-	upUvs_1( line2 );
 }
 
 

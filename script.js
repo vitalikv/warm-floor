@@ -98,9 +98,7 @@ function animate()
 
 	cameraZoomTopLoop();	
 	moveCameraToNewPosition();
-	offsetTexture();
 	
-	//renderer.clearDepth();
 	updateKeyDown();
 
 	stats.end();

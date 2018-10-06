@@ -53,7 +53,7 @@ function createFloor(arrP, arrW, arrS, id, roomType, material, plinth)
 	//setMaterialFloorCeiling(n, material)
 	
 	
-	upUvs_1( room[n] );
+	
 	
 	getYardageSpace( [room[n]] );
 
@@ -142,7 +142,7 @@ function updateShapeFloor(arrRoom)
 		arrRoom[i].geometry.faces = geometry.faces;		
 		arrRoom[i].geometry.verticesNeedUpdate = true;
 		arrRoom[i].geometry.elementsNeedUpdate = true;
-		upUvs_1( arrRoom[i] );
+		
 		arrRoom[i].geometry.computeBoundingSphere();
 		arrRoom[i].geometry.computeBoundingBox();
 		arrRoom[i].geometry.computeFaceNormals();
@@ -158,7 +158,7 @@ function updateShapeFloor(arrRoom)
 		ceiling[num].geometry.faces = geometry.faces;			
 		ceiling[num].geometry.verticesNeedUpdate = true;
 		ceiling[num].geometry.elementsNeedUpdate = true;
-		upUvs_1( ceiling[num] );
+		
 		ceiling[num].geometry.computeBoundingSphere();
 		ceiling[num].geometry.computeBoundingBox();
 		ceiling[num].geometry.computeFaceNormals();		

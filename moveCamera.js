@@ -217,7 +217,7 @@ function cameraMove3D( event )
 
 // скрываем внешние стены, когда она перекрывает обзор
 function wallAfterRender_2()
-{ //return; 
+{ return; 
 	for ( var i = 0; i < wallVisible.length; i++ )
 	{
 		var wall = wallVisible[ i ].wall;

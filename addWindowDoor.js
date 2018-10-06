@@ -81,9 +81,7 @@ function addWD( obj, wall, pos )
 		
 		//wall.material[0].wireframe = true;
 		//wall.material[1].wireframe = true;
-		//wall.material[2].wireframe = true;
-		
-		upUvs_1( wall );		
+		//wall.material[2].wireframe = true;	
 	}	
 
 
@@ -95,39 +93,9 @@ function addWD( obj, wall, pos )
 	// правильно поворачиваем окно/дверь	
 	// obj.updateMatrixWorld();  сверху уже есть
 	
-	if(obj.userData.tag == 'door') 
-	{ 
-		createDoorLeaf(obj, (obj.userData.door.open_type) ? obj.userData.door.open_type : 0); 
-		
-		// устанавливаем (поварачиваем) ПОП дверь	
-		if(obj.userData.door.type == 'DoorSimply') { setPosDoorLeaf_2(obj); }
-		else if(obj.userData.door.type == 'DoorPattern') { if(obj.userData.door.goList.setPopObj) { changeWidthParamWD(obj); setPosDoorLeaf_3(obj); } } 
-		
-			 
-	}
-	else
-	{
-		var room = detectCommonZone_1( wall );
-		
-		if(room.length == 1)
-		{
-			var side = 0;
-			for ( var i2 = 0; i2 < room[0].w.length; i2++ ) { if(room[0].w[i2].userData.id == wall.userData.id) { side = room[0].s[i2]; break; } }
 
-			if(side == 0) { obj.userData.door.popObj.rotation.y += Math.PI; }
-			else { }			
-		}
-		 
-		obj.userData.door.popObj.position.copy(obj.geometry.boundingSphere.center.clone());
-	}
-	
 	getInfoWD_1(obj, pos);
 	resetMenuUI();
-	
-	// если объект новый (вставили из каталога), то записываем 
-	// если объект загружен из сохраненного файла или вставлен из undoRedo, то ничего не делаем 
-	if(obj.userData.door.status == '') { getInfoEvent6( obj ); }  
-	//else if(obj.userData.door.status == 'undoRedo') { forceAssignActiveObj(obj); }	// выделение/активация объекта
 	
 	renderCamera();
 }
@@ -263,9 +231,7 @@ function clickMoveWD_BSP( wd )
 			if(wall.geometry.faces[i].normal.z == 1) { wall.geometry.faces[i].materialIndex = 1; }
 			else if(wall.geometry.faces[i].normal.z == -1) { wall.geometry.faces[i].materialIndex = 2; }
 		}		
-	}
-	
-	upUvs_1( wall );	
+	}	
 	
 	return wall;
 }
@@ -320,9 +286,7 @@ function MeshBSP( wd, objsBSP )
 		else if(wall.geometry.faces[i].normal.z == -1) { wall.geometry.faces[i].materialIndex = 2; }
 	}
 
-	//wall.updateMatrixWorld();
-	
-	upUvs_1( wall );	 	
+	//wall.updateMatrixWorld();	 	
 }
 
  

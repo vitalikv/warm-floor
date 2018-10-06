@@ -326,127 +326,6 @@ function loadPopObj_2(cdm)
 
 
 
-function loaderObjPop(cdm, json)
-{	
-	// замена выделенного объекта
-	var parO = { pos : new THREE.Vector3(), rot : new THREE.Vector3() };
-	
-	var pos = (cdm.pos) ? new THREE.Vector3(Number(cdm.pos.x), Number(cdm.pos.y), Number(cdm.pos.z)) : new THREE.Vector3();
-	var rot = (cdm.rot) ? new THREE.Vector3(Number(cdm.rot.x), Number(cdm.rot.y), Number(cdm.rot.z)) : new THREE.Vector3();
-
-	
-	var obj = param_pivot.obj;
-	if(obj) 
-	{ 
-		if(menuUI.type == 'catalog_self') 
-		{ 
-			parO.pos = new THREE.Vector3(obj.position.x, obj.position.y, -obj.position.z); 
-			parO.rot = new THREE.Vector3(obj.rotation.x + Math.PI, obj.rotation.y + Math.PI, obj.rotation.z + Math.PI); 
-			deleteObjCatalog(obj);   
-		}
-		else 
-		{
-			param_pivot.obj = null;
-			pivot.visible = false;
-			gizmo.visible = false;				
-		}
-	}				
-	
-	var mod = json.modifiers.split(';');
-	
-	if(!cdm.id)
-	{
-		offset = new THREE.Vector3();
-		
-										
-		for ( var i2 = 0; i2 < mod.length; i2++ ) 
-		{ 
-			if(mod[i2] == 'SnapToCeil') { pos.y = Number(height_wall); break; } 							// объекты крепятся к потолку
-			if((/SetupBeginOverfloor/i).test( mod[i2] )) { pos.y = Number(mod[i2].split('*')[1]); break; }	// объекты крепятся на заданную высоту	
-		}
-		
-		planeMath2.position.set( pos.x, pos.y, pos.z );
-		planeMath2.rotation.set( 0, 0, 0 );
-		
-		parO.pos.y = pos.y;
-		pos.copy( parO.pos ); 									
-		rot.copy( parO.rot ); 
-	}
-	
-	// json parse
-	var obj = new THREE.ObjectLoader().parse( json.fileJson );
-
-	var obj3D = createCopyPopForm(obj);  		
-	
-	if(cdm.id) { var id = cdm.id; }
-	else { var id = countId; countId++; }
-	
-	
-	
-		 						 								
-	obj3D.lotid = json.id; 
-	obj3D.pr_scale = (cdm.id) ? cdm.size : json.size;	
-	obj3D.pr_group = null;
-	obj3D.pr_catalog = Object.assign({}, cdm.catalog);
-	obj3D.pr_filters = json.filters;
-	obj3D.pr_preview = json.preview;
-	
-	obj3D.userData.id = id;
-	obj3D.userData.tag = 'obj';
-	obj3D.userData.catalog = cdm.catalog;
-	obj3D.userData.obj3D = { lotid : json.id, lotGroup : json.lotGroup, size : (cdm.id) ? cdm.size : json.size, filters : json.filters, preview : json.preview, caption : json.caption, catalog : Object.assign({}, cdm.catalog) };
-	
-	var box = null;
-	
-	for ( var i2 = 0; i2 < mod.length; i2++ ) 
-	{ 
-		if((/ResizeOption/i).test( mod[i2] )) { box = boxPop; break; }	// объекту можно менять высоту/ширину/длину
-	}	
-	
-	obj3D.userData.obj3D.boxPop = box; 
-	obj3D.userData.obj3D.controller = 'pivot'; 
-	
-	if(cdm.id)
-	{
-		obj3D.scale.set(cdm.size.x / json.size.x, cdm.size.y / json.size.y, cdm.size.z / json.size.z);									
-		assignTextureAllChildrensLoadPop(obj, cdm.material);
-		obj3D.position.set(pos.x, pos.y, -pos.z); 					// ковертируем с помощью -pos.z		
-	}
-	else
-	{
-		if(menuUI.type != 'catalog_self') { obj_selected = obj3D; }		
-		assignTextureAllChildrens(obj, json.components);
-
-		if(cdm.emptyCube) { obj3D.position.copy( cdm.emptyCube.position ); scene.remove( cdm.emptyCube ); }
-		else { obj3D.position.set(pos.x, pos.y, -pos.z); }   		
-	}
-
-	popChangeMaxAnisotropy(obj);
-	obj3D.add( obj ); 
-	
-	// ковертируем с помощью Math.PI
-	if(obj.userData.version == "2.0") { obj3D.rotation.set(rot.x, -rot.y, rot.z); }
-	else { obj3D.rotation.set(rot.x + Math.PI, rot.y, rot.z + Math.PI); }					
-	
-	
-	arr_obj[arr_obj.length] = obj3D; 
-
-	if(cdm.group) 
-	{ 
-		var box = cdm.group;
-		box.add( obj3D );
-		var n = box.userData.arrO.length;
-		box.userData.arrO[n] = obj3D;
-		box.userData.pos_obj[n] = obj3D.position.clone();
-		obj3D.pr_group = box; 
-	}		 
-
-	resetMenuUI();
-	renderCamera();
-}
-
-
-
 // устанавливаем у POP для map и lightMap максимальное значение anisotropy
 function popChangeMaxAnisotropy(obj) 
 {
@@ -476,91 +355,18 @@ function loaderWD(cdm, json)
 	var obj = cdm.emptyBox;
 
 	obj.userData.door.lotid = json.id;
-	obj.userData.door.type = (json.lotGroup == 'Windows') ? 'WindowSimply' : ((/DoorPattern*/i).test( json.modifiers )) ? 'DoorPattern' : 'DoorSimply';
+	obj.userData.door.type = (json.lotGroup == 'Windows') ? 'WindowSimply' : 'DoorEmpty';
 	
 	obj.caption = json.caption;
 	obj.pr_catalog = Object.assign({}, cdm.catalog);
 	obj.pr_filters = json.filters;
 	obj.lotid = json.id;
-	obj.pr_preview = json.preview;
-	 	
-	
-	// кликнули/выбрали дверь, заменяем на другую
-	if(menuUI.type == 'catalog_self')
-	{	
-		//cdm.mess = 'replace';
-		cdm.id = Number(cdm.obj.userData.id);
-		cdm.pos = cdm.obj.position.clone();
-		cdm.wall = cdm.obj.userData.door.wall;		
-		if(cdm.obj.userData.door.open_type) { cdm.open_type = cdm.obj.userData.door.open_type; }
-		obj_selected = null;
-		
-		//obj.userData.door.width = cdm.obj.userData.door.width;
-		
-		deleteWinDoor( cdm.obj );
-		delete cdm.obj;		
-	}	
-	
-	if(obj.userData.door.type == 'DoorPattern')
-	{  					
-		createJambDoor(json, cdm);  // параметрическая дверь   		
-	}
-	else 
-	{  
-		if(json.fileJson) { var popObj = (json.fileJson.geometries) ? new THREE.ObjectLoader().parse( json.fileJson ) : null; }
-		else { var popObj = null; }				
-				
-		obj.userData.door.popObj = popObj;	
-		obj.userData.door.goList.setPopObj = true; 
-		
-		if(json.id == 9012) { obj.pr_filters = [3856, 3864]; }
-		else if(json.id == 278) { obj.pr_filters = [3770]; }		
-		else if(json.id == 575) { obj.pr_filters = [3856, 3864]; }
-		
-		if(popObj)
-		{
-			if(!popObj.geometry) 
-			{
-				if(popObj.children[0]) { obj.userData.door.popObj = popObj.children[0]; obj.add( popObj ); }
-			}
-		}		
-		
-		//var arr = json.modifiers.split(';');
-		//for ( var i = 0; i < arr.length; i++ ) { if((/Mirrored/i).test( arr[i] )) { size.x *= -1; } }
-		
-		var existObj = (obj.userData.door.popObj) ? (obj.userData.door.popObj.geometry) ? true : false : false;
-		
-		if(existObj)
-		{  
-			var size = (cdm.size) ? cdm.size : json.size;
-			
-			popObj = obj.userData.door.popObj;
-			
-			popObj.geometry.computeBoundingBox();		
-			var dX = popObj.geometry.boundingBox.max.x - popObj.geometry.boundingBox.min.x;
-			var dY = popObj.geometry.boundingBox.max.y - popObj.geometry.boundingBox.min.y;
-			popObj.scale.set( size.x / dX, size.y / dY, 1 );	 				
-
-			assignTextureAllChildrens(popObj, json.components);		
-			obj.add( popObj );			
-		}
-		else 
-		{
-			obj.userData.door.type = 'DoorEmpty';			
-			obj.userData.door.popObj = null;
-		}		
-	}
-	
-	if(obj) { (obj.userData.door.type === 'DoorPattern') ? UI.show('doorPattern') : UI.hide('doorPattern'); }
+	obj.pr_preview = json.preview;	
+	obj.userData.door.popObj = null;
 	
 	// если это загрузка (из xml), то вставляем дверь 
 	if(cdm.id) 
 	{ 
-		if(obj.userData.door.type == 'DoorSimply' || obj.userData.door.type == 'DoorPattern')
-		{
-			if(cdm.open_type) obj.userData.door.open_type = cdm.open_type;
-		}
-		
 		if(cdm.status)
 		{
 			if(cdm.status == 'load')
@@ -713,86 +519,6 @@ function getAllChildrenObj(obj, arr)
 	
 	return arr;
 }
-
-
-
-// загрузка материала 
-function loadPopMaterial(cdm, json) 
-{
-	var obj = cdm.obj; 
-	var lotid = json.id;  
-	var scale = json.size; 
-	var mat_color = json.color; 
-	var filters = json.filters; 
-	var preview = json.preview; 
-	var caption = json.caption; 
-	var catalog = cdm.catalog;
-	
-	var color = null;
-	
-	if (cdm.start == 'new') 
-	{ 
-		color = (json.sourceImageURL) ? new THREE.Color( 0xffffff ) : new THREE.Color('#'+json.color);		
-		if(obj.userData.tag == 'wall' || obj.userData.tag == 'room') { getInfoEvent22( cdm, { id : lotid, size : scale, color : color } ) } 
-	}
-	else 
-	{ 
-		if(cdm.rgb) color = new THREE.Color('rgb('+cdm.rgb.r+'%,'+cdm.rgb.g+'%,'+cdm.rgb.b+'%)');
-		if(cdm.scale) scale = cdm.scale;
-	}	
-	
-	
-	if(obj.userData.tag == 'wall') 
-	{ 
-		var material = obj.material[cdm.index]; 
-	}
-	else 
-	{ 
-		var material = obj.material; 
-	}
-
-
-	// загрузка текстуры
-	if(json.sourceImageURL) 
-	{ 
-		new THREE.TextureLoader().load(json.sourceImageURL, function ( image ) 
-		{ 
-			var inf = {obj : obj, image : image, scale : scale};
-			
-			if(cdm.offset) { inf.offset = cdm.offset; } 
-			if(cdm.rot) { inf.rot = cdm.rot; }
-			if(obj.userData.tag == 'wall') { inf.index = cdm.index; }
-			 
-			setMultyMaterialSide3(inf); 
-			material.color = color; 
-		}); 
-	}
-	else 
-	{ 
-		material.map = null; 
-		material.color = color; 
-		material.needsUpdate = true; 
-	}
-
-	
-	if(obj.userData.tag != 'wall')
-	{			 		 
-		obj.pr_containerID = (cdm.containerID) ? cdm.containerID : null;
-		obj.pr_matScale = scale;  
-		obj.pr_filters = filters;
-		obj.pr_preview = preview;
-		obj.pr_catalog = Object.assign({}, catalog);
-	}
-	
-	var inf = { lotid : lotid, containerID : cdm.containerID, caption : caption, color : color, scale : scale, filters : filters, preview : preview, catalog : catalog };
-	
-	if(obj.userData.tag == 'wall') { obj.userData.material[cdm.index] = inf; }
-	else { obj.userData.material = inf; }
-		
-
-	resetMenuUI();
-}
-
 
 
  
