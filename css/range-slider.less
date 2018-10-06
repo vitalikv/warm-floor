@@ -1,0 +1,115 @@
+.range-slider {
+  margin: auto;
+}
+
+.camera-range {
+  width: 36px;
+  height: 140px;
+  border-radius: 20px;
+  background-color: #f2f2f2;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+}
+
+.camera-range .range-slider-vertical {
+  margin: auto;
+  width: 20px;
+  height: 120px;
+  position: relative;
+}
+
+.camera-range .range-slider-vertical .range-slider-track {
+  width: 20px;
+  height: 105px;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.camera-range .range-slider-vertical .range-slider-track:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 8px;
+  width: 4px;
+  height: 120px;
+	background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDQgMTIwIj4gICAgPHJlY3Qgd2lkdGg9IjQiIGhlaWdodD0iMTIwIiBmaWxsPSIjRDBEMEQwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHJ4PSIyIi8+PC9zdmc+);
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.angle-range .range-slider-track:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -5px;
+  right: 0px;
+  width: 4px;
+  height: 5px;
+	background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjUiIHZpZXdCb3g9IjAgMCA0IDUiPiAgICA8cGF0aCBmaWxsPSIjRDBEMEQwIiBmaWxsLXJ1bGU9Im5vbnplcm8iIGQ9Ik0yIDMuNWExIDEgMCAxIDAgMC0yIDEgMSAwIDAgMCAwIDJ6bTAgMWEyIDIgMCAxIDEgMC00IDIgMiAwIDAgMSAwIDR6Ii8+PC9zdmc+);
+  
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.camera-range .range-slider-vertical .range-slider-track .dragger {
+  width: 27px;
+  height: 15px;
+  border-radius: 1px;
+	background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNyIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI3IDE1Ij4gICAgPHBhdGggZmlsbD0iIzRBNEE0QSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNyAxLjk5MkM3IC44OTIgNy44OTggMCA4Ljk5IDBoMTYuMDJDMjYuMTA4IDAgMjcgLjg5MyAyNyAxLjk5MnYxMS4wMTZjMCAxLjEtLjg5OCAxLjk5Mi0xLjk5IDEuOTkySDguOTlDNy44OTIgMTUgNyAxNC4xMDcgNyAxMy4wMDhWMS45OTJ6bS01LjU0NS4xMjFsNCAyLjA0NGExIDEgMCAwIDEgLjU0NS44OXY0LjkwNmExIDEgMCAwIDEtLjU0NS44OWwtNCAyLjA0M0ExIDEgMCAwIDEgMCAxMS45OTZWMy4wMDRhMSAxIDAgMCAxIDEuNDU1LS44OXoiLz48L3N2Zz4=);
+  
+  background-repeat: no-repeat;
+  background-position: center center;
+  position: relative;
+  z-index: 2;
+  display: block;
+  cursor: pointer;
+  left: -5px;
+  transition: top .05s;
+}
+
+.angle-range .range-slider-track {
+  width: 113px;
+  height: 15px;
+  background-color: @light-grey;
+  margin: auto;
+  position: relative;
+  cursor: pointer;
+}
+
+.angle-range .range-slider-track:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 1px;
+  left: -5px;
+  width: 123px;
+  height: 15px;
+	background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjIiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxMjIgMTYiPiAgICA8cGF0aCBmaWxsPSIjRDBEMEQwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0yLjA1NiA3LjY5NmMtMi43NTMuMTc0LTIuNzU3LjQ1NSAwIC42MjhsMTEzLjk1MyA3LjE4YzEuMTAzLjA3IDIuNjAzLS41MjQgMy4zMTMtMS4zOCAwIDAgMi42NjgtMi40MDUgMi42NjgtNi4xODEgMC0zLjc3Ni0yLjY0Ni02LjA2My0yLjY0Ni02LjA2My0uNzM5LS44MjMtMi4yMjQtMS40MzQtMy4zMzUtMS4zNjRMMi4wNTYgNy42OTZ6Ii8+PC9zdmc+);  
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.angle-range .range-slider-track .dragger {
+  width: 4px;
+  height: 16px;
+	background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjE2IiB2aWV3Qm94PSIwIDAgNCAxNiI+ICAgIDxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjE1IiB5PSIuNSIgZmlsbD0iIzRBNEE0QSIgZmlsbC1ydWxlPSJldmVub2RkIiByeD0iMiIvPjwvc3ZnPg==);  
+  background-repeat: no-repeat;
+  background-position: center center;
+  position: relative;
+  z-index: 2;
+  display: block;
+  cursor: pointer;
+  transition: left .05s;
+  /* opacity:.6; */
+}
+
+.angle-range {
+  width: 140px;
+  height: 36px;
+  background-color: @light-grey;
+  border-radius: 36px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+}

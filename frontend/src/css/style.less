@@ -1,0 +1,224 @@
+@import './fonts.less';
+@import './editable-input.less';
+@import './modal.less';
+@dark-grey  : #4a4a4a;
+@light-grey : #f2f2f2;
+@medium-grey: #979797;
+@hover      : #e9ecff;
+@active     : #f4f4ff;
+@accent     : #FF8A55;
+@blue       : #5966f7;
+@text-color : #4e4e55;
+@dots       : #d1d1d1;
+@br         : 4px;
+@pink       : #ef2a5a;
+@pop        : #2699fa;
+
+html,
+body {
+  margin: 0;
+  font-family: 'AvenirNextCyr';
+  color: @dark-grey;
+}
+
+#app {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header {
+  display: flex;
+  position: relative;
+  z-index: 1000;
+  height: 62px;
+  min-height: 62px;
+  box-sizing: border-box;
+  background: @light-grey;
+  min-width: 1100px;
+  &__section {
+    position: relative;
+    padding: 0 18px;
+    padding-bottom: 6px;
+    &:not(:last-child)::after {
+      display: block;
+      content: "";
+      width: 1px;
+      position: absolute;
+      right: 0;
+      top: 3px;
+      bottom: 3px;
+      background: -webkit-linear-gradient(bottom, transparent 1px, #979797 2px);
+      background: linear-gradient(to top, transparent 1px, #979797 2px);
+      background-size: 1px 3px;
+    }
+  }
+  &__main {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+  }
+  &__logo-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__back-btn {
+    margin-left: 24px;
+    margin-top: 5px;
+    transition: all .1s;
+    line-height: 0;
+    font-size: 13px;
+    #back-btn-g:hover #back-btn {
+      fill: @hover;
+    }
+    #back-btn-g text {
+      font-family: 'AvenirNextCyr';
+      font-size: 13px;
+    }
+    #back-btn-g:hover {
+      cursor: pointer;
+    }
+  }
+  h1 {
+    flex-grow: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  &__price {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  &__user-info {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+}
+
+.price {
+  height: 44px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &__refresh {
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+  }
+  &__loading {
+    animation: rotate 1s linear infinite;
+  }
+  &__value {
+    padding: 5px 12px;
+    width: 171px;
+    margin-right: 6px;
+    margin-left: 12px;
+    font-family: AvenirNextCyr;
+    font-size: 28px;
+    font-weight: 500;
+    text-align: right;
+    color: @dark-grey;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  }
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  &__ava {
+    width: 44px;
+    height: 44px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    text-align: center;
+    background-color: @pop;
+    margin-right: 12px;
+    img {
+      display: block;
+      transform: translateY(50%);
+    }
+  }
+  &__name {
+    font-family: AvenirNextCyr;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    color: @dark-grey;
+    white-space: nowrap;
+  }
+  &__arrow {
+    position: relative;
+    width: 14px;
+    height: 9px;
+    margin-left: 12px;
+    &:before {
+      content: "";
+      position: absolute;
+      display: block;
+      top: 3px;
+      left: -1px;
+      width: 10px;
+      height: 2px;
+      background-color: #979797;
+      transform: rotate(45deg);
+      border-radius: 1px;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      display: block;
+      top: 3px;
+      right: -1px;
+      width: 10px;
+      height: 2px;
+      background-color: #979797;
+      transform: rotate(-45deg);
+      border-radius: 1px;
+    }
+  }
+}
+
+.logo {
+  width: 46px;
+  height: 44px;
+  padding-top: 5px;
+}
+
+.ic-rur {
+  width: 14px;
+  height: 20px;
+  background-image: url('../images/icons/ic-rur.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  display: inline-block;
+}
+
+.open-catalog {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -80px;
+  width: 70px;
+  height: 125px;
+  background-color: #627fed;
+	background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI5NCIgdmlld0JveD0iMCAwIDQwIDk0Ij4gICAgPGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJub256ZXJvIj4gICAgICAgIDxnIGZpbGw9IiNGMkYyRjIiPiAgICAgICAgICAgIDxwYXRoIGQ9Ik01LjYgMzQuMmgzLjZ2LTIuN0g1LjZ2Mi43em0tMS44LTQuNUgxMVYzNkgzLjh2LTYuM3pNMzAuOCAzNC4yaDMuNnYtMi43aC0zLjZ2Mi43ek0yOSAyOS43aDcuMlYzNkgyOXYtNi4zeiIvPiAgICAgICAgICAgIDxwYXRoIGQ9Ik05LjIgMjkuN1YxMC44SDMuOHYxOC45aDUuNHpNMy44IDloNS40YTEuOCAxLjggMCAwIDEgMS44IDEuOHYyMC43SDJWMTAuOEExLjggMS44IDAgMCAxIDMuOCA5eiIvPiAgICAgICAgICAgIDxwYXRoIGQ9Ik0xMSAyOS43aDE4VjMuNmExLjggMS44IDAgMCAwLTEuOC0xLjhIMTIuOEExLjggMS44IDAgMCAwIDExIDMuNnYyNi4xek0xMi44IDBoMTQuNGEzLjYgMy42IDAgMCAxIDMuNiAzLjZ2MjcuOUg5LjJWMy42QTMuNiAzLjYgMCAwIDEgMTIuOCAweiIvPiAgICAgICAgICAgIDxwYXRoIGQ9Ik0zNi4yIDI5LjdWMTAuOGgtNS40djE4LjloNS40ek0zMC44IDloNS40YTEuOCAxLjggMCAwIDEgMS44IDEuOHYyMC43aC05VjEwLjhBMS44IDEuOCAwIDAgMSAzMC44IDl6Ii8+ICAgICAgICAgICAgPHBhdGggZD0iTTI5IDI5Ljd2LTlhMS44IDEuOCAwIDAgMC0xLjgtMS44SDEyLjhhMS44IDEuOCAwIDAgMC0xLjggMS44djloMTh6TTEyLjggMTcuMWgxNC40YTMuNiAzLjYgMCAwIDEgMy42IDMuNnYxMC44SDkuMlYyMC43YTMuNiAzLjYgMCAwIDEgMy42LTMuNnoiLz4gICAgICAgIDwvZz4gICAgICAgIDxnIGZpbGw9IiNGMkYyRjIiPiAgICAgICAgICAgIDxwYXRoIGQ9Ik0zLjggNTkuOFY2N2gyNi4wMTV2LTcuMkgzLjh6bTAtMS44aDI2LjAxNWExLjggMS44IDAgMCAxIDEuOCAxLjhWNjdhMS44IDEuOCAwIDAgMS0xLjggMS44SDMuOEExLjggMS44IDAgMCAxIDIgNjd2LTcuMkExLjggMS44IDAgMCAxIDMuOCA1OHpNMTcuMjYyIDc5LjZ2MTIuNmgzLjU3OVY3OS42aC0zLjU4em0tMS44LTEuOGg3LjE3OVY5NGgtNy4xOFY3Ny44eiIvPiAgICAgICAgICAgIDxwYXRoIGQ9Ik0zNi4xIDY5LjkzbC0xNy45NDkgNS40djMuMzdoMS44di0yLjAzbDE3Ljk0OS01LjRWNjIuNWgtNi4yODV2MS44SDM2LjF6Ii8+ICAgICAgICA8L2c+ICAgICAgICA8cGF0aCBmaWxsPSIjRkZGIiBkPSJNMCA0Ny41aDQwdi0xSDB6Ii8+ICAgIDwvZz48L3N2Zz4=);
+  background-repeat: no-repeat;
+  background-position: center center;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  cursor: pointer;
+}

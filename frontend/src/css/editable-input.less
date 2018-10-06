@@ -1,0 +1,53 @@
+.editable {
+  &__input {
+    // display: none;
+    font-family: AvenirNextCyr;
+    font-size: 28px;
+    font-weight: 500;
+    text-align: left;
+    color: #4a4a4a;
+    flex-grow: 1;
+    padding: 0px 8px;
+    padding-right: 28px;
+    border-radius: @br;
+    white-space: nowrap;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    outline: none;
+    border: none;
+    // margin-top: 4px;
+    margin-left: 1px;
+    height: 46px;
+    // transition: all .2s;
+    max-width: 380px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    flex: 0 1 auto;
+  }
+  &__text {
+    font-family: AvenirNextCyr;
+    font-size: 28px;
+    height: 34px;    
+    font-weight: 500;
+    text-align: left;
+    color: #4a4a4a;
+    flex-grow: 1;
+    padding: 5px 8px;
+    padding-right: 28px;
+    border-radius: @br;
+    cursor: pointer;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    max-width: 380px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    flex: 0 1 auto;
+    &:hover {
+      border: 1px solid #d0d0d0;
+      cursor: pointer;
+    }
+  }
+}

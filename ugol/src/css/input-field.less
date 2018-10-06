@@ -1,0 +1,30 @@
+
+.input-field {
+  width: 100px;
+  padding: 6px;
+  box-sizing: border-box;
+  border-radius: @br;
+  height: 35px;
+  border: 1px solid @dots;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 6px;
+  &__input {
+    width: 60px;
+    font-size: 17px;
+    font-family: 'AvenirNextCyr';
+    color: @dark-grey;
+    font-weight: 400;
+    border: none;
+    box-sizing: border-box;
+    &:focus {
+      outline: none;
+    }
+  }
+  &__label {
+    margin: 0 6px;
+  }
+   ::-webkit-input-placeholder {
+    color: @dots;
+  }
+}

@@ -1,0 +1,53 @@
+.overlay-btn {
+  position: relative;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  background-color: @light-grey;
+  border-radius: @br;
+  text-align: center;
+  padding: 5px;
+  width: 34px;
+  height: 34px;
+  min-height: 34px;
+  box-sizing: border-box;
+  margin: 3px;
+  transition: background-color .3s, transform .1s, margin .2s;
+  justify-content: center;
+  display: none;
+  align-items: center;
+  &:hover {
+    background-color: @hover;
+    cursor: pointer;
+  }
+  &_circle {
+    border-radius: 50%;
+  }
+  &:active {
+    background-color: @active;
+  }
+  &_active {
+    background-color: @hover;
+  }
+  &_inverted {
+    background-color: @dark-grey;
+    &:hover {
+      background-color: @dark-grey;
+    }
+  }
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    display: flex !important;
+  }
+  &.disabled+ul {
+    pointer-events: none!important;;
+    opacity: 0!important;;
+  }
+}
+
+.on {
+  display: flex;
+}
+
+.off {
+  display: none !important;
+}

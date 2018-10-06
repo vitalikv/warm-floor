@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="699" height="175" viewBox="0 0 699 175">
+    <defs>
+        <rect id="b" width="68" height="68" rx="8"/>
+        <filter id="a" width="141.2%" height="141.2%" x="-20.6%" y="-14.7%" filterUnits="objectBoundingBox">
+            <feOffset dy="4" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="4"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.198171422 0"/>
+        </filter>
+        <rect id="d" width="68" height="68" rx="8"/>
+        <filter id="c" width="141.2%" height="141.2%" x="-20.6%" y="-14.7%" filterUnits="objectBoundingBox">
+            <feOffset dy="4" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="4"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.200577446 0"/>
+        </filter>
+        <rect id="f" width="68" height="68" rx="8"/>
+        <filter id="e" width="141.2%" height="141.2%" x="-20.6%" y="-14.7%" filterUnits="objectBoundingBox">
+            <feOffset dy="4" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="4"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.200577446 0"/>
+        </filter>
+        <rect id="h" width="68" height="68" rx="8"/>
+        <filter id="g" width="141.2%" height="141.2%" x="-20.6%" y="-14.7%" filterUnits="objectBoundingBox">
+            <feOffset dy="4" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="4"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+        </filter>
+        <rect id="j" width="68" height="68" rx="8"/>
+        <filter id="i" width="141.2%" height="141.2%" x="-20.6%" y="-14.7%" filterUnits="objectBoundingBox">
+            <feOffset dy="4" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="4"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+        </filter>
+        <rect id="l" width="68" height="68" rx="8"/>
+        <filter id="k" width="141.2%" height="141.2%" x="-20.6%" y="-14.7%" filterUnits="objectBoundingBox">
+            <feOffset dy="4" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="4"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g transform="translate(123 55)">
+            <use fill="#000" filter="url(#a)" xlink:href="#b"/>
+            <use fill="#F2F2F2" xlink:href="#b"/>
+        </g>
+        <g fill="#4A4A4A" fill-rule="nonzero">
+            <path d="M169 81a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 4a8 8 0 1 1 0-16 8 8 0 0 1 0 16zM145 105a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 4a8 8 0 1 1 0-16 8 8 0 0 1 0 16z"/>
+            <path d="M150.414 98.414L166.54 82.29l-2.829-2.829-16.124 16.125z"/>
+        </g>
+        <g transform="translate(201 55)">
+            <use fill="#000" filter="url(#c)" xlink:href="#d"/>
+            <use fill="#F2F2F2" xlink:href="#d"/>
+        </g>
+        <g fill="#4A4A4A" fill-rule="nonzero">
+            <path d="M249 77a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 4a6 6 0 1 1 0-12 6 6 0 0 1 0 12zM221 77a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 4a6 6 0 1 1 0-12 6 6 0 0 1 0 12zM249 105a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 4a6 6 0 1 1 0-12 6 6 0 0 1 0 12zM221 105a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 4a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"/>
+            <path d="M225 77h22v-4h-22zM225 105h22v-4h-22zM219 79v22h4V79zM247 79v22h4V79z"/>
+        </g>
+        <g transform="translate(279 55)">
+            <use fill="#000" filter="url(#e)" xlink:href="#f"/>
+            <use fill="#F2F2F2" xlink:href="#f"/>
+        </g>
+        <path fill="#4A4A4A" d="M295 69h6v4h-4v4h-4v-6a2 2 0 0 1 2-2zm0 40a2 2 0 0 1-2-2v-6h4v4h4v4h-6zm38-38v6h-4v-4h-4v-4h6a2 2 0 0 1 2 2zm0 36a2 2 0 0 1-2 2h-6v-4h4v-4h4v6zm-40-26h4v6h-4v-6zm36 0h4v6h-4v-6zm-36 10h4v6h-4v-6zm28-22v4h-6v-4h6zm-10 0v4h-6v-4h6zm-6 40v-4h6v4h-6zm10 0v-4h6v4h-6zm14-18h4v6h-4v-6z"/>
+        <g transform="translate(377 55)">
+            <use fill="#000" filter="url(#g)" xlink:href="#h"/>
+            <use fill="#F2F2F2" xlink:href="#h"/>
+        </g>
+        <g fill="#4A4A4A" fill-rule="nonzero">
+            <path d="M397 71h28v30h-28V71zm-2-4a2 2 0 0 0-2 2v34a2 2 0 0 0 2 2h32a2 2 0 0 0 2-2V69a2 2 0 0 0-2-2h-32z"/>
+            <path d="M395.628 67.101l22 7.273A2 2 0 0 1 419 76.273V109a2 2 0 0 1-2.628 1.899l-22-7.273a2 2 0 0 1-1.372-1.899V69a2 2 0 0 1 2.628-1.899zM411 87v8a2 2 0 1 0 4 0v-8a2 2 0 1 0-4 0z"/>
+        </g>
+        <g transform="translate(455 55)">
+            <use fill="#000" filter="url(#i)" xlink:href="#j"/>
+            <use fill="#F2F2F2" xlink:href="#j"/>
+        </g>
+        <path fill="#4A4A4A" fill-rule="nonzero" d="M501 75.118v27.876h-24V75.118h24zm-26-4a2 2 0 0 0-2 2v31.876a2 2 0 0 0 2 2h28a2 2 0 0 0 2-2V73.118a2 2 0 0 0-2-2h-28z"/>
+        <path fill="#4A4A4A" fill-rule="nonzero" d="M474 89.944h29v-2h-29z"/>
+        <path fill="#4A4A4A" fill-rule="nonzero" d="M488 72.059v33.157h2V72.059z"/>
+        <g transform="translate(533 55)">
+            <use fill="#000" filter="url(#k)" xlink:href="#l"/>
+            <use fill="#F2F2F2" xlink:href="#l"/>
+        </g>
+        <path fill="#4A4A4A" fill-rule="nonzero" d="M581 75v28h-4V81a2 2 0 0 0-2-2h-16a2 2 0 0 0-2 2v22h-4V75h28zm-20 8h12v22a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V73a2 2 0 0 0-2-2h-32a2 2 0 0 0-2 2v32a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V83z"/>
+        <text fill="#9B9B9B" font-family="GraphikLCG-Regular, Graphik LCG" font-size="12" transform="translate(-1 -4)">
+            <tspan x="0" y="176">Построить стену</tspan>
+        </text>
+        <text fill="#9B9B9B" font-family="GraphikLCG-Regular, Graphik LCG" font-size="12" transform="translate(-1 -4)">
+            <tspan x="378" y="176">Установить дверь</tspan>
+        </text>
+        <text fill="#9B9B9B" font-family="GraphikLCG-Regular, Graphik LCG" font-size="12" transform="translate(-1 -4)">
+            <tspan x="108" y="176">Построить помещение</tspan>
+        </text>
+        <text fill="#9B9B9B" font-family="GraphikLCG-Regular, Graphik LCG" font-size="12" transform="translate(-1 -4)">
+            <tspan x="490" y="176">Установить окно</tspan>
+        </text>
+        <text fill="#9B9B9B" font-family="GraphikLCG-Regular, Graphik LCG" font-size="12" transform="translate(-1 -4)">
+            <tspan x="251" y="176">Разделить на зоны</tspan>
+        </text>
+        <text fill="#9B9B9B" font-family="GraphikLCG-Regular, Graphik LCG" font-size="16" transform="translate(-1 -4)">
+            <tspan x="265.884" y="16">Инструменты построения</tspan>
+        </text>
+        <text fill="#9B9B9B" font-family="GraphikLCG-Regular, Graphik LCG" font-size="12" transform="translate(-1 -4)">
+            <tspan x="596" y="176">Установить проем</tspan>
+        </text>
+        <path stroke="#E1E1E1" d="M59 158.76c16.176-2.446 32.774-6.98 49.791-13.603 17.018-6.624 33.615-15.01 49.792-25.157M174 158.835c12.832-5.038 24.206-10.734 34.123-17.086 9.918-6.352 18.753-13.602 26.506-21.749M299 158.835c4.015-4.7 7.326-10.308 9.933-16.824 2.608-6.516 3.882-13.698 3.822-21.547M636.304 158c-14.99-4.934-27.93-10.306-38.818-16.117-10.889-5.812-20.777-12.623-29.665-20.435M526.4 158c-8.075-4.175-15.151-9.35-21.227-15.525-6.318-6.422-11.636-13.844-15.955-22.266M419.368 158c-3.502-6.521-5.98-12.938-7.433-19.249-1.454-6.31-1.908-12.622-1.361-18.933"/>
+    </g>
+</svg>

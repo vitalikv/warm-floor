@@ -1,0 +1,554 @@
+.icon-close {
+  font-size: 20px;
+  display: inline-block;
+  position: relative;
+  background-image: none;
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 17px;
+    height: 2px;
+    border-radius: 5px;
+    background: @dark-grey;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  &::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  &::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+}
+
+.icon-3d {
+  width: auto;
+  height: 100%;
+  display: none;
+  &-wrap {
+    background: @dark-grey;
+    background: linear-gradient(to top, @dark-grey, @dark-grey);
+    width: 60px;
+    height: 60px;
+    min-height: 60px;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5);
+    &[data-selected="3D"] {
+      .icon-2d {
+        display: block;
+      }
+    }
+    &[data-selected="2D"] {
+      .icon-3d {
+        display: block;
+      }
+    }
+    &[data-selected="render"],
+    &[data-selected="window"] {
+      .exit-mode {
+        display: block;
+      }
+    }
+    &:hover {
+      background: #828282;
+      background: linear-gradient(to top, @dark-grey, #828282);
+      cursor: pointer;
+    }
+  }
+}
+
+.exit-mode {
+  width: auto;
+  height: 100%;
+  display: none;
+  &-wrap {
+    background: @dark-grey;
+    background: linear-gradient(to top, @dark-grey, @dark-grey);
+    width: 60px;
+    height: 60px;
+    min-height: 60px;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5);
+    &:hover {
+      background: #828282;
+      background: linear-gradient(to top, @dark-grey, #828282);
+      cursor: pointer;
+    }
+  }
+}
+
+
+.icon-2d {
+  width: auto;
+  height: 100%;
+  display: none;
+  &-wrap {
+    background: @dark-grey;
+    background: linear-gradient(to top, @dark-grey, @dark-grey);
+    width: 60px;
+    height: 60px;
+    min-height: 60px;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5);
+    &:hover {
+      background: #828282;
+      background: linear-gradient(to top, @dark-grey, #828282);
+      cursor: pointer;
+    }
+  }
+}
+
+.ic-man {
+  width: 48px;
+  height: 48px;
+  min-height: 48px;
+}
+
+.ic-bird {
+  width: 48px;
+  height: 48px;
+  min-height: 48px;
+}
+
+.icon-eye {
+  width: 48px;
+  height: 48px;
+  min-height: 48px;
+}
+
+.icon-question {
+  width: 48px;
+  height: 48px;
+  min-height: 48px;
+}
+
+.sub-icon {
+  width: 48px;
+  min-width: 48px;
+  height: auto;
+  min-height: 26px;
+  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sub-grid-icon {
+  width: 60px;
+  min-width: 60px;
+  height: 60px;
+  min-height: 60px;
+  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg-add-dot-dims {
+	width: 36px;
+	height: 10px;
+}
+
+.svg-alarm-dims {
+	width: 22px;
+	height: 18px;
+}
+
+.svg-arrow-down-dims {
+	width: 15px;
+	height: 18px;
+}
+
+.svg-arrow-left-dims {
+	width: 18px;
+	height: 14px;
+}
+
+.svg-arrow-right-dims {
+	width: 18px;
+	height: 14px;
+}
+
+.svg-arrow-up-dims {
+	width: 14px;
+	height: 18px;
+}
+
+.svg-back-btn-dims {
+	width: 95px;
+	height: 44px;
+}
+
+.svg-balcony-center-dims {
+	width: 28px;
+	height: 24px;
+}
+
+.svg-balcony-left-dims {
+	width: 28px;
+	height: 24px;
+}
+
+.svg-balcony-right-dims {
+	width: 28px;
+	height: 24px;
+}
+
+.svg-big-brush-dims {
+	width: 24px;
+	height: 24px;
+}
+
+.svg-brush-dims {
+	width: 16px;
+	height: 16px;
+}
+
+.svg-chain-dims {
+	width: 7px;
+	height: 16px;
+}
+
+.svg-close-dims {
+	width: 12px;
+	height: 12px;
+}
+
+.svg-dimentions-dims {
+	width: 18px;
+	height: 18px;
+}
+
+.svg-double-door-dims {
+	width: 28px;
+	height: 24px;
+}
+
+.svg-double-window-dims {
+	width: 18px;
+	height: 20px;
+}
+
+.svg-down-dims {
+	width: 14px;
+	height: 9px;
+}
+
+.svg-drag-rotate-dims {
+	width: 22px;
+	height: 22px;
+}
+
+.svg-enter-door-dims {
+	width: 17px;
+	height: 24px;
+}
+
+.svg-horizontal-dims {
+	width: 24px;
+	height: 24px;
+}
+
+.svg-ic-2-d-dims {
+	width: 29px;
+	height: 18px;
+}
+
+.svg-ic-3-d-dims {
+	width: 29px;
+	height: 18px;
+}
+
+.svg-ic-angle-control-dims {
+	width: 4px;
+	height: 16px;
+}
+
+.svg-ic-angle-degree-dims {
+	width: 4px;
+	height: 5px;
+}
+
+.svg-ic-angle-triangle-dims {
+	width: 122px;
+	height: 16px;
+}
+
+.svg-ic-arrows-dims {
+	width: 168px;
+	height: 110px;
+}
+
+.svg-ic-bird-dims {
+	width: 33px;
+	height: 24px;
+}
+
+.svg-ic-camera-level-dims {
+	width: 18px;
+	height: 24px;
+}
+
+.svg-ic-camera-level-control-dims {
+	width: 27px;
+	height: 15px;
+}
+
+.svg-ic-center-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-ic-clone-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-ic-cm-dims {
+	width: 22px;
+	height: 10px;
+}
+
+.svg-ic-door-dims {
+	width: 18px;
+	height: 22px;
+}
+
+.svg-ic-doorway-dims {
+	width: 18px;
+	height: 18px;
+}
+
+.svg-ic-exit-dims {
+	width: 24px;
+	height: 24px;
+}
+
+.svg-ic-eye-dims {
+	width: 26px;
+	height: 17px;
+}
+
+.svg-ic-level-dims {
+	width: 4px;
+	height: 120px;
+}
+
+.svg-ic-line-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-ic-m-dims {
+	width: 12px;
+	height: 10px;
+}
+
+.svg-ic-man-dims {
+	width: 12px;
+	height: 38px;
+}
+
+.svg-ic-minus-dims {
+	width: 18px;
+	height: 2px;
+}
+
+.svg-ic-mm-dims {
+	width: 25px;
+	height: 10px;
+}
+
+.svg-ic-plus-dims {
+	width: 18px;
+	height: 18px;
+}
+
+.svg-ic-question-dims {
+	width: 13px;
+	height: 22px;
+}
+
+.svg-ic-redo-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-ic-render-dims {
+	width: 20px;
+	height: 18px;
+}
+
+.svg-ic-rur-dims {
+	width: 14px;
+	height: 20px;
+}
+
+.svg-ic-save-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-ic-shape-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-ic-undo-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-ic-view-angle-dims {
+	width: 17px;
+	height: 20px;
+}
+
+.svg-ic-wasd-dims {
+	width: 168px;
+	height: 110px;
+}
+
+.svg-ic-window-dims {
+	width: 16px;
+	height: 18px;
+}
+
+.svg-ic-zone-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-price-refresh-dims {
+	width: 26px;
+	height: 26px;
+}
+
+.svg-render-dims {
+	width: 28px;
+	height: 20px;
+}
+
+.svg-rotate-0-dims {
+	width: 28px;
+	height: 31px;
+}
+
+.svg-rotate-45-dims {
+	width: 26px;
+	height: 31px;
+}
+
+.svg-rotate-90-dims {
+	width: 26px;
+	height: 31px;
+}
+
+.svg-scale-dims {
+	width: 22px;
+	height: 22px;
+}
+
+.svg-settings-dims {
+	width: 20px;
+	height: 23px;
+}
+
+.svg-shape-type-1-dims {
+	width: 40px;
+	height: 40px;
+}
+
+.svg-shape-type-2-dims {
+	width: 40px;
+	height: 20px;
+}
+
+.svg-shape-type-3-dims {
+	width: 40px;
+	height: 40px;
+}
+
+.svg-shape-type-4-dims {
+	width: 40px;
+	height: 40px;
+}
+
+.svg-shape-type-5-dims {
+	width: 40px;
+	height: 40px;
+}
+
+.svg-shape-type-6-dims {
+	width: 40px;
+	height: 40px;
+}
+
+.svg-simple-door-dims {
+	width: 15px;
+	height: 24px;
+}
+
+.svg-simple-window-dims {
+	width: 16px;
+	height: 20px;
+}
+
+.svg-small-plus-dims {
+	width: 15px;
+	height: 15px;
+}
+
+.svg-trash-bin-dims {
+	width: 18px;
+	height: 23px;
+}
+
+.svg-triple-window-dims {
+	width: 28px;
+	height: 20px;
+}
+
+.svg-up-dims {
+	width: 14px;
+	height: 9px;
+}
+
+.svg-vertical-dims {
+	width: 24px;
+	height: 24px;
+}
+
+.svg-vr-dims {
+	width: 26px;
+	height: 20px;
+}
+
+.svg-wall-blue-arrow-dims {
+	width: 26px;
+	height: 26px;
+}
+
+.svg-wall-blue-dot-dims {
+	width: 26px;
+	height: 26px;
+}
+
+.svg-wall-red-arrow-dims {
+	width: 26px;
+	height: 26px;
+}
+
+.svg-wall-red-dot-dims {
+	width: 26px;
+	height: 26px;
+}
+
+.svg-wall-redblue-dims {
+	width: 26px;
+	height: 26px;
+}
+
+.svg-wall-redblue-arrow-dims {
+	width: 26px;
+	height: 26px;
+}

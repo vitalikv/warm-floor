@@ -1,0 +1,3512 @@
+[
+  {
+      "id": 3,
+      "filter_lots": [],
+      "catalog_categories_id": 0,
+      "hidden": false,
+      "image": "https://files.planoplan.com/upload/catalog/category/201404/78d04b00.jpg",
+      "sort": 6,
+      "color": "12b2e6",
+      "caption": {
+          "en": "Building",
+          "ru": "Построение",
+          "de": "Konstruktion",
+          "fi": "Rakenteelliset",
+          "fr": "",
+          "cn": "",
+          "jp": "",
+          "pt": "",
+          "th": "",
+          "es": "",
+          "tr": ""
+      },
+      "categories": [
+          {
+              "id": 5,
+              "filter_lots": [
+                  8
+              ],
+              "catalog_categories_id": 3,
+              "hidden": true,
+              "image": "https://files.planoplan.com/upload/catalog/category/201401/f893dbd3.jpg",
+              "sort": 4,
+              "color": "333333",
+              "caption": {
+                  "en": "gggg",
+                  "ru": "gffff",
+                  "de": "Fenster",
+                  "fi": "Ikkunat",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 6,
+              "filter_lots": [
+                  9
+              ],
+              "catalog_categories_id": 3,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201401/fa8dc8a6.jpg",
+              "sort": 6,
+              "color": "",
+              "caption": {
+                  "en": "Doors & Doorways",
+                  "ru": "Двери и проемы",
+                  "de": "Türen und Öffnungen",
+                  "fi": "Ovet & oviaukot",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 1487,
+              "filter_lots": [
+                  9,
+                  1387
+              ],
+              "catalog_categories_id": 3,
+              "hidden": true,
+              "image": "",
+              "sort": 0,
+              "color": "",
+              "caption": {
+                  "en": "",
+                  "ru": "Ручки дверей",
+                  "de": "",
+                  "fi": "",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 8,
+              "filter_lots": [
+                  11
+              ],
+              "catalog_categories_id": 3,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201401/0bc6e083.jpg",
+              "sort": 10,
+              "color": "",
+              "caption": {
+                  "en": "Railing & Fencing",
+                  "ru": "Перила и ограждения",
+                  "de": "Geländer und Zäune",
+                  "fi": "Kaiteet & aidat",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 9,
+              "filter_lots": [
+                  12
+              ],
+              "catalog_categories_id": 3,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201401/34d5d12f.jpg",
+              "sort": 12,
+              "color": "",
+              "caption": {
+                  "en": "Columns & Beams",
+                  "ru": "Колонны и балки",
+                  "de": "Säulen unf Balken",
+                  "fi": "Pylväät",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 10,
+              "filter_lots": [
+                  13
+              ],
+              "catalog_categories_id": 3,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201401/33211934.jpg",
+              "sort": 14,
+              "color": "",
+              "caption": {
+                  "en": "Stairs",
+                  "ru": "Лестницы",
+                  "de": "Treppen",
+                  "fi": "Portaat",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 4,
+              "filter_lots": [
+                  7
+              ],
+              "catalog_categories_id": 3,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201401/a99a6f61.jpg",
+              "sort": 2,
+              "color": "",
+              "caption": {
+                  "en": "Primitives",
+                  "ru": "Примитивы",
+                  "de": "Grundelemente",
+                  "fi": "3D kappaleet",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 7,
+              "filter_lots": [
+                  10
+              ],
+              "catalog_categories_id": 3,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201401/5e3bd830.jpg",
+              "sort": 8,
+              "color": "",
+              "caption": {
+                  "en": "Room divider",
+                  "ru": "Перегородки ",
+                  "de": "Trennwände",
+                  "fi": "Seinäkkeet",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 571,
+              "filter_lots": [
+                  122
+              ],
+              "catalog_categories_id": 3,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201406/d79cb5ec.jpg",
+              "sort": 0,
+              "color": "",
+              "caption": {
+                  "en": "Roofs",
+                  "ru": "Крыши",
+                  "de": "Dächer",
+                  "fi": "Katot",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 11,
+              "filter_lots": [
+                  14
+              ],
+              "catalog_categories_id": 3,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201401/7d24fd8c.jpg",
+              "sort": 16,
+              "color": "",
+              "caption": {
+                  "en": "Cornices, moldings and baseboards",
+                  "ru": "Карнизы, молдинги и плинтусы",
+                  "de": " Gardinenstangen, Zierleisten, Fußleisten",
+                  "fi": "Listat",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 12,
+              "filter_lots": [
+                  15
+              ],
+              "catalog_categories_id": 3,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201405/9f2c79f5.jpg",
+              "sort": 18,
+              "color": "",
+              "caption": {
+                  "en": "Outlets and switches",
+                  "ru": "Розетки и выключатели",
+                  "de": "Steckdosen und Schalter",
+                  "fi": "Pistokkeet & katkaisijat",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          }
+      ]
+  },
+  {
+      "id": 96,
+      "filter_lots": [
+          57
+      ],
+      "catalog_categories_id": 0,
+      "hidden": false,
+      "image": "https://files.planoplan.com/upload/catalog/category/201401/a99ed3e8.jpg",
+      "sort": 100,
+      "color": "c44c1c",
+      "caption": {
+          "en": "Mannequins",
+          "ru": "Манекены",
+          "de": "Figuren",
+          "fi": "Mannekiinit",
+          "fr": "",
+          "cn": "",
+          "jp": "",
+          "pt": "",
+          "th": "",
+          "es": "",
+          "tr": ""
+      },
+      "categories": []
+  },
+  {
+      "id": 2663,
+      "filter_lots": [],
+      "catalog_categories_id": 0,
+      "hidden": false,
+      "image": "https://files.planoplan.com/upload/catalog/category/201709/b1d7ae0d.jpeg",
+      "sort": 0,
+      "color": "",
+      "caption": {
+          "en": "тест5",
+          "ru": "тест5",
+          "de": "",
+          "fi": "",
+          "fr": "",
+          "cn": "",
+          "jp": "",
+          "pt": "",
+          "th": "",
+          "es": "",
+          "tr": ""
+      },
+      "categories": []
+  },
+  {
+      "id": 14,
+      "filter_lots": [],
+      "catalog_categories_id": 0,
+      "hidden": false,
+      "image": "https://files.planoplan.com/upload/catalog/category/201404/7e18d870.jpg",
+      "sort": 10,
+      "color": "12b2e6",
+      "caption": {
+          "en": "Furnish",
+          "ru": "Отделка",
+          "de": "Oberflächen",
+          "fi": "Materiaalit ja pinnat",
+          "fr": "",
+          "cn": "",
+          "jp": "",
+          "pt": "",
+          "th": "",
+          "es": "",
+          "tr": ""
+      },
+      "categories": [
+          {
+              "id": 153,
+              "filter_lots": [],
+              "catalog_categories_id": 14,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201404/919b87d7.jpg",
+              "sort": 0,
+              "color": "",
+              "caption": {
+                  "en": "Interior wall decoration",
+                  "ru": "Внутренняя отделка стен",
+                  "de": "Innenwanddekoration",
+                  "fi": "Sisäseinien pinnat",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": [
+                  {
+                      "id": 159,
+                      "filter_lots": [
+                          96
+                      ],
+                      "catalog_categories_id": 153,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201404/52986b54.jpg",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Brick",
+                          "ru": "Кирпич",
+                          "de": "Ziegelstein",
+                          "fi": "Tiilet",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 162,
+                      "filter_lots": [
+                          95
+                      ],
+                      "catalog_categories_id": 153,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201404/5b4cdada.jpg",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Tiles",
+                          "ru": "Плитка",
+                          "de": "Kacheln",
+                          "fi": "Laatat",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 163,
+                      "filter_lots": [
+                          99
+                      ],
+                      "catalog_categories_id": 153,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201404/8465c3fc.jpg",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Paint",
+                          "ru": "Краска",
+                          "de": "Farbe",
+                          "fi": "Maalit",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 1486,
+                      "filter_lots": [
+                          1325
+                      ],
+                      "catalog_categories_id": 153,
+                      "hidden": false,
+                      "image": "",
+                      "sort": 7,
+                      "color": "",
+                      "caption": {
+                          "en": "",
+                          "ru": "Штукатурка",
+                          "de": "",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 1497,
+                      "filter_lots": [
+                          1415
+                      ],
+                      "catalog_categories_id": 153,
+                      "hidden": false,
+                      "image": "",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "",
+                          "ru": "Фотообои",
+                          "de": "",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 164,
+                      "filter_lots": [
+                          94
+                      ],
+                      "catalog_categories_id": 153,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201404/6def1e32.jpg",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Paperhangings",
+                          "ru": "Обои",
+                          "de": "Tapeten",
+                          "fi": "Tapetit",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 160,
+                      "filter_lots": [
+                          98
+                      ],
+                      "catalog_categories_id": 153,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201404/d805ee80.jpg",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Stone",
+                          "ru": "Камень",
+                          "de": "Stein",
+                          "fi": "Kivipinnat",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 165,
+                      "filter_lots": [
+                          100
+                      ],
+                      "catalog_categories_id": 153,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201404/aea99007.jpg",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Wood",
+                          "ru": "Дерево",
+                          "de": "Holz",
+                          "fi": "Puupinnat",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 176,
+                      "filter_lots": [
+                          97
+                      ],
+                      "catalog_categories_id": 153,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201404/243bec43.jpg",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Mosaics",
+                          "ru": "Мозаика",
+                          "de": "Mosaikfliesen",
+                          "fi": "Mosaiikit",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  }
+              ]
+          },
+          {
+              "id": 154,
+              "filter_lots": [],
+              "catalog_categories_id": 14,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201404/36862ec9.jpg",
+              "sort": 0,
+              "color": "",
+              "caption": {
+                  "en": "Flooring",
+                  "ru": "Напольные покрытия",
+                  "de": "Bodenbeläge",
+                  "fi": "Lattiapinnat",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": [
+                  {
+                      "id": 166,
+                      "filter_lots": [
+                          98
+                      ],
+                      "catalog_categories_id": 154,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201406/19c77b39.jpg",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Stone",
+                          "ru": "Камень",
+                          "de": "Stein",
+                          "fi": "Kivipinnat",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 167,
+                      "filter_lots": [
+                          95,
+                          97
+                      ],
+                      "catalog_categories_id": 154,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201406/5cb596bb.jpg",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Tile and mosaics",
+                          "ru": "Плитка и мозаика",
+                          "de": "Fliesen und Mosaiksteine",
+                          "fi": "Laatat ja mosaiikit",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 174,
+                      "filter_lots": [
+                          105
+                      ],
+                      "catalog_categories_id": 154,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201406/5bceafdf.jpg",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Carpeting",
+                          "ru": "Ковролин",
+                          "de": "Teppichboden",
+                          "fi": "Matot",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 168,
+                      "filter_lots": [
+                          101,
+                          102
+                      ],
+                      "catalog_categories_id": 154,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201406/f70203d1.jpg",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Parquet and laminate",
+                          "ru": "Паркет и ламинат",
+                          "de": "Parkett und Laminat",
+                          "fi": "Parketit ja laminaatit",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 175,
+                      "filter_lots": [
+                          106
+                      ],
+                      "catalog_categories_id": 154,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201406/c6556b1a.jpg",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "",
+                          "ru": "Линолеум",
+                          "de": "Linoleum",
+                          "fi": "Muut",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  }
+              ]
+          },
+          {
+              "id": 157,
+              "filter_lots": [],
+              "catalog_categories_id": 14,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201404/6935a950.jpg",
+              "sort": 0,
+              "color": "",
+              "caption": {
+                  "en": "External wall decoration",
+                  "ru": "Внешняя отделка стен",
+                  "de": "Außenwanddekoration",
+                  "fi": "Ulkoseinien pinnat",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": [
+                  {
+                      "id": 169,
+                      "filter_lots": [
+                          96
+                      ],
+                      "catalog_categories_id": 157,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201404/ef45ac3f.jpg",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Brick",
+                          "ru": "Кирпич",
+                          "de": "Ziegelstein",
+                          "fi": "Tiilet",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 173,
+                      "filter_lots": [
+                          104
+                      ],
+                      "catalog_categories_id": 157,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201404/0a820b48.jpg",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Concrete",
+                          "ru": "Бетон",
+                          "de": "Beton",
+                          "fi": "Betonit",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  }
+              ]
+          },
+          {
+              "id": 158,
+              "filter_lots": [],
+              "catalog_categories_id": 14,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201404/3081c503.jpg",
+              "sort": 0,
+              "color": "",
+              "caption": {
+                  "en": "Other",
+                  "ru": "Другое",
+                  "de": "Sonstiges",
+                  "fi": "Muut",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": [
+                  {
+                      "id": 570,
+                      "filter_lots": [
+                          121
+                      ],
+                      "catalog_categories_id": 158,
+                      "hidden": false,
+                      "image": "",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "",
+                          "ru": "Абстракции",
+                          "de": "Abstraktionen",
+                          "fi": "Muut",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 698,
+                      "filter_lots": [
+                          112
+                      ],
+                      "catalog_categories_id": 158,
+                      "hidden": false,
+                      "image": "",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Paintings",
+                          "ru": "Картины",
+                          "de": "Bilder",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  }
+              ]
+          },
+          {
+              "id": 156,
+              "filter_lots": [],
+              "catalog_categories_id": 14,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201404/e9457624.jpg",
+              "sort": 0,
+              "color": "",
+              "caption": {
+                  "en": "Furniture decoration",
+                  "ru": "Мебельная отделка",
+                  "de": "Möbeloberflächen",
+                  "fi": "Kalustepinnat",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": [
+                  {
+                      "id": 1493,
+                      "filter_lots": [
+                          110
+                      ],
+                      "catalog_categories_id": 156,
+                      "hidden": false,
+                      "image": "",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Carpets",
+                          "ru": "Ковры",
+                          "de": "",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 1494,
+                      "filter_lots": [
+                          100
+                      ],
+                      "catalog_categories_id": 156,
+                      "hidden": false,
+                      "image": "",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Wood",
+                          "ru": "Дерево",
+                          "de": "",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 1495,
+                      "filter_lots": [
+                          103
+                      ],
+                      "catalog_categories_id": 156,
+                      "hidden": false,
+                      "image": "",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Cloth",
+                          "ru": "Ткань",
+                          "de": "",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 1496,
+                      "filter_lots": [
+                          1414
+                      ],
+                      "catalog_categories_id": 156,
+                      "hidden": false,
+                      "image": "",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Skin",
+                          "ru": "Кожа",
+                          "de": "",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  }
+              ]
+          }
+      ]
+  },
+  {
+      "id": 16,
+      "filter_lots": [],
+      "catalog_categories_id": 0,
+      "hidden": false,
+      "image": "https://files.planoplan.com/upload/catalog/category/201401/b5c9a599.jpg",
+      "sort": 14,
+      "color": "c44c1c",
+      "caption": {
+          "en": "Lighting",
+          "ru": "Освещение",
+          "de": "Beleuchtung",
+          "fi": "Valaistus",
+          "fr": "",
+          "cn": "",
+          "jp": "",
+          "pt": "",
+          "th": "",
+          "es": "",
+          "tr": ""
+      },
+      "categories": [
+          {
+              "id": 64,
+              "filter_lots": [],
+              "catalog_categories_id": 16,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201406/ea8cfa40.jpg",
+              "sort": 2,
+              "color": "",
+              "caption": {
+                  "en": "Ceiling",
+                  "ru": "Потолочное",
+                  "de": "Deckenleuchten",
+                  "fi": "",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": [
+                  {
+                      "id": 69,
+                      "filter_lots": [
+                          26
+                      ],
+                      "catalog_categories_id": 64,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/ec16bd35.jpg",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Pendants",
+                          "ru": "Подвесные светильники",
+                          "de": "Pendelleuchten",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 70,
+                      "filter_lots": [
+                          27
+                      ],
+                      "catalog_categories_id": 64,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/31814526.jpg",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Flushmounts",
+                          "ru": "Плоские потолочные светильники",
+                          "de": "Flache Deckenlampen",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 71,
+                      "filter_lots": [
+                          28
+                      ],
+                      "catalog_categories_id": 64,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/f3c64df3.jpg",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Spots",
+                          "ru": "Точечные светильники",
+                          "de": "Strahler und Spots",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 72,
+                      "filter_lots": [
+                          29
+                      ],
+                      "catalog_categories_id": 64,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/d2bafd16.jpg",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Tracks",
+                          "ru": "Трековые светильники",
+                          "de": "",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 68,
+                      "filter_lots": [
+                          25
+                      ],
+                      "catalog_categories_id": 64,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/a8808ee0.jpg",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Chandeliers",
+                          "ru": "Люстры",
+                          "de": "Kronleuchter",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  }
+              ]
+          },
+          {
+              "id": 65,
+              "filter_lots": [
+                  30
+              ],
+              "catalog_categories_id": 16,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201406/e57d9535.jpg",
+              "sort": 4,
+              "color": "",
+              "caption": {
+                  "en": "Sconces",
+                  "ru": "Бра",
+                  "de": "Wandleuchten",
+                  "fi": "",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 66,
+              "filter_lots": [
+                  32
+              ],
+              "catalog_categories_id": 16,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201406/59ef38a4.jpg",
+              "sort": 8,
+              "color": "",
+              "caption": {
+                  "en": "Floor Lamps",
+                  "ru": "Торшеры",
+                  "de": "Stehlampen",
+                  "fi": "",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 67,
+              "filter_lots": [
+                  33
+              ],
+              "catalog_categories_id": 16,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201406/bd24ff91.jpg",
+              "sort": 10,
+              "color": "",
+              "caption": {
+                  "en": "Table & Task Lamps",
+                  "ru": "Настольные лампы",
+                  "de": "Tischlampen",
+                  "fi": "",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          }
+      ]
+  },
+  {
+      "id": 17,
+      "filter_lots": [],
+      "catalog_categories_id": 0,
+      "hidden": false,
+      "image": "https://files.planoplan.com/upload/catalog/category/201401/306c111f.jpg",
+      "sort": 16,
+      "color": "c44c1c",
+      "caption": {
+          "en": "Technics",
+          "ru": "Техника",
+          "de": "Technik",
+          "fi": "Tekniikka",
+          "fr": "",
+          "cn": "",
+          "jp": "",
+          "pt": "",
+          "th": "",
+          "es": "",
+          "tr": ""
+      },
+      "categories": [
+          {
+              "id": 73,
+              "filter_lots": [],
+              "catalog_categories_id": 17,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201406/9cbb1faa.jpg",
+              "sort": 2,
+              "color": "",
+              "caption": {
+                  "en": "Major Appliances",
+                  "ru": "Крупная бытовая техника",
+                  "de": "Haushaltsgeräte",
+                  "fi": "",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": [
+                  {
+                      "id": 74,
+                      "filter_lots": [
+                          34
+                      ],
+                      "catalog_categories_id": 73,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201406/92d388b5.jpg",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Fridges",
+                          "ru": "Холодильники",
+                          "de": "Kühlschränke",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 75,
+                      "filter_lots": [
+                          35
+                      ],
+                      "catalog_categories_id": 73,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201406/93ccc98e.jpg",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Cookers & Hobs",
+                          "ru": "Плиты и варочные поверхности",
+                          "de": "Herde und Kochfelder",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 76,
+                      "filter_lots": [
+                          36
+                      ],
+                      "catalog_categories_id": 73,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201406/2879947f.jpg",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Ovens & Microwaves",
+                          "ru": "Духовые шкафы и СВЧ-печи",
+                          "de": "Backöfen und Mikrowellen",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 77,
+                      "filter_lots": [
+                          37
+                      ],
+                      "catalog_categories_id": 73,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201406/810ed95b.jpg",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Washers & Dishwashers",
+                          "ru": "Стиральные и посудомоечные машины",
+                          "de": "Waschmaschinen und Geschirrspüler",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 78,
+                      "filter_lots": [
+                          38
+                      ],
+                      "catalog_categories_id": 73,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201406/0c9caa65.jpg",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Air Conditioners",
+                          "ru": "Кондиционеры",
+                          "de": "Klimaanlagen",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 79,
+                      "filter_lots": [
+                          39
+                      ],
+                      "catalog_categories_id": 73,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201406/c1832f33.jpg",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "Heating",
+                          "ru": "Отопление",
+                          "de": "Heizung",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  }
+              ]
+          },
+          {
+              "id": 80,
+              "filter_lots": [
+                  40
+              ],
+              "catalog_categories_id": 17,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201406/e28702b7.jpg",
+              "sort": 4,
+              "color": "",
+              "caption": {
+                  "en": "Small Appliances",
+                  "ru": "Мелкая бытовая техника",
+                  "de": "Kleine Haushaltsgeräte",
+                  "fi": "",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 82,
+              "filter_lots": [
+                  42
+              ],
+              "catalog_categories_id": 17,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201406/f396cf69.jpg",
+              "sort": 8,
+              "color": "",
+              "caption": {
+                  "en": "PCs & Tablets",
+                  "ru": "Компьютеры и планшеты",
+                  "de": "Computer und Tablets",
+                  "fi": "",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 1479,
+              "filter_lots": [
+                  1290
+              ],
+              "catalog_categories_id": 17,
+              "hidden": false,
+              "image": "",
+              "sort": 0,
+              "color": "",
+              "caption": {
+                  "en": "",
+                  "ru": "Инструменты",
+                  "de": "",
+                  "fi": "",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 81,
+              "filter_lots": [
+                  41
+              ],
+              "catalog_categories_id": 17,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201406/1d77a979.jpg",
+              "sort": 6,
+              "color": "",
+              "caption": {
+                  "en": "TV & Video, Audio, Photo",
+                  "ru": "TV, Аудио-видео-фото",
+                  "de": "TV, Audio, Video, Foto",
+                  "fi": "",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          }
+      ]
+  },
+  {
+      "id": 2664,
+      "filter_lots": [],
+      "catalog_categories_id": 0,
+      "hidden": true,
+      "image": "https://files.planoplan.com/upload/catalog/category/201709/2e42d81c.jpeg",
+      "sort": 2,
+      "color": "",
+      "caption": {
+          "en": "тест5",
+          "ru": "тест5",
+          "de": "",
+          "fi": "",
+          "fr": "",
+          "cn": "",
+          "jp": "",
+          "pt": "",
+          "th": "",
+          "es": "",
+          "tr": ""
+      },
+      "categories": []
+  },
+  {
+      "id": 2665,
+      "filter_lots": [],
+      "catalog_categories_id": 0,
+      "hidden": true,
+      "image": "https://files.planoplan.com/upload/catalog/category/201709/07cc4673.jpeg",
+      "sort": 2,
+      "color": "",
+      "caption": {
+          "en": "тест5",
+          "ru": "тест5",
+          "de": "",
+          "fi": "",
+          "fr": "",
+          "cn": "",
+          "jp": "",
+          "pt": "",
+          "th": "",
+          "es": "",
+          "tr": ""
+      },
+      "categories": []
+  },
+  {
+      "id": 1285,
+      "filter_lots": [
+          349
+      ],
+      "catalog_categories_id": 0,
+      "hidden": false,
+      "image": "",
+      "sort": 101,
+      "color": "bbbbbd",
+      "caption": {
+          "en": "Dummy objects",
+          "ru": "Условные объекты",
+          "de": "",
+          "fi": "",
+          "fr": "",
+          "cn": "",
+          "jp": "",
+          "pt": "",
+          "th": "",
+          "es": "",
+          "tr": ""
+      },
+      "categories": []
+  },
+  {
+      "id": 1,
+      "filter_lots": [
+          1,
+          2,
+          3,
+          4,
+          5
+      ],
+      "catalog_categories_id": 0,
+      "hidden": false,
+      "image": "https://files.planoplan.com/upload/catalog/category/201401/2cc5b441.jpg",
+      "sort": 2,
+      "color": "12b2e6",
+      "caption": {
+          "en": "Аpartment samples",
+          "ru": "Квартиры",
+          "de": "Musterwohnungen",
+          "fi": "Malli huoneistot",
+          "fr": "",
+          "cn": "",
+          "jp": "",
+          "pt": "",
+          "th": "",
+          "es": "",
+          "tr": ""
+      },
+      "categories": []
+  },
+  {
+      "id": 2,
+      "filter_lots": [
+          6
+      ],
+      "catalog_categories_id": 0,
+      "hidden": false,
+      "image": "https://files.planoplan.com/upload/catalog/category/201401/bc609dff.jpg",
+      "sort": 4,
+      "color": "12b2e6",
+      "caption": {
+          "en": "Standard rooms",
+          "ru": "Комнаты",
+          "de": "Standardzimmer",
+          "fi": "Tyhjät huoneet",
+          "fr": "",
+          "cn": "",
+          "jp": "",
+          "pt": "",
+          "th": "",
+          "es": "",
+          "tr": ""
+      },
+      "categories": []
+  },
+  {
+      "id": 13,
+      "filter_lots": [
+          16
+      ],
+      "catalog_categories_id": 0,
+      "hidden": false,
+      "image": "https://files.planoplan.com/upload/catalog/category/201404/676c049a.jpg",
+      "sort": 101,
+      "color": "bbbbbd",
+      "caption": {
+          "en": "Sign & Symbols",
+          "ru": "Обозначения",
+          "de": "Zeichen und Symbole",
+          "fi": "Tekstit ja symbolit",
+          "fr": "",
+          "cn": "",
+          "jp": "",
+          "pt": "",
+          "th": "",
+          "es": "",
+          "tr": ""
+      },
+      "categories": []
+  },
+  {
+      "id": 15,
+      "filter_lots": [],
+      "catalog_categories_id": 0,
+      "hidden": false,
+      "image": "https://files.planoplan.com/upload/catalog/category/201401/dd3b3a09.jpg",
+      "sort": 12,
+      "color": "c44c1c",
+      "caption": {
+          "en": "Furniture",
+          "ru": "Мебель",
+          "de": "Möbel",
+          "fi": "Kalusteet",
+          "fr": "",
+          "cn": "",
+          "jp": "",
+          "pt": "",
+          "th": "",
+          "es": "",
+          "tr": ""
+      },
+      "categories": [
+          {
+              "id": 19,
+              "filter_lots": [],
+              "catalog_categories_id": 15,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201405/32b36887.jpg",
+              "sort": 2,
+              "color": "",
+              "caption": {
+                  "en": "Living room",
+                  "ru": "Гостиная",
+                  "de": "Wohnzimmer",
+                  "fi": "Olohuone",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": [
+                  {
+                      "id": 26,
+                      "filter_lots": [
+                          18,
+                          58
+                      ],
+                      "catalog_categories_id": 19,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201406/27ce2a47.jpg",
+                      "sort": 2,
+                      "color": "",
+                      "caption": {
+                          "en": "Sofas",
+                          "ru": "Диваны",
+                          "de": "Sofas",
+                          "fi": "Sohvat",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 28,
+                      "filter_lots": [
+                          18,
+                          60,
+                          61
+                      ],
+                      "catalog_categories_id": 19,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201406/e289a03b.jpg",
+                      "sort": 6,
+                      "color": "",
+                      "caption": {
+                          "en": "Tables & Chairs",
+                          "ru": "Столы и стулья",
+                          "de": "Tische und Stühle",
+                          "fi": "Pöydät ja tuolit",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 31,
+                      "filter_lots": [
+                          18,
+                          69,
+                          70,
+                          71
+                      ],
+                      "catalog_categories_id": 19,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201406/3135234b.jpg",
+                      "sort": 12,
+                      "color": "",
+                      "caption": {
+                          "en": "TV & Media Storage",
+                          "ru": "Мебель для ТВ и мультимедиа",
+                          "de": "TV- & Multimediamöbel",
+                          "fi": "AV kalusteet",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 27,
+                      "filter_lots": [
+                          18,
+                          59,
+                          62,
+                          63
+                      ],
+                      "catalog_categories_id": 19,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201406/24bd0bdb.jpg",
+                      "sort": 4,
+                      "color": "",
+                      "caption": {
+                          "en": "Armchairs, Ottomans & Benches",
+                          "ru": "Кресла, пуфы и банкетки",
+                          "de": "Sessel, Hocker und Sitzbänke",
+                          "fi": "Nojatuolit",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 29,
+                      "filter_lots": [
+                          18,
+                          64,
+                          65
+                      ],
+                      "catalog_categories_id": 19,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201406/a277ce5c.jpg",
+                      "sort": 8,
+                      "color": "",
+                      "caption": {
+                          "en": "Dressers & Sideboards",
+                          "ru": "Комоды и серванты",
+                          "de": "Sideboards und Kommoden",
+                          "fi": "Lipastot ja sivupöydät",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 30,
+                      "filter_lots": [
+                          18,
+                          66,
+                          67,
+                          68
+                      ],
+                      "catalog_categories_id": 19,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201406/162ec618.jpg",
+                      "sort": 10,
+                      "color": "",
+                      "caption": {
+                          "en": "Cabinets, Bookcases, Shelving & Shelves",
+                          "ru": "Шкафы, стеллажи и полки",
+                          "de": "Schränke, Regale und Ablagen",
+                          "fi": "Kirjahyllyt ja kaapit",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  }
+              ]
+          },
+          {
+              "id": 21,
+              "filter_lots": [],
+              "catalog_categories_id": 15,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201405/d97b86f3.jpg",
+              "sort": 6,
+              "color": "",
+              "caption": {
+                  "en": "Bedroom",
+                  "ru": "Спальня",
+                  "de": "Schlafzimmer",
+                  "fi": "Makuuhuone",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": [
+                  {
+                      "id": 38,
+                      "filter_lots": [
+                          20,
+                          77
+                      ],
+                      "catalog_categories_id": 21,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/3791f0a3.jpg",
+                      "sort": 4,
+                      "color": "",
+                      "caption": {
+                          "en": "Beds & Headboards",
+                          "ru": "Кровати и изголовья",
+                          "de": "Betten und Kopfteile",
+                          "fi": "Sängyt ja päädyt",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 39,
+                      "filter_lots": [
+                          20,
+                          79
+                      ],
+                      "catalog_categories_id": 21,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/f8b8e808.jpg",
+                      "sort": 6,
+                      "color": "",
+                      "caption": {
+                          "en": "Dressers & Nightstands",
+                          "ru": "Комоды и прикроватные тумбы",
+                          "de": "Kommoden und Nachttische",
+                          "fi": "Lipastot ja yöpöydät",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 40,
+                      "filter_lots": [
+                          20,
+                          60
+                      ],
+                      "catalog_categories_id": 21,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/623a4356.jpg",
+                      "sort": 8,
+                      "color": "",
+                      "caption": {
+                          "en": "Dressing Tables, Consoles & Console Mirrors",
+                          "ru": "Туалетные столики, консоли и трюмо",
+                          "de": "Frisiertische und Konsolen",
+                          "fi": "Peilit ja peilipöydät",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 41,
+                      "filter_lots": [
+                          20,
+                          66
+                      ],
+                      "catalog_categories_id": 21,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/c8839332.jpg",
+                      "sort": 10,
+                      "color": "",
+                      "caption": {
+                          "en": "Armoires & Wardrobes",
+                          "ru": "Шкафы и гардеробы",
+                          "de": "Kleiderschränke und Garderoben",
+                          "fi": "Vaatekaapit",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  }
+              ]
+          },
+          {
+              "id": 23,
+              "filter_lots": [],
+              "catalog_categories_id": 15,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201405/e9103bd5.jpg",
+              "sort": 10,
+              "color": "",
+              "caption": {
+                  "en": "Baby & Kids room",
+                  "ru": "Детская",
+                  "de": "Kinderzimmer",
+                  "fi": "Lastenhuone",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": [
+                  {
+                      "id": 46,
+                      "filter_lots": [
+                          108
+                      ],
+                      "catalog_categories_id": 23,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/6bfddc44.jpg",
+                      "sort": 2,
+                      "color": "",
+                      "caption": {
+                          "en": "Furniture for Babies",
+                          "ru": "Мебель для младенцев",
+                          "de": "Babymöbel",
+                          "fi": "Vauva kalusteet",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 48,
+                      "filter_lots": [
+                          22,
+                          58,
+                          77
+                      ],
+                      "catalog_categories_id": 23,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/f2939576.jpg",
+                      "sort": 4,
+                      "color": "",
+                      "caption": {
+                          "en": "Beds, Sofa Beds",
+                          "ru": "Кровати, диваны-кровати",
+                          "de": "Betten, Schlafsofas",
+                          "fi": "Sängyt ja vuodesohvat",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 49,
+                      "filter_lots": [
+                          22,
+                          59,
+                          62
+                      ],
+                      "catalog_categories_id": 23,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/aa98f310.jpg",
+                      "sort": 6,
+                      "color": "",
+                      "caption": {
+                          "en": "Armcahirs & Ottomans",
+                          "ru": "Кресла и пуфы",
+                          "de": "Sessel und Sitzsäcke",
+                          "fi": "Nojatuolit ja divaanit",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 50,
+                      "filter_lots": [
+                          22,
+                          60,
+                          61
+                      ],
+                      "catalog_categories_id": 23,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/183d9eba.jpg",
+                      "sort": 8,
+                      "color": "",
+                      "caption": {
+                          "en": "Tables & Chairs",
+                          "ru": "Столы и стулья",
+                          "de": "Tische und Stühle",
+                          "fi": "Pöydät ja tuolit",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 51,
+                      "filter_lots": [
+                          22,
+                          79
+                      ],
+                      "catalog_categories_id": 23,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/5a1df6a8.jpg",
+                      "sort": 10,
+                      "color": "",
+                      "caption": {
+                          "en": "Dressers & Chests",
+                          "ru": "Комоды и тумбы",
+                          "de": "Kommoden und Truhen",
+                          "fi": "Kaapit ja arkut",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 52,
+                      "filter_lots": [
+                          22,
+                          66,
+                          67,
+                          68
+                      ],
+                      "catalog_categories_id": 23,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/1f0ddf02.jpg",
+                      "sort": 12,
+                      "color": "",
+                      "caption": {
+                          "en": "Cabinets, Bookcases, Shelving & Shelves",
+                          "ru": "Шкафы, стеллажи и полки",
+                          "de": "Schränke, Regale und Ablagen",
+                          "fi": "Kirjahyllyt ja hyllyt",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 53,
+                      "filter_lots": [
+                          22,
+                          53
+                      ],
+                      "catalog_categories_id": 23,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/ae6b95cb.jpg",
+                      "sort": 14,
+                      "color": "",
+                      "caption": {
+                          "en": "Toys & Accessories",
+                          "ru": "Игрушки и аксессуары",
+                          "de": "Spielzeug und Zubehör",
+                          "fi": "Lelut ja tarvikkeet",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  }
+              ]
+          },
+          {
+              "id": 24,
+              "filter_lots": [],
+              "catalog_categories_id": 15,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201405/3c545426.jpg",
+              "sort": 12,
+              "color": "",
+              "caption": {
+                  "en": "Study & Home office",
+                  "ru": "Кабинет и домашний офис",
+                  "de": "Büro und Heimbüro",
+                  "fi": "Työhuone",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": [
+                  {
+                      "id": 54,
+                      "filter_lots": [
+                          23,
+                          60,
+                          61
+                      ],
+                      "catalog_categories_id": 24,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/c0da1c03.jpg",
+                      "sort": 2,
+                      "color": "",
+                      "caption": {
+                          "en": "Tables & Chairs",
+                          "ru": "Столы и стулья",
+                          "de": "Schreibtische und Bürostühle",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 55,
+                      "filter_lots": [
+                          23,
+                          59
+                      ],
+                      "catalog_categories_id": 24,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/ed2e08bf.jpg",
+                      "sort": 4,
+                      "color": "",
+                      "caption": {
+                          "en": "Armchairs",
+                          "ru": "Кресла",
+                          "de": "Bürosessel ",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 56,
+                      "filter_lots": [
+                          23,
+                          58
+                      ],
+                      "catalog_categories_id": 24,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/4d2d73a7.jpg",
+                      "sort": 6,
+                      "color": "",
+                      "caption": {
+                          "en": "Sofas",
+                          "ru": "Диваны",
+                          "de": "Sofas",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 57,
+                      "filter_lots": [
+                          23,
+                          67,
+                          68,
+                          66
+                      ],
+                      "catalog_categories_id": 24,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/6b50e1ea.jpg",
+                      "sort": 8,
+                      "color": "",
+                      "caption": {
+                          "en": "Cabinets, Bookcases, Shelving & Shelves",
+                          "ru": "Шкафы, стеллажи и полки",
+                          "de": "Büroschränke und Büroregale ",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  }
+              ]
+          },
+          {
+              "id": 25,
+              "filter_lots": [],
+              "catalog_categories_id": 15,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201405/2164fdd2.jpg",
+              "sort": 14,
+              "color": "",
+              "caption": {
+                  "en": "Hallway & Entryway",
+                  "ru": "Прихожая",
+                  "de": "Korridor",
+                  "fi": "Eteinen ja varasto",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": [
+                  {
+                      "id": 1511,
+                      "filter_lots": [
+                          1422
+                      ],
+                      "catalog_categories_id": 25,
+                      "hidden": false,
+                      "image": "",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "",
+                          "ru": "Предметы экстерьера",
+                          "de": "",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 58,
+                      "filter_lots": [
+                          55
+                      ],
+                      "catalog_categories_id": 25,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/4ca091a8.jpg",
+                      "sort": 2,
+                      "color": "",
+                      "caption": {
+                          "en": "Coat Racks",
+                          "ru": "Вешалки",
+                          "de": "Kleiderhaken",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 59,
+                      "filter_lots": [
+                          24,
+                          66
+                      ],
+                      "catalog_categories_id": 25,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/57082ce7.jpg",
+                      "sort": 4,
+                      "color": "",
+                      "caption": {
+                          "en": "Armoires & Wardrobes",
+                          "ru": "Шкафы и гардеробы",
+                          "de": "Garderoben",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 60,
+                      "filter_lots": [
+                          24,
+                          60
+                      ],
+                      "catalog_categories_id": 25,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/70ffbd08.jpg",
+                      "sort": 6,
+                      "color": "",
+                      "caption": {
+                          "en": "Dressing Tables, Concoles & Console Mirrors",
+                          "ru": "Туалетные столики, консоли и трюмо",
+                          "de": "Schminktische, Konsolen und Spiegel",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 61,
+                      "filter_lots": [
+                          24,
+                          62,
+                          63
+                      ],
+                      "catalog_categories_id": 25,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/5c91d95c.jpg",
+                      "sort": 8,
+                      "color": "",
+                      "caption": {
+                          "en": "Ottomans & Benches",
+                          "ru": "Пуфы и банкетки",
+                          "de": "Hocker und Bänke",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 62,
+                      "filter_lots": [
+                          107
+                      ],
+                      "catalog_categories_id": 25,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/49ac5c69.jpg",
+                      "sort": 10,
+                      "color": "",
+                      "caption": {
+                          "en": "Shoe Storage Units",
+                          "ru": "Подставки для обуви/Галошницы",
+                          "de": "Schuhschränke und Schuhablagen",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 63,
+                      "filter_lots": [
+                          24,
+                          44
+                      ],
+                      "catalog_categories_id": 25,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/06aff92e.jpg",
+                      "sort": 12,
+                      "color": "",
+                      "caption": {
+                          "en": "Doormats & Rugs",
+                          "ru": "Коврики",
+                          "de": "Fußabtreter",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  }
+              ]
+          },
+          {
+              "id": 20,
+              "filter_lots": [],
+              "catalog_categories_id": 15,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201405/5136a8b2.jpg",
+              "sort": 4,
+              "color": "",
+              "caption": {
+                  "en": "Kitchen & Dining",
+                  "ru": "Кухня-столовая",
+                  "de": "Küche",
+                  "fi": "Keittiö ja ruokailutila",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": [
+                  {
+                      "id": 1491,
+                      "filter_lots": [
+                          1404
+                      ],
+                      "catalog_categories_id": 20,
+                      "hidden": true,
+                      "image": "",
+                      "sort": 0,
+                      "color": "",
+                      "caption": {
+                          "en": "",
+                          "ru": "Готовые кухни",
+                          "de": "",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 32,
+                      "filter_lots": [
+                          19,
+                          72
+                      ],
+                      "catalog_categories_id": 20,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201407/582678a8.jpg",
+                      "sort": 2,
+                      "color": "",
+                      "caption": {
+                          "en": "Kitchen Modules",
+                          "ru": "Модули",
+                          "de": "Küchenmodule",
+                          "fi": "Keittiökaapit",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 33,
+                      "filter_lots": [
+                          19,
+                          60,
+                          61
+                      ],
+                      "catalog_categories_id": 20,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201407/b9ac3057.jpg",
+                      "sort": 4,
+                      "color": "",
+                      "caption": {
+                          "en": "Tables & Chairs",
+                          "ru": "Столы и стулья",
+                          "de": "Tische und Stühle",
+                          "fi": "Pöydät ja tuolit",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 34,
+                      "filter_lots": [
+                          74
+                      ],
+                      "catalog_categories_id": 20,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201407/26426868.jpg",
+                      "sort": 6,
+                      "color": "",
+                      "caption": {
+                          "en": "Cupboards",
+                          "ru": "Буфеты",
+                          "de": "Küchenbuffets",
+                          "fi": "Kaapit",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 35,
+                      "filter_lots": [
+                          75
+                      ],
+                      "catalog_categories_id": 20,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201407/c80135a3.jpg",
+                      "sort": 8,
+                      "color": "",
+                      "caption": {
+                          "en": "Freestanding appliances",
+                          "ru": "Отдельностоящая техника",
+                          "de": "Freistehende Geräte",
+                          "fi": "Keittiölaitteet",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 36,
+                      "filter_lots": [
+                          52
+                      ],
+                      "catalog_categories_id": 20,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201407/12f0bccd.jpg",
+                      "sort": 10,
+                      "color": "",
+                      "caption": {
+                          "en": "Accessories",
+                          "ru": "Аксессуары",
+                          "de": "Küchenzubehör",
+                          "fi": "Oheistarvikkeet",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 1375,
+                      "filter_lots": [
+                          19,
+                          479
+                      ],
+                      "catalog_categories_id": 20,
+                      "hidden": true,
+                      "image": "",
+                      "sort": 0,
+                      "color": "f99977",
+                      "caption": {
+                          "en": "Editable modules",
+                          "ru": "Редактируемые модули",
+                          "de": "",
+                          "fi": "",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  }
+              ]
+          },
+          {
+              "id": 22,
+              "filter_lots": [],
+              "catalog_categories_id": 15,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201405/841fa190.jpg",
+              "sort": 8,
+              "color": "",
+              "caption": {
+                  "en": "Bathroom",
+                  "ru": "Санузел",
+                  "de": "Bad und WC",
+                  "fi": "Kylpyhuone",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": [
+                  {
+                      "id": 42,
+                      "filter_lots": [],
+                      "catalog_categories_id": 22,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/59819fd6.jpg",
+                      "sort": 2,
+                      "color": "",
+                      "caption": {
+                          "en": "Plumbing Fixtures",
+                          "ru": "Сантехника",
+                          "de": "Badausstattung",
+                          "fi": "Kiintokalusteet",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": [
+                          {
+                              "id": 99,
+                              "filter_lots": [
+                                  21,
+                                  82
+                              ],
+                              "catalog_categories_id": 42,
+                              "hidden": false,
+                              "image": "",
+                              "sort": 0,
+                              "color": "",
+                              "caption": {
+                                  "en": "WCs and Bidets",
+                                  "ru": "Унитазы и биде",
+                                  "de": "Wcs, Bidets",
+                                  "fi": "WC-istuimet ja bideet",
+                                  "fr": "",
+                                  "cn": "",
+                                  "jp": "",
+                                  "pt": "",
+                                  "th": "",
+                                  "es": "",
+                                  "tr": ""
+                              },
+                              "categories": []
+                          },
+                          {
+                              "id": 100,
+                              "filter_lots": [
+                                  21,
+                                  83
+                              ],
+                              "catalog_categories_id": 42,
+                              "hidden": false,
+                              "image": "",
+                              "sort": 0,
+                              "color": "",
+                              "caption": {
+                                  "en": "Shower Curtains & Tub Doors",
+                                  "ru": "Занавески и дверки",
+                                  "de": "Duschvorhänge, Faltwände",
+                                  "fi": "Suihkuverhot",
+                                  "fr": "",
+                                  "cn": "",
+                                  "jp": "",
+                                  "pt": "",
+                                  "th": "",
+                                  "es": "",
+                                  "tr": ""
+                              },
+                              "categories": []
+                          },
+                          {
+                              "id": 101,
+                              "filter_lots": [
+                                  21,
+                                  86
+                              ],
+                              "catalog_categories_id": 42,
+                              "hidden": false,
+                              "image": "",
+                              "sort": 0,
+                              "color": "",
+                              "caption": {
+                                  "en": "Towel Rails",
+                                  "ru": "Полотенцесушители",
+                                  "de": "Handtuchtrockner",
+                                  "fi": "Pyyhetelineet",
+                                  "fr": "",
+                                  "cn": "",
+                                  "jp": "",
+                                  "pt": "",
+                                  "th": "",
+                                  "es": "",
+                                  "tr": ""
+                              },
+                              "categories": []
+                          },
+                          {
+                              "id": 770,
+                              "filter_lots": [
+                                  21,
+                                  84
+                              ],
+                              "catalog_categories_id": 42,
+                              "hidden": false,
+                              "image": "",
+                              "sort": 0,
+                              "color": "",
+                              "caption": {
+                                  "en": "Liquidizer",
+                                  "ru": "Смесители",
+                                  "de": "Badarmaturen",
+                                  "fi": "",
+                                  "fr": "",
+                                  "cn": "",
+                                  "jp": "",
+                                  "pt": "",
+                                  "th": "",
+                                  "es": "",
+                                  "tr": ""
+                              },
+                              "categories": []
+                          },
+                          {
+                              "id": 97,
+                              "filter_lots": [
+                                  21,
+                                  80,
+                                  81
+                              ],
+                              "catalog_categories_id": 42,
+                              "hidden": false,
+                              "image": "",
+                              "sort": 0,
+                              "color": "",
+                              "caption": {
+                                  "en": "Baths, Shower Enclosures",
+                                  "ru": "Ванны, душевые кабины",
+                                  "de": "Wannen, Duschkabinen",
+                                  "fi": "Kylpyammeet ja suihkut",
+                                  "fr": "",
+                                  "cn": "",
+                                  "jp": "",
+                                  "pt": "",
+                                  "th": "",
+                                  "es": "",
+                                  "tr": ""
+                              },
+                              "categories": []
+                          },
+                          {
+                              "id": 98,
+                              "filter_lots": [
+                                  21,
+                                  85
+                              ],
+                              "catalog_categories_id": 42,
+                              "hidden": false,
+                              "image": "",
+                              "sort": 0,
+                              "color": "",
+                              "caption": {
+                                  "en": "Sinks & Washbasins",
+                                  "ru": "Раковины и умывальники",
+                                  "de": "Waschtische",
+                                  "fi": "Lavuaarit ja pesualtaat",
+                                  "fr": "",
+                                  "cn": "",
+                                  "jp": "",
+                                  "pt": "",
+                                  "th": "",
+                                  "es": "",
+                                  "tr": ""
+                              },
+                              "categories": []
+                          }
+                      ]
+                  },
+                  {
+                      "id": 43,
+                      "filter_lots": [
+                          21,
+                          79
+                      ],
+                      "catalog_categories_id": 22,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/a343ebe1.jpg",
+                      "sort": 4,
+                      "color": "",
+                      "caption": {
+                          "en": "Bathroom Furniture",
+                          "ru": "Мебель для санузла",
+                          "de": "Badmöbel",
+                          "fi": "Kylpyhuoneen kalusteet",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 44,
+                      "filter_lots": [
+                          21,
+                          46
+                      ],
+                      "catalog_categories_id": 22,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/d6f1b0e9.jpg",
+                      "sort": 6,
+                      "color": "",
+                      "caption": {
+                          "en": "Bathroom Mirrors",
+                          "ru": "Зеркала для санузла",
+                          "de": "Badspiegel",
+                          "fi": "Peilit",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  },
+                  {
+                      "id": 45,
+                      "filter_lots": [
+                          21,
+                          51
+                      ],
+                      "catalog_categories_id": 22,
+                      "hidden": false,
+                      "image": "https://files.planoplan.com/upload/catalog/category/201410/7d35a600.jpg",
+                      "sort": 8,
+                      "color": "",
+                      "caption": {
+                          "en": "Accessories",
+                          "ru": "Аксессуары",
+                          "de": "Badaccessoires",
+                          "fi": "Oheistarvikkeet",
+                          "fr": "",
+                          "cn": "",
+                          "jp": "",
+                          "pt": "",
+                          "th": "",
+                          "es": "",
+                          "tr": ""
+                      },
+                      "categories": []
+                  }
+              ]
+          }
+      ]
+  },
+  {
+      "id": 18,
+      "filter_lots": [],
+      "catalog_categories_id": 0,
+      "hidden": false,
+      "image": "https://files.planoplan.com/upload/catalog/category/201401/23af0ad1.jpg",
+      "sort": 18,
+      "color": "c44c1c",
+      "caption": {
+          "en": "Decoration",
+          "ru": "Декор",
+          "de": "Dekor",
+          "fi": "Sisustus elementit",
+          "fr": "",
+          "cn": "",
+          "jp": "",
+          "pt": "",
+          "th": "",
+          "es": "",
+          "tr": ""
+      },
+      "categories": [
+          {
+              "id": 83,
+              "filter_lots": [
+                  43
+              ],
+              "catalog_categories_id": 18,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201401/6351aae5.jpg",
+              "sort": 2,
+              "color": "",
+              "caption": {
+                  "en": "Curtains & Curtain Rails",
+                  "ru": "Шторы и карнизы",
+                  "de": "Gardinen und Gardinenstangen",
+                  "fi": "",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 85,
+              "filter_lots": [
+                  45
+              ],
+              "catalog_categories_id": 18,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201406/f6337f0c.jpg",
+              "sort": 6,
+              "color": "",
+              "caption": {
+                  "en": "Pillows & Blankets",
+                  "ru": "Подушки и одеяла",
+                  "de": "Kissen und Decken",
+                  "fi": "",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 86,
+              "filter_lots": [
+                  46
+              ],
+              "catalog_categories_id": 18,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201406/35ede19f.jpg",
+              "sort": 8,
+              "color": "",
+              "caption": {
+                  "en": "Mirrors",
+                  "ru": "Зеркала",
+                  "de": "Spiegel",
+                  "fi": "",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 87,
+              "filter_lots": [
+                  47
+              ],
+              "catalog_categories_id": 18,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201406/532b556b.jpg",
+              "sort": 10,
+              "color": "",
+              "caption": {
+                  "en": "Clocks",
+                  "ru": "Часы",
+                  "de": "Uhren",
+                  "fi": "",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 89,
+              "filter_lots": [
+                  49
+              ],
+              "catalog_categories_id": 18,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201406/19ce492b.jpg",
+              "sort": 14,
+              "color": "",
+              "caption": {
+                  "en": "Vases, Statuettes, Frames & Candlesticks",
+                  "ru": "Вазы, статуэтки, фоторамки, подсвечники",
+                  "de": "Vasen, Figuren, Bilderrahmen, Kerzenhalter",
+                  "fi": "",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 92,
+              "filter_lots": [
+                  53
+              ],
+              "catalog_categories_id": 18,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201401/59fda3c6.jpg",
+              "sort": 20,
+              "color": "",
+              "caption": {
+                  "en": "Kids Accessories & Toys",
+                  "ru": "Игрушки и аксессуары для детской",
+                  "de": "Spielzeug und Kinderzimmerdeko",
+                  "fi": "",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 93,
+              "filter_lots": [
+                  54
+              ],
+              "catalog_categories_id": 18,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201406/862f5d7f.jpg",
+              "sort": 22,
+              "color": "",
+              "caption": {
+                  "en": "Sports Equipment",
+                  "ru": "Спортивные принадлежности",
+                  "de": "Sportgeräte",
+                  "fi": "",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 94,
+              "filter_lots": [
+                  55
+              ],
+              "catalog_categories_id": 18,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201406/8827e740.jpg",
+              "sort": 24,
+              "color": "",
+              "caption": {
+                  "en": "Coat Racks, Clothes, Shoes & Bags",
+                  "ru": "Вешалки, одежда, обувь и сумки",
+                  "de": "Bügel, Kleidung, Schuhe und Taschen",
+                  "fi": "",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 95,
+              "filter_lots": [
+                  56
+              ],
+              "catalog_categories_id": 18,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201401/07c4eeb3.jpg",
+              "sort": 26,
+              "color": "",
+              "caption": {
+                  "en": "Plants",
+                  "ru": "Растения",
+                  "de": "Pflanzen",
+                  "fi": "",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 171,
+              "filter_lots": [
+                  87
+              ],
+              "catalog_categories_id": 18,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201401/b89bd2af.jpg",
+              "sort": 0,
+              "color": "",
+              "caption": {
+                  "en": "Books",
+                  "ru": "Книги",
+                  "de": "Bücher",
+                  "fi": "",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 84,
+              "filter_lots": [
+                  44
+              ],
+              "catalog_categories_id": 18,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201406/9542c971.jpg",
+              "sort": 4,
+              "color": "",
+              "caption": {
+                  "en": "Carpets, Rugs & Doormats",
+                  "ru": "Ковры",
+                  "de": "Teppiche",
+                  "fi": "",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 88,
+              "filter_lots": [
+                  48
+              ],
+              "catalog_categories_id": 18,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201401/f24d2fd6.jpg",
+              "sort": 12,
+              "color": "",
+              "caption": {
+                  "en": "Painings, Photos & Posters",
+                  "ru": "Картины, фотографии и плакаты",
+                  "de": "Gemälde, Fotografien und Plakate",
+                  "fi": "",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 90,
+              "filter_lots": [
+                  51
+              ],
+              "catalog_categories_id": 18,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201406/560a8e49.jpg",
+              "sort": 16,
+              "color": "",
+              "caption": {
+                  "en": "Batroom Accessories",
+                  "ru": "Аксессуары для санузла",
+                  "de": "Badaccessoires",
+                  "fi": "",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 91,
+              "filter_lots": [
+                  52
+              ],
+              "catalog_categories_id": 18,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201401/69fb4706.jpg",
+              "sort": 18,
+              "color": "",
+              "caption": {
+                  "en": "Kitchen Accessories",
+                  "ru": "Аксессуары для кухни, посуда",
+                  "de": "Küchenzubehör und Geschirr",
+                  "fi": "",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          },
+          {
+              "id": 557,
+              "filter_lots": [
+                  109
+              ],
+              "catalog_categories_id": 18,
+              "hidden": false,
+              "image": "https://files.planoplan.com/upload/catalog/category/201406/c207d029.jpg",
+              "sort": 0,
+              "color": "",
+              "caption": {
+                  "en": "",
+                  "ru": "Декоративные панели",
+                  "de": "Dekorplatten",
+                  "fi": "",
+                  "fr": "",
+                  "cn": "",
+                  "jp": "",
+                  "pt": "",
+                  "th": "",
+                  "es": "",
+                  "tr": ""
+              },
+              "categories": []
+          }
+      ]
+  }
+]

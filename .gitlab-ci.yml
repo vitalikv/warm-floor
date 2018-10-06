@@ -1,0 +1,29 @@
+deploy-master:
+  environment:
+    name:                   master
+  variables:
+    ANS_PLAYBOOK:           "playbooks/git/webgl_editor-main.yml"
+    ANS_PLAYBOOK_INVENTORY: "inventories/main/"
+    GIT_STRATEGY:           none
+  script:
+  - echo "Deploy master"
+  - echo $ANS_PLAYBOOK
+  - echo $ANS_PLAYBOOK_INVENTORY
+  - ssh -T ad.vms02.ksdev.ru "cd /etc/ansible/ && ansible-playbook $ANS_PLAYBOOK -i $ANS_PLAYBOOK_INVENTORY"
+  only:
+  - master
+
+deploy-dev:
+  environment:
+    name:                   dev
+  variables:
+    ANS_PLAYBOOK:           "playbooks/git/webgl_editor-dev.yml"
+    ANS_PLAYBOOK_INVENTORY: "inventories/dev/"
+    GIT_STRATEGY:           none
+  script:
+  - echo "Deploy dev"
+  - echo $ANS_PLAYBOOK
+  - echo $ANS_PLAYBOOK_INVENTORY
+  - ssh -T ad.vms02.ksdev.ru "cd /etc/ansible/ && ansible-playbook $ANS_PLAYBOOK -i $ANS_PLAYBOOK_INVENTORY"
+  only:
+  - dev
