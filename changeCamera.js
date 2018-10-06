@@ -340,27 +340,3 @@ function rayFurniture_2( obj, wall )
 
 
 
-// переключение 3D камер в сохраненные места
-function switchCamers3D( id )
-{
-	if(arrRenderCams.length == 0) return;
-	if(!arrRenderCams[id]) return;
-	
-	camera3D.position.copy( arrRenderCams[id].posCam );  
-	
-	centerCam.position = new THREE.Vector3(arrRenderCams[id].posTarget.x, arrRenderCams[id].posTarget.y, arrRenderCams[id].posTarget.z);
-	camera3D.lookAt( centerCam );	
-	camera3D.rotation.z = 0;
-			
-			
-	wallAfterRender_2();
-	
-	//console.log( $('[data-action="changeViewMode"]') ); 
-	
-	if(camera != camera3D) { UI.setView('3D'); }
-	if(camera3D.userData.camera.type == 'first') { UI.changeViewMode( $('[data-action="changeViewMode"]') ); }	
-}
-
-
-
-

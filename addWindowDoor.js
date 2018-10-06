@@ -36,7 +36,7 @@ function addWD( obj, wall, pos )
 	obj.rotation.copy( wall.rotation ); 
 	obj.material.transparent = false;
 	clickO.obj = obj;
-	
+	console.log(333333)
 	if(camera == cameraTop)
 	{ 
 		obj.material.depthTest = false;  

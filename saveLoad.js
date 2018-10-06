@@ -232,48 +232,6 @@ function saveScene()
 	}	
 	
 	
-	for ( var i = 0; i < arr_obj.length; i++ )
-	{
-		sv.obj[i] = { id : 0, lotid : 0, pos : '', rot : '', size : '', material : [] }; 
-		sv.obj[i].id = arr_obj[i].userData.id;  
-		sv.obj[i].lotid = arr_obj[i].userData.obj3D.lotid;
-		
-		//arr_obj[i].updateMatrixWorld();  
-		//sv.obj[i].pos = arr_obj[i].localToWorld( arr_obj[i].children[0].position.clone() );
-		sv.obj[i].pos = arr_obj[i].position.clone();
-		
-		if(arr_obj[i].children[0].userData.version == "2.0")
-		{
-			sv.obj[i].rot = new THREE.Vector3( THREE.Math.radToDeg(arr_obj[i].rotation.x), THREE.Math.radToDeg(-arr_obj[i].rotation.y), THREE.Math.radToDeg(arr_obj[i].rotation.z) );
-		}
-		else
-		{
-			sv.obj[i].rot = new THREE.Vector3( THREE.Math.radToDeg(arr_obj[i].rotation.x - Math.PI), THREE.Math.radToDeg(arr_obj[i].rotation.y), THREE.Math.radToDeg(arr_obj[i].rotation.z - Math.PI) );
-		}
-				
-		sv.obj[i].size = arr_obj[i].pr_scale; 
-		
-		//sv.obj[i].overFloor = 
-		
-		var childrens = getAllChildrenObj(arr_obj[i].children[0], []);
-		sv.obj[i].material = [];
-		
-		//console.log(arr_obj[i], childrens);    
-		
-		for ( var i2 = 0; i2 < childrens.length; i2++ )  
-		{
-			var child = childrens[i2].obj;
-			
-			if(!child.pr_containerID) { child.pr_containerID = '---'; }
-			
-			if(child.pr_color) { var color = { r : child.pr_color.r, g : child.pr_color.g, b : child.pr_color.b, a : 1 }; }
-			else { var color = { r : 1, g : 1, b : 1, a : 1 }; }
-			
-			
-			sv.obj[i].material[i2] = { lotid : child.pr_matId, containerID : child.pr_containerID, color : color, scale : new THREE.Vector2(1,1) };
-		}
-	}	
-
 
 	for ( var i = 0; i < room.length; i++ )
 	{
@@ -591,45 +549,7 @@ function getJsonGeometry()
 		}	
 	}
 	
-	
-	for ( var i = 0; i < arr_obj.length; i++ )
-	{
-		furn[i] = { id : 0, lotid : 0, pos : '', rot : '', size : '', material : [] }; 
-		furn[i].id = arr_obj[i].userData.id;  
-		furn[i].lotid = arr_obj[i].userData.obj3D.lotid;
-		
-		furn[i].pos = new THREE.Vector3( arr_obj[i].position.x, arr_obj[i].position.y, -arr_obj[i].position.z );
-		
-		if(arr_obj[i].children[0].userData.version == "2.0")
-		{
-			furn[i].rot = new THREE.Vector3( THREE.Math.radToDeg(arr_obj[i].rotation.x), THREE.Math.radToDeg(-arr_obj[i].rotation.y), THREE.Math.radToDeg(arr_obj[i].rotation.z) );
-		}
-		else
-		{
-			furn[i].rot = new THREE.Vector3( THREE.Math.radToDeg(arr_obj[i].rotation.x - Math.PI), THREE.Math.radToDeg(arr_obj[i].rotation.y), THREE.Math.radToDeg(arr_obj[i].rotation.z - Math.PI) );
-		}
-				
-		furn[i].size = arr_obj[i].pr_scale; 
-		
-		
-		furn[i].colors = [];		   
-		var arr = getAllChildrenObj(arr_obj[i].children[0], []);
-		
-		for ( var i2 = 0; i2 < arr.length; i2++ )  
-		{
-			var child = arr[i2].obj;
-			
-			furn[i].colors[i2] = {  };		
-			furn[i].colors[i2].containerID = (!child.pr_containerID) ? '---' : child.containerID;
-			furn[i].colors[i2].lot = { id : "default" };
-			
-			furn[i].colors[i2].matMod = { colorsets : [], texScal : new THREE.Vector3() };
-			furn[i].colors[i2].matMod.colorsets[0] = { r : child.material.color.r, g : child.material.color.g, b : child.material.color.b, a : 1 };
-			furn[i].colors[i2].matMod.texScal = child.material.scale;			
-		}		
-	}	
-	
-	
+
 	
 	json.floors[0].points = points;
 	json.floors[0].walls = walls;
@@ -810,85 +730,14 @@ function loadFilePL(arr)
 		arrW[arrW.length] = obj;
 	}	
 	 
-	//for ( var i = 0; i < obj_point.length; i++ ) { upLineYY(obj_point[i]); }
+	
 	for ( var i = 0; i < obj_point.length; i++ ) { upLineYY_2(obj_point[i], obj_point[i].p, obj_point[i].w, obj_point[i].start); }
 	
 	upLabelPlan_1(obj_line);	// размеры стен
 	// создаем и устанавливаем все стены (без окон/дверей)
 
 	
-	// восстанавливаем пол
-	if(1==2)	// старый вариант, где пол строился по точкам из файла
-	{
-		for ( var i = 0; i < rooms.length; i++ ) 
-		{
-			var p = [];		
-			for ( var i2 = 0; i2 < rooms[i].pointid.length; i2++ ){ p[i2] = rooms[i].pointid[i2]; } 
-			p[p.length] = rooms[i].pointid[0];
 
-			var points = [];				
-			for ( var i2 = p.length - 1; i2 >= 0; i2-- ) { points[points.length] = findObjFromId( 'point', p[i2] ); }
-			
-			var material = [];
-			for ( var i2 = 0; i2 < rooms[i].colors.length; i2++ )	
-			{
-				material[i2] = {};
-				material[i2].containerID = rooms[i].colors[i2].containerID;
-				
-				if(!rooms[i].colors[i2].lot)
-				{
-					if(material[i2].containerID == 'floor') { rooms[i].colors[i2].lot = { id : 4956 }; }
-					if(material[i2].containerID == 'ceil') { rooms[i].colors[i2].lot = { id : 4957 }; }
-				}
-				
-				if(rooms[i].colors[i2].lot.id)
-				{
-					if(isNumeric(rooms[i].colors[i2].lot.id))
-					{
-						material[i2].lotid = rooms[i].colors[i2].lot.id;
-					}				
-				}
-				
-				if(rooms[i].colors[i2].matMod)
-				{
-					if(rooms[i].colors[i2].matMod.colorsets[0].color)
-					{
-						var color = rooms[i].colors[i2].matMod.colorsets[0].color;
-						color.r = Math.round(color.r * 100);
-						color.g = Math.round(color.g * 100);
-						color.b = Math.round(color.b * 100);
-						
-						material[i2].color = color;					
-					}
-					
-					if(rooms[i].colors[i2].matMod.texScal)
-					{
-						material[i2].scale = new THREE.Vector2( rooms[i].colors[i2].matMod.texScal.x, rooms[i].colors[i2].matMod.texScal.y );
-					}				
-				}				
-				
-			}
-		 
-			var plinth = [{o : false, lotid : 0}, {o : false, lotid : 0}];
-			
-			if(rooms[i].plinthLot) { plinth[0].o = true; plinth[0].lotid = rooms[i].plinthLot.id; }
-			if(rooms[i].plinthCeilLot) { plinth[1].o = true; plinth[1].lotid = rooms[i].plinthCeilLot.id; }
-			
-			
-			// если не смогли загрузить плинтус, то очищаем его значения
-			var flag = true;
-			for ( var i2 = 0; i2 < pool_pop.length; i2++ ) { if(pool_pop[i2].id == plinth[0].lotid) { if(!pool_pop[i2].empty) { flag = false; break; } } } 
-			if(flag) { plinth[0] = {o : false, lotid : 0}; }
-			
-			var flag = true;
-			for ( var i2 = 0; i2 < pool_pop.length; i2++ ) { if(pool_pop[i2].id == plinth[1].lotid) { if(!pool_pop[i2].empty) { flag = false; break; } } } 
-			if(flag) { plinth[1] = {o : false, lotid : 0}; }		
-			 
-			var zp = compileArrPointRoom_1(points);	
-			createFloor(points, zp[0], zp[1], rooms[i].id, detectNameRoom('idToText', rooms[i].roomSType), material, plinth);	  		 	
-		}				
-	}
-	
 	detectRoomZone(nameRoomDef);
 	
 
@@ -911,31 +760,8 @@ function loadFilePL(arr)
 	
 	
 	
-	
-	
-	
-	arrRenderCams = [];
-	if(arr.cams)
-	{
-		for ( var i = 0; i < arr.cams.length; i++ )
-		{
-			arr.cams[i].position.z *= -1;
-			arr.cams[i].target_position.z *= -1;
-			
-			arrRenderCams[i] = { posCam : arr.cams[i].position, posTarget : arr.cams[i].target_position };
-		}		
-	}
-	
-	
-	for ( var i = 0; i < obj_line.length; i++ ) 
-	{ 
-		//var geometry = new THREE.BufferGeometry().fromGeometry( obj_line[i].geometry );
-		//obj_line[i].geometry.dispose();
-		//obj_line[i].geometry = geometry; 
-	}		
-	
 	centerCamera2D();
-	console.log(99999999);
+	
 	emitAction('load-project-end');
 	emitAction('stop-fake-loading');
 	renderCamera();

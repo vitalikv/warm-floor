@@ -241,7 +241,7 @@ var arrContWD = createControllWD();
 var ruleVert_1 = createRulerVerticalWin();
 
 
-var arrRenderCams = [];
+
 var nameRoomDef = 'Гостиная';
 var param_ugol = { file : '', hash : '', key : '', link_render : '', link_save : '' };
 

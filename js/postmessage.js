@@ -21,7 +21,7 @@ function listener(event)
 		switch (action) 
 		{
 			case 'INIT':
-				editorButtons = msg.payload.buttons;
+				editorButtons = buttons;
 				disableUIButtons();
 
 				assignBlockParam(msg.payload.mode);
@@ -59,7 +59,22 @@ function listener(event)
 }
 
 
-
+var buttons = {
+save: 1,
+line: 1,
+window: 1,
+doorway: 1,
+changeView: 1,
+toggleSizes: 1,
+center: 1,
+centerCamera2d: 1,
+zoomIn: 1,
+zoomOut: 1,
+angle: 1,
+changeViewMode: 1,
+cameraHeight: 1,
+ceilingHeight: 1,
+};
 
 
 

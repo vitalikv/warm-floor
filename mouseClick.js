@@ -520,8 +520,8 @@ function hideMenuObjUI_3D( o )
 		switch ( o.userData.tag ) 
 		{
 			case 'wall': scene.remove(o.userData.wall.outline); o.userData.wall.outline = null; UI.hideToolbar( 'wall-3d-toolbar' ); break;
-			case 'window': UI.hideToolbar( 'window-toolbar' ); clearSelectedObjects(o.userData.tag);  break;
-			case 'door': UI.hideToolbar( 'door-2d-toolbar' ); clearSelectedObjects(o.userData.tag);  break;
+			case 'window': UI.hideToolbar( 'window-toolbar' ); break;
+			case 'door': UI.hideToolbar( 'door-2d-toolbar' ); break;
 			case 'room': scene.remove(o.userData.room.outline); o.userData.room.outline = null; UI.hideToolbar( 'floor-3d-toolbar' ); break; 
 			case 'ceiling': scene.remove(o.userData.ceil.outline); o.userData.ceil.outline = null; UI.hideToolbar( 'floor-3d-toolbar' ); break; 
 			case 'obj': hidePivotGizmo( o ); break;
