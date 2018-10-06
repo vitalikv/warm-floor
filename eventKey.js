@@ -56,9 +56,7 @@ document.body.addEventListener("keydown", function (e)
 				},
 			});			
 		}	
-		
-		
-		//if(e.keyCode == 80) { createEstimateJson(); }
+
 		
 		if(e.keyCode == 55) 
 		{

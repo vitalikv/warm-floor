@@ -22,7 +22,6 @@ function resetVarParam()
 
 function mouseDownRight( event )
 {
-	catalogResetObj();
 	
 	clickO.buttonAct = null;
 	clickO.button = null; 

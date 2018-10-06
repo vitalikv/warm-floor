@@ -446,7 +446,6 @@ function saveFile_2(cdm, json, popUrl)
 		dataType: 'json',
 		success: function(json)
 		{ 			
-			setLinkSave(cdm, json, createEstimateJson());
 			sendMessage('EDITOR.PROJECT_SAVED'); 
 		},
 		error: function(json){ console.log(json); UI.showAlert('Ошибка сохранения', 'warning'); }
@@ -660,71 +659,6 @@ function saveFileJson(json)
 		error: function(json){ console.log(json);  }
 	});		
 }
-
-
-// отправляем на сервер и сохраняем
-function setLinkSave(cdm, project, estimate) 
-{ 
-	var hostname = window.location.hostname; console.log(hostname);
-	
-	if(hostname == 'planoplan.com') 
-	{ 
-		var url = window.location.protocol + '//' + window.location.hostname + '/projects/save/'; 
-	}
-	else if(hostname == 'ugol.planoplan.com' || hostname == 'pp.ksdev.ru') 
-	{ 
-		project[0] = param_ugol.hash;
-		var url = param_ugol.link_save; 
-	}	
-
-	 
-	var boundary = "a1JzeySHGcJt5Ggc01sCIxEL9XRGwzaI9a1jjdWM";
-	var body = '--' + boundary + '\r\n'
-			 + 'Content-Type: text/plain; charset="utf-8"\r\n'
-			 + 'Content-Disposition: form-data; name="id"\r\n\r\n'
-			 + project[0] + '\r\n'
-			 
-			 + '--' + boundary + '\r\n'
-			+ 'Content-Type: application/octet-stream\r\n'
-			+ 'Content-disposition: form-data; name="file"; filename="file.dat"\r\n\r\n'
-			 + project[1] + '\r\n'
-			  
-			 + '--' + boundary + '\r\n'
-			 + 'Content-Type: text/plain; charset="utf-8"\r\n'
-			 + 'Content-Disposition: form-data; name="checksum"\r\n\r\n'
-			 + project[2] + '\r\n'
-
-			 + '--' + boundary + '\r\n'
-			 + 'Content-Type: text/plain; charset="utf-8"\r\n'
-			 + 'Content-Disposition: form-data; name="estimate"\r\n\r\n'
-			 + estimate.estimate + '\r\n'
-
-			 + '--' + boundary + '\r\n'
-			 + 'Content-Type: text/plain; charset="utf-8"\r\n'
-			 + 'Content-Disposition: form-data; name="noTask"\r\n\r\n'
-			 + estimate.noTask + '\r\n'
-			  + '--'+ boundary + '--'			  
-			 ;
-	
-	$.ajax
-	({		
-		url: url,
-		contentType: "multipart/form-data; boundary="+boundary,
-		type: 'POST',
-		data: body,
-		dataType: 'json',
-		success: function(json, status)
-		{ 
-			emitAction('save-project-result', {status: status, data: json}); 
-			console.log(json);  
-			UI.showAlert('Проект сохранен', 'success'); 
-			
-			if(cdm == 'render') { getRender(UI.renderMode); UI.changeView('3D'); }
-		},
-		error: function(){ UI.showAlert('Ошибка сохранения', 'warning'); }		
-	});	
-}
-
 
 
 

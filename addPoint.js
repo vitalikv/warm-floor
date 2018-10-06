@@ -3,6 +3,29 @@ var param_pw = {};
 
 
 
+
+// пускаем луч и определяем к какой комнате принадлежит объект
+function rayFurniture( obj ) 
+{
+	obj.updateMatrixWorld();
+	obj.geometry.computeBoundingSphere();
+	
+	//var pos = obj.position.clone();
+	var pos = obj.localToWorld( obj.geometry.boundingSphere.center.clone() );
+	pos.y = 1;
+	
+	var ray = new THREE.Raycaster();
+	ray.set( pos, new THREE.Vector3(0, -1, 0) );
+	
+	var intersects = ray.intersectObjects( room, true );	
+	
+	var floor = (intersects.length == 0) ? null : intersects[0].object				
+	
+	return { id : (floor) ? floor.userData.id : 0, obj : floor };
+}
+
+
+
  
 
 
