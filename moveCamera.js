@@ -210,8 +210,7 @@ function cameraMove3D( event )
 			
 			centerCam.copy( dir ); 		
 		}
-	}
-	updateObjectControlRotation(); 		
+	} 		
 	
 }
 
@@ -494,10 +493,6 @@ function cameraZoomTop( delta )
 			geometryLabelFloor.elementsNeedUpdate = true;
 		}
 	}
-
-	adjustObjectControlsScale();
-	adjustGizmoScale();
-
 }
 
 
@@ -522,9 +517,6 @@ function cameraZoom3D( delta, z )
 	if ( delta < 0 ) { if ( pos2.y >= 0 ) { centerCam.copy( pos2 ); } }
 
 	if ( pos3.distanceTo( centerCam ) >= 0.5 ) { camera.position.copy( pos3 ); }
-
-	adjustObjectControlsScale();
-	adjustGizmoScale();
 }
 
 

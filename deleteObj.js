@@ -4,8 +4,6 @@ function detectDeleteObj()
 {
 	var obj = clickO.last_obj;
 	
-	if(deleteActionBreak( obj )) return;
-	
 	if(!obj) return;
 	if(!obj.userData.tag) return;
 	

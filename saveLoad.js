@@ -18,8 +18,6 @@ function loadUrl(href)
 
 function resetScene() 
 {	
-	hideGizmo();
-	hideObjectControls();
 	
 	disposeHierchy(scene, disposeNode);
 	
@@ -30,7 +28,7 @@ function resetScene()
 		if(obj_line[i].userData.wall.outline) { scene.remove(obj_line[i].userData.wall.outline); }
 		scene.remove(obj_line[i]); 
 	}
-	for ( var i = 0; i < obj_point.length; i++ ){ scene.remove(obj_point[i]); }	
+	
 	for ( var i = 0; i < arr_window.length; i++ ){ scene.remove(arr_window[i]); }
 	for ( var i = 0; i < arr_door.length; i++ ){ scene.remove(arr_door[i]); }	
 	for ( var i = 0; i < arr_obj.length; i++ ) { scene.remove(arr_obj[i]); }

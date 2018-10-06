@@ -1029,7 +1029,7 @@
     <script src="stats.min.js?<?=$vrs?>"></script>
     <script src="units.js?<?=$vrs?>"></script>
     <script src="rulerWin.js?<?=$vrs?>"></script>
-    <script src="clickMoveObjectControls.js?<?=$vrs?>"></script>
+    
     <script src="calculationArea.js?<?=$vrs?>"></script>
     <script src="snapToWall.js?<?=$vrs?>"></script>
     <script src="crossWall.js?<?=$vrs?>"></script>
@@ -1046,28 +1046,24 @@
     <script src="floor.js?<?=$vrs?>"></script>
     <script src="detectZone.js?<?=$vrs?>"></script>
 	
-    <script src="clickPopObj.js?<?=$vrs?>"></script>
-    <script src="clickMovePivot.js?<?=$vrs?>"></script>
-    <script src="clickMoveGizmo.js?<?=$vrs?>"></script>
+
     <script src="inputWall.js?<?=$vrs?>"></script>
     <script src="dragWindowDoorUI.js?<?=$vrs?>"></script>
     <script src="changeTexture.js?<?=$vrs?>"></script>
   	<script src="loadPopObj.js?<?=$vrs?>"></script>
-	<script src="createParamWD.js?<?=$vrs?>"></script>
-	<script src="boxPop.js?<?=$vrs?>"></script>
 	
 	<script src="clickActiveObj.js?<?=$vrs?>"></script>
 	<script src="activeHover2D.js?<?=$vrs?>"></script>
     
     <script src="undoRedo.js?<?=$vrs?>"></script>
     <script src="saveLoad.js?<?=$vrs?>"></script>
-	<script src="estimate.js?<?=$vrs?>"></script>
+	
 	
 	<script src="posLabelRoom.js?<?=$vrs?>"></script>
 	
-    <script src="outlineShaders.js?<?=$vrs?>"></script>	
+	
     <script src="script.js?<?=$vrs?>"></script>
-    <script src="outline.js?<?=$vrs?>"></script>	
+    	
 	<script src="eventKey.js?<?=$vrs?>"></script>
 	
 

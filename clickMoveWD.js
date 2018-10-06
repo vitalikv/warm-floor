@@ -10,7 +10,7 @@ function clickWD( intersect )
 	
 	setUIPreview(obj, obj.pr_preview, obj.pr_catalog);
 	setUIDoorSize(obj);
-	addSelectedObject(obj);
+	
 
 	(obj.userData.door.type === 'DoorPattern') ? UI.show('doorPattern') : UI.hide('doorPattern');
 

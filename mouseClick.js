@@ -214,36 +214,6 @@ function clickActionBreak( rayhit )
 }
 
 
-// блокировка при перемещения объекта
-function moveActionBreak( obj )
-{
-	var tag = obj.userData.tag;
-	
-	if(tag == 'wall') { if(!obj.userData.wall.actList.move) return true; }
-	else if(tag == 'point') { if(!obj.userData.point.actList.move) return true; }
-	else if(tag == 'window') { if(!obj.userData.door.actList.move) return true; }
-	else if(tag == 'door') { if(!obj.userData.door.actList.move) return true; }		
-		
-	
-	return false;
-}
-
-
-// блокировка при удалении объекта
-function deleteActionBreak( obj )
-{
-	var tag = obj.userData.tag;
-	
-	if(tag == 'wall') { if(!obj.userData.wall.actList.delete) return true; }
-	else if(tag == 'point') { if(!obj.userData.point.actList.delete) return true; }
-	else if(tag == 'window') { if(!obj.userData.door.actList.delete) return true; }
-	else if(tag == 'door') { if(!obj.userData.door.actList.delete) return true; }		
-		
-	
-	return false;
-}
-
-
 
 function clickRayHit( rayhit )
 { 
@@ -380,19 +350,14 @@ function onDocumentMouseMove( event )
 	{
 		var tag = obj.userData.tag;
 		
-		if(moveActionBreak( obj )) return;
-		
 		if ( tag == 'wall' ) { moveWall( event, obj ); }
 		else if ( tag == 'window' ) { moveWD( event, obj ); }
 		else if ( tag == 'door' ) { moveWD( event, obj ); }
 		else if ( tag == 'controll_wd' ) { moveToggleChangeWin( event, obj ); }
 		else if ( tag == 'point' ) { movePoint( event, obj ); }
 		else if ( tag == 'd_tool' ) { moveToolDoor( event ); }
-		else if ( tag == 'gizmo' ) { moveGizmo( event ); }
 		else if ( tag == 'move_control' ) { moveObjectControls( event ); }
 		else if ( tag == 'room' ) { cameraMove3D( event ); }
-		else if ( tag == 'obj' ) { movePopObj( event ); }
-		else if ( tag == 'group_pop' ) { movePopObj( event ); }
 		else if ( tag == 'toggle_gp' ) { moveToggleGp( event ); }
 		else if ( tag == 'free_dw' ) { dragWD_2( event, obj ); }
 	}
@@ -404,8 +369,6 @@ function onDocumentMouseMove( event )
 	}
 
 	activeHover2D( event );
-	
-	checkHoverObjectControl( event );
 	
 	renderCamera();
 }
@@ -489,14 +452,10 @@ function hideMenuObjUI_2D( o )
 		switch ( o.userData.tag ) 
 		{  
 			case 'wall': UI.hideToolbar( 'wall-2d-toolbar' );  break;
-			case 'window': UI.hideToolbar( 'window-toolbar' ); clearSelectedObjects(o.userData.tag); if ( camera != camera3D ) { hideSizeWD( o ); } break;
-			case 'door': UI.hideToolbar( 'door-2d-toolbar' );  clearSelectedObjects(o.userData.tag);  if ( camera != camera3D ) { hideSizeWD( o ); } break;
+			case 'window': UI.hideToolbar( 'window-toolbar' ); if ( camera != camera3D ) { hideSizeWD( o ); } break;
+			case 'door': UI.hideToolbar( 'door-2d-toolbar' ); if ( camera != camera3D ) { hideSizeWD( o ); } break;
 			case 'room': UI.hideToolbar( 'floor-2d-toolbar' ); break;
-			case 'obj': hidePivotGizmo( o ); break;
-			// case 'pivot': hidePivotGizmo(o); break;
-			case 'gizmo': hidePivotGizmo( o ); break;
-			case 'move_control': hidePivotGizmo( o ); break;
-			case 'group_pop': hidePivotGizmo( o ); break; 
+			case 'move_control': hidePivotGizmo( o ); break; 
 		}
 		
 		//clickO.last_obj = null; 

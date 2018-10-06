@@ -87,7 +87,7 @@ if(1==2)
 	scene.add( cube2 ); 	
 }
 
-var selectedObjects = [];
+
 
 //----------- render
 function animate() 
@@ -114,52 +114,16 @@ function renderCamera()
 }
 
 
-var lastFrameTime = new Date().getTime();
 
 var moveTexture = { };
 
 function drawRender()
 {
-	if (new Date().getTime() - lastFrameTime < 20) console.log(new Date().getTime() - lastFrameTime);
-	//if ( new Date().getTime() - lastFrameTime < 20 ) return;
-	//lastFrameTime = new Date().getTime(); 
+	camera.updateMatrixWorld();			
 	
-	camera.updateMatrixWorld();		
-	
-	if (selectedObjects.length > 0) 
-	{
-		renderer.autoClear = false;
-		changeVisibilityOfSelectedObjects( false );
-		renderer.render( scene, camera, depthTexture, true );
-		changeVisibilityOfSelectedObjects( true );
-
-		changeVisibilityOfNonSelectedObjects( false );
-		scene.overrideMaterial = maskMaterial;
-		maskMaterial.uniforms[ "cameraNearFar" ].value = new THREE.Vector2( camera.near, camera.far );
-		maskMaterial.uniforms[ "depthTexture" ].value = depthTexture.texture;
-		renderer.render( scene, camera, maskTexture, true );
-		scene.overrideMaterial = null;
-		changeVisibilityOfNonSelectedObjects( true );
-
-		edgeDetectionMaterial.uniforms[ "maskTexture" ].value = maskTexture.texture;
-		edgeDetectionMaterial.uniforms[ "texSize" ].value = new THREE.Vector2( size.width, size.height );
-
-		renderer.render( scene, camera, outlineQuadTexture, true );
-
-		postProcessQuad.material.texture = outlineQuadTexture.texture;
-
-		renderer.clear();
-		renderer.render( scene, camera );
-		renderer.render( outlineScene, outlineCamera );
-	} 
-	else 
-	{
-		renderer.autoClear = true;
-		renderer.clear();
-		renderer.render(scene, camera);
-	}
-	
-	//renderer.clearDepth();
+	renderer.autoClear = true;
+	renderer.clear();
+	renderer.render(scene, camera);
 }
 
 
@@ -266,10 +230,9 @@ var p_tool = createToolPoint();
 var d_tool = createToolDoorPoint();
 // createGrid();
 var pointGrid = createPointGrid(100);
-var boxPop = createBoxPop(); 
-var lineBoxPop = createLineBoxPop();
-var controlBoxPop2D = createControlBoxPop2D(); 
-var controlBoxPop3D = createControlBoxPop3D(); 
+ 
+
+
 var planeMath = createPlaneMath();
 var planeMath2 = createPlaneMath2();
 var arrRule4 = createRulerWin();
@@ -278,9 +241,8 @@ var geometryLabelWall = createGeometryPlan(0.25 * kof_rd, 0.125 * kof_rd);
 var geometryLabelFloor = createGeometryPlan(0.5 * kof_rd, 0.125 * kof_rd);
 var arrContWD = createControllWD(); 
 var ruleVert_1 = createRulerVerticalWin();
-var pivot = createPivot();
-var gizmo = createGizmo();
-var objectControls = createObjectControlsGroup();
+
+
 var arrRenderCams = [];
 var nameRoomDef = 'Гостиная';
 var param_ugol = { file : '', hash : '', key : '', link_render : '', link_save : '' };
@@ -714,6 +676,51 @@ function createLineAxis( p1, p2 )
 	return wall;
 }
 
+// vertex для Gizmo
+function createGeometryCircle( vertices )
+{
+	var geometry = new THREE.Geometry();
+
+	var faces = [];
+
+	var n = 0;
+	for ( var i = 0; i < vertices.length - 4; i += 4 )
+	{
+		faces[ n ] = new THREE.Face3( i + 0, i + 4, i + 6 ); n++;
+		faces[ n ] = new THREE.Face3( i + 6, i + 2, i + 0 ); n++;
+
+		faces[ n ] = new THREE.Face3( i + 2, i + 6, i + 7 ); n++;
+		faces[ n ] = new THREE.Face3( i + 7, i + 3, i + 2 ); n++;
+
+		faces[ n ] = new THREE.Face3( i + 3, i + 7, i + 5 ); n++;
+		faces[ n ] = new THREE.Face3( i + 5, i + 1, i + 3 ); n++;
+
+		faces[ n ] = new THREE.Face3( i + 0, i + 1, i + 5 ); n++;
+		faces[ n ] = new THREE.Face3( i + 5, i + 4, i + 0 ); n++;
+	}
+
+
+	faces[ n ] = new THREE.Face3( i + 0, 0, 2 ); n++;
+	faces[ n ] = new THREE.Face3( 2, i + 2, i + 0 ); n++;
+
+	faces[ n ] = new THREE.Face3( i + 2, 2, 3 ); n++;
+	faces[ n ] = new THREE.Face3( 3, i + 3, i + 2 ); n++;
+
+	faces[ n ] = new THREE.Face3( i + 3, 3, 1 ); n++;
+	faces[ n ] = new THREE.Face3( 1, i + 1, i + 3 ); n++;
+
+	faces[ n ] = new THREE.Face3( i + 0, i + 1, 1 ); n++;
+	faces[ n ] = new THREE.Face3( 1, 0, i + 0 ); n++;
+
+
+
+	geometry.vertices = vertices;
+	geometry.faces = faces;
+	geometry.computeFaceNormals();
+	geometry.uvsNeedUpdate = true;
+
+	return geometry;
+}
 
 
 function createGeometryPivot(x, y, z)

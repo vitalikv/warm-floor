@@ -77,7 +77,7 @@ function clickShowRulerWD(wd)
 	wall.label[0].visible = false;
 	wall.label[1].visible = false; 
 	
-	addSelectedObject(wd);
+	
 	setUIDoorSize(wd);
 	
 	var p = [];	
