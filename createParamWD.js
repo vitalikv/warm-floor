@@ -561,7 +561,7 @@ function compileParamDoor(arrObjs, pr_door)
 	{  
 		changeWidthParamWD(objWD);
 		setPosDoorLeaf_3(objWD); 				// если форма двери уже установлена на стене, то правильно устанвливаем ПОП объект		
-		updatePlinthsReplaceDoor(objWD);		// обновляем положение плинтусов 
+		
 	}		
 }
 

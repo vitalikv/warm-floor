@@ -49,7 +49,7 @@ function changeCamera(cam)
 			}
 		}		
 		
-		for ( var i = 0; i < room.length; i++ ) { deletePlinths(room[i], room[i].userData.room.plinth.o); }		
+			
 	}
 	else if(camera == camera3D)
 	{	
@@ -65,7 +65,7 @@ function changeCamera(cam)
 			obj_line[i].material[2].clippingPlanes[0].constant = 1; 
 		}		
 		
-		updateFormPlinths(room);
+		
 		 
 		if(cdm == 'cameraTop')	// возращаемся в 3D режим из 2D режима
 		{
@@ -108,10 +108,7 @@ function changeCamera(cam)
 			obj_line[i].material[2].clippingPlanes[0].constant = 0; 
 		}
 		
-		for ( var i = 0; i < room.length; i++ )
-		{
-			deletePlinths(room[i], room[i].userData.room.plinth.o);
-		}		
+	
 		
 		var wall = clickO.last_obj;
 		var index = clickO.index;

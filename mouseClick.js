@@ -509,8 +509,6 @@ function showMenuObjUI_2D( o )
 {
 	var rayhit = clickO.rayhit;
 	
-	catalogClickObj( o, rayhit );
-	
 	if ( o )
 	{
 		objActiveColor_2D(o);
@@ -551,8 +549,6 @@ function showMenuObjUI_3D( o )
 			case 'group_pop': clickPopObj( rayhit ); break;
 		}
 	}
-	
-	catalogClickObj( o, rayhit );
 
 	clickO.last_obj = o;
 	clickO.obj = null;

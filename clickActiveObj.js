@@ -194,8 +194,6 @@ function objActiveColor_Wall(obj)
 	
 	clickO.last_obj = obj;		
 	clickO.obj = null;
-	
-	catalogClickObj( clickO.last_obj, clickO.rayhit );
 }
 
 

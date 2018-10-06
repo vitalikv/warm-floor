@@ -103,7 +103,7 @@ function addWD( obj, wall, pos )
 		if(obj.userData.door.type == 'DoorSimply') { setPosDoorLeaf_2(obj); }
 		else if(obj.userData.door.type == 'DoorPattern') { if(obj.userData.door.goList.setPopObj) { changeWidthParamWD(obj); setPosDoorLeaf_3(obj); } } 
 		
-		updatePlinthsReplaceDoor(obj);		 
+			 
 	}
 	else
 	{

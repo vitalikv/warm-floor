@@ -562,7 +562,7 @@ function сhangeSizePosWD( wd, pos, x, y )
 	
 	changeWindowDoorPop(wd, x / 2, y / 2);		// изменяем у ПОП объекта ширину/высоту/центрируем 
 	
-	if(camera == camera3D) { updateFormPlinths( detectCommonZone_1( wd.userData.door.wall ) ); }
+	
 }
 
 

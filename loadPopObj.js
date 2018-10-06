@@ -303,7 +303,7 @@ function loadPopObj_2(cdm)
 			}
 			else if(json[i].lotGroup == 'Plinths')
 			{						
-				getLengthPlinths( cdm[n].obj, json[i] );								
+												
 			}
 			else if(json[i].lotGroup == 'TypalRoom') 
 			{ 

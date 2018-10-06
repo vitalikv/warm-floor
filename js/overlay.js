@@ -281,7 +281,7 @@ function emitAction(action, value, $source, stage) {
     else if (action == 'rotate-90-w3d') { materialRotation({ obj : clickO.last_obj, rot: Math.PI / 2, loop : true, index : clickO.index }); }
     else if (action == 'rotate-45-f3d') { materialRotation({ obj : clickO.last_obj, rot: Math.PI / 4, loop : true }); } 
     else if (action == 'rotate-90-f3d') { materialRotation({ obj : clickO.last_obj, rot: Math.PI / 2, loop : true }); }
-    else if (action == 'clear-plinths-preview') { deletePlinths(clickO.last_obj, false); $source.attr('data-selected', false); }
+    
     else if (action == 'showCatalogButton') { sendMessage('show-catalog-button'); }
     else if (action == 'hideCatalogButton') { sendMessage('hide-catalog-button'); }
     else if (action == 'render') { UI.setRenderMode('render'); changeCamera(camera3D); UI.changeView('render'); }
@@ -298,7 +298,7 @@ function emitAction(action, value, $source, stage) {
     else if (action == 'load_error') { sendMessage('EDITOR.ERROR', { code: value.code, key: getErrorKey(value.code) }); }
     else if (action == 'camera-angle') { camera3D.fov = value / 2 + 25; camera3D.updateProjectionMatrix(); }
     else if (action == 'camera-height') { changeHeightCameraFirst(value); }
-    else if (action == 'delete-plinth') { deletePlinths(clickO.last_obj, false); UI('plinth-preview').val(''); UI.setObjectCaption('', 'plinth'); }
+    
     else if (action == 'apply-to-all-walls') { assignTextureOnAllWall(); }
     else if (action == 'rotate-45-object') { inputGizmo(45); renderCamera(); }
     else if (action == 'rotate-90-object') { inputGizmo(90); renderCamera(); }

@@ -261,7 +261,7 @@ function deleteWinDoor( obj )
 	
 	for ( var i = 0; i < wall.userData.wall.arrO.length; i++ ){ if(obj == wall.userData.wall.arrO[i]) { wall.userData.wall.arrO.splice(i, 1); break; } }
 	
-	updatePlinthsReplaceDoor(obj);		// обновляем плинтуса в помещении
+	
 	
 	if(obj.userData.tag == 'window') { UI.hideToolbar( 'window-toolbar' ); }
 	if(obj.userData.tag == 'door') { UI.hideToolbar( 'door-2d-toolbar' ); }

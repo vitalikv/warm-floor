@@ -66,7 +66,7 @@ function createEstimateJson()
 		
 		if(room[i].userData.room.plinth.o)
 		{		
-			getLengthPlinths( room[i], null ); 
+			
 			 
 			plinth = 
 			{

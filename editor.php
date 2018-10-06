@@ -1045,7 +1045,7 @@
     <script src="deleteObj.js?<?=$vrs?>"></script>
     <script src="floor.js?<?=$vrs?>"></script>
     <script src="detectZone.js?<?=$vrs?>"></script>
-	<script src="plinths.js?<?=$vrs?>"></script>
+	
     <script src="clickPopObj.js?<?=$vrs?>"></script>
     <script src="clickMovePivot.js?<?=$vrs?>"></script>
     <script src="clickMoveGizmo.js?<?=$vrs?>"></script>
