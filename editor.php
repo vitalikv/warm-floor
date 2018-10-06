@@ -1062,7 +1062,7 @@
     <script src="undoRedo.js?<?=$vrs?>"></script>
     <script src="saveLoad.js?<?=$vrs?>"></script>
 	<script src="estimate.js?<?=$vrs?>"></script>
-	<script src="getDesign.js?<?=$vrs?>"></script>
+	
 	<script src="posLabelRoom.js?<?=$vrs?>"></script>
 	
     <script src="outlineShaders.js?<?=$vrs?>"></script>	

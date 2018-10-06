@@ -1271,3 +1271,8 @@ var stats = new Stats();
 
 animate();
 renderCamera();
+
+
+
+
+$(document).ready(function () { sendMessage('EDITOR.READY', null); });
