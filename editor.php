@@ -8,27 +8,7 @@
   <title>Webgl-editor</title>
   <link rel="stylesheet" href="css/simplebar.css">  
   <link rel="stylesheet" href="css/style.css">
-  <script src="js/fontfaceobserver.js"></script>
-    <script>
-        var AvenirNextCyr = new FontFaceObserver('AvenirNextCyr', {
-            weight: 400
-        });
 
-        var AvenirNextCyrMedium = new FontFaceObserver('AvenirNextCyr', {
-            weight: 500
-        });
-
-        var AvenirNextCyrBold = new FontFaceObserver('AvenirNextCyr', {
-            weight: 600
-        });
-
-        Promise.all(
-            [AvenirNextCyr.load(), AvenirNextCyrMedium.load(), AvenirNextCyrBold.load()]
-        ).then(function() {
-            document.documentElement.className += 'font-loaded';
-        });
-	
-    </script>
 </head>
 
 <body>
@@ -164,50 +144,6 @@
 							<use xlink:href="images/icons/sprite.svg#ic-window"></use>
 						</svg>
           </span>
-            <ul class="toolbar__submenu">
-              <li class="toolbar__submenu-item" data-action="singleWindow">
-                <span class="sub-icon">
-                <svg class="svg-simple-window-dims">
-							<use xlink:href="images/icons/sprite.svg#simple-window"></use>
-            </svg>
-          </span>Одностворчатое</li>
-              <li class="toolbar__submenu-item" data-action="doubleWindow">
-                <span class="sub-icon">
-                <svg class="svg-double-window-dims">
-							<use xlink:href="images/icons/sprite.svg#double-window"></use>
-            </svg>
-          </span>Двустворчатое</li>
-              <li class="toolbar__submenu-item" data-action="tripleWindow">
-                <span class="sub-icon">
-                <svg class="svg-triple-window-dims">
-							<use xlink:href="images/icons/sprite.svg#triple-window"></use>
-            </svg>
-          </span>Трехстворчатое</li>
-            <li class="toolbar__submenu-item" data-action="balconyDoor">
-                <span class="sub-icon">
-                <svg class="svg-simple-window-dims">
-							<use xlink:href="images/icons/sprite.svg#simple-window"></use>
-            </svg>
-          </span>Балконная дверь</li>
-              <li class="toolbar__submenu-item" data-action="balconyRightDoor">
-                <span class="sub-icon">
-                <svg class="svg-balcony-right-dims">
-							<use xlink:href="images/icons/sprite.svg#balcony-right"></use>
-            </svg>
-          </span>Дверь справа</li>
-              <li class="toolbar__submenu-item" data-action="balconyLeftDoor">
-                <span class="sub-icon">
-                  <svg class="svg-balcony-left-dims">
-							<use xlink:href="images/icons/sprite.svg#balcony-left"></use>
-            </svg>
-          </span>Дверь слева</li>
-              <li class="toolbar__submenu-item" data-action="balconyCenterDoor">
-                <span class="sub-icon">
-                <svg class="svg-balcony-center-dims">
-							<use xlink:href="images/icons/sprite.svg#balcony-center"></use>
-            </svg>
-          </span>Дверь по центру</li>
-            </ul>
           </li>
           <li><span class="overlay-btn" data-action="doorway">
           <svg class="svg-ic-doorway-dims">
@@ -820,11 +756,7 @@
             </svg> 
            </span>
           </div>
-          <div class="overlay-btn overlay-btn_circle icon-eye toggle-sizes" data-action="toggleSizes">
-            <svg class="svg-ic-eye-dims">
-              <use xlink:href="images/icons/sprite.svg#ic-eye"></use>
-            </svg>
-          </div>
+
           <div class="overlay-btn overlay-btn_circle ic-man change-view-mode" data-action="changeViewMode" data-selected="bird">
             <svg class="svg-ic-man-dims">
               <use xlink:href="images/icons/sprite.svg#ic-man"></use>
@@ -989,15 +921,7 @@
         </div>
       </div>
     </div>
-    <div class="make-render" data-action="make-render">
-      Сделать фотореалистичный снимок
-    </div>
-    <ul class="catalog-buttons">
-      <li class="catalog-buttons__button" data-action="plans">
-      </li>
-      <li class="catalog-buttons__button" data-action="catalog">
-      </li>
-    </ul>
+
     <div class="loader">
       <div class="loader__content">
         <div id="preloader-wrap">
@@ -1031,7 +955,7 @@
     <script src="rulerWin.js?<?=$vrs?>"></script>
     
     <script src="calculationArea.js?<?=$vrs?>"></script>
-    <script src="snapToWall.js?<?=$vrs?>"></script>
+    
     <script src="crossWall.js?<?=$vrs?>"></script>
     <script src="addPoint.js?<?=$vrs?>"></script>
     <script src="addWindowDoor.js?<?=$vrs?>"></script>

@@ -264,7 +264,7 @@ function deleteWinDoor( obj )
 	if(obj.userData.tag == 'window') { UI.hideToolbar( 'window-toolbar' ); }
 	if(obj.userData.tag == 'door') { UI.hideToolbar( 'door-2d-toolbar' ); }
 	
-	clearSelectedObjects(obj.userData.tag); 
+
 	hideSizeWD( obj ); 
 
 	if(camera == camera3D)

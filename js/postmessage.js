@@ -8,8 +8,8 @@ function sendMessage(action, payload) {
 
 
 function listener(event) 
-{
-	if (event.source === window) return;
+{ 
+	//if (event.source === window) return;
 	var msg = event.data;
 	console.log(msg);
 	var source = msg.action.split('.')[0];

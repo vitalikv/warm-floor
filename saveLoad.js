@@ -28,7 +28,7 @@ function resetScene()
 		if(obj_line[i].userData.wall.outline) { scene.remove(obj_line[i].userData.wall.outline); }
 		scene.remove(obj_line[i]); 
 	}
-	
+	for ( var i = 0; i < obj_point.length; i++ ){ scene.remove(obj_point[i]); }	
 	for ( var i = 0; i < arr_window.length; i++ ){ scene.remove(arr_window[i]); }
 	for ( var i = 0; i < arr_door.length; i++ ){ scene.remove(arr_door[i]); }	
 	for ( var i = 0; i < arr_obj.length; i++ ) { scene.remove(arr_obj[i]); }
@@ -145,138 +145,6 @@ function disposeNode(node)
 
 
 
-
-
-function saveScene()
-{
-	var sv = 	
-	{ 
-		point : [],
-		walls : [],	
-		obj : [],
-		room : [],
-		height_wall : 0,
-		levelFloor : 1,
-		projName : 'Новый проект',
-		version : '1'
-	};
-	
-	if(!Array.isArray(levelFloor)) { sv.levelFloor = levelFloor; }
-	if(!Array.isArray(projName)) { sv.projName = projName; }
-	if(!Array.isArray(projVersion)) { sv.version = projVersion; } 
-	if(!Array.isArray(height_wall)) { sv.height_wall = height_wall; }
-	var walls = obj_line;
-	
-	var m = 0;
-	for ( var i = 0; i < walls.length; i++ )
-	{				
-		var p = walls[i].userData.wall.p;
-		
-		for ( var i2 = 0; i2 < p.length; i2++ )  
-		{
-			var flag = true;
-			for ( var i3 = 0; i3 < sv.point.length; i3++ ) { if(p[i2].userData.id == sv.point[i3].id){ flag = false; break; } }
-			
-			if(flag) 
-			{  
-				sv.point[m] = { id : 0, pos : new THREE.Vector2() };
-				sv.point[m].id = p[i2].userData.id;
-				sv.point[m].pos = { x : p[i2].position.x, z : -p[i2].position.z };
-				m++; 
-			}
-		}
-	}
-	
-	
-	for ( var i = 0; i < walls.length; i++ )
-	{ 
-		var p = walls[i].userData.wall.p;
-		
-		sv.walls[i] = { id : 0, points : [], width : 0, height : 0, offsetZ : new THREE.Vector3(), windows : [], doors : [], material : [] }; 
-		
-		sv.walls[i].id = walls[i].userData.id;
-		sv.walls[i].points[0] = p[0].userData.id;
-		sv.walls[i].points[1] = p[1].userData.id;
-		sv.walls[i].width = walls[i].userData.wall.width; 
-		sv.walls[i].height = walls[i].userData.wall.height_1; 
-		
-		
-
-		var x1 = p[1].position.z - p[0].position.z;
-		var z1 = p[0].position.x - p[1].position.x;	
-		var dir = new THREE.Vector3(z1, 0, -x1).normalize();						// перпендикуляр стены  (перевернуты x и y)
-		dir.multiplyScalar( walls[i].userData.wall.offsetZ );
-		sv.walls[i].offsetZ = new THREE.Vector3(dir.z, 0, dir.x);
-				
-		var wd = saveWindows(walls[i]);		
-		sv.walls[i].windows = wd.windows;
-		sv.walls[i].doors = wd.doors;
-		
-		var mat = walls[i].userData.material;	 	  
-		sv.walls[i].material = [];
-		sv.walls[i].material[0] = { containerID : 'wall3d_'+walls[i].userData.id+'_p2', lotid : mat[1].lotid, color : { r : mat[1].color.r, g : mat[1].color.g, b : mat[1].color.b, a : 1 }, scale : mat[1].scale };
-		sv.walls[i].material[1] = { containerID : 'wall3d_'+walls[i].userData.id+'_p1', lotid : mat[2].lotid, color : { r : mat[2].color.r, g : mat[2].color.g, b : mat[2].color.b, a : 1 }, scale : mat[2].scale };
-
-		var mat = walls[i].material;
-		if(mat[1].map)
-		{
-			sv.walls[i].material[0].offset = mat[1].map.offset;
-			if(mat[1].map.rotation != 0) sv.walls[i].material[0].rot = THREE.Math.radToDeg( mat[1].map.rotation );
-		}
-
-		if(mat[2].map)
-		{
-			sv.walls[i].material[1].offset = mat[2].map.offset;
-			if(mat[2].map.rotation != 0) sv.walls[i].material[1].rot = THREE.Math.radToDeg( mat[2].map.rotation ); 			
-		}		
-	}	
-	
-	
-
-	for ( var i = 0; i < room.length; i++ )
-	{
-		sv.room[i] = { id : 0, name : '', type : '', plinth : null, point : [], material : [] };
-		
-		sv.room[i].id = room[i].userData.id;  
-		sv.room[i].name = 'Room';
-		sv.room[i].type = detectNameRoom('textToId', room[i].userData.room.roomType);		
-		//for ( var i2 = 0; i2 < room[i].p.length; i2++ ) { sv.room[i].point[i2] = room[i].p[i2].userData.id; }
-		var s = 0; for ( var i2 = room[i].p.length - 1; i2 >= 0; i2-- ) { sv.room[i].point[s] = room[i].p[i2].userData.id; s++; }
-		
-		sv.room[i].plinth = (room[i].userData.room.plinth.o) ? room[i].userData.room.plinth.lotid : -1;    
-		
-		sv.room[i].material = [];
-		sv.room[i].material[0] = {  };		
-		sv.room[i].material[0].containerID = 'floor';
-		sv.room[i].material[0].lotid = room[i].userData.material.lotid; 
-		sv.room[i].material[0].color = { r : room[i].material.color.r, g : room[i].material.color.g, b : room[i].material.color.b, a : 1 };
-		sv.room[i].material[0].scale = room[i].userData.material.scale;
-		
-		if(room[i].material.map)
-		{
-			sv.room[i].material[0].offset = room[i].material.map.offset;
-			if(room[i].material.map.rotation != 0) sv.room[i].material[0].rot = THREE.Math.radToDeg( room[i].material.map.rotation );
-		}
-		
-
-		sv.room[i].material[1] = {  };		
-		sv.room[i].material[1].containerID = 'ceil'; 
-		sv.room[i].material[1].lotid = ceiling[i].userData.material.lotid;
-		sv.room[i].material[1].color = { r : ceiling[i].material.color.r, g : ceiling[i].material.color.g, b : ceiling[i].material.color.b, a : 1 };
-		sv.room[i].material[1].scale = ceiling[i].userData.material.scale;
-		
-		if(ceiling[i].material.map)
-		{
-			sv.room[i].material[1].offset = ceiling[i].material.map.offset;
-			if(ceiling[i].material.map.rotation != 0) sv.room[i].material[1].rot = THREE.Math.radToDeg( ceiling[i].material.map.rotation ); 
-		}		
-	}
-	console.log(sv);
-	
-	return sv;
-}
-
-
 // сохраняем окна/двери
 function saveWindows(wall)
 {
@@ -342,37 +210,20 @@ function saveWindows(wall)
 
 function saveFile(cdm) 
 { 
-	UI.showAlert('Сохранение проекта', '');            
-	var txt = saveScene();  
+	var json = JSON.stringify( getJsonGeometry() );
 	
-	var csv = JSON.stringify( txt );  	 
-	
-	var hostname = window.location.hostname;
-	
-	if(hostname == 'planoplan.com')
-	{
-		var url = new URL(window.parent.location.href);
-		var id = url.searchParams.get('id'); 	
-		
-		$.ajax 
-		({		
-			url: window.location.protocol + '//' + window.location.hostname + '/api/getWebglEditorData/?id=' + id,
-			type: 'POST',
-			dataType: 'json',
-			success: function(json){ saveFile_2(cdm, csv, json.data.project.file); },
-			error: function(json){ saveFile_2(cdm, csv, ''); UI.showAlert('Ошибка сохранения', 'warning'); sendMessage('EDITOR.ERROR', {code: 404}) }
-		});				
-	}
-	else if(hostname == 'ugol.planoplan.com' || hostname == 'pp.ksdev.ru')
-	{
-		saveFile_2(cdm, csv, param_ugol.file);  
-	}
-	else
-	{
-		saveFile_2(cdm, csv, '');  // test
-	}
-	
-	saveFileJson(JSON.stringify( getJsonGeometry() ));
+	$.ajax
+	({
+		url: 'saveJson.php',
+		type: 'POST',
+		data: {myarray: json},
+		dataType: 'json',
+		success: function(json)
+		{ 			
+			console.log(json); 
+		},
+		error: function(json){ console.log(json);  }
+	});	
 	
 	if(1==2)
 	{
@@ -388,25 +239,6 @@ function saveFile(cdm)
 	}
 }
 
-
-
-function saveFile_2(cdm, json, popUrl)
-{
-	console.log(popUrl);
-	
-	$.ajax
-	({
-		url: 'convertXml.php',
-		type: 'POST',
-		data: {myarray: json, url: popUrl},
-		dataType: 'json',
-		success: function(json)
-		{ 			
-			sendMessage('EDITOR.PROJECT_SAVED'); 
-		},
-		error: function(json){ console.log(json); UI.showAlert('Ошибка сохранения', 'warning'); }
-	});		
-}
 
 
 
@@ -561,39 +393,21 @@ function getJsonGeometry()
 
 
 
-function saveFileJson(json)
-{
-	
-	$.ajax
-	({
-		url: 'saveJson.php',
-		type: 'POST',
-		data: {myarray: json},
-		dataType: 'json',
-		success: function(json)
-		{ 			
-			console.log(json); 
-		},
-		error: function(json){ console.log(json);  }
-	});		
-}
-
-
 
 
 
 function loadFile(file) 
 {
-	//loader.show('Загрузка проекта');
-
 	$.ajax
 	({
-		url: 'convertArr.php',
+		url: 't/fileJson.json',
 		type: 'POST',
-		data: { file: file },
 		dataType: 'json',
-		success: function(json){ loadTotalLotid(json); loader.hide(); },
-		error: function(json) { loader.hide(); UI.showAlert('Ошибка загрузки', 'warning'); }
+		success: function(json)
+		{ 
+			json.code_server = 200;
+			loadTotalLotid(json); 	// загрузка json
+		},
 	});	
 }
 
@@ -601,12 +415,8 @@ function loadFile(file)
 function loadTotalLotid(arr)
 {
 	resetScene();	
-	console.log(arr);		
+		
 	UI.setView('2D');	// переключаемся в 2D
-	
-
-
-	
 	
 	loadFilePL(arr);
 }
@@ -671,7 +481,19 @@ function loadFilePL(arr)
 		wall[i].arrO = [];
 		
 		
-				
+		for ( var i2 = 0; i2 < arrO.length; i2++ )
+		{					
+			wall[i].arrO[i2] = {  }
+			
+			wall[i].arrO[i2].id = arrO[i2].id;
+			wall[i].arrO[i2].lotid = arrO[i2].lotid;
+			wall[i].arrO[i2].pos = new THREE.Vector3(Math.round(arrO[i2].startPointDist * 100) / 100, Math.round(arrO[i2].over_floor * 100) / 100, 0);
+			wall[i].arrO[i2].size = new THREE.Vector2(Math.round(arrO[i2].width * 100) / 100, Math.round(arrO[i2].height * 100) / 100);
+			if(arrO[i2].open_type) { wall[i].arrO[i2].open = arrO[i2].open_type; }
+			wall[i].arrO[i2].type = arrO[i2].type;
+			
+			if(arrO[i2].options){ wall[i].arrO[i2].options = arrO[i2].options; }
+		} 	
 	}
 	
 
@@ -771,9 +593,8 @@ function loadFilePL(arr)
 			if(wall[i].arrO[i2].size) { inf.size = wall[i].arrO[i2].size; }
 			if(wall[i].arrO[i2].open) { inf.open_type = wall[i].arrO[i2].open; } 
 			if(wall[i].arrO[i2].options) { inf.options = wall[i].arrO[i2].options; }				
-			
-			
-			loadPopObj_1(inf);  
+						 
+			createEmptyFormWD(inf);
 		}		
 	}
 	// устанавливаем окна/двери
@@ -803,7 +624,7 @@ function loadFilePL(arr)
 	emitAction('stop-fake-loading');
 	renderCamera();
 	
-	getSkeleton_1(room);
+	//getSkeleton_1(room);
 }
 
 

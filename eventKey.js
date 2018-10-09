@@ -33,51 +33,11 @@ document.body.addEventListener("keydown", function (e)
 
 	if(e.keyCode == 46) { detectDeleteObj(); }
 	
-	
+	if(e.keyCode == 76) { loadFile(''); }
+	if(e.keyCode == 79) { getSkeleton_1(room); }
 	
 	if (window.location.hostname == 'plan1' || window.location.hostname == 'plan3' || window.location.hostname == 'webgl-editor')
 	{
-		
-		if(e.keyCode == 76) { loadFile(''); }
-		
-		if(e.keyCode == 75) 
-		{ 
-			var file_data = 't/fileJson.json';
-		
-			$.ajax
-			({
-				url: file_data,
-				type: 'POST',
-				dataType: 'json',
-				success: function(json)
-				{ 
-					json.code_server = 200;
-					loadTotalLotid(json); 	// загрузка json
-				},
-			});			
-		}	
-
-		
-		if(e.keyCode == 55) 
-		{
-			var file_data = 't/saveJson.u3d';
-		
-			$.ajax
-			({
-				url: file_data,
-				type: 'POST',
-				dataType: 'json',
-				success: function(json)
-				{ 
-					json.code_server = 200;
-					loadTotalLotid(json); 	// загрузка json
-				},
-				error: function() 
-				{
-					loadFile('');		// загрузка xml
-				}
-			});	
-		}		
 		
 		// включить/выключить изменение масштаба для примитива
 		if(e.keyCode == 11179) 
@@ -93,8 +53,7 @@ document.body.addEventListener("keydown", function (e)
 					if(gizmo.visible)
 					{
 						gizmo.visible = false;
-						hideObjectControls();
-						clearSelectedObjects();										
+						hideObjectControls();									
 						showBoxPop(obj);					
 					}
 					else
@@ -111,7 +70,7 @@ document.body.addEventListener("keydown", function (e)
 		//if(e.keyCode == 80) { resetStyleRoom(0); }
 		
 		if(e.keyCode == 79) { getSkeleton_1(room); }
-		//if(e.keyCode == 79) { resetScene() ; }
+		
 		if(e.keyCode == 80) { getConsoleRendererInfo() } 
 	}
 	

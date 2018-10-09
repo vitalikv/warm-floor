@@ -56,18 +56,7 @@ class CatalogButtons extends Component {
     }
   }
 
-  render() {
-    return (
-      <ul className='catalog-buttons'>
-        <li className='catalog-buttons__button'>
-          <SlideButton handleClick={() => this.handleClick('layouts', LAYOUT_CATEGORY)} icon={layoutsIcon} caption='Планировки' />
-        </li>
-        <li className='catalog-buttons__button'>
-          <SlideButton handleClick={() => this.handleClick('catalog', LOTS_CATEGORY)} icon={catalogIcon} caption='Каталог товаров' />
-        </li>
-      </ul>
-    )
-  }
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CatalogButtons)

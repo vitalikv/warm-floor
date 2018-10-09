@@ -221,13 +221,11 @@ function objDeActiveColor_Wall(obj)
 	else if(obj.userData.tag == 'window') 
 	{ 
 		UI.hideToolbar( 'window-toolbar' );
-		clearSelectedObjects(obj.userData.tag); 
 		hideSizeWD( obj ); 
 	} 
 	else if(obj.userData.tag == 'door') 
 	{ 
 		UI.hideToolbar( 'door-2d-toolbar' );
-		clearSelectedObjects(obj.userData.tag); 
 		hideSizeWD( obj ); 
 	}
 	
