@@ -742,6 +742,43 @@ function loadFilePL(arr)
 	
 
 	
+	// устанавливаем окна/двери
+	for ( var i = 0; i < wall.length; i++ )
+	{ 
+		var obj = arrW[i];
+		
+		var point1 = obj.userData.wall.p[0];
+		var point2 = obj.userData.wall.p[1];		
+		
+		for ( var i2 = 0; i2 < wall[i].arrO.length; i2++ )
+		{			
+			wall[i].arrO[i2].pos.x = point1.position.distanceTo( point2.position ) * wall[i].arrO[i2].pos.x;
+			
+			var intP = obj.localToWorld( wall[i].arrO[i2].pos.clone() );  						
+
+			// если не смогли загрузить дверь, то загружаем проем
+			var flag = true;
+			
+			for ( var i3 = 0; i3 < pool_pop.length; i3++ ) { if(pool_pop[i3].id == wall[i].arrO[i2].lotid) { if(!pool_pop[i3].empty) { flag = false; break; } } } 
+			 
+			if(flag) 
+			{ 
+				if(wall[i].arrO[i2].type == 'door') { wall[i].arrO[i2].lotid = 575; delete wall[i].arrO[i2].open; } 
+				else if(wall[i].arrO[i2].type == 'window') { wall[i].arrO[i2].lotid = 8747; }
+			}
+
+			var inf = { status : 'load', id : wall[i].arrO[i2].id, lotid: wall[i].arrO[i2].lotid, pos : intP, wall : obj };	 		
+			if(wall[i].arrO[i2].size) { inf.size = wall[i].arrO[i2].size; }
+			if(wall[i].arrO[i2].open) { inf.open_type = wall[i].arrO[i2].open; } 
+			if(wall[i].arrO[i2].options) { inf.options = wall[i].arrO[i2].options; }				
+			
+			
+			loadPopObj_1(inf);  
+		}		
+	}
+	// устанавливаем окна/двери
+	
+			
 
 
 	

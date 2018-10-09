@@ -45,9 +45,11 @@ function loadPopObj_1(cdm)
 
 
 // создаем форму окна/двери/балкона при загрузки объекта (вставка формы двери в сцену)
-function createEmptyFormWD(json, cdm)
+function createEmptyFormWD(cdm)
 {  
-
+	var json = {};
+	(cdm.lotid == 8747) ? json.lotGroup = 'Windows' : json.lotGroup = 'Doors';
+	 
 	if(json.lotGroup == 'Windows' || json.lotGroup == 'Doors')
 	{
 		var form = { type : '' , v : new THREE.Vector2( 0, 0 ) };  

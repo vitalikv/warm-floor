@@ -245,20 +245,8 @@ function emitAction(action, value, $source, stage) {
     else if (action == 'changeViewMode') { UI.changeViewMode($source); }
     else if (action == 'line') { clickO.button = 'create_wall'; }
     else if (action == 'add-wall-dot') { clickO.button = 'add_point'; }
-    else if (action == 'zone') { clickO.button = 'create_zone'; }
-    else if (action == 'window') { clickO.button = 8747; }
-    else if (action == 'singleWindow') { clickO.button = 8747; }
-    else if (action == 'doubleWindow') { clickO.button = 8740; }
-    else if (action == 'tripleWindow') { clickO.button = 31; }
-    else if (action == 'balconyDoor') { clickO.button = 10; }
-    else if (action == 'balconyLeftDoor') { clickO.button = 11; }
-    else if (action == 'balconyCenterDoor') { clickO.button = 12; }
-    else if (action == 'balconyRightDoor') { clickO.button = 11; }
-    else if (action == 'door') { clickO.button = 9012; }
-    else if (action == 'singleDoor') { clickO.button = 9012; }
-    else if (action == 'doubleDoor') { clickO.button = 534; }
-    else if (action == 'tripleDoor') { clickO.button = 278; }
-    else if (action == 'doorway') { clickO.button = 575; }
+    else if (action == 'window') { createEmptyFormWD({ lotid: 8747 }); }
+    else if (action == 'doorway') { createEmptyFormWD({ lotid: 575 }); }
     else if (action == 'save') { saveFile(''); }
     else if (action == 'save-project-result') { sendMessage('EDITOR.PROJECT_SAVED', value); }
     else if (action == 'undo') { setInfoEvent1('undo'); renderCamera(); }
