@@ -62,7 +62,7 @@ function mouseDownRight( event )
 function onDocumentMouseDown( event ) 
 {
 	//event.preventDefault();	
-
+console.log(33333, clickO.last_obj); 
 	long_click = false;
 	lastClickTime = new Date().getTime();
 
@@ -235,9 +235,9 @@ function clickRayHit( rayhit )
 	if ( camera == cameraTop )
 	{  
 		if (clickToolWD()) { console.log(clickO.last_obj); }
-		else if ( tag == 'wall' ) { clickWall_2D( rayhit ); sendMessage('EDITOR.CLICK', 'WALL'); }
+		else if ( tag == 'wall' ) { clickWall_2D( rayhit ); }
 		else if ( tag == 'point' ) { clickPoint( rayhit ); }
-		else if ( tag == 'obj' ) { clickPopObj( rayhit ); sendMessage('EDITOR.CLICK', 'OBJECT'); }
+		else if ( tag == 'obj' ) { clickPopObj( rayhit ); }
 		else if ( tag == 'group_pop' ) { clickPopObj( rayhit ); }
 		else if ( tag == 'window' ) { clickWD( rayhit ); }
 		else if ( tag == 'door' ) { clickWD( rayhit ); }
@@ -247,7 +247,7 @@ function clickRayHit( rayhit )
 		else if ( tag == 'gizmo' ) { clickGizmo( rayhit ); }
 		else if ( tag == 'move_control' ) { clickObjectControls( rayhit ); }
 		else if ( tag == 'toggle_gp' ) { clickToggleGp( rayhit ); }
-		else if ( tag == 'room' ) { obj_selected = object; sendMessage('EDITOR.CLICK', 'FLOOR'); }
+		else if ( tag == 'room' ) { obj_selected = object; }
 	}
 	else if ( camera == camera3D )
 	{
@@ -451,10 +451,10 @@ function hideMenuObjUI_2D( o )
 		
 		switch ( o.userData.tag ) 
 		{  
-			case 'wall': UI.hideToolbar( 'wall-2d-toolbar' );  break;
-			case 'window': UI.hideToolbar( 'window-toolbar' ); if ( camera != camera3D ) { hideSizeWD( o ); } break;
-			case 'door': UI.hideToolbar( 'door-2d-toolbar' ); if ( camera != camera3D ) { hideSizeWD( o ); } break;
-			case 'room': UI.hideToolbar( 'floor-2d-toolbar' ); break;
+			case 'wall':  break;
+			case 'window': if ( camera != camera3D ) { hideSizeWD( o ); } break;
+			case 'door': if ( camera != camera3D ) { hideSizeWD( o ); } break;
+			case 'room': break;
 			case 'move_control': hidePivotGizmo( o ); break; 
 		}
 		

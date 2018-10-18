@@ -635,32 +635,7 @@ $('[data-chain]').each(function () {
 });
 
 
-RS(document.querySelector('.range-slider'), {
-  value: 60, // initial value
-  vertical: false, // vertical or horizontal slider?
-  // create: function(value, target) { }, // create event
-  // start: function(value, target, event) { }, // start event
-  drag: function (e) { emitAction('camera-angle', e); } // drag event
-  // stop: function(value, target, event) { } // stop event
-}); //angle
-RS(document.querySelector('.range-slider1'), {
-  value: 60, // initial value
-  vertical: false, // vertical or horizontal slider?
-  // create: function(value, target) { }, // create event
-  // start: function(value, target, event) { }, // start event
-  drag: function (e) { emitAction('camera-angle', e); } // drag event
-  // stop: function(value, target, event) { } // stop event
-});
-RS(document.querySelector('.range-slider2'), {
-  value: 50, // initial value 
-  vertical: true, // vertical or horizontal slider?
-  // create: function(value, target) { }, // create event
-  // start: function(value, target, event) { }, // start event
-  drag: function (e) { emitAction('camera-height', Math.abs(e - 100)); } // drag event
-  // stop: function(value, target, event) { } // stop event
-});  //camera
 
-$('.range-slider2').attr("value", 50);
 
 
 function Loader(text) {
@@ -719,7 +694,7 @@ function initRoomTypeSelect(roomTypes) {
   for (var i = 0; i < roomTypes.length; i++) {
     $select.append('<li class="select__option">' + roomTypes[i].caption + '</li>');
   }
-  new SimpleBar($('.select__sb')[0]);
+  
 }
 
 
@@ -837,4 +812,3 @@ function formatInputValue($el) {
 
 
 initRoomTypeSelect(roomTypes);
-svg4everybody();

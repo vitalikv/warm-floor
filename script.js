@@ -1280,4 +1280,4 @@ renderCamera();
 
 
 
-$(document).ready(function () { sendMessage('EDITOR.READY', null); });
+$(document).ready(function () { sendMessage('EDITOR.READY', null); loadFile(''); });

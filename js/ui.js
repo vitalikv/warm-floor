@@ -670,12 +670,7 @@ var UI = (function () {
     $('.' + toolbar).show();
     $('[data-subtoolbar]').data('open', false);
     $('.b-toolbar__toggle-btn').removeClass('b-toolbar__toggle-btn--active');
-    closeToolbarHelp();
-    if (!localStorage.getItem(toolbar)) {
-      var help = getToolbarHelp(toolbar);
-      showToolbarHelp(help.$el, help.i, help.icon);
-      localStorage.setItem(toolbar, true);
-    }
+
   }
 
   function hideToolbar(toolbar) {
@@ -683,7 +678,7 @@ var UI = (function () {
     $('.b-toolbar--subtoolbar').hide();
     $('[data-subtoolbar]').data('open', false);
     $('.b-toolbar__toggle-btn').removeClass('b-toolbar__toggle-btn--active');
-    closeToolbarHelp();
+    
   }
 
   UI.isMouseDown = isMouseDown;

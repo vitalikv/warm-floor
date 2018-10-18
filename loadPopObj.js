@@ -15,30 +15,7 @@ function loadPopObj_1(cdm)
 	
 	
 		
-	
-	
-	$.ajax
-	({
-		url: 'https://catalog.planoplan.com/api/v2/search/?keys[0]='+param_ugol.key+'&disregard_price=1&disregard_structure=1&id[0]='+cdm[0].lotid+'&lang=ru',
-		type: 'GET', 
-		dataType: 'json',
-		success: function(json)
-		{ 				 
-
-			
-			json = json.items[0];	
-			
-			createEmptyFormWD(json, cdm[0]);	// вставка формы двери	
-			
-
-			
-							
-		}, 
-		error: function(json)
-		{
-			console.log('error', cdm[0].lotid);
-		}
-	});		
+	createEmptyFormWD(cdm[0]);	// вставка формы двери		
 
 }
 
