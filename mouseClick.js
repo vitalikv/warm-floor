@@ -62,7 +62,7 @@ function mouseDownRight( event )
 function onDocumentMouseDown( event ) 
 {
 	//event.preventDefault();	
-console.log(33333, clickO.last_obj); 
+ 
 	long_click = false;
 	lastClickTime = new Date().getTime();
 

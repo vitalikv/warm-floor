@@ -624,7 +624,7 @@ function loadFilePL(arr)
 	emitAction('stop-fake-loading');
 	renderCamera();
 	
-	//getSkeleton_1(room);
+	getSkeleton_1(room);
 }
 
 

@@ -67,6 +67,93 @@ function getSkeleton_1(arrRoom)
 			//console.log(arrRoom[s].userData.id, skeleton);
 		}
 	}
+	
+	console.log(skeleton);
+	
+			
+	for ( var i = 0; i < skeleton.cycle.length; i++ )
+	{
+		var i2 = i + 2;
+
+		if(i+1 == skeleton.cycle.length - 1) 
+		{
+			var line_1 = skeleton.cycle[i].line[skeleton.cycle[i].line.length - 1];
+			var line_2 = skeleton.cycle[i+1].line[skeleton.cycle[i+1].line.length - 1];
+			
+			var d1 = 0.6;
+			var d2 = 0.3;
+			
+			var v = line_1.obj.geometry.vertices; 
+			v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = v[11].x - d1;
+			line_1.obj.geometry.verticesNeedUpdate = true;
+
+			line_1.obj.updateMatrixWorld();
+			var pos1 = line_1.obj.localToWorld(new THREE.Vector3(v[11].x, 0, 0));				
+
+			var v = line_2.obj.geometry.vertices; 
+			v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = v[11].x - d2;
+			line_2.obj.geometry.verticesNeedUpdate = true;
+			
+			line_2.obj.updateMatrixWorld();
+			var pos2 = line_2.obj.localToWorld(new THREE.Vector3(v[11].x, 0, 0));		
+			
+			line_1.p[1].position.copy(pos1);
+			line_2.p[1].position.copy(pos2);
+		}		
+		
+		if(i2 > skeleton.cycle.length - 1) continue;
+		
+		
+		
+		if(i == 0 || i == 1)
+		{
+			var d = (i+1)*-0.3 - 0.5;
+			var line_1 = skeleton.cycle[i].line[0];
+			
+			var dir = new THREE.Vector3().subVectors( line_1.p[1].position, line_1.p[0].position ).normalize();
+			dir = new THREE.Vector3().addScaledVector( dir, d );
+			var pos =  new THREE.Vector3().copy(line_1.p[0].position);
+			pos.add(dir);
+			
+			var d = line_1.p[1].position.distanceTo( pos );
+			
+			var v = line_1.obj.geometry.vertices; 
+			v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = d;
+			line_1.obj.geometry.verticesNeedUpdate = true;
+
+			line_1.obj.position.copy(pos);
+		}
+				
+		
+		
+		
+		
+		var line_1 = skeleton.cycle[i].line[skeleton.cycle[i].line.length - 1];		
+		var line_2 = skeleton.cycle[i2].line[0];		
+		
+		
+		var v = line_1.obj.geometry.vertices; 
+		
+		var d = v[11].x - 0.6;		
+		v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = d;
+		line_1.obj.geometry.verticesNeedUpdate = true;
+		
+		line_1.obj.updateMatrixWorld();
+		var pos = line_1.obj.localToWorld(new THREE.Vector3(d, 0, 0));
+		
+		line_1.p[1].position.copy(pos);
+		line_2.obj.position.copy(pos);
+		
+		var d2 = line_2.p[1].position.distanceTo( pos );
+
+		var v = line_2.obj.geometry.vertices; 
+		v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = d2;
+		line_2.obj.geometry.verticesNeedUpdate = true;			
+		
+	console.log(line_1.p[0].userData.id, line_1.p[1].userData.id, line_2.p[0].userData.id, line_2.p[1].userData.id);
+	
+		
+	}
 }
 
 
@@ -312,7 +399,7 @@ function getSkeleton_2(arrP, cycle, roomId)
 	else { var zone = detectRoomZone_2(arrP2, []); }
 	
 	
-	
+	cccc3 = (cccc3 == cccc1) ? cccc2 : cccc1;
 	console.log('--------------');
 	for ( var i = 0; i < zone.length; i++ ) { showSkeleton(zone[i], cycle, roomId); getSkeleton_2(zone[i], cycle + 1, roomId); }
 
@@ -360,17 +447,32 @@ function showConsoleSkeleton(arr, roomId)
 function showSkeleton(arrP, cycle, roomId)
 {
 	var n2 = skeleton.cycle.length;
-	skeleton.cycle[n2] = { num : cycle, p : [] };
+	skeleton.cycle[n2] = { num : cycle, p : [], line : [] };
 	
 	for ( var i = 0; i < arrP.length; i++ )
 	{
 		var i2 = (i == arrP.length - 1) ? 0 : i + 1;
 		
-		skeleton.point[skeleton.point.length] = createPoint( arrP[i].position, arrP[i].userData.id );
+		var point = createPoint( arrP[i].position, arrP[i].userData.id );
+		
+		skeleton.point[skeleton.point.length] = point;
 		
 		skeleton.cycle[n2].p[skeleton.cycle[n2].p.length] = arrP[i].position;		
 		
-		skeleton.line[skeleton.line.length] = createOneWall_4( arrP[i].position, arrP[i2].position, 0x0000FF );						
+		var line = createOneWall_4( arrP[i].position, arrP[i2].position, 0x0000FF );
+
+		skeleton.line[skeleton.line.length] = line;
+
+		skeleton.cycle[n2].line[i] = { obj : line, p : [point] };
+	}	
+	
+	
+	
+	for ( var i = 0; i < skeleton.cycle[n2].line.length; i++ )
+	{
+		var i2 = (i == skeleton.cycle[n2].line.length - 1) ? 0 : i + 1;
+		
+		skeleton.cycle[n2].line[i].p[1] = skeleton.cycle[n2].line[i2].p[0];
 	}	
 }
 
@@ -520,9 +622,10 @@ function checkClockWise_2( arrP )
 
 
 
-var cccc1 = new THREE.Color('#aaf0d1');
-var cccc2 = 0x808080;
-var cccc3 = cccc1;
+//var cccc1 = new THREE.Color('#aaf0d1');
+var cccc1 = 0xff0000;
+var cccc2 = 0x0037ff;
+var cccc3 = cccc2;
 
 
 // создание визуальных точек
@@ -544,7 +647,7 @@ function createPoint_2( pos, id )
 
 
 // создание визуальных линий
-function createOneWall_4( pos1, pos2, cccc3 ) 
+function createOneWall_4( pos1, pos2, color ) 
 {	
 	var d = pos1.distanceTo( pos2 );	
 	
@@ -563,6 +666,65 @@ function createOneWall_4( pos1, pos2, cccc3 )
 	
 	return wall;
 }
+
+
+
+
+function showWarmF_1()
+{
+	
+	for ( var i = 0; i < skeleton.cycle.length; i++ )
+	{
+		var i2 = i + 2;	
+
+		if(i+2 > skeleton.cycle.length - 1) 
+		{
+			var line_1 = skeleton.cycle[i].line[skeleton.cycle[i].line.length - 1];
+			
+			var d = (i+1 > skeleton.cycle.length - 1) ? 0.4 : 0.7;
+			
+			var v = line_1.obj.geometry.vertices; 
+			v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = v[11].x - d;
+			line_1.obj.geometry.verticesNeedUpdate = true;	
+
+			var dir = new THREE.Vector3().subVectors( line_1.p[1].position, line_1.p[0].position ).normalize();
+			dir = new THREE.Vector3().addScaledVector( dir, -d );
+			
+			line_1.p[1].position.add(dir);	
+			continue;
+		}
+		
+		if(i2 > skeleton.cycle.length - 1) continue;
+		
+		var line_1 = skeleton.cycle[i].line[skeleton.cycle[i].line.length - 1];		
+		var line_2 = skeleton.cycle[i2].line[0];
+		
+		var pos = crossPointTwoLine(line_1.p[0].position, line_1.p[1].position, line_2.p[0].position, line_2.p[1].position);
+		
+		//skeleton.point[skeleton.point.length] = createPoint( pos, 0 );
+		
+		line_1.p[1].position.copy(pos);			
+		line_2.obj.position.copy(pos);
+		
+		var d1 = line_1.p[0].position.distanceTo( pos );
+		var d2 = line_2.p[1].position.distanceTo( pos );
+		
+		
+		var v = line_1.obj.geometry.vertices; 
+		v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = d1;
+		line_1.obj.geometry.verticesNeedUpdate = true;
+
+		var v = line_2.obj.geometry.vertices; 
+		v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = d2;
+		line_2.obj.geometry.verticesNeedUpdate = true;			
+		
+	console.log(line_1.p[0].userData.id, line_1.p[1].userData.id, line_2.p[0].userData.id, line_2.p[1].userData.id);
+	}
+		
+				
+}
+
+
 
 
  

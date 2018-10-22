@@ -35,7 +35,7 @@ function clickCreateWall(point)
 	var obj = point.userData.point.cross;
 	
 	if(!obj) return;
-	
+	console.log(1111, point.userData.point.type );
 	if(point.userData.point.type == 'create_wall')
 	{ 
 		if(obj.userData.tag == 'planeMath') { addPoint_6( point ); } 
@@ -318,7 +318,7 @@ function addPoint_4( point )
 		console.log('1. кликнули на точку, создаем новую стену из этой точки');
 	}
 	else if(point.userData.point.type == 'continue_create_wall') 
-	{
+	{ 
 		if(point.userData.point.cross == planeMath)		// 2
 		{	
 			if(crossLineOnLine_1(point)) return; 	// произошло пересечение с другой стеной
@@ -341,7 +341,16 @@ function addPoint_4( point )
 		} 
 		else if(point.userData.point.cross.userData.tag == 'point')		// 3
 		{	
-			addPointOption_4(point);
+			if(point.userData.point.cross.userData.point.last.cdm == 'new_point_1')
+			{
+				deleteWall_2(point.w[0]);
+				obj_selected = null;
+				clickO = resetVarParam();
+			}
+			else
+			{
+				addPointOption_4(point);
+			}			
 		}
 	} 
 	else if(!point.userData.point.type) 	// 4
@@ -479,6 +488,8 @@ function addPoint_5( wall, point )
 		point.userData.point.last.cdm = 'new_point_1'; 
 		var point1 = point;		
 		var point2 = createPoint( point.position.clone(), 0 );			 							
+		
+		point2.userData.point.cross = point1;
 		
 		var newWall = createOneWall3( point1, point2, (clickO.buttonAct == 'create_zone') ? 0.01 : width_wall, {} ); 
 		var arrW = splitWalls( wall, point1 );
