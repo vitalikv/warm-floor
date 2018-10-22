@@ -127,21 +127,13 @@ function getSkeleton_1(arrRoom)
 		
 		
 		
-		
-		var line_1 = skeleton.cycle[i].line[skeleton.cycle[i].line.length - 1];		
+		var line_1 = skeleton.cycle[i].line[skeleton.cycle[i].line.length - 1];	
+				
 		var line_2 = skeleton.cycle[i2].line[0];		
 		
 		
-		var v = line_1.obj.geometry.vertices; 
+		var pos = floorPipe_1(i);
 		
-		var d = v[11].x - 0.6;		
-		v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = d;
-		line_1.obj.geometry.verticesNeedUpdate = true;
-		
-		line_1.obj.updateMatrixWorld();
-		var pos = line_1.obj.localToWorld(new THREE.Vector3(d, 0, 0));
-		
-		line_1.p[1].position.copy(pos);
 		line_2.obj.position.copy(pos);
 		
 		var d2 = line_2.p[1].position.distanceTo( pos );
@@ -157,6 +149,47 @@ function getSkeleton_1(arrRoom)
 }
 
 
+
+function floorPipe_1(i)
+{
+	var line_1 = skeleton.cycle[i].line[skeleton.cycle[i].line.length - 1];	
+	
+	var v = line_1.obj.geometry.vertices; 
+	
+	var d = v[11].x - 0.6;
+	var d2 = 0;
+	
+	if(d < 0) { d2 = d; d = 0; }
+
+		
+	v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = d;
+	line_1.obj.geometry.verticesNeedUpdate = true;
+	
+	if(d2 == 0)
+	{
+		line_1.obj.updateMatrixWorld();
+		var pos = line_1.obj.localToWorld(new THREE.Vector3(d, 0, 0));			
+	}
+	else
+	{
+		var line_2 = skeleton.cycle[i].line[skeleton.cycle[i].line.length - 2];	
+		var v = line_2.obj.geometry.vertices;
+		var d = v[11].x - d2;
+		
+		v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = d;
+		line_2.obj.geometry.verticesNeedUpdate = true;	
+
+		line_2.obj.updateMatrixWorld();
+		var pos = line_2.obj.localToWorld(new THREE.Vector3(d, 0, 0));	
+
+		line_2.p[1].position.copy(pos);
+	}
+
+	
+	line_1.p[1].position.copy(pos);
+	
+	return pos;
+}
 
 
 
