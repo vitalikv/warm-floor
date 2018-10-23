@@ -71,22 +71,50 @@ function getSkeleton_1(arrRoom)
 	console.log(skeleton);
 	
 	
-	for ( var i = 0; i < skeleton.cycle.length; i++ )
+	// меняем положение старта
+	if(1==1)
 	{
-		var line_1 = skeleton.cycle[i].line;
-		
-		var arrL = [];
-		
-		for ( var i2 = 0; i2 < skeleton.cycle[i].line.length; i2++ )
+		for ( var i = 0; i < skeleton.cycle.length; i++ )
 		{
-			//var n = (i2==0) ? skeleton.cycle[i].line.length - 1 : i2 - 1;
-			var n = (i2 == skeleton.cycle[i].line.length - 1) ? 0 : i2 + 1;
+			var line_1 = skeleton.cycle[i].line;
 			
-			arrL[arrL.length] = skeleton.cycle[i].line[n];
-		}
-		
-		skeleton.cycle[i].line = arrL;
+			var arrL = [];
+			
+			for ( var i2 = 0; i2 < skeleton.cycle[i].line.length; i2++ )
+			{
+				//var n = (i2==0) ? skeleton.cycle[i].line.length - 1 : i2 - 1;
+				var n = (i2 == skeleton.cycle[i].line.length - 1) ? 0 : i2 + 1;
+				
+				arrL[arrL.length] = skeleton.cycle[i].line[n];
+			}
+			
+			skeleton.cycle[i].line = arrL;
+		}		
 	}
+	
+	
+	// ресивер
+	if(1==2)
+	{
+		for ( var i = 0; i < skeleton.cycle.length; i++ )
+		{
+			var line_1 = skeleton.cycle[i].line;
+			
+			var arrL = [];
+			
+			for ( var i2 = skeleton.cycle[i].line.length - 1; i2 >= 0; i2-- )
+			{
+				var line = skeleton.cycle[i].line[i2];
+				
+				//line.p = [line.p[1], line.p[0]];
+				
+				arrL[arrL.length] = line;
+			}
+			
+			skeleton.cycle[i].line = arrL;
+		}		
+	}	
+	
 			
 	for ( var i = 0; i < skeleton.cycle.length; i++ )
 	{
@@ -124,8 +152,49 @@ function getSkeleton_1(arrRoom)
 		
 		if(i == 0 || i == 1)
 		{
-			var d = (i+1)*-0.3 - 0.5;
 			var line_1 = skeleton.cycle[i].line[0];
+			
+			if(i == 0)
+			{
+				var line_1 = skeleton.cycle[i].line[0];
+				var line_2 = skeleton.cycle[i+1].line[0];
+				
+				var flag = true;
+				if(line_1.p[0].userData.id == line_2.p[0].userData.id && line_1.p[1].userData.id == line_2.p[1].userData.id) flag = false;
+				
+				if(flag)
+				{
+					var pId1 = line_2.p[0].userData.id;
+					var pId2 = line_2.p[1].userData.id;
+					
+					var del = { line : [], point : [] };
+					
+					for ( var m = 0; m < skeleton.cycle[i].line.length; m++ )
+					{
+						var lineD = skeleton.cycle[i].line[m];
+						
+						del.line[del.line.length] = lineD;
+						del.point[del.point.length] = lineD.p[1];
+						
+						if(pId2 == lineD.p[1].userData.id) { break; }
+					}
+
+					//for ( var m = 0; m < del.line.length; m++ ) scene.remove( del.line[m] ); 
+					//for ( var m = 0; m < del.point.length; m++ ) scene.remove( del.point[m] );
+
+					for ( var m = skeleton.cycle[i].line.length - 1; m >= 0; m-- )
+					{
+						var lineD = skeleton.cycle[i].line[m];
+						
+						
+						if(pId1 == lineD.p[0].userData.id) { var line_1 = skeleton.cycle[i].line[m]; break; }
+					}					
+				}
+
+			}
+			
+			var d = (i+1)*-0.3 - 0.5;
+			//var line_1 = skeleton.cycle[i].line[0];
 			
 			var dir = new THREE.Vector3().subVectors( line_1.p[1].position, line_1.p[0].position ).normalize();
 			dir = new THREE.Vector3().addScaledVector( dir, d );
