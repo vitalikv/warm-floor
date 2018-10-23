@@ -70,6 +70,23 @@ function getSkeleton_1(arrRoom)
 	
 	console.log(skeleton);
 	
+	
+	for ( var i = 0; i < skeleton.cycle.length; i++ )
+	{
+		var line_1 = skeleton.cycle[i].line;
+		
+		var arrL = [];
+		
+		for ( var i2 = 0; i2 < skeleton.cycle[i].line.length; i2++ )
+		{
+			//var n = (i2==0) ? skeleton.cycle[i].line.length - 1 : i2 - 1;
+			var n = (i2 == skeleton.cycle[i].line.length - 1) ? 0 : i2 + 1;
+			
+			arrL[arrL.length] = skeleton.cycle[i].line[n];
+		}
+		
+		skeleton.cycle[i].line = arrL;
+	}
 			
 	for ( var i = 0; i < skeleton.cycle.length; i++ )
 	{
@@ -122,6 +139,8 @@ function getSkeleton_1(arrRoom)
 			line_1.obj.geometry.verticesNeedUpdate = true;
 
 			line_1.obj.position.copy(pos);
+			
+			console.log(line_1.p[0].userData.id, line_1.p[1].userData.id);
 		}
 				
 		
@@ -142,7 +161,7 @@ function getSkeleton_1(arrRoom)
 		v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = d2;
 		line_2.obj.geometry.verticesNeedUpdate = true;			
 		
-	console.log(line_1.p[0].userData.id, line_1.p[1].userData.id, line_2.p[0].userData.id, line_2.p[1].userData.id);
+	//console.log(line_1.p[0].userData.id, line_1.p[1].userData.id, line_2.p[0].userData.id, line_2.p[1].userData.id);
 	
 		
 	}
@@ -182,7 +201,7 @@ function floorPipe_1(i)
 		line_2.obj.updateMatrixWorld();
 		var pos = line_2.obj.localToWorld(new THREE.Vector3(d, 0, 0));	
 
-		line_2.p[1].position.copy(pos);
+		line_2.p[1].position.copy(pos);  console.log(1111111);
 	}
 
 	
