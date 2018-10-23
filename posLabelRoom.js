@@ -140,7 +140,7 @@ function getSkeleton_1(arrRoom)
 
 			line_1.obj.position.copy(pos);
 			
-			console.log(line_1.p[0].userData.id, line_1.p[1].userData.id);
+			console.log('start pipe', line_1.p[0].userData.id, line_1.p[1].userData.id);
 		}
 				
 		
@@ -161,7 +161,7 @@ function getSkeleton_1(arrRoom)
 		v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = d2;
 		line_2.obj.geometry.verticesNeedUpdate = true;			
 		
-	//console.log(line_1.p[0].userData.id, line_1.p[1].userData.id, line_2.p[0].userData.id, line_2.p[1].userData.id);
+	console.log('| pipe1 = ', line_1.p[0].userData.id, line_1.p[1].userData.id, ' | pipe2 = ', line_2.p[0].userData.id, line_2.p[1].userData.id);
 	
 		
 	}
