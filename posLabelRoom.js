@@ -136,7 +136,7 @@ function getSkeleton_1(arrRoom)
 	
 
 	
-	var p = findEquallyPipe({ line_1 : { p : [skeleton.cycle[0].p1[0].point, skeleton.cycle[0].p1[1].point]} });
+	var p = findEquallyPipe({ line_1 : { p : [skeleton.cycle[0].p1[0].point, skeleton.cycle[0].p1[1].point]}, index : [0, 1] });
 	
 	var p1 = p;  
 	
@@ -147,10 +147,10 @@ function getSkeleton_1(arrRoom)
 			var p = skeleton.cycle[0].line[i].p; break;
 		}
 	}	
-	console.log(99999, p[0].userData.id, p[1].userData.id);
-	var p = findEquallyPipe({ line_1 : { p : p } });
 	
-	var p2 = p; console.log(99999, p2[0].userData.id, p2[1].userData.id);
+	var p = findEquallyPipe({ line_1 : { p : p }, index : [0, 1] });
+	
+	var p2 = p; 
 	
 	
 	
@@ -162,6 +162,26 @@ function getSkeleton_1(arrRoom)
 		var i2 = i + 2;	
 		
 		if(i2 > skeleton.cycle.length - 1) continue;
+		
+		
+		
+	var p1 = findEquallyPipe({ line_1 : { p : [skeleton.cycle[i].p1[0].point, skeleton.cycle[i].p1[1].point]}, index : [i, i+2] }); 
+	
+	console.log(p1[0].userData.id, p1[1].userData.id, ' | ', skeleton.cycle[i].p1[0].point.userData.id, skeleton.cycle[i].p1[1].point.userData.id);
+	
+	if(p1[0].userData.id != skeleton.cycle[i].p1[0].point.userData.id) { p1 = [p1[1], p1[0]] };
+	for ( var m = 0; m < skeleton.cycle[i2].line.length; m++ )
+	{
+		
+		if(skeleton.cycle[i2].line[m].p[1].userData.id == p1[0].userData.id)
+		{
+			var p = skeleton.cycle[i2].line[m].p; break;
+		}
+	}	
+	
+	var p2 = findEquallyPipe({ line_1 : { p : p }, index : [i, i+2] });		
+		
+		
 		
 		var line_1 = null;
 		var line_2 = null;
@@ -181,7 +201,13 @@ function getSkeleton_1(arrRoom)
 				var line_2 = skeleton.cycle[i2].line[m]; break;
 			}
 		}
+		
+		
 
+		console.log(p1[0].userData.id, p1[1].userData.id, p2[0].userData.id, p2[1].userData.id);
+		
+		if(i == 3) line_2.obj.material[0].color.set(0x000000);
+		
 		if(!line_1 || !line_2) continue;
 		
 		p2 = [line_1.p[0], line_1.p[1]];
@@ -206,7 +232,8 @@ function getSkeleton_1(arrRoom)
 		v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = d2;
 		line_2.obj.geometry.verticesNeedUpdate = true;	  		
 		
-	console.log(p1[0].userData.id, p1[1].userData.id, p2[0].userData.id, p2[1].userData.id);
+		
+	
 	}
 }
 
@@ -219,12 +246,12 @@ function getSkeleton_1(arrRoom)
 function findEquallyPipe(cdm)
 {
 	
-	var level_1 = skeleton.cycle[0];
-	var level_2 = skeleton.cycle[1];
+	var level_1 = skeleton.cycle[cdm.index[0]];
+	var level_2 = skeleton.cycle[cdm.index[1]];
 	
 	var line_1 = cdm.line_1;		
 	
-	var p = line_1.p;	
+		
 	
 	var equally = [-1, -1];
 	for ( var i = 0; i < level_2.p1.length; i++ )
@@ -242,17 +269,17 @@ function findEquallyPipe(cdm)
 		var arrP_2 = level_1.p2;			
 		
 		var num = 0;
-		for ( var m = 0; m < level_1.p1.length; m++ ) { if(point == level_1.p1[m].point) { num = m; break; } }		
+		for ( var m = 0; m < level_1.p1.length; m++ ) { if(point.userData.id == level_1.p1[m].point.userData.id) { num = m; break; } }		
 		if(num > 0) { arrP_1 = shiftArray({arr : level_1.p1, count : num}); }
 
 		var num = 0;
-		for ( var m = 0; m < level_1.p2.length; m++ ) { if(point == level_1.p2[m].point) { num = m; num = (level_1.p2.length - 1) - num; break; } }		
+		for ( var m = 0; m < level_1.p2.length; m++ ) { if(point.userData.id == level_1.p2[m].point.userData.id) { num = m; num = (level_1.p2.length - 1) - num; break; } }		
 		if(num > 0) { arrP_2 = shiftArray({arr : level_1.p2, count : -num}); }		
 		
 		
-		for ( var m = 0; m < arrP_1.length; m++ ) { console.log(arrP_1[m].point.userData.id); }
-		console.log('----------'); 
-		for ( var m = 0; m < arrP_2.length; m++ ) { console.log(arrP_2[m].point.userData.id); }
+		//for ( var m = 0; m < arrP_1.length; m++ ) { console.log(arrP_1[m].point.userData.id); }
+		//console.log('----------'); 
+		//for ( var m = 0; m < arrP_2.length; m++ ) { console.log(arrP_2[m].point.userData.id); }
 		console.log('----------'); 	
 
 		var p = [];
@@ -287,9 +314,13 @@ function findEquallyPipe(cdm)
 			if(exist) break;
 		}					
 	}
+	else
+	{
+		var p = line_1.p;
+	}
 	
 	
-	console.log('pId1 : ', p[0].userData.id, 'pId2 : ', p[1].userData.id);
+	console.log('index:', cdm.index, 'pId1 : ', p[0].userData.id, 'pId2 : ', p[1].userData.id);
 	
 	return p;
 }
