@@ -4,8 +4,26 @@
 
 var skeleton = { line : [], point : [], cycle : [] };
 
+// сдвиг массива на count позиций
+// если count = отрицательный => удаляем с конца массива заданное кол-во элементов и добавляем в начало
+// если count = положительный => удаляем из массива все элементы начиная с count и добавляем в начало
+function shiftArray(cdm)
+{
+	var arr = cdm.arr;
+	var count = cdm.count;
+
+	var arr2 = [];
+	for ( var i = 0; i < arr.length; i++ ){ arr2[i] = arr[i]; }	
+	
+	var arr2 = arr2.splice(count).concat(arr2);
+	
+	console.log(arr2);
+
+	return arr2;
+}
 
 
+shiftArray({arr : [1,2,3,45,8,9,7,10], count : 1});
 
 
 function getSkeleton_1(arrRoom)
@@ -115,7 +133,9 @@ function getSkeleton_1(arrRoom)
 		}		
 	}	
 	
-			
+	
+	findEquallyPipe(skeleton.cycle);
+	
 	for ( var i = 0; i < skeleton.cycle.length; i++ )
 	{
 		var i2 = i + 2;
@@ -247,6 +267,92 @@ function getSkeleton_1(arrRoom)
 		
 	}
 }
+
+
+
+
+
+
+
+function findEquallyPipe(cycle)
+{
+	var level_1 = cycle[0];
+	var level_2 = cycle[1];
+	
+	var line_1 = { p : [] };
+	line_1.p[0] = level_1.p1[0].point;
+	line_1.p[1] = level_1.p2[0].point;
+	
+	var line_2 = { p : [] };
+	line_2.p[0] = level_2.p1[0].point;
+	line_2.p[1] = level_2.p2[0].point;		
+	
+	console.log(777, line_1.p[0].userData.id, line_1.p[1].userData.id);
+	console.log(777, line_2.p[0].userData.id, line_2.p[1].userData.id);
+	
+	
+	var flag = true;
+	if(line_1.p[0].userData.id == line_2.p[0].userData.id && line_1.p[1].userData.id == line_2.p[1].userData.id) flag = false;		
+	
+	
+	if(flag)
+	{
+		var point = (line_1.p[0].userData.id != line_2.p[0].userData.id) ? line_1.p[0] : line_1.p[1];
+		
+		var arrP_1 = level_1.p1;
+		var arrP_2 = level_1.p2;			
+		
+		var num = 0;
+		for ( var m = 0; m < level_1.p1.length; m++ ) { if(point == level_1.p1[m].point) { num = m; break; } }		
+		if(num > 0) { arrP_1 = shiftArray({arr : level_1.p1, count : num}); }
+
+		var num = 0;
+		for ( var m = 0; m < level_1.p2.length; m++ ) { if(point == level_1.p2[m].point) { num = m; num = (level_1.p2.length - 1) - num; break; } }		
+		if(num > 0) { arrP_2 = shiftArray({arr : level_1.p2, count : -num}); }		
+		
+		
+		for ( var m = 0; m < arrP_1.length; m++ ) { console.log(arrP_1[m].point.userData.id); }
+		console.log('----------'); 
+		for ( var m = 0; m < arrP_2.length; m++ ) { console.log(arrP_2[m].point.userData.id); }
+		console.log('----------'); 	
+
+		var p = [];
+		
+		for ( var m = 0; m < arrP_1.length; m++ )
+		{
+			var exist = false;
+			for ( var m2 = 0; m2 < level_2.p1.length; m2++ )
+			{
+				if(arrP_1[m].point.userData.id == level_2.p1[m2].point.userData.id)
+				{
+					exist = true;
+					var pId2 = arrP_1[m].point.userData.id;  console.log('pId2 : ', pId2);
+					p[1] = arrP_1[m].point;
+					break;
+				}
+			}
+			if(exist) break;
+		}
+		
+		for ( var m = arrP_2.length - 1; m >= 0; m-- )
+		{
+			var exist = false;
+			for ( var m2 = 0; m2 < level_2.p1.length; m2++ )
+			{
+				if(arrP_2[m].point.userData.id == level_2.p1[m2].point.userData.id)
+				{
+					exist = true;
+					var pId1 = arrP_2[m].point.userData.id;  console.log('pId1 : ', pId1);
+					p[0] = arrP_2[m].point;
+					break;
+				}
+			}
+			if(exist) break;
+		}			
+		
+	}
+}
+
 
 
 
@@ -580,7 +686,7 @@ function showConsoleSkeleton(arr, roomId)
 function showSkeleton(arrP, cycle, roomId)
 {
 	var n2 = skeleton.cycle.length;
-	skeleton.cycle[n2] = { num : cycle, p : [], line : [] };
+	skeleton.cycle[n2] = { num : cycle, p : [], line : [], p1 : [], p2 : [] };
 	
 	for ( var i = 0; i < arrP.length; i++ )
 	{
@@ -597,6 +703,8 @@ function showSkeleton(arrP, cycle, roomId)
 		skeleton.line[skeleton.line.length] = line;
 
 		skeleton.cycle[n2].line[i] = { obj : line, p : [point] };
+		
+		skeleton.cycle[n2].p1[i] = { point : point, line : line };
 	}	
 	
 	
@@ -606,6 +714,8 @@ function showSkeleton(arrP, cycle, roomId)
 		var i2 = (i == skeleton.cycle[n2].line.length - 1) ? 0 : i + 1;
 		
 		skeleton.cycle[n2].line[i].p[1] = skeleton.cycle[n2].line[i2].p[0];
+		
+		skeleton.cycle[n2].p2[i] = { point : skeleton.cycle[n2].line[i2].p[0], line : skeleton.cycle[n2].line[i] };
 	}	
 }
 
