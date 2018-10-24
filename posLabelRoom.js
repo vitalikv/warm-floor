@@ -154,55 +154,53 @@ function getSkeleton_1(arrRoom)
 		{
 			var line_1 = skeleton.cycle[i].line[0];
 			
-			if(i == 0)
+			if(i == 0 || i == 1)
 			{
 				var line_1 = skeleton.cycle[i].line[0];
 				var line_2 = skeleton.cycle[i+1].line[0];
 				
 				var flag = true;
-				if(line_1.p[0].userData.id == line_2.p[0].userData.id && line_1.p[1].userData.id == line_2.p[1].userData.id) flag = false;
+				//if(line_1.p[0].userData.id == line_2.p[0].userData.id && line_1.p[1].userData.id == line_2.p[1].userData.id) flag = false;
 				
 				if(flag)
 				{
-					var pId1 = line_2.p[0].userData.id;
-					var pId2 = line_2.p[1].userData.id;
-					
-					var del = { line : [], point : [] };
-					
-					var flag = false;
+					var pId1 = line_1.p[0].userData.id;
+					var pId2 = line_1.p[1].userData.id;
 					var p = [];
 					
 					for ( var m = 0; m < skeleton.cycle[i].line.length; m++ )
 					{
-						var lineD = skeleton.cycle[i].line[m];
-						
-						if(lineD.p[0].userData.id == pId1) 
+						var exist = false;
+						for ( var m2 = 0; m2 < skeleton.cycle[i+1].line.length; m2++ )
 						{
-							p[0] = lineD.p[0];
-							flag = true;
-						}	
-						
-						
-						if(flag)
-						{
-							del.line[del.line.length] = lineD;							
-							
-							if(lineD.p[1].userData.id == pId2) { p[1] = lineD.p[1]; break; }
-							
-							del.point[del.point.length] = lineD.p[1];
+							if(skeleton.cycle[i].line[m].p[1].userData.id == skeleton.cycle[i+1].line[m2].p[1].userData.id)
+							{
+								exist = true;
+								var pId2 = skeleton.cycle[i].line[m].p[1].userData.id;  console.log(pId2);
+								p[1] = skeleton.cycle[i].line[m].p[1];
+								break;
+							}
 						}
+						if(exist) break;
 					}
-
-					//for ( var m = 0; m < del.line.length; m++ ) scene.remove( del.line[m] ); 
-					//for ( var m = 0; m < del.point.length; m++ ) scene.remove( del.point[m] );
-
-					for ( var m = skeleton.cycle[i].line.length - 1; m >= 0; m-- )
+					
+					for ( var m = skeleton.cycle[i].line.length - 1; m >= 0; m++ )
 					{
-						//skeleton.cycle[i].line.splice(m, 1);
-					}	
-
-					skeleton.cycle[i].line[0].p = p;
-					var line_1 = skeleton.cycle[i].line[0];
+						var exist = false;
+						for ( var m2 = 0; m2 < skeleton.cycle[i+1].line.length; m2++ )
+						{
+							if(skeleton.cycle[i].line[m].p[0].userData.id == skeleton.cycle[i+1].line[m2].p[0].userData.id)
+							{
+								exist = true;
+								var pId1 = skeleton.cycle[i].line[m].p[0].userData.id;  console.log(pId1);
+								p[0] = skeleton.cycle[i].line[m].p[0];
+								break;
+							}
+						}
+						if(exist) break;
+					}					
+					
+					skeleton.cycle[i].line[i].p = p;
 				}
 
 			}
