@@ -138,6 +138,8 @@ function getSkeleton_1(arrRoom)
 	
 	var p = findEquallyPipe({ line_1 : { p : [skeleton.cycle[0].p1[0].point, skeleton.cycle[0].p1[1].point]} });
 	
+	var p1 = p;  
+	
 	for ( var i = 0; i < skeleton.cycle[0].line.length; i++ )
 	{
 		if(skeleton.cycle[0].line[i].p[1] == p[0])
@@ -145,139 +147,62 @@ function getSkeleton_1(arrRoom)
 			var p = skeleton.cycle[0].line[i].p; break;
 		}
 	}	
-		
+	console.log(99999, p[0].userData.id, p[1].userData.id);
 	var p = findEquallyPipe({ line_1 : { p : p } });
+	
+	var p2 = p; console.log(99999, p2[0].userData.id, p2[1].userData.id);
+	
+	
+	
+	
 	
 	
 	for ( var i = 0; i < skeleton.cycle.length; i++ )
 	{
-		var i2 = i + 2;
-
-		if(i+1 == skeleton.cycle.length - 1) 
-		{
-			var line_1 = skeleton.cycle[i].line[skeleton.cycle[i].line.length - 1];
-			var line_2 = skeleton.cycle[i+1].line[skeleton.cycle[i+1].line.length - 1];
-			
-			var d1 = 0.6;
-			var d2 = 0.3;
-			
-			var v = line_1.obj.geometry.vertices; 
-			v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = v[11].x - d1;
-			line_1.obj.geometry.verticesNeedUpdate = true;
-
-			line_1.obj.updateMatrixWorld();
-			var pos1 = line_1.obj.localToWorld(new THREE.Vector3(v[11].x, 0, 0));				
-
-			var v = line_2.obj.geometry.vertices; 
-			v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = v[11].x - d2;
-			line_2.obj.geometry.verticesNeedUpdate = true;
-			
-			line_2.obj.updateMatrixWorld();
-			var pos2 = line_2.obj.localToWorld(new THREE.Vector3(v[11].x, 0, 0));		
-			
-			line_1.p[1].position.copy(pos1);
-			line_2.p[1].position.copy(pos2);
-		}		
+		var i2 = i + 2;	
 		
 		if(i2 > skeleton.cycle.length - 1) continue;
 		
 		
-		
-		if(i == 0 || i == 1)
+		for ( var m = 0; m < skeleton.cycle[i].line.length; m++ )
 		{
-			var line_1 = skeleton.cycle[i].line[0];
-			
-			if(i == 0 || i == 1)
+			if(skeleton.cycle[i].line[m].p[0].userData.id == p2[0].userData.id)
 			{
-				var line_1 = skeleton.cycle[i].line[0];
-				var line_2 = skeleton.cycle[i+1].line[0];
-				
-				var flag = true;
-				//if(line_1.p[0].userData.id == line_2.p[0].userData.id && line_1.p[1].userData.id == line_2.p[1].userData.id) flag = false;
-				
-				if(flag)
-				{
-					var pId1 = line_1.p[0].userData.id;
-					var pId2 = line_1.p[1].userData.id;
-					var p = [];
-					
-					for ( var m = 0; m < skeleton.cycle[i].line.length; m++ )
-					{
-						var exist = false;
-						for ( var m2 = 0; m2 < skeleton.cycle[i+1].line.length; m2++ )
-						{
-							if(skeleton.cycle[i].line[m].p[1].userData.id == skeleton.cycle[i+1].line[m2].p[1].userData.id)
-							{
-								exist = true;
-								var pId2 = skeleton.cycle[i].line[m].p[1].userData.id;  console.log(pId2);
-								p[1] = skeleton.cycle[i].line[m].p[1];
-								break;
-							}
-						}
-						if(exist) break;
-					}
-					
-					for ( var m = skeleton.cycle[i].line.length - 1; m >= 0; m++ )
-					{
-						var exist = false;
-						for ( var m2 = 0; m2 < skeleton.cycle[i+1].line.length; m2++ )
-						{
-							if(skeleton.cycle[i].line[m].p[0].userData.id == skeleton.cycle[i+1].line[m2].p[0].userData.id)
-							{
-								exist = true;
-								var pId1 = skeleton.cycle[i].line[m].p[0].userData.id;  console.log(pId1);
-								p[0] = skeleton.cycle[i].line[m].p[0];
-								break;
-							}
-						}
-						if(exist) break;
-					}					
-					
-					skeleton.cycle[i].line[i].p = p;
-				}
-
+				var line_1 = skeleton.cycle[i].line[m]; break;
 			}
-			
-			var d = (i+1)*-0.3 - 0.5;
-			//var line_1 = skeleton.cycle[i].line[0];
-			
-			var dir = new THREE.Vector3().subVectors( line_1.p[1].position, line_1.p[0].position ).normalize();
-			dir = new THREE.Vector3().addScaledVector( dir, d );
-			var pos =  new THREE.Vector3().copy(line_1.p[0].position);
-			pos.add(dir);
-			
-			var d = line_1.p[1].position.distanceTo( pos );
-			
-			var v = line_1.obj.geometry.vertices; 
-			v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = d;
-			line_1.obj.geometry.verticesNeedUpdate = true;
-
-			line_1.obj.position.copy(pos);
-			
-			console.log('start pipe', line_1.p[0].userData.id, line_1.p[1].userData.id);
-		}
-				
+		}					
 		
+		for ( var m = 0; m < skeleton.cycle[i2].line.length; m++ )
+		{
+			if(skeleton.cycle[i2].line[m].p[0].userData.id == p1[0].userData.id)
+			{
+				var line_2 = skeleton.cycle[i2].line[m]; break;
+			}
+		}		
 		
+		p2 = [line_1.p[0], line_1.p[1]];
+		p1 = [line_2.p[0], line_2.p[1]];
 		
-		var line_1 = skeleton.cycle[i].line[skeleton.cycle[i].line.length - 1];	
-				
-		var line_2 = skeleton.cycle[i2].line[0];		
+		var pos = crossPointTwoLine(p1[0].position, p1[1].position, p2[0].position, p2[1].position);
 		
+		//skeleton.point[skeleton.point.length] = createPoint( pos, 0 );
 		
-		var pos = floorPipe_1(i);
-		
+		p2[1].position.copy(pos);			
 		line_2.obj.position.copy(pos);
 		
-		var d2 = line_2.p[1].position.distanceTo( pos );
+		var d1 = p2[0].position.distanceTo( pos );
+		var d2 = p1[1].position.distanceTo( pos );
+		
+		
+		var v = line_1.obj.geometry.vertices; 
+		v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = d1;
+		line_1.obj.geometry.verticesNeedUpdate = true;
 
 		var v = line_2.obj.geometry.vertices; 
 		v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = d2;
 		line_2.obj.geometry.verticesNeedUpdate = true;			
 		
-	console.log('| pipe1 = ', line_1.p[0].userData.id, line_1.p[1].userData.id, ' | pipe2 = ', line_2.p[0].userData.id, line_2.p[1].userData.id);
-	
-		
+	console.log(p1[0].userData.id, p1[1].userData.id, p2[0].userData.id, p2[1].userData.id);
 	}
 }
 
@@ -335,8 +260,7 @@ function findEquallyPipe(cdm)
 			{
 				if(arrP_1[m].point.userData.id == level_2.p1[m2].point.userData.id)
 				{
-					exist = true;
-					var pId2 = arrP_1[m].point.userData.id; 
+					exist = true; 
 					p[1] = arrP_1[m].point;
 					break;
 				}
@@ -352,7 +276,6 @@ function findEquallyPipe(cdm)
 				if(arrP_2[m].point.userData.id == level_2.p1[m2].point.userData.id)
 				{
 					exist = true;
-					var pId1 = arrP_2[m].point.userData.id; 
 					p[0] = arrP_2[m].point;
 					break;
 				}
