@@ -134,7 +134,20 @@ function getSkeleton_1(arrRoom)
 	}	
 	
 	
-	findEquallyPipe(skeleton.cycle);
+
+	
+	var p = findEquallyPipe({ line_1 : { p : [skeleton.cycle[0].p1[0].point, skeleton.cycle[0].p1[1].point]} });
+	
+	for ( var i = 0; i < skeleton.cycle[0].line.length; i++ )
+	{
+		if(skeleton.cycle[0].line[i].p[1] == p[0])
+		{
+			var p = skeleton.cycle[0].line[i].p; break;
+		}
+	}	
+		
+	var p = findEquallyPipe({ line_1 : { p : p } });
+	
 	
 	for ( var i = 0; i < skeleton.cycle.length; i++ )
 	{
@@ -274,30 +287,27 @@ function getSkeleton_1(arrRoom)
 
 
 
-function findEquallyPipe(cycle)
+function findEquallyPipe(cdm)
 {
-	var level_1 = cycle[0];
-	var level_2 = cycle[1];
 	
-	var line_1 = { p : [] };
-	line_1.p[0] = level_1.p1[0].point;
-	line_1.p[1] = level_1.p2[0].point;
+	var level_1 = skeleton.cycle[0];
+	var level_2 = skeleton.cycle[1];
 	
-	var line_2 = { p : [] };
-	line_2.p[0] = level_2.p1[0].point;
-	line_2.p[1] = level_2.p2[0].point;		
+	var line_1 = cdm.line_1;		
 	
-	console.log(777, line_1.p[0].userData.id, line_1.p[1].userData.id);
-	console.log(777, line_2.p[0].userData.id, line_2.p[1].userData.id);
+	var p = line_1.p;	
 	
-	
-	var flag = true;
-	if(line_1.p[0].userData.id == line_2.p[0].userData.id && line_1.p[1].userData.id == line_2.p[1].userData.id) flag = false;		
-	
-	
-	if(flag)
+	var equally = [-1, -1];
+	for ( var i = 0; i < level_2.p1.length; i++ )
 	{
-		var point = (line_1.p[0].userData.id != line_2.p[0].userData.id) ? line_1.p[0] : line_1.p[1];
+		if(line_1.p[0].userData.id == level_2.p1[i].point.userData.id) { equally[0] = level_2.p1[i].point.userData.id; }
+		if(line_1.p[1].userData.id == level_2.p1[i].point.userData.id) { equally[1] = level_2.p1[i].point.userData.id; }
+	}
+	
+	
+	if(equally[0] == -1 || equally[1] == -1)
+	{
+		var point = (line_1.p[0].userData.id != equally[0]) ? line_1.p[0] : line_1.p[1];
 		
 		var arrP_1 = level_1.p1;
 		var arrP_2 = level_1.p2;			
@@ -326,7 +336,7 @@ function findEquallyPipe(cycle)
 				if(arrP_1[m].point.userData.id == level_2.p1[m2].point.userData.id)
 				{
 					exist = true;
-					var pId2 = arrP_1[m].point.userData.id;  console.log('pId2 : ', pId2);
+					var pId2 = arrP_1[m].point.userData.id; 
 					p[1] = arrP_1[m].point;
 					break;
 				}
@@ -342,15 +352,19 @@ function findEquallyPipe(cycle)
 				if(arrP_2[m].point.userData.id == level_2.p1[m2].point.userData.id)
 				{
 					exist = true;
-					var pId1 = arrP_2[m].point.userData.id;  console.log('pId1 : ', pId1);
+					var pId1 = arrP_2[m].point.userData.id; 
 					p[0] = arrP_2[m].point;
 					break;
 				}
 			}
 			if(exist) break;
-		}			
-		
+		}					
 	}
+	
+	
+	console.log('pId1 : ', p[0].userData.id, 'pId2 : ', p[1].userData.id);
+	
+	return p;
 }
 
 
