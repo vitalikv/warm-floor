@@ -169,14 +169,28 @@ function getSkeleton_1(arrRoom)
 					
 					var del = { line : [], point : [] };
 					
+					var flag = false;
+					var p = [];
+					
 					for ( var m = 0; m < skeleton.cycle[i].line.length; m++ )
 					{
 						var lineD = skeleton.cycle[i].line[m];
 						
-						del.line[del.line.length] = lineD;
-						del.point[del.point.length] = lineD.p[1];
+						if(lineD.p[0].userData.id == pId1) 
+						{
+							p[0] = lineD.p[0];
+							flag = true;
+						}	
 						
-						if(pId2 == lineD.p[1].userData.id) { break; }
+						
+						if(flag)
+						{
+							del.line[del.line.length] = lineD;							
+							
+							if(lineD.p[1].userData.id == pId2) { p[1] = lineD.p[1]; break; }
+							
+							del.point[del.point.length] = lineD.p[1];
+						}
 					}
 
 					//for ( var m = 0; m < del.line.length; m++ ) scene.remove( del.line[m] ); 
@@ -184,11 +198,11 @@ function getSkeleton_1(arrRoom)
 
 					for ( var m = skeleton.cycle[i].line.length - 1; m >= 0; m-- )
 					{
-						var lineD = skeleton.cycle[i].line[m];
-						
-						
-						if(pId1 == lineD.p[0].userData.id) { var line_1 = skeleton.cycle[i].line[m]; break; }
-					}					
+						//skeleton.cycle[i].line.splice(m, 1);
+					}	
+
+					skeleton.cycle[i].line[0].p = p;
+					var line_1 = skeleton.cycle[i].line[0];
 				}
 
 			}
