@@ -163,6 +163,8 @@ function getSkeleton_1(arrRoom)
 		
 		if(i2 > skeleton.cycle.length - 1) continue;
 		
+		var line_1 = null;
+		var line_2 = null;
 		
 		for ( var m = 0; m < skeleton.cycle[i].line.length; m++ )
 		{
@@ -178,7 +180,9 @@ function getSkeleton_1(arrRoom)
 			{
 				var line_2 = skeleton.cycle[i2].line[m]; break;
 			}
-		}		
+		}
+
+		if(!line_1 || !line_2) continue;
 		
 		p2 = [line_1.p[0], line_1.p[1]];
 		p1 = [line_2.p[0], line_2.p[1]];
@@ -200,7 +204,7 @@ function getSkeleton_1(arrRoom)
 
 		var v = line_2.obj.geometry.vertices; 
 		v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = d2;
-		line_2.obj.geometry.verticesNeedUpdate = true;			
+		line_2.obj.geometry.verticesNeedUpdate = true;	  		
 		
 	console.log(p1[0].userData.id, p1[1].userData.id, p2[0].userData.id, p2[1].userData.id);
 	}
@@ -293,14 +297,19 @@ function findEquallyPipe(cdm)
 
 
 
-function floorPipe_1(i)
+function floorPipe_1(point)
 {
+	var dir = new THREE.Vector3().subVectors( point[1].position, point[0].position ).normalize();
+	dir = new THREE.Vector3().addScaledVector( dir, -0.3 );
+	
+	point[1].position.add(dir);
+	
 	var line_1 = skeleton.cycle[i].line[skeleton.cycle[i].line.length - 1];	
 	
 	var v = line_1.obj.geometry.vertices; 
 	
 	var d = v[11].x - 0.6;
-	var d2 = 0;
+	
 	
 	if(d < 0) { d2 = d; d = 0; }
 
@@ -308,25 +317,9 @@ function floorPipe_1(i)
 	v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = d;
 	line_1.obj.geometry.verticesNeedUpdate = true;
 	
-	if(d2 == 0)
-	{
-		line_1.obj.updateMatrixWorld();
-		var pos = line_1.obj.localToWorld(new THREE.Vector3(d, 0, 0));			
-	}
-	else
-	{
-		var line_2 = skeleton.cycle[i].line[skeleton.cycle[i].line.length - 2];	
-		var v = line_2.obj.geometry.vertices;
-		var d = v[11].x - d2;
-		
-		v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = d;
-		line_2.obj.geometry.verticesNeedUpdate = true;	
+	line_1.obj.updateMatrixWorld();
+	var pos = line_1.obj.localToWorld(new THREE.Vector3(d, 0, 0));			
 
-		line_2.obj.updateMatrixWorld();
-		var pos = line_2.obj.localToWorld(new THREE.Vector3(d, 0, 0));	
-
-		line_2.p[1].position.copy(pos);  console.log(1111111);
-	}
 
 	
 	line_1.p[1].position.copy(pos);
