@@ -958,9 +958,9 @@ var lightMap_1 = new THREE.TextureLoader().load('img/lightMap_1.png');
 
 function createOneWall3( point1, point2, width, cdm ) 
 {
-	var offsetZ = (cdm.offsetZ) ? cdm.offsetZ : 0;
-	var height = (cdm.height) ? cdm.height : height_wall;
-	height = (width == 0.01) ? 0.003 : height;
+	var offsetZ = 0;
+	var height = 0.2;
+	width = 0.01;
 	var matId = (cdm.material) ? cdm.material : default_wall_matId;
 	
 	var p1 = point1.position;
@@ -978,7 +978,7 @@ function createOneWall3( point1, point2, width, cdm )
 	//wall.p[1] = point2;
 	wall.label = [];
 	wall.label[0] = createLabelArea( 0, 1.0, 0.5, '45', false, geometryLabelWall );	wall.label[0].visible = (camera == cameraTop) ? true : false;
-	wall.label[1] = createLabelArea( 0, 1.0, 0.5, '45', false, geometryLabelWall );	wall.label[1].visible = (camera == cameraTop) ? true : false;
+	//wall.label[1] = createLabelArea( 0, 1.0, 0.5, '45', false, geometryLabelWall );	wall.label[1].visible = (camera == cameraTop) ? true : false;
 	
 	wall.position.copy( p1 );
 	
@@ -999,6 +999,8 @@ function createOneWall3( point1, point2, width, cdm )
 	wall.userData.wall.outline = null;
 	wall.userData.wall.arrO = [];
 	wall.userData.wall.last = { pos : new THREE.Vector3(), rot : new THREE.Vector3() }; 
+	
+	wall.userData.wall.room = { side : 0 };   
 	
 	var v = wall.geometry.vertices;
 	wall.userData.wall.v = [];

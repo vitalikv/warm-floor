@@ -261,7 +261,7 @@ function hideSizeWD( obj )
 			if(obj.userData.tag == 'door' || obj.userData.tag == 'window')
 			{
 				obj.userData.door.wall.label[0].visible = true; 
-				obj.userData.door.wall.label[1].visible = true;	 	
+				//obj.userData.door.wall.label[1].visible = true;	 	
 			}			
 		}
 	}

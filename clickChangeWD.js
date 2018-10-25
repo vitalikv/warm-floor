@@ -75,7 +75,7 @@ function clickShowRulerWD(wd)
 	var wall = wd.userData.door.wall;  
 
 	wall.label[0].visible = false;
-	wall.label[1].visible = false; 
+	//wall.label[1].visible = false; 
 	
 	
 	setUIDoorSize(wd);

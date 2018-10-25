@@ -9,8 +9,13 @@ function createFloor(arrP, arrW, arrS, id, roomType, material, plinth)
 		point_room[i] = new THREE.Vector2 ( arrP[i].position.x, arrP[i].position.z );		
 	}
 	
+	for ( var i = 0; i < arrW.length; i++ ) 
+	{ 
+		arrW[i].userData.wall.room.side = arrS[i]; console.log(arrS[i], arrW[i].userData.wall.room.side); 
+	}
+	
 	//var str = ''; for ( var i = 0; i < arrP.length; i++ ) { str += ' | ' + arrP[i].userData.id; } console.log(str);
-	//console.log('-------------');	 
+	console.log('-------------');	 
 	
 	var shape = new THREE.Shape( point_room );
 	var geometry = new THREE.ShapeGeometry( shape );

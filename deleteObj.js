@@ -78,7 +78,7 @@ function deleteWall_2(wall)
 	deleteWallFromArr(wall);
 	
 	scene.remove(wall.label[0]);
-	scene.remove(wall.label[1]);	
+	//scene.remove(wall.label[1]);	
 	scene.remove( wall );
 	
 	if(p0.w.length == 0){ deletePointFromArr( p0 ); scene.remove( p0 ); }
@@ -115,7 +115,7 @@ function deleteWall_3(wall)
 	deleteWallFromArr(wall);
 	
 	scene.remove(wall.label[0]);
-	scene.remove(wall.label[1]);	
+	//scene.remove(wall.label[1]);	
 	scene.remove( wall );
 	
 	if(p0.w.length == 0){ deletePointFromArr( p0 ); scene.remove( p0 ); }
@@ -270,7 +270,7 @@ function deleteWinDoor( obj )
 	if(camera == camera3D)
 	{
 		wall.label[0].visible = false; 
-		wall.label[1].visible = false;	 			
+		//wall.label[1].visible = false;	 			
 	}
 	
 	scene.remove( obj.userData.door.leaf_2D );

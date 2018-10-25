@@ -616,7 +616,7 @@ function loadFilePL(arr)
 	// восстанавливаем countId
 	
 	
-	
+	upLabelPlan_1(obj_line);
 	
 	centerCamera2D();
 	

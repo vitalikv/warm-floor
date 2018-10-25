@@ -52,24 +52,24 @@ function upLabelPlan_1(arrWall, Zoom)
 	{
 		var wall = arrWall[i];
 		
-		var label_2 = wall.label[0];
-		var label_1 = wall.label[1];
+		//var label_2 = wall.label[1];
+		var label_1 = wall.label[0];
 		
 		if(Zoom) { var v = wall.userData.wall.v; }		// если это zoom, то берем старые значения	
 		else { var v = wall.geometry.vertices; }
 		
-		if(!Zoom)
-		{
-			var v = wall.geometry.vertices;
-			var d1 = Math.abs( v[6].x - v[0].x );		
-			var d2 = Math.abs( v[10].x - v[4].x );
-
-			upLabelArea(label_1, Math.round(d1 * 100) * 10, '85', 'rgba(255,255,255,1)', false);
-			upLabelArea(label_2, Math.round(d2 * 100) * 10, '85', 'rgba(255,255,255,1)', false);			
-		}
 		
 		var p1 = wall.userData.wall.p[0].position;
 		var p2 = wall.userData.wall.p[1].position;
+		
+		
+		if(!Zoom)
+		{
+			var dist = p1.distanceTo( p2 );
+			
+			upLabelArea(label_1, Math.round(dist * 100) * 10, '85', 'rgba(255,255,255,1)', false);
+			//upLabelArea(label_2, Math.round(dist * 100) * 10, '85', 'rgba(255,255,255,1)', false);			
+		}		
 		
 		var dir = new THREE.Vector3().subVectors( p2, p1 );
 		var rotY = Math.atan2(dir.x, dir.z);
@@ -78,20 +78,29 @@ function upLabelPlan_1(arrWall, Zoom)
 		if(rotY <= 0.001){ rotY += Math.PI / 2;  }
 		else { rotY -= Math.PI / 2; }
 		
+		 
 		label_1.rotation.set( 0, rotY, 0 );
-		label_2.rotation.set( 0, rotY, 0 );
+		//label_2.rotation.set( 0, rotY, 0 );
 
 		var v1 = wall.label[0].geometry.vertices;
 		
 		var x1 = p2.z - p1.z;
 		var z1 = p1.x - p2.x;
-		var dir = new THREE.Vector3().addScaledVector( new THREE.Vector3(x1, 0, z1).normalize(), -v[0].z - (v1[1].z - v1[0].z) / 2 );
-		dir.y = 0.05;
-		label_1.position.copy( new THREE.Vector3().addVectors( pos, dir ) );
 
-		var dir = new THREE.Vector3().addScaledVector( new THREE.Vector3(x1, 0, z1).normalize(), -v[4].z + (v1[1].z - v1[0].z) / 2 );
+		
+		if(wall.userData.wall.room.side == 1)
+		{ 
+			var dir = new THREE.Vector3().addScaledVector( new THREE.Vector3(x1, 0, z1).normalize(), -v[4].z + (v1[1].z - v1[0].z) / 2 );
+		}
+		else
+		{
+			var dir = new THREE.Vector3().addScaledVector( new THREE.Vector3(x1, 0, z1).normalize(), -v[0].z - (v1[1].z - v1[0].z) / 2 );
+		}
+		
 		dir.y = 0.05;
-		label_2.position.copy( new THREE.Vector3().addVectors( pos, dir ) );
+		label_1.position.copy( new THREE.Vector3().addVectors( pos, dir ) );			
+
+
 
 		if(!Zoom)	// если это не zoom, то обновляем значения
 		{
@@ -116,7 +125,7 @@ function getYardageSpace( room )
 		var arrS = room[u].s;
 		var n = arrW.length;
 		var res = 0;
-		
+		console.log(arrS);
 		
 		for (i = 0; i < n; i++) { arrW[i].updateMatrixWorld(); }
 		
@@ -301,7 +310,7 @@ function upLabelArea2(label, text, text2, size, color, border)
 	ctx.textBaseline = "bottom";
 	ctx.fillText(text, canvs.width / 2, canvs.height / 2 );
 
-	if(text2 != '') { ctx.fillText(text2, canvs.width / 2, canvs.height / 2 + 110 );	}
+	//if(text2 != '') { ctx.fillText(text2, canvs.width / 2, canvs.height / 2 + 110 );	}
 	
 	label.material.map.needsUpdate = true;
 }
