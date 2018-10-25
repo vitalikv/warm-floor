@@ -28,7 +28,12 @@ document.body.addEventListener("keydown", function (e)
 	if (e.keyCode == 89 && e.ctrlKey) { setInfoEvent1( 'redo' ); renderCamera(); }
 	if (e.keyCode == 72 && e.ctrlKey) { showHash(); }
 	
-	if(UI.activeInput) { changeHeightWall( 1 ); return; }
+	if(UI.activeInput) 
+	{ 
+		if(UI.activeInput == 'input-height') { changeHeightWall( $('[data-action="input-height"]').val() ); }
+		 
+		return; 
+	}
 
 
 	if(e.keyCode == 46) { detectDeleteObj(); }

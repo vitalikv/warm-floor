@@ -238,8 +238,8 @@ function showHideSizePlane(cdm)
 {
 	var flag = (cdm == 'hide') ? false : true;
 
-	for ( var i = 0; i < obj_line.length; i++ ){ obj_line[i].label[0].visible = flag;  }
-	for ( var i = 0; i < room.length; i++ ){ room[i].label.visible = flag; }		
+	//for ( var i = 0; i < obj_line.length; i++ ){ obj_line[i].label[0].visible = flag;  }
+	//for ( var i = 0; i < room.length; i++ ){ room[i].label.visible = flag; }		
 }
 
 

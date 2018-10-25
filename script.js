@@ -205,7 +205,7 @@ var keys = [];
 //var libs = '92da6c1f72c1ebca456a86d978af1dfc7db1bcb24d658d710c5c8ae25d98ba52';  
 var libs = 'fb5f95f84fa11b73e0ebfa0969de65176902c1b7337652d43537a66a09d7028d';
 var camera = cameraTop;
-var height_wall = 3.0;
+var height_wall = 0.2;
 var width_wall = 0.3;
 var obj_point = [];
 var obj_line = [];
@@ -562,7 +562,7 @@ function createGeometryWall(x, y, z, pr_offsetZ)
 {
 	var geometry = new THREE.Geometry();
 	
-	var h1 = -0.1;
+	var h1 = 0;
 	
 	if(1==1)
 	{
@@ -959,7 +959,7 @@ var lightMap_1 = new THREE.TextureLoader().load('img/lightMap_1.png');
 function createOneWall3( point1, point2, width, cdm ) 
 {
 	var offsetZ = 0;
-	var height = 0.2;
+	var height = height_wall;
 	width = 0.01;
 	var matId = (cdm.material) ? cdm.material : default_wall_matId;
 	
@@ -1081,32 +1081,15 @@ function showObjTool( tag )
 
 
 // изменение высоты стен
-function changeHeightWall( h )
+function changeHeightWall( h2 )
 {
+	if(!isNumeric(h2)) return;
+	h2 = Number(h2);
 	
 	var v = obj_line[0].geometry.vertices;	
-	var res = v[1].y - v[0].y;	
-	
-	var max = 0;
-	
-	for ( var i = 0; i < obj_line.length; i++ )
-	{
-		var v = obj_line[i].geometry.vertices;
-		
-		for ( var i2 = 0; i2 < v.length; i2++ )
-		{
-			if(res > v[i2].y)
-			{
-				if (v[i2].y > max){ max = v[i2].y; }
-			}
-		}
-	}
 
-	var h2 = h;
-	if(max > 1.5)
-	{
-		if(max + 0.1 > h){ h2 = max + 0.1; }
-	}
+	if(h2 < 0.01) { h2 = 0.01; }
+	if(h2 > 3) { h2 = 3; }
 	
 	for ( var i = 0; i < obj_line.length; i++ )
 	{
@@ -1132,11 +1115,12 @@ function changeHeightWall( h )
 		obj_point[i].geometry.verticesNeedUpdate = true;
 	}
 	
-	height_wall = h;
+	height_wall = h2;
 	
 	h2 = Math.round(h2 * 10) / 10;
 	
 	//upLabelArea(bUI_6[bUI_6.length - 1], h2 + ' м', 1.2, 0.5, '22', 'rgba(255,255,255,1)', false);
+	renderCamera();
 }
 	
 	

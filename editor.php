@@ -83,8 +83,7 @@
 	<li data-action ='2D' class="button17">2D</li>
 	<li data-action ='3D' class="button17">3D</li>
 	<li data-action ='wall' class="button17">стена</li>	
-	<li data-action ='window' class="button17">окно</li>
-	<li data-action ='door' class="button17">дверь</li>		
+	<li data-action ='height-wall' class="button17">высота</li>	
 	</ul>
 	</div>
 	</div>
@@ -102,7 +101,7 @@
 	
 	<script>
 	
-		$('[data-action="2D"]').on('mousedown', function(e) { console.log(22);  UI.setView('2D'); return false; }); 	
+		$('[data-action="2D"]').on('mousedown', function(e) { UI.setView('2D'); return false; }); 	
 		$('[data-action="3D"]').mousedown(function () { UI.setView('3D'); return false; }); 	
 		$('[data-action="wall"]').mousedown(function () { clickO.button = 'create_wall'; return false; }); 	
 		$('[data-action="window"]').mousedown(function () { createEmptyFormWD({ lotid: 8747 }); return false; }); 	

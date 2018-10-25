@@ -22,8 +22,8 @@ function createFloor(arrP, arrW, arrS, id, roomType, material, plinth)
 	
 	var n = room.length;	
 	//room[n] = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { color : 0xe3e3e5, side : THREE.BackSide } ) );	
-	room[n] = new THREE.Mesh( new THREE.ExtrudeGeometry( shape, { bevelEnabled: false, amount: -arrW[0].userData.wall.height_0 } ), new THREE.MeshLambertMaterial( { color : 0xe3e3e5, lightMap : lightMap_1 } ) ); 
-	room[n].position.set( 0, arrP[0].position.y, 0 );
+	room[n] = new THREE.Mesh( new THREE.ExtrudeGeometry( shape, { bevelEnabled: false, amount: height_wall } ), new THREE.MeshLambertMaterial( { color : 0xe3e3e5, lightMap : lightMap_1 } ) ); 
+	room[n].position.set( 0, height_wall, 0 );
 	room[n].rotation.set( Math.PI / 2, 0, 0 );	
 	room[n].p = arrP;
 	room[n].w = arrW; 

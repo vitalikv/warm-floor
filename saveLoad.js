@@ -433,7 +433,7 @@ function loadFilePL(arr)
 	
 	
 	levelFloor = arr.floors[0].id;
-	height_wall = arr.floors[0].height;
+	//height_wall = arr.floors[0].height;
 	projName = arr.floors[0].name;
 	projVersion = arr.version;
 		
@@ -443,7 +443,7 @@ function loadFilePL(arr)
 	var obj_pop = [];
 	
 
-	if(height_wall < 0.1) { height_wall = 3; }	
+	//if(height_wall < 0.1) { height_wall = 3; }	
 			
 	var wall = [];
 	
