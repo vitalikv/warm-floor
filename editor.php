@@ -93,20 +93,32 @@
 		<div class="side_panel-button">
 			<div class="button2" data-action ='form_1'> </div>
 			<div class="button2" data-action ='form_2'> </div>
-			<div class="button2" data-action ='form_3'> </div>		
+			<div class="button2" data-action ='form_3'> </div>							
+		</div> 
+		<div class="input-height">
+			<input type="text" data-action ='input-height'>
 		</div> 
 	</div>
 	
-	<script> $('[data-action="2D"]').on('mousedown', function(e) { console.log(22);  UI.setView('2D'); return false; }); </script>	
-	<script> $('[data-action="3D"]').mousedown(function () { UI.setView('3D'); return false; }); </script>	
-	<script> $('[data-action="wall"]').mousedown(function () { clickO.button = 'create_wall'; return false; }); </script>	
-	<script> $('[data-action="window"]').mousedown(function () { createEmptyFormWD({ lotid: 8747 }); return false; }); </script>	
-	<script> $('[data-action="door"]').mousedown(function () { createEmptyFormWD({ lotid: 575 }); return false; }); </script>	
-	<script> $('[data-action="save"]').mousedown(function () { saveFile(); return false; }); </script>
-	<script> $('[data-action="side_panel"]').mousedown(function () { return false; }); </script>
-	<script> $('[data-action="form_1"]').mousedown(function () { createForm('shape1'); }); </script>
-	<script> $('[data-action="form_2"]').mousedown(function () { createForm('shape3'); }); </script>
-	<script> $('[data-action="form_3"]').mousedown(function () { createForm('shape5'); }); </script>
+	<script>
+	
+		$('[data-action="2D"]').on('mousedown', function(e) { console.log(22);  UI.setView('2D'); return false; }); 	
+		$('[data-action="3D"]').mousedown(function () { UI.setView('3D'); return false; }); 	
+		$('[data-action="wall"]').mousedown(function () { clickO.button = 'create_wall'; return false; }); 	
+		$('[data-action="window"]').mousedown(function () { createEmptyFormWD({ lotid: 8747 }); return false; }); 	
+		$('[data-action="door"]').mousedown(function () { createEmptyFormWD({ lotid: 575 }); return false; }); 	
+		$('[data-action="save"]').mousedown(function () { saveFile(); return false; }); 
+		$('[data-action="side_panel"]').mousedown(function () { return false; }); 
+		$('[data-action="form_1"]').mousedown(function () { createForm('shape1'); }); 
+		$('[data-action="form_2"]').mousedown(function () { createForm('shape3'); }); 
+		$('[data-action="form_3"]').mousedown(function () { createForm('shape5'); }); 
+		$('[data-action="input-height"]').mousedown(function () { $(this).focus(); });  
+
+
+		$('input').on('focus keyup change', function () { UI.activeInput = $(this).data('action'); });
+		$('input').blur(function () { UI.activeInput = ''; });		
+	
+	</script> 
 </body>
 
 </html>

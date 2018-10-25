@@ -753,8 +753,9 @@ $(document).keyup(UI.handleKeyUp);
 
 
 $('input').on('focus keyup change', function () {
-  UI.activeInput = $(this).data('action');
+  UI.activeInput = $(this).data('action'); 
 });
+
 
 
 $('input').blur(function () {

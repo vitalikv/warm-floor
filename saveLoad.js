@@ -618,7 +618,7 @@ function loadFilePL(arr)
 	
 	upLabelPlan_1(obj_line);
 	
-	centerCamera2D();
+	//centerCamera2D();
 	
 	emitAction('load-project-end');
 	emitAction('stop-fake-loading');

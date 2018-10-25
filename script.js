@@ -6,7 +6,7 @@ var w_h = window.innerHeight;
 var aspect = w_w/w_h;
 var d = 5;
 
-var renderer = new THREE.WebGLRenderer( {antialias : true} );
+var renderer = new THREE.WebGLRenderer( /*{antialias : true}*/ );
 renderer.localClippingEnabled = true;
 //renderer.autoClear = false;
 renderer.setPixelRatio( window.devicePixelRatio );
@@ -1083,6 +1083,7 @@ function showObjTool( tag )
 // изменение высоты стен
 function changeHeightWall( h )
 {
+	
 	var v = obj_line[0].geometry.vertices;	
 	var res = v[1].y - v[0].y;	
 	
@@ -1111,10 +1112,12 @@ function changeHeightWall( h )
 	{
 		var v = obj_line[i].geometry.vertices;
 		
-		for ( var i2 = 0; i2 < v.length; i2++ )
-		{
-			if(res == v[i2].y){ v[i2].y = h2; }
-		}
+		v[1].y = h2;
+		v[3].y = h2;
+		v[5].y = h2;
+		v[7].y = h2;
+		v[9].y = h2;
+		v[11].y = h2;
 		obj_line[i].geometry.verticesNeedUpdate = true;
 	}
 	
