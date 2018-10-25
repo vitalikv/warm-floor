@@ -70,6 +70,9 @@ function createFloor(arrP, arrW, arrS, id, roomType, material, plinth)
 	if(plinth[0].o) { loadPopObj_1({ obj: room[n], lotid : plinth[0].lotid }); } 
 	//if(plinth[1].o) { loadPopObj_1({ obj: ceiling[n], lotid : plinth[0].lotid}); }
 	
+	
+	upLabelPlan_1(arrW);
+	
 	return room[n];
 }
 

@@ -6,7 +6,7 @@ var w_h = window.innerHeight;
 var aspect = w_w/w_h;
 var d = 5;
 
-var renderer = new THREE.WebGLRenderer( /*{antialias : true}*/ );
+var renderer = new THREE.WebGLRenderer( {antialias : true} );
 renderer.localClippingEnabled = true;
 //renderer.autoClear = false;
 renderer.setPixelRatio( window.devicePixelRatio );
@@ -226,9 +226,9 @@ var wallVisible = [];
 var circle = createCircleSpline();
 var p_tool = createToolPoint();
 var d_tool = createToolDoorPoint();
-// createGrid();
-var pointGrid = createPointGrid(100);
- 
+createGrid();
+// var pointGrid = createPointGrid(100);
+var pointGrid = { visible : true }
 
 
 var planeMath = createPlaneMath();
@@ -275,7 +275,7 @@ $( ".ui-layer" ).mouseout(function(){
 function createGrid()
 {
 	var geom_line = new THREE.Geometry();
-	var count_grid1 = 100;
+	var count_grid1 = 30;
 	var count_grid2 = (count_grid1 * 0.5) / 2;
 	geom_line.vertices.push(new THREE.Vector3( - count_grid2, 0, 0 ) );
 	geom_line.vertices.push(new THREE.Vector3( count_grid2, 0, 0 ) );

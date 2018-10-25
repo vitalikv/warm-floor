@@ -53,7 +53,7 @@ function upLabelPlan_1(arrWall, Zoom)
 		var wall = arrWall[i];
 		
 		//var label_2 = wall.label[1];
-		var label_1 = wall.label[0];
+		var label_1 = wall.label[0]; 
 		
 		if(Zoom) { var v = wall.userData.wall.v; }		// если это zoom, то берем старые значения	
 		else { var v = wall.geometry.vertices; }
@@ -121,49 +121,38 @@ function getYardageSpace( room )
 	for (u = 0; u < room.length; u++)
 	{  
 		var arrW = room[u].w; 
-		var arrP = room[u].p;
+		var arrP = room[u].p;  
 		var arrS = room[u].s;
 		var n = arrW.length;
 		var res = 0;
-		console.log(arrS);
 		
-		for (i = 0; i < n; i++) { arrW[i].updateMatrixWorld(); }
 		
-		for (i = 0; i < n; i++) 
+		for (i = 0; i < arrW.length; i++)
 		{
-			var ch = (arrS[i] == 0) ? 4 : 6;
-			
-			var p1 = arrW[i].localToWorld( arrW[i].userData.wall.v[ ch ].clone() );		
+			var p1 = (arrS[i] == 0) ? arrW[i].userData.wall.p[0].position : arrW[i].userData.wall.p[1].position;	
 			
 			if (i == 0) 
 			{
-				var ch1 = (arrS[ n-1 ] == 0) ? 4 : 6; 
-				var ch2 = (arrS[ i+1 ] == 0) ? 4 : 6;
-				
-				var p2 = arrW[n-1].localToWorld( arrW[n-1].userData.wall.v[ ch1 ].clone() );
-				var p3 = arrW[i+1].localToWorld( arrW[i+1].userData.wall.v[ ch2 ].clone() );						
+				var p2 = (arrS[ n-1 ] == 0) ? arrW[n-1].userData.wall.p[0].position : arrW[n-1].userData.wall.p[1].position; 
+				var p3 = (arrS[ i+1 ] == 0) ? arrW[i+1].userData.wall.p[0].position : arrW[i+1].userData.wall.p[1].position;						
 			}
 			else if (i == n-1) 
 			{
-				var ch1 = (arrS[ i-1 ] == 0) ? 4 : 6;
-				var ch2 = (arrS[ 0 ] == 0) ? 4 : 6;
-				
-				var p2 = arrW[i-1].localToWorld( arrW[i-1].userData.wall.v[ ch1 ].clone() );
-				var p3 = arrW[0].localToWorld( arrW[0].userData.wall.v[ ch2 ].clone() );									
+				var p2 = (arrS[ i-1 ] == 0) ? arrW[i-1].userData.wall.p[0].position : arrW[i-1].userData.wall.p[1].position;
+				var p3 = (arrS[ 0 ] == 0) ? arrW[0].userData.wall.p[0].position : arrW[0].userData.wall.p[1].position;								
 			}
 			else 
 			{
-				var ch1 = (arrS[ i-1 ] == 0) ? 4 : 6;
-				var ch2 = (arrS[ i+1 ] == 0) ? 4 : 6;
-				
-				var p2 = arrW[i-1].localToWorld( arrW[i-1].userData.wall.v[ ch1 ].clone() );
-				var p3 = arrW[i+1].localToWorld( arrW[i+1].userData.wall.v[ ch2 ].clone() );							
+				var p2 = (arrS[ i-1 ] == 0) ? arrW[i-1].userData.wall.p[0].position : arrW[i-1].userData.wall.p[1].position; 
+				var p3 = (arrS[ i+1 ] == 0) ? arrW[i+1].userData.wall.p[0].position : arrW[i+1].userData.wall.p[1].position; 						
 			}
 			
 			var sum = p1.x*(p2.z - p3.z); 
 			sum = Math.round(sum * 100) * 10;
 			res += sum;				
 		}
+		
+
 		
 		res = Math.abs( res ) / 2;
 		res = Math.round(res / 10) / 100;
