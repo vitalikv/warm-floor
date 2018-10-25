@@ -107,7 +107,6 @@ canvas {
     </script>
     <script src="js/three.min.js?<?=$vrs?>"></script>
     <script src="js/jquery.js"></script>
-    <script src="js/url-polyfill.min.js"></script>
     <script src="js/ThreeCSG.js"></script>    
     
     <script src="stats.min.js?<?=$vrs?>"></script>
