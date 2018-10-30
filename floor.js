@@ -51,7 +51,7 @@ function createFloor(arrP, arrW, arrS, id, roomType, material, plinth)
 	ceiling[n].userData.ceil = { preview : '', caption : '' };
 	ceiling[n].userData.material = { lotid : 4957, containerID : null, caption : '', color : ceiling[n].material.color, scale : new THREE.Vector2(1,1), filters : 1039, preview : '', catalog : null };
 	ceiling[n].userData.ceil.plinth = {o : plinth[1].o, lotid : plinth[1].lotid, v : [], mat : null, obj : [], preview : '', caption : '', param : null, catalog : null };
-	
+	ceiling[n].visible = false;
 
 
 	// загружаем материал (пол, потолок)
@@ -144,7 +144,7 @@ function updateShapeFloor(arrRoom)
 		
 		var shape = new THREE.Shape( point );				
 
-		var geometry = new THREE.ExtrudeGeometry( shape, { bevelEnabled: false, amount: -arrRoom[i].w[0].userData.wall.height_0 } ); 
+		var geometry = new THREE.ExtrudeGeometry( shape, { bevelEnabled: false, amount: height_wall } ); 
 		
 		arrRoom[i].geometry.vertices = geometry.vertices;
 		arrRoom[i].geometry.faces = geometry.faces;		
@@ -154,6 +154,8 @@ function updateShapeFloor(arrRoom)
 		arrRoom[i].geometry.computeBoundingSphere();
 		arrRoom[i].geometry.computeBoundingBox();
 		arrRoom[i].geometry.computeFaceNormals();
+		
+		arrRoom[i].position.y = height_wall;
 		
 		getYardageSpace([arrRoom[i]]); 
 

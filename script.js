@@ -1119,6 +1119,8 @@ function changeHeightWall( h2 )
 	
 	h2 = Math.round(h2 * 10) / 10;
 	
+	updateShapeFloor(room);
+	
 	//upLabelArea(bUI_6[bUI_6.length - 1], h2 + ' м', 1.2, 0.5, '22', 'rgba(255,255,255,1)', false);
 	renderCamera();
 }
