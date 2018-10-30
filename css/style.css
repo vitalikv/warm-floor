@@ -114,9 +114,9 @@ canvas {
 
 .side_panel-button
 {
-	width: 100%;
+	width: 120px;
 	height: auto;
-	margin-top: 40px;
+	margin: 20px auto 0 auto;
 	display: -webkit-box;
 	display: flex;
 	flex-direction: column;
@@ -125,33 +125,80 @@ canvas {
 
 .side_panel-button .button2
 {
-	width: 80%;
+	width: 100%;
 	height: 100px;
-	margin: 0px auto;
+	margin: 2px auto;
 	color: #cccccc;
 	background: #ffffff;
 	border: 1px solid rgba(33,43,52,1);
 	border-radius: 3px;
-	
 }
+
+.button2 img 
+{
+	display: block;
+	width: 95%;
+	height: 95%;
+	margin: auto;
+} 
 
 
 .input-height
 {
 	width: 80%;
-	height: 50px;
+	height: 90px;
 	margin: 20px auto;
 	background: #ffffff;	
 	border: 1px solid rgba(33,43,52,1);	
+	
+	display: -webkit-box;
+	display: flex;
+	flex-direction: column;
+	-webkit-flex-direction: column;		
+}
+
+
+.text_1
+{
+  font-family: arial,sans-serif;
+  font-size: 18px;
+  color: rgb(205,216,228);
+  text-shadow: 0 -1px rgb(46,53,58);
+  text-decoration: none;
+  user-select: none;
+  -moz-user-select: none;
+  line-height: 2em;
+  padding: 1px 1.2em;
+  outline: none;
+  border: 1px solid rgba(33,43,52,1);
+  border-radius: 3px;
+  background: rgb(81,92,102) linear-gradient(rgb(81,92,102), rgb(69,78,87));
+  box-shadow:
+   inset 0 1px rgba(101,114,126,1),
+   inset 0 0 1px rgba(140,150,170,.8),
+   0 1px rgb(83,94,104),
+   0 0 1px rgb(86,96,106);
+   text-align:  center;
 }
 
 .input-height input
 {
 	display: block;
-	width:80%;
-	margin: 20px auto;
+	width:99%;
+	margin: auto;
 	border: 1px solid black;
-	border-radius: 5px;	
+	border-radius: 2px;	
+	font-size: 18px;
+	
+  text-shadow: 0 -1px rgb(46,53,58);
+  text-decoration: none;
+  user-select: none;
+  -moz-user-select: none;
+  line-height: 2em;
+  padding: 0;
+  outline: none;
+  border: 1px solid rgba(33,43,52,1);
+  border-radius: 3px;	
 }
 
 

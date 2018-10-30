@@ -83,19 +83,19 @@
 	<li data-action ='2D' class="button17">2D</li>
 	<li data-action ='3D' class="button17">3D</li>
 	<li data-action ='wall' class="button17">стена</li>	
-	<li data-action ='height-wall' class="button17">высота</li>	
 	</ul>
 	</div>
 	</div>
 	
 	<div class="side_panel" data-action ='side_panel'>
 		<div class="side_panel-button">
-			<div class="button2" data-action ='form_1'> </div>
-			<div class="button2" data-action ='form_2'> </div>
-			<div class="button2" data-action ='form_3'> </div>							
+			<div class="button2" data-action ='form_1'><img src="img/f1.png"></div>
+			<div class="button2" data-action ='form_2'><img src="img/f2.png"></div>
+			<div class="button2" data-action ='form_3'><img src="img/f3.png"></div>							
 		</div> 
 		<div class="input-height">
-			<input type="text" data-action ='input-height'>
+			<div class="text_1">высота</div>
+			<input type="text" data-action ='input-height' value = 0.2>
 		</div> 
 	</div>
 	
@@ -103,9 +103,7 @@
 	
 		$('[data-action="2D"]').on('mousedown', function(e) { UI.setView('2D'); return false; }); 	
 		$('[data-action="3D"]').mousedown(function () { UI.setView('3D'); return false; }); 	
-		$('[data-action="wall"]').mousedown(function () { clickO.button = 'create_wall'; return false; }); 	
-		$('[data-action="window"]').mousedown(function () { createEmptyFormWD({ lotid: 8747 }); return false; }); 	
-		$('[data-action="door"]').mousedown(function () { createEmptyFormWD({ lotid: 575 }); return false; }); 	
+		$('[data-action="wall"]').mousedown(function () { clickO.button = 'create_wall'; return false; }); 		
 		$('[data-action="save"]').mousedown(function () { saveFile(); return false; }); 
 		$('[data-action="side_panel"]').mousedown(function () { return false; }); 
 		$('[data-action="form_1"]').mousedown(function () { createForm('shape1'); }); 
