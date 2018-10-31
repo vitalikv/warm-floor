@@ -979,7 +979,7 @@ function createOneWall3( point1, point2, width, cdm )
 	//wall.p[0] = point1;
 	//wall.p[1] = point2;
 	wall.label = [];
-	wall.label[0] = createLabelArea( 0, 1.0, 0.5, '45', false, geometryLabelWall );	wall.label[0].visible = (camera == cameraTop) ? true : false;
+	wall.label[0] = createLabelArea( 0, 1.0, 0.5, '45', false, geometryLabelWall );	wall.label[0].visible = true;
 	//wall.label[1] = createLabelArea( 0, 1.0, 0.5, '45', false, geometryLabelWall );	wall.label[1].visible = (camera == cameraTop) ? true : false;
 	
 	wall.position.copy( p1 );

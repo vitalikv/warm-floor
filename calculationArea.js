@@ -170,7 +170,7 @@ function getYardageSpace( room )
 		
 		room[u].userData.room.areaTxt = res;
 			
-		room[u].label.visible = (camera == cameraTop) ? true : false;
+		room[u].label.visible = true;
 	}	
 }
 
@@ -297,9 +297,9 @@ function upLabelArea2(label, text, text2, size, color, border)
 	ctx.fillStyle = 'rgba(0,0,0,1)';
 	ctx.textAlign = "center";
 	ctx.textBaseline = "bottom";
-	ctx.fillText(text, canvs.width / 2, canvs.height / 2 );
+	ctx.fillText('площадь : '+text, canvs.width / 2, canvs.height / 2 );
 
-	//if(text2 != '') { ctx.fillText(text2, canvs.width / 2, canvs.height / 2 + 110 );	}
+	if(text2 != '') { ctx.fillText('объем : 0 m3', canvs.width / 2, canvs.height / 2 + 110 );	}
 	
 	label.material.map.needsUpdate = true;
 }
