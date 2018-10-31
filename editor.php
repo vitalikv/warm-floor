@@ -80,18 +80,21 @@
 	<div class="toolbar">
 	<ul class="toolbar__group">
 	<li data-action ='save' class="button17">сохранить</li>
-	<li data-action ='2D' class="button17">2D</li>
-	<li data-action ='3D' class="button17">3D</li>
-	<li data-action ='wall' class="button17">стена</li>	
 	</ul>
 	</div>
 	</div>
 	
 	<div class="side_panel" data-action ='side_panel'>
-		<div class="side_panel-button">
+		<div class="side_panel-camera">
+			<div data-action ='2D' class="button1">2D</div>
+			<div data-action ='3D' class="button1">3D</div>		
+		</div> 
+		<div class="side_panel-button">			
+			<div class="button2" data-action ='form_0'><img src="img/f0.png"></div>
 			<div class="button2" data-action ='form_1'><img src="img/f1.png"></div>
 			<div class="button2" data-action ='form_2'><img src="img/f2.png"></div>
-			<div class="button2" data-action ='form_3'><img src="img/f3.png"></div>							
+			<div class="button2" data-action ='form_3'><img src="img/f3.png"></div>	
+			<div class="button3" data-action ='wall'>создать<br>свою<br>форму</div>
 		</div> 
 		<div class="input-height">
 			<div class="text_1">высота</div>
@@ -105,7 +108,8 @@
 		$('[data-action="3D"]').mousedown(function () { UI.setView('3D'); return false; }); 	
 		$('[data-action="wall"]').mousedown(function () { clickO.button = 'create_wall'; return false; }); 		
 		$('[data-action="save"]').mousedown(function () { saveFile(); return false; }); 
-		$('[data-action="side_panel"]').mousedown(function () { return false; }); 
+		$('[data-action="side_panel"]').mousedown(function () { return false; });
+		$('[data-action="form_0"]').mousedown(function () { resetScene(); }); 
 		$('[data-action="form_1"]').mousedown(function () { createForm('shape1'); }); 
 		$('[data-action="form_2"]').mousedown(function () { createForm('shape3'); }); 
 		$('[data-action="form_3"]').mousedown(function () { createForm('shape5'); }); 

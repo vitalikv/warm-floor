@@ -913,6 +913,8 @@ function createForm(cdm)
 	upLabelPlan_1(obj_line);	
 	
 	width_wall = 0.3;
+	
+	centerCamera2D();
 }
 
 

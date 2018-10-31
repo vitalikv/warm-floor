@@ -112,15 +112,79 @@ canvas {
 	0 0 1px rgb(86,96,106);	
 }
 
-.side_panel-button
+
+.side_panel-camera
 {
 	width: 120px;
 	height: auto;
 	margin: 20px auto 0 auto;
 	display: -webkit-box;
 	display: flex;
+}
+
+
+.button1:hover, .button3:hover { cursor: pointer }
+.button1, .button3
+{ 
+	width: 100%;
+	font-family: arial,sans-serif;
+	text-align:  center;
+	font-size: 26px;
+	color: rgb(205,216,228);
+	text-shadow: 0 -1px rgb(46,53,58);
+	text-decoration: none;
+	user-select: none;
+	-moz-user-select: none;
+	line-height: 2em;
+	padding: 0px;
+	outline: none;
+	border: 1px solid rgba(33,43,52,1);
+	border-radius: 3px;
+	background: rgb(81,92,102) linear-gradient(rgb(81,92,102), rgb(69,78,87));
+	box-shadow:
+	inset 0 1px rgba(101,114,126,1),
+	inset 0 0 1px rgba(140,150,170,.8),
+	0 1px rgb(83,94,104),
+	0 0 1px rgb(86,96,106);
+}
+
+.button1:active 
+{
+	box-shadow:
+	inset 0 1px 3px rgba(0,10,20,.5),
+	0 1px rgb(83,94,104),
+	0 0 1px rgb(86,96,106);
+}
+.button1:focus:not(:active) 
+{
+	border: 1px solid rgb(22,32,43);
+	border-bottom: 1px solid rgb(25,34,45);
+	background: rgb(53,61,71);
+	box-shadow:
+	inset 0 1px 3px rgba(0,10,20,.5),
+	0 1px rgb(83,94,104),
+	0 0 1px rgb(86,96,106);
+	pointer-events: none;
+}
+
+.side_panel-button
+{
+	width: 120px;
+	height: auto;
+	margin: 40px auto 0 auto;
+	display: -webkit-box;
+	display: flex;
 	flex-direction: column;
 	-webkit-flex-direction: column;	
+}
+
+
+.button3
+{
+	font-size: 18px;
+	line-height: 1em;
+	margin: 20px auto;	
+	padding: 10px 0;
 }
 
 .side_panel-button .button2
@@ -133,6 +197,8 @@ canvas {
 	border: 1px solid rgba(33,43,52,1);
 	border-radius: 3px;
 }
+
+.button2:hover { cursor: pointer }
 
 .button2 img 
 {
@@ -160,26 +226,28 @@ canvas {
 
 .text_1
 {
-  font-family: arial,sans-serif;
-  font-size: 18px;
-  color: rgb(205,216,228);
-  text-shadow: 0 -1px rgb(46,53,58);
-  text-decoration: none;
-  user-select: none;
-  -moz-user-select: none;
-  line-height: 2em;
-  padding: 1px 1.2em;
-  outline: none;
-  border: 1px solid rgba(33,43,52,1);
-  border-radius: 3px;
-  background: rgb(81,92,102) linear-gradient(rgb(81,92,102), rgb(69,78,87));
-  box-shadow:
-   inset 0 1px rgba(101,114,126,1),
-   inset 0 0 1px rgba(140,150,170,.8),
-   0 1px rgb(83,94,104),
-   0 0 1px rgb(86,96,106);
-   text-align:  center;
+	font-family: arial,sans-serif;
+	font-size: 18px;
+	color: rgb(205,216,228);
+	text-shadow: 0 -1px rgb(46,53,58);
+	text-decoration: none;
+	user-select: none;
+	-moz-user-select: none;
+	line-height: 2em;
+	padding: 1px 1.2em;
+	outline: none;
+	border: 1px solid rgba(33,43,52,1);
+	border-radius: 3px;
+	background: rgb(81,92,102) linear-gradient(rgb(81,92,102), rgb(69,78,87));
+	box-shadow:
+	inset 0 1px rgba(101,114,126,1),
+	inset 0 0 1px rgba(140,150,170,.8),
+	0 1px rgb(83,94,104),
+	0 0 1px rgb(86,96,106);
+	text-align:  center;
 }
+
+
 
 .input-height input
 {
@@ -190,15 +258,15 @@ canvas {
 	border-radius: 2px;	
 	font-size: 18px;
 	
-  text-shadow: 0 -1px rgb(46,53,58);
-  text-decoration: none;
-  user-select: none;
-  -moz-user-select: none;
-  line-height: 2em;
-  padding: 0;
-  outline: none;
-  border: 1px solid rgba(33,43,52,1);
-  border-radius: 3px;	
+	text-shadow: 0 -1px rgb(46,53,58);
+	text-decoration: none;
+	user-select: none;
+	-moz-user-select: none;
+	line-height: 2em;
+	padding: 0;
+	outline: none;
+	border: 1px solid rgba(33,43,52,1);
+	border-radius: 3px;	
 }
 
 
