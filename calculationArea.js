@@ -166,7 +166,7 @@ function getYardageSpace( room )
 		room[u].label.position.set(sumX / n, 0.2, sumZ / n);
 		
 		if(res < 0.5) { upLabelArea2(room[u].label, '', '', '85', 'rgba(255,255,255,1)', false); }
-		else { upLabelArea2(room[u].label, res + ' м2', room[u].userData.room.roomType, '85', 'rgba(255,255,255,1)', false); } 
+		else { upLabelArea2(room[u].label, res, room[u].userData.room.roomType, '80', 'rgba(255,255,255,1)', false); } 
 		
 		room[u].userData.room.areaTxt = res;
 			
@@ -277,7 +277,7 @@ function upLabelArea(label, text, size, color, border)
 
 
 // room
-function upLabelArea2(label, text, text2, size, color, border) 
+function upLabelArea2(label, area, text2, size, color, border) 
 {		
 	if(!label){ return; }
 	var canvs = label.material.map.image; 
@@ -297,9 +297,9 @@ function upLabelArea2(label, text, text2, size, color, border)
 	ctx.fillStyle = 'rgba(0,0,0,1)';
 	ctx.textAlign = "center";
 	ctx.textBaseline = "bottom";
-	ctx.fillText('площадь : '+text, canvs.width / 2, canvs.height / 2 );
+	ctx.fillText('площадь : '+area+ ' m2', canvs.width / 2, canvs.height / 2 - 10 );
 
-	if(text2 != '') { ctx.fillText('объем : 0 m3', canvs.width / 2, canvs.height / 2 + 110 );	}
+	ctx.fillText('объем : '+Math.round((area * height_wall) * 100) / 100 +' m3', canvs.width / 2, canvs.height / 2 + 110 );	
 	
 	label.material.map.needsUpdate = true;
 }

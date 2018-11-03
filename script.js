@@ -6,7 +6,7 @@ var w_h = window.innerHeight;
 var aspect = w_w/w_h;
 var d = 5;
 
-var renderer = new THREE.WebGLRenderer( /*{antialias : true}*/ );
+var renderer = new THREE.WebGLRenderer( {antialias : true} );
 renderer.localClippingEnabled = true;
 //renderer.autoClear = false;
 renderer.setPixelRatio( window.devicePixelRatio );
@@ -970,7 +970,7 @@ function createOneWall3( point1, point2, width, cdm )
 	var d = p1.distanceTo( p2 );
 	
 	var material = new THREE.MeshLambertMaterial( { color : 0xedded4, clippingPlanes : [ clippingMaskWall ], lightMap : lightMap_1 } );		
-	var materials = [ new THREE.MeshLambertMaterial( { color: 0x808080, clippingPlanes: [ clippingMaskWall ], lightMap : lightMap_1 } ), material.clone(), material.clone() ];		
+	var materials = [ new THREE.MeshLambertMaterial( { color: 0x808080, clippingPlanes: [ clippingMaskWall ], lightMap : lightMap_1, transparent: true, depthTest: false } ), material.clone(), material.clone() ];		
 	var geometry = createGeometryWall(d, height, width, offsetZ);	
 	var wall = obj_line[obj_line.length] = new THREE.Mesh( geometry, materials ); 
  	
@@ -1093,6 +1093,8 @@ function changeHeightWall( h2 )
 	if(h2 < 0.01) { h2 = 0.01; }
 	if(h2 > 3) { h2 = 3; }
 	
+	height_wall = h2;
+	
 	for ( var i = 0; i < obj_line.length; i++ )
 	{
 		var v = obj_line[i].geometry.vertices;
@@ -1106,18 +1108,32 @@ function changeHeightWall( h2 )
 		obj_line[i].geometry.verticesNeedUpdate = true;
 	}
 	
+
 	
-	for ( var i = 0; i < obj_point.length; i++ )
-	{
-		var v = obj_point[i].geometry.vertices;
-		v[1].y = h2 + 0.01;
-		v[2].y = h2 + 0.01;
-		v[5].y = h2 + 0.01;
-		v[6].y = h2 + 0.01;
-		obj_point[i].geometry.verticesNeedUpdate = true;
-	}
+	var v = p_tool.geometry.vertices;	
+	var n = 0;
+	for ( var i = 0; i < circle.length; i++ )
+	{		
+		v[ n ] = new THREE.Vector3().addScaledVector( circle[ i ].clone().normalize(), 0.1 / camera.zoom );
+		v[ n ].y = 0;
+		n++;
+
+		v[ n ] = new THREE.Vector3();
+		v[ n ].y = 0;
+		n++;
+		
+		v[ n ] = v[ n - 2 ].clone();
+		v[ n ].y = height_wall + 0.01;
+		n++;
+
+		v[ n ] = new THREE.Vector3();
+		v[ n ].y = height_wall + 0.01;
+		n++; 		
+	}	
+	p_tool.geometry.verticesNeedUpdate = true;
+	p_tool.geometry.elementsNeedUpdate = true;
 	
-	height_wall = h2;
+	
 	
 	h2 = Math.round(h2 * 10) / 10;
 	

@@ -57,15 +57,7 @@ function changeCamera(cam)
 		hideMenuObjUI_2D(clickO.last_obj); 
 		hideSizeWD(clickO.last_obj);
 		
-		pointGrid.visible = true;
-		for ( var i = 0; i < obj_line.length; i++ ) 
-		{ 
-			obj_line[i].material[0].clippingPlanes[0].constant = 1;
-			obj_line[i].material[1].clippingPlanes[0].constant = 1; 
-			obj_line[i].material[2].clippingPlanes[0].constant = 1; 
-		}		
-		
-		
+		pointGrid.visible = true;	
 		 
 		if(cdm == 'cameraTop')	// возращаемся в 3D режим из 2D режима
 		{
