@@ -26,10 +26,6 @@ function mouseDownRight( event )
 	clickO.buttonAct = null;
 	clickO.button = null; 
 	
-	if ( camera == camera3D ) 
-	{
-		hideMenuObjUI_3D( clickO.last_obj );
-	}
 	
 	if(obj_selected)
 	{
@@ -97,10 +93,6 @@ function onDocumentMouseDown( event )
 	clickO.rayhit = null;	
 	
 	clickRayHit( detectRayHit( event, 'click' ) );  
-
-	if ( camera == cameraTop ) { showHideMenuObjUI_2D(); }
-	else if ( camera == camera3D ) { hideMenuObjUI_3D( clickO.last_obj ); }
-	else if ( camera == cameraWall ) { objDeActiveColor_Wall(clickO.last_obj); objActiveColor_Wall(clickO.obj); }
 	
 	renderCamera();
 }
@@ -237,37 +229,6 @@ function clickRayHit( rayhit )
 		if (clickToolWD()) { console.log(clickO.last_obj); }
 		else if ( tag == 'wall' ) { clickWall_2D( rayhit ); }
 		else if ( tag == 'point' ) { clickPoint( rayhit ); }
-		else if ( tag == 'obj' ) { clickPopObj( rayhit ); }
-		else if ( tag == 'group_pop' ) { clickPopObj( rayhit ); }
-		else if ( tag == 'window' ) { clickWD( rayhit ); }
-		else if ( tag == 'door' ) { clickWD( rayhit ); }
-		else if ( tag == 'd_tool' ) { obj_selected = object; }
-		else if ( tag == 'controll_wd' ) { clickToggleChangeWin( rayhit ); }
-		// else if(tag == 'pivot') { clickPivot( rayhit ); }
-		else if ( tag == 'gizmo' ) { clickGizmo( rayhit ); }
-		else if ( tag == 'move_control' ) { clickObjectControls( rayhit ); }
-		else if ( tag == 'toggle_gp' ) { clickToggleGp( rayhit ); }
-		else if ( tag == 'room' ) { obj_selected = object; }
-	}
-	else if ( camera == camera3D )
-	{
-		if ( tag == 'wall' ) { clickO.obj = object; }
-		else if ( tag == 'window' ) { clickO.obj = object; }
-		else if ( tag == 'door' ) { clickO.obj = object; }
-		else if ( tag == 'obj' ) { if(param_pivot.obj == object) { clickPopObj( rayhit ); } clickO.obj = object; }
-		else if ( tag == 'group_pop' ) { clickPopObj( rayhit ); clickO.obj = object; }
-		// else if(tag == 'pivot') { clickPivot( rayhit ); }
-		else if ( tag == 'gizmo' ) { clickGizmo( rayhit ); }
-		else if ( tag == 'move_control' ) { clickObjectControls( rayhit ); }
-		else if ( tag == 'toggle_gp' ) { clickToggleGp( rayhit ); }
-		else if ( tag == 'room' ) { clickO.obj = object; }
-	}
-	else if ( camera == cameraWall )
-	{
-		if ( tag == 'wall' ) { clickWall_3D( rayhit ); }
-		else if ( tag == 'window' ) { clickWD( rayhit ); }
-		else if ( tag == 'door' ) { clickWD( rayhit ); }
-		else if ( tag == 'controll_wd' ) { clickToggleChangeWin( rayhit ); }
 	}
 
 }
@@ -377,7 +338,7 @@ function onDocumentMouseMove( event )
 function onDocumentMouseUp( event )  
 {
 
-	if ( !long_click && camera == camera3D ) { showMenuObjUI_3D( clickO.obj ); }
+	if ( !long_click && camera == camera3D ) {  }
 	
 	if ( obj_selected )  
 	{
@@ -390,15 +351,6 @@ function onDocumentMouseUp( event )
 		{
 			clickWallMouseUp(obj_selected);
 		}
-		else if ( obj_selected.userData.tag == 'window' || obj_selected.userData.tag == 'door' )
-		{
-			clickWDMouseUp( obj_selected );
-		}
-		else if ( obj_selected.userData.tag == 'd_tool' ) { clickToolDoorUp(obj_selected.door); }
-		else if ( obj_selected.userData.tag == 'move_control' ) { showGizmo(); restoreObjectControls( obj_selected.pr_axis ); }
-		else if ( obj_selected.userData.tag == 'gizmo' ) { showObjectControls(); }
-		else if ( obj_selected.userData.tag == 'obj' ) {  }
-		else if ( obj_selected.userData.tag == 'toggle_gp' ) { clickO.last_obj = boxPop.userData.boxPop.popObj; }
 		UI.setCursor();
 		
 	}
@@ -426,109 +378,6 @@ function onDocumentMouseUp( event )
 
 
 
-
-
-// показываем/скрываем меню для раличных элементов/объектов сцены
-function showHideMenuObjUI_2D()
-{  
-	hideMenuObjUI_2D( clickO.last_obj );
-	showMenuObjUI_2D( clickO.obj );
-}
-
-
-// скрываем меню для раличных элементов/объектов сцены
-function hideMenuObjUI_2D( o )
-{
-	if ( o )
-	{ 
-		objDeActiveColor_2D(); 
-		
-		if(clickO.obj)
-		{
-			if(clickO.obj.userData.tag == 'controll_wd'){ if(clickO.obj.userData.controll.obj == clickO.last_obj) { return; } } 
-			if(clickO.obj.userData.tag == 'd_tool'){ if(clickO.obj.door == clickO.last_obj) { return; } } 
-		}
-		
-		switch ( o.userData.tag ) 
-		{  
-			case 'wall':  break;
-			case 'window': if ( camera != camera3D ) { hideSizeWD( o ); } break;
-			case 'door': if ( camera != camera3D ) { hideSizeWD( o ); } break;
-			case 'room': break;
-			case 'move_control': hidePivotGizmo( o ); break; 
-		}
-		
-		//clickO.last_obj = null; 
-	}
-}
-
-// показываем меню для раличных элементов/объектов сцены
-function showMenuObjUI_2D( o )
-{
-	var rayhit = clickO.rayhit;
-	
-	if ( o )
-	{
-		objActiveColor_2D(o);
-		
-		switch ( o.userData.tag ) 
-		{
-			case 'wall': showLengthWallUI( o ); break;
-			case 'window': clickShowRulerWD( o ); showTableWD( o ); break; 
-			case 'door': clickShowRulerWD( o ); showTableWD( o ); break;
-			case 'room': showTableFloorUI(); break;
-			case 'obj': showTablePopObjUI( o ); break;
-			case 'controll_wd': o = o.userData.controll.obj; break;
-		}
-		
-		if(o.userData.tag == 'd_tool'){ return; } 	
-	}
-			
-	clickO.last_obj = o;
-}
-
-
-
-
-function showMenuObjUI_3D( o )
-{
-	var rayhit = clickO.rayhit;
-
-	if ( o )
-	{
-		switch ( o.userData.tag ) 
-		{
-			case 'wall': clickWall_3D( rayhit ); break;
-			case 'room': clickFloor_3D( o ); break;
-			case 'ceiling': clickCeiling_3D( o ); break;
-			case 'window': clickWD( rayhit ); showTableWD( o ); break;
-			case 'door': clickWD( rayhit ); showTableWD( o ); break;
-			case 'obj': clickPopObj( rayhit ); showTablePopObjUI( o ); break;
-			case 'group_pop': clickPopObj( rayhit ); break;
-		}
-	}
-
-	clickO.last_obj = o;
-	clickO.obj = null;
-}
-
-
-function hideMenuObjUI_3D( o )
-{
-	if ( o )
-	{ 
-		switch ( o.userData.tag ) 
-		{
-			case 'wall': scene.remove(o.userData.wall.outline); o.userData.wall.outline = null; UI.hideToolbar( 'wall-3d-toolbar' ); break;
-			case 'window': UI.hideToolbar( 'window-toolbar' ); break;
-			case 'door': UI.hideToolbar( 'door-2d-toolbar' ); break;
-			case 'room': scene.remove(o.userData.room.outline); o.userData.room.outline = null; UI.hideToolbar( 'floor-3d-toolbar' ); break; 
-			case 'ceiling': scene.remove(o.userData.ceil.outline); o.userData.ceil.outline = null; UI.hideToolbar( 'floor-3d-toolbar' ); break; 
-			case 'obj': hidePivotGizmo( o ); break;
-			case 'group_pop': hidePivotGizmo( o ); break;
-		}
-	}
-}
 
 
 // по клику получаем инфу об объекте

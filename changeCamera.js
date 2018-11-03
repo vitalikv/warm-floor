@@ -17,47 +17,13 @@ function changeCamera(cam)
 	{					
 		changeDepthColor();
 				
-		hideMenuObjUI_3D(clickO.last_obj);
-		hideSizeWD(clickO.last_obj);
-		showHideSizePlane('show'); 
-		
-		pointGrid.visible = true;
-		for ( var i = 0; i < obj_line.length; i++ ) 
-		{ 
-			obj_line[i].material[0].clippingPlanes[0].constant = 1;
-			obj_line[i].material[1].clippingPlanes[0].constant = 1; 
-			obj_line[i].material[2].clippingPlanes[0].constant = 1; 
-		}	
-				
-		showAllWallRender();	// показываем стены, которые были спрятаны
-		
-		if(cdm == 'cameraWall')	// возращаемся в 3D режим из cameraWall 
-		{ 
-			showHideArrObj(obj_line, true);
-			showHideArrObj(arr_window, true);
-			showHideArrObj(arr_door, true);
-			showHideArrObj(room, true);  
-			 
-			objDeActiveColor_Wall(clickO.last_obj);
-			
-			if(arr_obj.length > 0) 
-			{ 
-				if(!arr_obj[0].visible) 
-				{
-					for ( var i = 0; i < arr_obj.length; i++ ) { arr_obj[i].visible = true; }	// показываем все объекты 
-				}			
-			}
-		}		
-		
-			
+		showHideSizePlane('show'); 		
 	}
 	else if(camera == camera3D)
 	{	
 		activeHover2D_2();
-		hideMenuObjUI_2D(clickO.last_obj); 
-		hideSizeWD(clickO.last_obj);
-		
-		pointGrid.visible = true;	
+		 
+
 		 
 		if(cdm == 'cameraTop')	// возращаемся в 3D режим из 2D режима
 		{
@@ -68,75 +34,6 @@ function changeCamera(cam)
 			changeDepthColor();
 			getInfoRenderWall();
 		}
-		else if(cdm == 'cameraWall')	// возращаемся в 3D режим из cameraWall 
-		{ 
-			showHideArrObj(obj_line, true);
-			showHideArrObj(arr_window, true);
-			showHideArrObj(arr_door, true);
-			showHideArrObj(room, true);  
-			 
-			objDeActiveColor_Wall(clickO.last_obj);			
-			
-			for ( var i = 0; i < arr_obj.length; i++ ) { arr_obj[i].visible = true; }	// показываем все объекты 
-		}
-		
-		if(camera3D.userData.camera.type == 'fly') { wallAfterRender_2(); }
-		else if(camera3D.userData.camera.type == 'first') { showAllWallRender(); }  
-		
-		showHideSizePlane('hide');
-	}
-	else if(camera == cameraWall)		// переключаемся в cameraWall
-	{				 
-		showHideArrObj(obj_line, false);
-		showHideArrObj(arr_window, false);
-		showHideArrObj(arr_door, false);
-		showHideArrObj(room, false);
-
-		pointGrid.visible = false;		
-		for ( var i = 0; i < obj_line.length; i++ ) 
-		{ 
-			obj_line[i].material[0].clippingPlanes[0].constant = 0;
-			obj_line[i].material[1].clippingPlanes[0].constant = 0; 
-			obj_line[i].material[2].clippingPlanes[0].constant = 0; 
-		}
-		
-	
-		
-		var wall = clickO.last_obj;
-		var index = clickO.index;
-		
-		
-		for ( var i = 0; i < arrWallFront.length; i++ )
-		{
-			arrWallFront[i].obj.visible = true;
-			for ( var i2 = 0; i2 < arrWallFront[i].obj.userData.wall.arrO.length; i2++ ) 
-			{ 
-				arrWallFront[i].obj.userData.wall.arrO[i2].visible = true; 
-				if(arrWallFront[i].obj.userData.wall.arrO[i2].userData.door.popObj) { arrWallFront[i].obj.userData.wall.arrO[i2].userData.door.popObj.visible = true; }
-			}			
-		}		
-		
-		var x1 = wall.userData.wall.p[1].position.z - wall.userData.wall.p[0].position.z;
-		var z1 = wall.userData.wall.p[0].position.x - wall.userData.wall.p[1].position.x;	
-		var dir = new THREE.Vector3(x1, 0, z1).normalize();						// перпендикуляр стены			
-		var c = (index == 1) ? -6 : 6;	
-		var pc = new THREE.Vector3().subVectors( wall.userData.wall.p[1].position, wall.userData.wall.p[0].position ).divideScalar( 2 ).add( wall.userData.wall.p[0].position );
-		
-		cameraWall.position.copy( pc );
-		cameraWall.position.add(new THREE.Vector3().addScaledVector( dir, c )); 
-		cameraWall.position.y = 1.2;
-		
-		
-		var rotY = Math.atan2(dir.x, dir.z);
-		rotY = (index == 1) ? rotY + Math.PI : rotY;
-		cameraWall.rotation.set(0, rotY, 0);     
-		
-		wall.material[index].color = wall.userData.material[index].color;
-
-		//calculationSpaceWall( wall, index );
-		
-		hideMenuObjUI_3D(wall);
-		showHideObjCameraWall(wall);	// скрываем все объекты, которые не прилегают к выбранной стене
 	}
 
 	clickO = resetVarParam();

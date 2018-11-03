@@ -1169,15 +1169,12 @@ function clickButton( event )
 	
 	
 	if ( intersects.length > 0 )
-	{
-		if ( camera == cameraTop ) { clickO.obj = null; hideMenuObjUI_2D( clickO.last_obj ); clickO.last_obj = null; }	// снимаем выделение с последнего объекта
-		
-		if(isNumeric(clickO.button))
-		{
-			loadPopObj_1({ lotid: clickO.button });
-		}
-		else
+	{		
+		if(camera == cameraTop)
 		{ 
+			clickO.obj = null; 
+			clickO.last_obj = null;
+			
 			var point = createPoint( intersects[0].point, 0 );
 			point.position.y = 0;
 			point.userData.point.type = clickO.button; 
