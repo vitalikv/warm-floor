@@ -1138,7 +1138,10 @@ function changeHeightWall( h2 )
 	
 	
 	
-	h2 = Math.round(h2 * 10) / 10;
+	//h2 = Math.round(h2 * 10) / 100;
+	console.log(h2);
+	
+	$('input[data-action="input-height"]').val(h2);
 	
 	updateShapeFloor(room);
 	
@@ -1287,6 +1290,6 @@ animate();
 renderCamera();
 
 
+var docReady = false;
 
-
-$(document).ready(function () { sendMessage('EDITOR.READY', null); loadFile(''); });
+$(document).ready(function () { docReady = true; loadFile(''); });

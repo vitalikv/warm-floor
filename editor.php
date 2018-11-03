@@ -106,12 +106,20 @@
 		$('[data-action="form_1"]').mousedown(function () { createForm('shape1'); }); 
 		$('[data-action="form_2"]').mousedown(function () { createForm('shape3'); }); 
 		$('[data-action="form_3"]').mousedown(function () { createForm('shape5'); }); 
-		$('[data-action="input-height"]').mousedown(function () { $(this).focus(); });  
+		$('[data-action="input-height"]').mousedown(function () { $(this).focus(); UI.activeInput = $(this).data('action'); editText($(this)); });  
 
 
+		$('input').on('focus', function () {  });
 		$('input').on('focus keyup change', function () { UI.activeInput = $(this).data('action'); });
 		$('input').blur(function () { UI.activeInput = ''; });		
-	
+  
+  
+  
+  function editText(input) {
+    console.log(input[0])
+    let length = input[0].value.toString().length
+    input[0].setSelectionRange(0, length);
+  }	
 	</script> 
 </body>
 
