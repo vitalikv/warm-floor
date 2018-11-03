@@ -373,6 +373,9 @@ function onDocumentMouseUp( event )
 	isMouseDown2 = false;
 	isMouseDown3 = false;
 	
+lineAxis_1.visible = false;
+lineAxis_2.visible = false;	
+	
 	renderCamera();
 }
 

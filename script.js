@@ -641,7 +641,10 @@ function createGeometryWall(x, y, z, pr_offsetZ)
 	geometry.faces[1].materialIndex = 1;	
 	geometry.faces[2].materialIndex = 2;
 	geometry.faces[3].materialIndex = 2;	
-	
+	geometry.faces[4].materialIndex = 3;
+	geometry.faces[5].materialIndex = 3;
+	geometry.faces[6].materialIndex = 3;
+	geometry.faces[7].materialIndex = 3;
 	
 	return geometry;
 }
@@ -659,9 +662,9 @@ function createLineAxis( p1, p2 )
 	v[0].x = v[1].x = v[6].x = v[7].x = 0;
 	
 	
-	var wall = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { color : 0xff0000, depthTest: false } ) );
+	var wall = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { color : 0xff0000, transparent: true, depthTest: false } ) );
 	wall.position.copy( p1 );
-	wall.renderOrder = 1;
+	wall.renderOrder = 2;
 	scene.add( wall );		
 
 	
@@ -969,8 +972,8 @@ function createOneWall3( point1, point2, width, cdm )
 	var p2 = point2.position;	
 	var d = p1.distanceTo( p2 );
 	
-	var material = new THREE.MeshLambertMaterial( { color : 0xedded4, clippingPlanes : [ clippingMaskWall ], lightMap : lightMap_1 } );		
-	var materials = [ new THREE.MeshLambertMaterial( { color: 0x808080, clippingPlanes: [ clippingMaskWall ], lightMap : lightMap_1, transparent: true, depthTest: false } ), material.clone(), material.clone() ];		
+	var material = new THREE.MeshLambertMaterial( { color : 0xedded4, lightMap : lightMap_1 } );		
+	var materials = [ new THREE.MeshLambertMaterial( { color: 0x808080, lightMap : lightMap_1 } ), material.clone(), material.clone(), new THREE.MeshLambertMaterial( { color: 0x808080, lightMap : lightMap_1, transparent: true, depthTest: false } ) ];		
 	var geometry = createGeometryWall(d, height, width, offsetZ);	
 	var wall = obj_line[obj_line.length] = new THREE.Mesh( geometry, materials ); 
  	

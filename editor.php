@@ -76,13 +76,6 @@
 	
 	
 	
-	<div class="toolbar-wrap">
-	<div class="toolbar">
-	<ul class="toolbar__group">
-	<li data-action ='save' class="button17">сохранить</li>
-	</ul>
-	</div>
-	</div>
 	
 	<div class="side_panel" data-action ='side_panel'>
 		<div class="side_panel-camera">
