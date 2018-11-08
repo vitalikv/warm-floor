@@ -57,7 +57,9 @@ function mouseDownRight( event )
 
 function onDocumentMouseDown( event ) 
 {
-	//event.preventDefault();	
+	//event.preventDefault();
+
+	if (window.location.hostname != 'warm-floor') return;
  
 	long_click = false;
 	lastClickTime = new Date().getTime();
