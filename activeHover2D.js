@@ -33,7 +33,7 @@ function activeHover2D( event )
 		if ( tag == 'window' ) { object.material.color = colorHover; }
 		else if ( tag == 'door' ) { object.material.color = colorHover; if( object.userData.door.leaf_2D ){ object.userData.door.leaf_2D.material.color = colorHover; } }
 		else if ( tag == 'point' ) { object.material.color = colorHover; }
-		else if ( tag == 'wall' ) { object.material[ 0 ].color = colorHover; }		
+		else if ( tag == 'wall' ) { object.material[ 3 ].color = colorHover;  }		
 		else if ( tag == 'controll_wd' ) { if(clickO.last_obj == object.obj) { activeHover2D_2(); return; } }
 		
 		activeHover2D_2();
@@ -58,7 +58,7 @@ function activeHover2D_2()
 	
 	if ( tag == 'window' ) { var color = new THREE.Color(colWin); } 
 	else if ( tag == 'door' ) { var color = new THREE.Color(colDoor); }	
-	else if ( tag == 'wall' ) { var color = object.userData.material[ 0 ].color; }	
+	else if ( tag == 'wall' ) { var color = object.userData.material[ 3 ].color; }	
 	else if ( tag == 'point' )
 	{
 		var color = object.userData.point.color;
@@ -79,7 +79,7 @@ function activeHover2D_2()
 	if ( tag == 'window' ) { object.material.color = color; }
 	else if ( tag == 'point' ) { object.material.color = color; }
 	else if ( tag == 'obj' ) { /*object.material.color = color;*/ } 
-	else if ( tag == 'wall' ) { object.material[ 0 ].color = color; }
+	else if ( tag == 'wall' ) { object.material[ 3 ].color = color; }
 	else if ( tag == 'door' ) { object.material.color = color; if( object.userData.door.leaf_2D ) { object.userData.door.leaf_2D.material.color = color; } }
 	clickO.hover_obj = null;
 }

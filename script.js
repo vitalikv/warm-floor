@@ -967,15 +967,15 @@ function createOneWall3( point1, point2, width, cdm )
 {
 	var offsetZ = 0;
 	var height = height_wall;
-	width = 0.01;
+	width = 0.03;
 	var matId = (cdm.material) ? cdm.material : default_wall_matId;
 	
 	var p1 = point1.position;
 	var p2 = point2.position;	
 	var d = p1.distanceTo( p2 );
 	
-	var material = new THREE.MeshLambertMaterial( { color : 0xedded4, lightMap : lightMap_1 } );		
-	var materials = [ new THREE.MeshLambertMaterial( { color: 0x808080, lightMap : lightMap_1 } ), material.clone(), material.clone(), new THREE.MeshLambertMaterial( { color: 0x808080, lightMap : lightMap_1, transparent: true, depthTest: false } ) ];		
+	var material = new THREE.MeshLambertMaterial( { color : 0x7d7d7d, lightMap : lightMap_1 } );		
+	var materials = [ material.clone(), material.clone(), material.clone(), new THREE.MeshLambertMaterial( { color: 0x4d4d4d, lightMap : lightMap_1, transparent: true, depthTest: false } ) ];		
 	var geometry = createGeometryWall(d, height, width, offsetZ);	
 	var wall = obj_line[obj_line.length] = new THREE.Mesh( geometry, materials ); 
  	
@@ -1018,6 +1018,7 @@ function createOneWall3( point1, point2, width, cdm )
 	wall.userData.material[0] = { lotid : 0, caption : '', color : wall.material[0].color, scale : new THREE.Vector2(1,1), filters : 0, preview : '', catalog : '' };			// top
 	wall.userData.material[1] = { lotid : 4954, caption : '', color : wall.material[1].color, scale : new THREE.Vector2(1,1), filters : 1039, preview : '', catalog : '' };
 	wall.userData.material[2] = { lotid : 4954, caption : '', color : wall.material[2].color, scale : new THREE.Vector2(1,1), filters : 1039, preview : '', catalog : '' };
+	wall.userData.material[3] = { lotid : 4954, caption : '', color : wall.material[3].color, scale : new THREE.Vector2(1,1), filters : 1039, preview : '', catalog : '' };
 	// --------------
 	
 	

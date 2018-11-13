@@ -59,7 +59,8 @@ function onDocumentMouseDown( event )
 {
 	//event.preventDefault();
 
-	if (window.location.hostname != 'warm-floor') return;
+	if (window.location.hostname == 'warm-floor' || window.location.hostname == 'xn------6cdcklga3agac0adveeerahel6btn3c.xn--p1ai'){} 
+	else { return; }
  
 	long_click = false;
 	lastClickTime = new Date().getTime();
