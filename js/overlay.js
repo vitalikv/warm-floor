@@ -294,7 +294,6 @@ function emitAction(action, value, $source, stage) {
     else if (action == 'door_horizontal') { changeInputPosDoorLeaf(0); renderCamera(); }
     else if (action == 'door_vertical') { changeInputPosDoorLeaf(1); renderCamera(); }
     else if (action == 'delete-handle') { /* deleteHandle() */ UI('handle-preview').val(''); UI.setObjectCaption('', 'handle'); }
-    else if (action == 'units') { setUnits(value) }
     else if (action == 'show-interface-tutorial') { showInterfaceTutorial() }
     else if (action == 'show-hotkeys') { showHotkeys() }
     else if (action == 'floor_texture_offset_x') { offsetTextureInput(); }

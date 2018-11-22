@@ -235,7 +235,7 @@ function createLabelArea(text, x, y, size, border, geometry)
 	ctx.fillStyle = 'rgba(0,0,0,1)';
 	ctx.textAlign = "center";
 	ctx.textBaseline = "middle";
-	ctx.fillText(getValueInCurrentUnits(text, 1000), canvs.width / 2, canvs.height / 2 );	
+	ctx.fillText(text, canvs.width / 2, canvs.height / 2 );	
 	
 	var texture = new THREE.Texture(canvs);
 	texture.needsUpdate = true;		
@@ -270,7 +270,7 @@ function upLabelArea(label, text, size, color, border)
 	ctx.fillStyle = 'rgba(0,0,0,1)';
 	ctx.textAlign = "center";
 	ctx.textBaseline = "middle";
-	ctx.fillText(getValueInCurrentUnits(text, 1000), canvs.width / 2, canvs.height / 2 );	
+	ctx.fillText(text, canvs.width / 2, canvs.height / 2 );	
 	
 	label.material.map.needsUpdate = true;
 }
@@ -326,7 +326,7 @@ function upLabelAreaWall(label, text, size, color, border)
 	ctx.fillStyle = 'rgba(0,0,0,1)';
 	ctx.textAlign = "center";
 	ctx.textBaseline = "middle";
-	ctx.fillText(getValueInCurrentUnits(text, 1000), canvs.width / 2, canvs.height / 2 );	
+	ctx.fillText(text, canvs.width / 2, canvs.height / 2 );	
 	
 	label.material.map.needsUpdate = true;
 }

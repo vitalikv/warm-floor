@@ -92,16 +92,12 @@ if(1==2)
 //----------- render
 function animate() 
 {
-	requestAnimationFrame( animate );
-	
-	stats.begin();
+	requestAnimationFrame( animate );	
 
 	cameraZoomTopLoop();	
 	moveCameraToNewPosition();
 	
 	updateKeyDown();
-
-	stats.end();
 }
 
 
@@ -235,8 +231,7 @@ var pointGrid = { visible : true }
 
 var planeMath = createPlaneMath();
 var planeMath2 = createPlaneMath2();
-var arrRule4 = createRulerWin();
-var labelRuler1 = createLabelRulerWin('text', 0.4, 0.2, 50);
+
 var geometryLabelWall = createGeometryPlan(0.25 * kof_rd, 0.125 * kof_rd);
 var geometryLabelFloor = createGeometryPlan(0.5 * kof_rd, 0.125 * kof_rd);
 var arrContWD = createControllWD(); 
@@ -1287,7 +1282,6 @@ function formatSizeUnits(bytes){
  
 
 
-var stats = new Stats();
 
 animate();
 renderCamera();

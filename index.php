@@ -31,11 +31,7 @@ if($url == '/calculator/area_apartment')	{ $title = 'калькулятор пл
     </script>
     <script src="js/three.min.js?<?=$vrs?>"></script>
     <script src="js/jquery.js"></script>
-    <script src="js/ThreeCSG.js"></script>    
-    
-    <script src="stats.min.js?<?=$vrs?>"></script>
-    <script src="units.js?<?=$vrs?>"></script>
-    <script src="rulerWin.js?<?=$vrs?>"></script>
+    <script src="js/ThreeCSG.js"></script>       
     
     <script src="calculationArea.js?<?=$vrs?>"></script>
     
@@ -55,7 +51,6 @@ if($url == '/calculator/area_apartment')	{ $title = 'калькулятор пл
 	
 
     <script src="inputWall.js?<?=$vrs?>"></script>
-    <script src="dragWindowDoorUI.js?<?=$vrs?>"></script>
     
   	<script src="loadPopObj.js?<?=$vrs?>"></script>
 	
@@ -64,10 +59,7 @@ if($url == '/calculator/area_apartment')	{ $title = 'калькулятор пл
     
     <script src="undoRedo.js?<?=$vrs?>"></script>
     <script src="saveLoad.js?<?=$vrs?>"></script>
-	
-	
-	<script src="posLabelRoom.js?<?=$vrs?>"></script>
-	
+		
 	
     <script src="script.js?<?=$vrs?>"></script>
     	
