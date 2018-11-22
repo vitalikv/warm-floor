@@ -59,7 +59,7 @@ function onDocumentMouseDown( event )
 {
 	//event.preventDefault();
 
-	if (window.location.hostname == 'warm-floor' || window.location.hostname == 'xn------6cdcklga3agac0adveeerahel6btn3c.xn--p1ai'){} 
+	if (window.location.hostname == 'remstok' || window.location.hostname == 'warm-floor' || window.location.hostname == 'remstok.ru'){} 
 	else { return; }
  
 	long_click = false;
