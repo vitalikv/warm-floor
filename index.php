@@ -91,6 +91,11 @@ if($url == '/calculator/area_apartment')	{ $title = 'калькулятор пл
 		</div> 
 	</div>
 	
+	
+	<div class="left_panel_1" data-action ='left_panel_1'>			
+		<div class="link_page_1">создать<br>свою<br>форму</div>
+	</div>	
+	
 	<script>
 	
 		$('[data-action="2D"]').on('mousedown', function(e) { UI.setView('2D'); return false; }); 	
