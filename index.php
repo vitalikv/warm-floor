@@ -93,7 +93,7 @@ if($url == '/calculator/area_apartment')	{ $title = 'калькулятор пл
 	
 	
 	<div class="left_panel_1" data-action ='left_panel_1'>			
-		<div class="link_page_1">создать<br>свою<br>форму</div>
+		<a href="/calculator_lentochnogo_fundamenta" class="link_page_1">калькулятор<br>ленточного<br>фундамента</a>
 	</div>	
 	
 	<script>
