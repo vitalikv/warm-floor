@@ -1,0 +1,13 @@
+AddDefaultCharset utf-8
+DirectoryIndex index.php
+Options -Indexes
+
+
+Options +FollowSymLinks
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www.remstok\.ru$ [NC]
+RewriteRule ^(.*)$ http://remstok.ru/$1 [R=301,L]
+
+
+RewriteRule ^calculator/lentochnii_fundament$ index.php
+RewriteRule ^calculator/monolit_fundament$ index.php

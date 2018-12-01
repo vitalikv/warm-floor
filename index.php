@@ -1,9 +1,14 @@
 <? 
 
 $url = $_SERVER['REQUEST_URI'];
+
+$path = "/";
+
 $title = 'калькулятор площади пола онлайн';
 	
 if($url == '/calculator/area_apartment')	{ $title = 'калькулятор площади квартиры онлайн 3D'; }
+if($url == '/calculator/lentochnii_fundament')	{ $title = 'калькулятор ленточного фундамента 3D'; }
+if($url == '/calculator/monolit_fundament')	{ $title = 'калькулятор монолитного фундамента 3D'; }
 ?>
 
 
@@ -16,7 +21,7 @@ if($url == '/calculator/area_apartment')	{ $title = 'калькулятор пл
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title><?=$title?></title>
 
-	<link rel="stylesheet" href="css/style.css"> 
+	<link rel="stylesheet" href="<?=$path?>css/style.css"> 
 </head>
 
 <body>
@@ -26,49 +31,50 @@ if($url == '/calculator/area_apartment')	{ $title = 'калькулятор пл
 	
     <script>
 	var vr = "<?=$vrs ?>";
+	
 	console.log('version '+ vr);
       
     </script>
-    <script src="js/three.min.js?<?=$vrs?>"></script>
-    <script src="js/jquery.js"></script>
-    <script src="js/ThreeCSG.js"></script>       
+    <script src="<?=$path?>js/three.min.js?<?=$vrs?>"></script>
+    <script src="<?=$path?>js/jquery.js"></script>
+    <script src="<?=$path?>js/ThreeCSG.js"></script>       
     
-    <script src="calculationArea.js?<?=$vrs?>"></script>
+    <script src="<?=$path?>calculationArea.js?<?=$vrs?>"></script>
     
-    <script src="crossWall.js?<?=$vrs?>"></script>
-    <script src="addPoint.js?<?=$vrs?>"></script>
-    <script src="addWindowDoor.js?<?=$vrs?>"></script>
-    <script src="mouseClick.js?<?=$vrs?>"></script>
-	<script src="changeCamera.js?<?=$vrs?>"></script>
-    <script src="moveCamera.js?<?=$vrs?>"></script>
-    <script src="clickChangeWD.js?<?=$vrs?>"></script>
-    <script src="clickMovePoint.js?<?=$vrs?>"></script>
-    <script src="clickMoveWall.js?<?=$vrs?>"></script>
-    <script src="clickMoveWD.js?<?=$vrs?>"></script>
-    <script src="deleteObj.js?<?=$vrs?>"></script>
-    <script src="floor.js?<?=$vrs?>"></script>
-    <script src="detectZone.js?<?=$vrs?>"></script>
+    <script src="<?=$path?>crossWall.js?<?=$vrs?>"></script>
+    <script src="<?=$path?>addPoint.js?<?=$vrs?>"></script>
+    <script src="<?=$path?>addWindowDoor.js?<?=$vrs?>"></script>
+    <script src="<?=$path?>mouseClick.js?<?=$vrs?>"></script>
+	<script src="<?=$path?>changeCamera.js?<?=$vrs?>"></script>
+    <script src="<?=$path?>moveCamera.js?<?=$vrs?>"></script>
+    <script src="<?=$path?>clickChangeWD.js?<?=$vrs?>"></script>
+    <script src="<?=$path?>clickMovePoint.js?<?=$vrs?>"></script>
+    <script src="<?=$path?>clickMoveWall.js?<?=$vrs?>"></script>
+    <script src="<?=$path?>clickMoveWD.js?<?=$vrs?>"></script>
+    <script src="<?=$path?>deleteObj.js?<?=$vrs?>"></script>
+    <script src="<?=$path?>floor.js?<?=$vrs?>"></script>
+    <script src="<?=$path?>detectZone.js?<?=$vrs?>"></script>
 	
 
-    <script src="inputWall.js?<?=$vrs?>"></script>
+    <script src="<?=$path?>inputWall.js?<?=$vrs?>"></script>
     
-  	<script src="loadPopObj.js?<?=$vrs?>"></script>
+  	<script src="<?=$path?>loadPopObj.js?<?=$vrs?>"></script>
 	
-	<script src="clickActiveObj.js?<?=$vrs?>"></script>
-	<script src="activeHover2D.js?<?=$vrs?>"></script>
+	<script src="<?=$path?>clickActiveObj.js?<?=$vrs?>"></script>
+	<script src="<?=$path?>activeHover2D.js?<?=$vrs?>"></script>
     
-    <script src="undoRedo.js?<?=$vrs?>"></script>
-    <script src="saveLoad.js?<?=$vrs?>"></script>
+    <script src="<?=$path?>undoRedo.js?<?=$vrs?>"></script>
+    <script src="<?=$path?>saveLoad.js?<?=$vrs?>"></script>
 		
 	
-    <script src="script.js?<?=$vrs?>"></script>
+    <script src="<?=$path?>script.js?<?=$vrs?>"></script>
     	
-	<script src="eventKey.js?<?=$vrs?>"></script>
+	<script src="<?=$path?>eventKey.js?<?=$vrs?>"></script>
 	
 
-	<script src="js/ui.js?<?=$vrs?>"></script>
-    <script src="js/postmessage.js?<?=$vrs?>"></script>
-    <script src="js/overlay.js?<?=$vrs?>"></script>
+	<script src="<?=$path?>js/ui.js?<?=$vrs?>"></script>
+    <script src="<?=$path?>js/postmessage.js?<?=$vrs?>"></script>
+    <script src="<?=$path?>js/overlay.js?<?=$vrs?>"></script>
 	
 	
 	
@@ -79,10 +85,10 @@ if($url == '/calculator/area_apartment')	{ $title = 'калькулятор пл
 			<div data-action ='3D' class="button1">3D</div>		
 		</div> 
 		<div class="side_panel-button">			
-			<div class="button2" data-action ='form_0'><img src="img/f0.png"></div>
-			<div class="button2" data-action ='form_1'><img src="img/f1.png"></div>
-			<div class="button2" data-action ='form_2'><img src="img/f2.png"></div>
-			<div class="button2" data-action ='form_3'><img src="img/f3.png"></div>	
+			<div class="button2" data-action ='form_0'><img src="/img/f0.png"></div>
+			<div class="button2" data-action ='form_1'><img src="/img/f1.png"></div>
+			<div class="button2" data-action ='form_2'><img src="/img/f2.png"></div>
+			<div class="button2" data-action ='form_3'><img src="/img/f3.png"></div>	
 			<div class="button3" data-action ='wall'>создать<br>свою<br>форму</div>
 		</div> 
 		<div class="input-height">
@@ -93,7 +99,7 @@ if($url == '/calculator/area_apartment')	{ $title = 'калькулятор пл
 	
 	
 	<div class="left_panel_1" data-action ='left_panel_1'>			
-		<a href="/calculator_lentochnogo_fundamenta" class="link_page_1">калькулятор<br>ленточного<br>фундамента</a>
+		<a href="<?=$path?>calculator/lentochnii_fundament" class="link_page_1">калькулятор<br>ленточного<br>фундамента</a>
 	</div>	
 	
 	<script>

@@ -400,7 +400,7 @@ function loadFile(file)
 {
 	$.ajax
 	({
-		url: 't/fileJson.json',
+		url: '/t/fileJson.json',
 		type: 'POST',
 		dataType: 'json',
 		success: function(json)
