@@ -958,6 +958,45 @@ var clippingMaskWall = new THREE.Plane( new THREE.Vector3( 0, 1, 0 ), 1 );	// м
 var lightMap_1 = new THREE.TextureLoader().load('/img/lightMap_1.png');
 //renderer.clippingPlanes = [ clippingMaskWall ];
 
+
+
+var RD = (function ()  
+{ return {
+	create : function (cdm)
+	{
+		if(cdm.str == 'wall') { return wall(cdm); }
+
+		function wall(cdm)
+		{
+			return RD;
+		}		
+	}
+}
+})();
+
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+
+  sayName() {
+    console.log(`Person ${this.name} said his name`);
+  }
+}
+
+var john = new Person('John');
+john.sayName(); // Person John said his name
+
+
+function listCommand(name, value) 
+{
+	if(typeof RD[name] == 'function') { RD[name](value); }
+}
+
+console.log(RD.create({str : 'wall'}));
+
+
+
 function createOneWall3( point1, point2, width, cdm ) 
 {
 	var offsetZ = 0;
