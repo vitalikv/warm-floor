@@ -545,7 +545,10 @@ function loadFilePL(arr)
 
 		var dir = new THREE.Vector3().subVectors( point2.position, point1.position ).normalize();
 		var offsetZ = localTransformPoint(wall[i].offsetV, quaternionDirection(dir)).z;
-		var inf = { id : wall[i].id, offsetZ : -offsetZ, height : wall[i].height, material : wall[i].material };
+		var inf = { id : wall[i].id, offsetZ : -offsetZ, height : wall[i].height, material : wall[i].material, load : true };
+		
+		if(infProject.type == 2) { wall[i].width = 0.3; }
+		
 		var obj = createOneWall3( point1, point2, wall[i].width, inf ); 		
 		
 		obj.updateMatrixWorld();
@@ -555,12 +558,12 @@ function loadFilePL(arr)
 	
 	for ( var i = 0; i < obj_point.length; i++ ) { upLineYY_2(obj_point[i], obj_point[i].p, obj_point[i].w, obj_point[i].start); }
 	
-	upLabelPlan_1(obj_line);	// размеры стен
+	//upLabelPlan_1(obj_line);	// размеры стен
 	// создаем и устанавливаем все стены (без окон/дверей)
 
 	
 
-	detectRoomZone(nameRoomDef);
+	if(infProject.type == 1) { detectRoomZone(nameRoomDef); }
 	
 
 	

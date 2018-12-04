@@ -478,7 +478,7 @@ function cameraZoomTop( delta )
 
 		upLabelPlan_1( obj_line, true );
 
-		if ( labelRuler1[ 0 ].visible ) { for ( var i = 0; i < labelRuler1.length; i++ ) { labelRuler1[ i ].scale.set( k, k, k ); } }
+		//if ( labelRuler1[ 0 ].visible ) { for ( var i = 0; i < labelRuler1.length; i++ ) { labelRuler1[ i ].scale.set( k, k, k ); } }
 
 		var n1 = 0.5 * k;
 		

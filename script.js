@@ -909,7 +909,7 @@ function createForm(cdm)
 	
 	
 	for ( var i = 0; i < obj_point.length; i++ ) { upLineYY(obj_point[i]); }	
-	detectRoomZone(nameRoomDef);
+	if(infProject.type == 1) detectRoomZone(nameRoomDef);
 	upLabelPlan_1(obj_line);	
 	
 	width_wall = 0.3;
@@ -923,9 +923,11 @@ function createForm(cdm)
 
 function createPoint( pos, id )
 {
-	var point = obj_point[obj_point.length] = new THREE.Mesh( p_tool.geometry, new THREE.MeshLambertMaterial( { color : 0x333333, transparent: true, opacity: 0.6 } ) ); 
+	var point = obj_point[obj_point.length] = new THREE.Mesh( p_tool.geometry, new THREE.MeshLambertMaterial( { color : 0x333333, transparent: true, opacity: 0.6, depthTest: false } ) ); 
 	point.position.copy( pos );		
 
+	point.renderOrder = 1;
+	
 	point.w = [];
 	point.p = [];
 	point.start = [];		
@@ -974,18 +976,7 @@ var RD = (function ()
 }
 })();
 
-class Person {
-  constructor(name) {
-    this.name = name;
-  }
 
-  sayName() {
-    console.log(`Person ${this.name} said his name`);
-  }
-}
-
-var john = new Person('John');
-john.sayName(); // Person John said his name
 
 
 function listCommand(name, value) 
@@ -1001,24 +992,32 @@ function createOneWall3( point1, point2, width, cdm )
 {
 	var offsetZ = 0;
 	var height = height_wall;
-	width = 0.03;
+	
+	if(infProject.type == 1) { width = 0.03; }
+	
 	var matId = (cdm.material) ? cdm.material : default_wall_matId;
 	
 	var p1 = point1.position;
 	var p2 = point2.position;	
 	var d = p1.distanceTo( p2 );
 	
-	var material = new THREE.MeshLambertMaterial( { color : 0x7d7d7d, lightMap : lightMap_1 } );		
-	var materials = [ material.clone(), material.clone(), material.clone(), new THREE.MeshLambertMaterial( { color: 0x4d4d4d, lightMap : lightMap_1, transparent: true, depthTest: false } ) ];		
+	var material = new THREE.MeshLambertMaterial( { color : 0x7d7d7d, lightMap : lightMap_1 } );
+
+	if(infProject.type == 2) { var color = 0x696969; }
+	else { var color = 0x4d4d4d; }
+	
+	var materials = [ material.clone(), material.clone(), material.clone(), new THREE.MeshLambertMaterial( { color: color, lightMap : lightMap_1, transparent: true, depthTest: false } ) ];		
 	var geometry = createGeometryWall(d, height, width, offsetZ);	
 	var wall = obj_line[obj_line.length] = new THREE.Mesh( geometry, materials ); 
  	
 	
-	//wall.p = [];
-	//wall.p[0] = point1;
-	//wall.p[1] = point2;
 	wall.label = [];
 	wall.label[0] = createLabelArea( 0, 1.0, 0.5, '45', false, geometryLabelWall );	wall.label[0].visible = true;
+	
+	if(infProject.type == 2) 
+	{
+		wall.label[1] = createLabelArea( 0, 1.0, 0.5, '45', false, geometryLabelWall ); wall.label[1].visible = true;
+	}
 	//wall.label[1] = createLabelArea( 0, 1.0, 0.5, '45', false, geometryLabelWall );	wall.label[1].visible = (camera == cameraTop) ? true : false;
 	
 	wall.position.copy( p1 );
@@ -1328,4 +1327,8 @@ renderCamera();
 
 var docReady = false;
 
-$(document).ready(function () { docReady = true; loadFile(''); });
+$(document).ready(function () 
+{ 
+	docReady = true; 
+	loadFile(''); 
+});

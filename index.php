@@ -5,9 +5,10 @@ $url = $_SERVER['REQUEST_URI'];
 $path = "/";
 
 $title = 'калькулятор площади пола онлайн';
+$type = 1;
 	
 if($url == '/calculator/area_apartment')	{ $title = 'калькулятор площади квартиры онлайн 3D'; }
-if($url == '/calculator/lentochnii_fundament')	{ $title = 'калькулятор ленточного фундамента 3D'; }
+if($url == '/calculator/lentochnii_fundament')	{ $title = 'калькулятор ленточного фундамента 3D'; $type = 2; }
 if($url == '/calculator/monolit_fundament')	{ $title = 'калькулятор монолитного фундамента 3D'; }
 ?>
 
@@ -32,8 +33,11 @@ if($url == '/calculator/monolit_fundament')	{ $title = 'калькулятор �
     <script>
 	var vr = "<?=$vrs ?>";
 	
+	var infProject = { type : <?=$type?> };
+	
 	console.log('version '+ vr);
-      
+    console.log('infProject ', infProject);
+	
     </script>
     <script src="<?=$path?>js/three.min.js?<?=$vrs?>"></script>
     <script src="<?=$path?>js/jquery.js"></script>
