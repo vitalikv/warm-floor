@@ -139,9 +139,41 @@ function upLabelPlan_1(arrWall, Zoom)
 			var v = wall.geometry.vertices;
 			for ( var i2 = 0; i2 < v.length; i2++ ) { wall.userData.wall.v[i2] = v[i2].clone(); }	// обновляем vertices			
 		}
+		
+		getWallAreaTop( wall );
 	}
 }
 
+
+
+
+//площадь стены сверху
+function getWallAreaTop( wall ) 
+{	
+	var res = 0;
+	var v = wall.userData.wall.v; 
+	
+	for (i = 0; i < v.length; i++)
+	{
+		var n1 = i - 1;
+		var n2 = i + 1;
+		
+		if(i == 0) { n1 = v.length - 1; n2 = i + 1; }
+		else if(i == v.length - 1) { n1 = i - 1; n2 = 0; }
+		
+		
+		var sum = v[i].x*(v[n1].z - v[n2].z); 
+		//sum = Math.round(sum * 100);
+		res += sum;			
+	}
+	console.log(res);
+	res = Math.abs( res ) / 2;
+	//res = Math.round(res) / 100;			
+	
+	wall.userData.wall.area.top = res;
+	
+	
+}
 
 
 

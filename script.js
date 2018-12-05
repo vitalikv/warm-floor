@@ -1039,6 +1039,7 @@ function createOneWall3( point1, point2, width, cdm )
 	wall.userData.wall.outline = null;
 	wall.userData.wall.arrO = [];
 	wall.userData.wall.last = { pos : new THREE.Vector3(), rot : new THREE.Vector3() }; 
+	wall.userData.wall.area = { top : 0 }; 
 	
 	wall.userData.wall.room = { side : 0 };   
 	
