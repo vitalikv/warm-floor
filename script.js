@@ -224,8 +224,8 @@ var wallVisible = [];
 var circle = createCircleSpline();
 var p_tool = createToolPoint();
 var d_tool = createToolDoorPoint();
-createGrid();
-// var pointGrid = createPointGrid(100);
+// createGrid();
+var pointGrid = createPointGrid(100);
 var pointGrid = { visible : true }
 
 

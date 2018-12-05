@@ -77,8 +77,7 @@ function deleteWall_2(wall)
 	deleteOneOnPointValue(p1, wall);
 	deleteWallFromArr(wall);
 	
-	scene.remove(wall.label[0]);
-	//scene.remove(wall.label[1]);	
+	for ( var i = 0; i < wall.label.length; i ++ ){ scene.remove(wall.label[i]); } 
 	scene.remove( wall );
 	
 	if(p0.w.length == 0){ deletePointFromArr( p0 ); scene.remove( p0 ); }
@@ -114,8 +113,7 @@ function deleteWall_3(wall)
 	deleteOneOnPointValue(p1, wall);
 	deleteWallFromArr(wall);
 	
-	scene.remove(wall.label[0]);
-	//scene.remove(wall.label[1]);	
+	for ( var i = 0; i < wall.label.length; i ++ ){ scene.remove(wall.label[i]); }	
 	scene.remove( wall );
 	
 	if(p0.w.length == 0){ deletePointFromArr( p0 ); scene.remove( p0 ); }
