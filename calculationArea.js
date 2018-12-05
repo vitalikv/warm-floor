@@ -153,7 +153,7 @@ function getWallAreaTop( wall )
 	var res = 0;
 	var v = wall.userData.wall.v; 
 	
-	for (i = 0; i < v.length; i++)
+	for (i = 0; i < v.length - 1; i++)
 	{
 		var n1 = i - 1;
 		var n2 = i + 1;
