@@ -251,6 +251,10 @@ var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
 var offset = new THREE.Vector3();
   
+  
+  
+if(infProject.type == 2) { var floorLabel = createLabelCameraWall({ count : 1, text : 0, size : 65, ratio : {x:256*4, y:256}, geometry : geometryLabelFloor })[0]; }   
+ 
 
 
 camera3D.position.x = radious * Math.sin( theta * Math.PI / 360 ) * Math.cos( phi * Math.PI / 360 );
@@ -1012,13 +1016,15 @@ function createOneWall3( point1, point2, width, cdm )
  	
 	
 	wall.label = [];
-	wall.label[0] = createLabelArea( 0, 1.0, 0.5, '45', false, geometryLabelWall );	wall.label[0].visible = true;
+	wall.label[0] = createLabelCameraWall({ count : 1, text : 0, size : 85, ratio : {x:256*2, y:256}, geometry : geometryLabelWall })[0];	
+	wall.label[0].visible = true;
 	
 	if(infProject.type == 2) 
 	{
-		wall.label[1] = createLabelArea( 0, 1.0, 0.5, '45', false, geometryLabelWall ); wall.label[1].visible = true;
+		wall.label[1] = createLabelCameraWall({ count : 1, text : 0, size : 85, ratio : {x:256*2, y:256}, geometry : geometryLabelWall })[0]; 
+		wall.label[1].visible = true;
 	}
-	//wall.label[1] = createLabelArea( 0, 1.0, 0.5, '45', false, geometryLabelWall );	wall.label[1].visible = (camera == cameraTop) ? true : false;
+	
 	
 	wall.position.copy( p1 );
 	

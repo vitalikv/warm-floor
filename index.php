@@ -61,7 +61,7 @@ if($url == '/calculator/monolit_fundament')	{ $title = 'калькулятор �
 	
 
     <script src="<?=$path?>inputWall.js?<?=$vrs?>"></script>
-    
+    <script src="<?=$path?>label.js?<?=$vrs?>"></script>
   	<script src="<?=$path?>loadPopObj.js?<?=$vrs?>"></script>
 	
 	<script src="<?=$path?>clickActiveObj.js?<?=$vrs?>"></script>

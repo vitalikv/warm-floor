@@ -140,7 +140,7 @@ function upLabelPlan_1(arrWall, Zoom)
 			for ( var i2 = 0; i2 < v.length; i2++ ) { wall.userData.wall.v[i2] = v[i2].clone(); }	// обновляем vertices			
 		}
 		
-		getWallAreaTop( wall );
+		if(infProject.type == 2) { getWallAreaTop( wall ); }
 	}
 	
 	
@@ -290,39 +290,7 @@ function checkClockWise( arrP )
 
 
 
-function createLabelArea(text, x, y, size, border, geometry) 
-{	
-	var canvs = document.createElement("canvas");
-	var ctx = canvs.getContext("2d");
-	
-	var k = x / y;
-	canvs.width = 256 * k;
-	canvs.height = 256;
-	
-	ctx.font = size + 'pt Arial';
-	if(border)
-	{
-		ctx.fillStyle = 'rgba(0,0,0,1)';
-		ctx.fillRect(0, 0, canvs.width, canvs.height);
-		ctx.fillStyle = 'rgba(255,255,255,0)';
-		ctx.fillRect(1, 1, canvs.width - 2, canvs.height - 2);		
-	}
 
-	ctx.fillStyle = 'rgba(0,0,0,1)';
-	ctx.textAlign = "center";
-	ctx.textBaseline = "middle";
-	ctx.fillText(text, canvs.width / 2, canvs.height / 2 );	
-	
-	var texture = new THREE.Texture(canvs);
-	texture.needsUpdate = true;		
-	var material = new THREE.MeshBasicMaterial({ map : texture, transparent: true, depthTest: false });
-	
-	
-	var label = new THREE.Mesh(geometry, material);		 
-	scene.add( label );		
-	
-	return label;
-}
 
 
 

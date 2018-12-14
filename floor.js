@@ -28,7 +28,7 @@ function createFloor(arrP, arrW, arrS, id, roomType, material, plinth)
 	room[n].p = arrP;
 	room[n].w = arrW; 
 	room[n].s = arrS;
-	room[n].label = createLabelArea('0', 2, 0.5, '65', false, geometryLabelFloor);			
+	room[n].label = createLabelCameraWall({ count : 1, text : 0, size : 65, ratio : {x:256*4, y:256}, geometry : geometryLabelFloor })[0];
 	room[n].pr_preview = '';
 	room[n].pr_catalog = '';
 	
