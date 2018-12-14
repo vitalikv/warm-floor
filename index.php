@@ -82,8 +82,15 @@ if($url == '/calculator/monolit_fundament')	{ $title = 'калькулятор �
 	
 	
 	
+	<div class="top_panel_1" data-action ='top_panel_1'>
+		<div class="input-height">
+			<div class="text_1">объем</div>
+			<input type="text" data-action ='input-height' value = 0.2>
+		</div> 	
+	</div>
 	
-	<div class="side_panel" data-action ='side_panel'>
+	
+	<div class="side_panel" data-action ='side_panel' hidden='true'>
 		<div class="side_panel-camera">
 			<div data-action ='2D' class="button1">2D</div>
 			<div data-action ='3D' class="button1">3D</div>		

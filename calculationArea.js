@@ -142,6 +142,20 @@ function upLabelPlan_1(arrWall, Zoom)
 		
 		getWallAreaTop( wall );
 	}
+	
+	
+	if(infProject.type == 2)
+	{
+		var sum = 0;
+		for ( var i = 0; i < obj_line.length; i++ )
+		{
+			sum += obj_line[i].userData.wall.area.top;
+		}
+		
+		sum = Math.round(sum * 100)/100;
+		
+		console.log(sum);
+	}
 }
 
 
@@ -153,7 +167,7 @@ function getWallAreaTop( wall )
 	var res = 0;
 	var v = wall.userData.wall.v; 
 	
-	for (i = 0; i < v.length - 1; i++)
+	for (var i = 0; i < v.length - 1; i++)
 	{
 		var n1 = i - 1;
 		var n2 = i + 1;
@@ -163,16 +177,14 @@ function getWallAreaTop( wall )
 		
 		
 		var sum = v[i].x*(v[n1].z - v[n2].z); 
-		//sum = Math.round(sum * 100);
+		sum = Math.round(sum * 100) / 100;
 		res += sum;			
 	}
-	console.log(res);
-	res = Math.abs( res ) / 2;
-	//res = Math.round(res) / 100;			
+	
+	res = Math.abs( res ) / 1;
+	res = Math.round(res * 100) / 100;			
 	
 	wall.userData.wall.area.top = res;
-	
-	
 }
 
 
@@ -182,7 +194,7 @@ function getYardageSpace( room )
 {	
 	
 	
-	for (u = 0; u < room.length; u++)
+	for (var u = 0; u < room.length; u++)
 	{  
 		var arrW = room[u].w; 
 		var arrP = room[u].p;  
