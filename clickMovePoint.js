@@ -573,6 +573,9 @@ function upLineUU(line1, line2, s1, s2, pointC)
 
 	line1.geometry.verticesNeedUpdate = true;	
 	line2.geometry.verticesNeedUpdate = true;
+	
+	line1.geometry.computeBoundingBox(); 	
+	line2.geometry.computeBoundingSphere();	
 }
 
 

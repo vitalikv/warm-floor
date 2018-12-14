@@ -253,7 +253,7 @@ var offset = new THREE.Vector3();
   
   
   
-if(infProject.type == 2) { var floorLabel = createLabelCameraWall({ count : 1, text : 0, size : 65, ratio : {x:256*4, y:256}, geometry : geometryLabelFloor })[0]; }   
+if(infProject.type == 2) { var floorLabel = createLabelCameraWall({ count : 1, text : 0, size : 65, ratio : {x:256*4, y:256}, geometry : geometryLabelFloor })[0]; floorLabel.visible = true; }   
  
 
 
@@ -1188,7 +1188,6 @@ function changeHeightWall( h2 )
 	
 	updateShapeFloor(room);
 	
-	//upLabelArea(bUI_6[bUI_6.length - 1], h2 + ' м', 1.2, 0.5, '22', 'rgba(255,255,255,1)', false);
 	renderCamera();
 }
 	

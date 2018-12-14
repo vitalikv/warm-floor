@@ -76,7 +76,8 @@ function upLabelPlan_1(arrWall, Zoom)
 			if(infProject.type == 1)
 			{
 				var dist = p1.distanceTo( p2 );			
-				upLabelArea(label_1, Math.round(dist * 100) * 10, '85', 'rgba(255,255,255,1)', false);
+				
+				upLabelCameraWall({label : label_1, text : Math.round(dist * 100) * 10, sizeText : 85, color : 'rgba(0,0,0,1)'});
 			}
 			else
 			{
@@ -84,8 +85,8 @@ function upLabelPlan_1(arrWall, Zoom)
 				var d1 = Math.abs( v[6].x - v[0].x );		
 				var d2 = Math.abs( v[10].x - v[4].x );
 
-				upLabelArea(label_1, Math.round(d1 * 100) * 10, '85', 'rgba(255,255,255,1)', false);
-				upLabelArea(label_2, Math.round(d2 * 100) * 10, '85', 'rgba(255,255,255,1)', false);			
+				upLabelCameraWall({label : label_1, text : Math.round(d1 * 100) * 10, sizeText : 85, color : 'rgba(0,0,0,1)'});
+				upLabelCameraWall({label : label_2, text : Math.round(d2 * 100) * 10, sizeText : 85, color : 'rgba(0,0,0,1)'});				
 			}			
 		}		
 		
@@ -136,7 +137,7 @@ function upLabelPlan_1(arrWall, Zoom)
 
 		if(!Zoom)	// если это не zoom, то обновляем значения
 		{
-			var v = wall.geometry.vertices;
+			var v = wall.geometry.vertices; wall.geometry.verticesNeedUpdate = true;
 			for ( var i2 = 0; i2 < v.length; i2++ ) { wall.userData.wall.v[i2] = v[i2].clone(); }	// обновляем vertices			
 		}
 		
@@ -152,9 +153,9 @@ function upLabelPlan_1(arrWall, Zoom)
 			sum += obj_line[i].userData.wall.area.top;
 		}
 		
-		sum = Math.round(sum * 100)/100;
+		sum = Math.round(sum * 100)/100;		
 		
-		console.log(sum);
+		upLabelArea2(floorLabel, sum, '80', 'rgba(255,255,255,1)', true);
 	}
 }
 
@@ -241,11 +242,12 @@ function getYardageSpace( room )
 		
 		room[u].label.position.set(sumX / n, 0.2, sumZ / n);
 		
-		if(res < 0.5) { upLabelArea2(room[u].label, '', '', '85', 'rgba(255,255,255,1)', false); }
-		else { upLabelArea2(room[u].label, res, room[u].userData.room.roomType, '80', 'rgba(255,255,255,1)', false); } 
-		
 		room[u].userData.room.areaTxt = res;
-			
+		
+		if(res < 0.5) { res = ''; }
+		
+		upLabelArea2(room[u].label, res, '80', 'rgba(255,255,255,1)', false);
+		
 		room[u].label.visible = true;
 	}	
 }
@@ -293,33 +295,6 @@ function checkClockWise( arrP )
 
 
 
-
-function upLabelArea(label, text, size, color, border) 
-{		
-	if(!label){ return; }
-	var canvs = label.material.map.image; 
-	var ctx = canvs.getContext("2d");
-	
-	ctx.clearRect(0, 0, canvs.width, canvs.height);
-	ctx.font = size + 'pt Arial';
-	
-	if(border)
-	{
-		ctx.fillStyle = 'rgba(0,0,0,1)';
-		ctx.fillRect(0, 0, canvs.width, canvs.height);
-		ctx.fillStyle = color;
-		ctx.fillRect(1, 1, canvs.width - 2, canvs.height - 2);		
-	}
-	
-	ctx.fillStyle = 'rgba(0,0,0,1)';
-	ctx.textAlign = "center";
-	ctx.textBaseline = "middle";
-	ctx.fillText(text, canvs.width / 2, canvs.height / 2 );	
-	
-	label.material.map.needsUpdate = true;
-}
-
-
 // room
 function upLabelArea2(label, area, text2, size, color, border) 
 {		
@@ -330,11 +305,11 @@ function upLabelArea2(label, area, text2, size, color, border)
 	ctx.clearRect(0, 0, canvs.width, canvs.height);
 	ctx.font = size + 'pt Arial';
 	
-	if(border)
+	if(infProject.type == 2)
 	{
 		ctx.fillStyle = 'rgba(0,0,0,1)';
 		ctx.fillRect(0, 0, canvs.width, canvs.height);
-		ctx.fillStyle = color;
+		ctx.fillStyle = 'rgba(255,255,255,1)';
 		ctx.fillRect(1, 1, canvs.width - 2, canvs.height - 2);		
 	}
 	
@@ -344,33 +319,6 @@ function upLabelArea2(label, area, text2, size, color, border)
 	ctx.fillText('площадь : '+area+ ' m2', canvs.width / 2, canvs.height / 2 - 10 );
 
 	ctx.fillText('объем : '+Math.round((area * height_wall) * 100) / 100 +' m3', canvs.width / 2, canvs.height / 2 + 110 );	
-	
-	label.material.map.needsUpdate = true;
-}
-
-
-
-function upLabelAreaWall(label, text, size, color, border) 
-{		
-	if(!label){ return; }
-	var canvs = label.material.map.image; 
-	var ctx = canvs.getContext("2d");
-	
-	ctx.clearRect(0, 0, canvs.width, canvs.height);
-	ctx.font = size + 'pt Arial';
-	
-	if(border)
-	{
-		ctx.fillStyle = 'rgba(0,0,0,1)';
-		ctx.fillRect(0, 0, canvs.width, canvs.height);
-		ctx.fillStyle = color;
-		ctx.fillRect(1, 1, canvs.width - 2, canvs.height - 2);		
-	}
-	
-	ctx.fillStyle = 'rgba(0,0,0,1)';
-	ctx.textAlign = "center";
-	ctx.textBaseline = "middle";
-	ctx.fillText(text, canvs.width / 2, canvs.height / 2 );	
 	
 	label.material.map.needsUpdate = true;
 }

@@ -650,8 +650,8 @@ function deleteOneSameZone( arrRoom, arrP, arrRoom_2 )
 			arrRoom_2[0].userData.room.roomType = arrRoom[i].userData.room.roomType; 
 			arrRoom_2[1].userData.room.roomType = arrRoom[i].userData.room.roomType;
 			
-			upLabelArea2(arrRoom_2[0].label, arrRoom_2[0].userData.room.areaTxt + ' м2', arrRoom[i].userData.room.roomType, '85', 'rgba(255,255,255,1)', false);
-			upLabelArea2(arrRoom_2[1].label, arrRoom_2[1].userData.room.areaTxt + ' м2', arrRoom[i].userData.room.roomType, '85', 'rgba(255,255,255,1)', false);
+			upLabelArea2(arrRoom_2[0].label, arrRoom_2[0].userData.room.areaTxt + ' м2', '85', 'rgba(255,255,255,1)', false);
+			upLabelArea2(arrRoom_2[1].label, arrRoom_2[1].userData.room.areaTxt + ' м2', '85', 'rgba(255,255,255,1)', false);
 			
 			deleteArrZone([arrRoom[i]]);  
 			break; 

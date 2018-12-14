@@ -95,7 +95,9 @@ function onDocumentMouseDown( event )
 	clickO.obj = null; 
 	clickO.rayhit = null;	
 	
-	clickRayHit( detectRayHit( event, 'click' ) );  
+	clickRayHit( detectRayHit( event, 'click' ) ); 
+
+	if ( camera == cameraTop ) { clickO.last_obj = clickO.obj; }	
 	
 	renderCamera();
 }

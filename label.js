@@ -153,7 +153,7 @@ function upLabelCameraWall(cdm)
 	ctx.fillStyle = cdm.color;
 	ctx.textAlign = "center";
 	ctx.textBaseline = "middle";
-	ctx.fillText(getValueInCurrentUnits(cdm.text, 1000), canvs.width / 2, canvs.height / 2 );
+	ctx.fillText(cdm.text, canvs.width / 2, canvs.height / 2 );
 	
 	cdm.label.material.map.needsUpdate = true;
 }

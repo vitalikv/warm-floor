@@ -30,7 +30,7 @@ function detectDeleteObj()
 
 function deleteWall_1( wall )
 {	
-	hideMenuObjUI_2D(wall);
+	//hideMenuObjUI_2D(wall);
 
 	var arrZone = detectCommonZone_1( wall );
 	var oldZ = findNumberInArrRoom(arrZone);
