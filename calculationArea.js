@@ -145,6 +145,12 @@ function upLabelPlan_1(arrWall, Zoom)
 	}
 	
 	
+
+}
+
+
+function calculationAreaFundament_2()
+{
 	if(infProject.type == 2)
 	{
 		var sum = 0;
@@ -153,12 +159,18 @@ function upLabelPlan_1(arrWall, Zoom)
 			sum += obj_line[i].userData.wall.area.top;
 		}
 		
-		sum = Math.round(sum * 100)/100;		
+		sum = Math.round(sum * 100)/100;
+
+
+		var pos = new THREE.Vector3();
+		
+		for (i = 0; i < obj_point.length; i++) { pos.x += obj_point[i].position.x; pos.z += obj_point[i].position.z; }				
+		
+		floorLabel.position.set(pos.x / obj_point.length, 0.2, pos.z / obj_point.length);		
 		
 		upLabelArea2(floorLabel, sum, '80', 'rgba(255,255,255,1)', true);
-	}
+	}	
 }
-
 
 
 
@@ -183,7 +195,7 @@ function getWallAreaTop( wall )
 	}
 	
 	res = Math.abs( res ) / 1;
-	res = Math.round(res * 100) / 100;			
+	//res = Math.round(res * 100) / 100;			
 	
 	wall.userData.wall.area.top = res;
 }
@@ -246,7 +258,7 @@ function getYardageSpace( room )
 		
 		if(res < 0.5) { res = ''; }
 		
-		upLabelArea2(room[u].label, res, '80', 'rgba(255,255,255,1)', false);
+		upLabelArea2(room[u].label, res, '80', 'rgba(255,255,255,1)', true);
 		
 		room[u].label.visible = true;
 	}	
@@ -305,13 +317,10 @@ function upLabelArea2(label, area, text2, size, color, border)
 	ctx.clearRect(0, 0, canvs.width, canvs.height);
 	ctx.font = size + 'pt Arial';
 	
-	if(infProject.type == 2)
-	{
 		ctx.fillStyle = 'rgba(0,0,0,1)';
 		ctx.fillRect(0, 0, canvs.width, canvs.height);
 		ctx.fillStyle = 'rgba(255,255,255,1)';
-		ctx.fillRect(1, 1, canvs.width - 2, canvs.height - 2);		
-	}
+		ctx.fillRect(1, 1, canvs.width - 2, canvs.height - 2);	
 	
 	ctx.fillStyle = 'rgba(0,0,0,1)';
 	ctx.textAlign = "center";

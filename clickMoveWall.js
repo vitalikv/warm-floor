@@ -557,6 +557,8 @@ function clickWallMouseUp(wall)
 	if ( camera == cameraTop ) { getInfoEvent2( wall, param_wall.wallR ); }	
 	
 	clickPointUP_BSP(param_wall.wallR);
+	
+	calculationAreaFundament_2();
 }
 
 

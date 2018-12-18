@@ -89,8 +89,8 @@ if($url == '/calculator/monolit_fundament')	{ $title = 'калькулятор �
 		</div> 	
 	</div>
 	
-	
-	<div class="side_panel" data-action ='side_panel' hidden='true'>
+	<!--hidden='true'-->
+	<div class="side_panel" data-action ='side_panel'  >
 		<div class="side_panel-camera">
 			<div data-action ='2D' class="button1">2D</div>
 			<div data-action ='3D' class="button1">3D</div>		

@@ -620,6 +620,7 @@ function loadFilePL(arr)
 	
 	
 	upLabelPlan_1(obj_line);
+	calculationAreaFundament_2();
 	
 	centerCamera2D();
 	

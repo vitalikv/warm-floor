@@ -217,7 +217,6 @@ var actColorWin = new THREE.Color('rgb(255,0,0)');
 var colorHover = new THREE.Color('rgb(55, 125, 61)');
 var colDoor = 'rgb(166, 151, 99)';
 var colWin = 'rgb(122, 160, 195)';
-var default_wall_matId = [ { lotid : 4954, color : {r : 93, g : 87, b : 83 }, scale : new THREE.Vector2(1,1) }, { lotid : 4954, color : {r : 93, g : 87, b : 83 }, scale : new THREE.Vector2(1,1) } ];
 
 
 var wallVisible = [];
@@ -915,7 +914,7 @@ function createForm(cdm)
 	for ( var i = 0; i < obj_point.length; i++ ) { upLineYY(obj_point[i]); }	
 	if(infProject.type == 1) detectRoomZone(nameRoomDef);
 	upLabelPlan_1(obj_line);	
-	
+	calculationAreaFundament_2();
 	width_wall = 0.3;
 	
 	centerCamera2D();
@@ -998,8 +997,6 @@ function createOneWall3( point1, point2, width, cdm )
 	var height = height_wall;
 	
 	if(infProject.type == 1) { width = 0.03; }
-	
-	var matId = (cdm.material) ? cdm.material : default_wall_matId;
 	
 	var p1 = point1.position;
 	var p2 = point2.position;	
@@ -1338,3 +1335,5 @@ $(document).ready(function ()
 	docReady = true; 
 	loadFile(''); 
 });
+
+

@@ -350,7 +350,8 @@ function onDocumentMouseUp( event )
 		if ( obj_selected.userData.tag == 'point' ) 
 		{  			
 			if(!obj_selected.userData.point.type) { clickCreateWall(obj_selected); }
-			//if(obj_selected) { upLabelPlan_1( detectChangeArrWall([], obj_selected) ); updateShapeFloor(obj_selected.zone); }	// перемещение точки (измениние длины стены/пола)
+			
+			clickPointMouseUp(obj_selected);
 		}
 		else if ( obj_selected.userData.tag == 'wall' ) 
 		{

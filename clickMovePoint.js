@@ -679,7 +679,10 @@ function undoRedoChangeMovePoint( point, walls )
 }
 
 
-
+function clickPointMouseUp()
+{ 
+	calculationAreaFundament_2();
+}
 
 
 

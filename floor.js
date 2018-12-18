@@ -212,7 +212,7 @@ function clickTableZoneUI(value)
 { 
 	var room = clickO.obj;
 	
-	upLabelArea2(room.label, room.userData.room.areaTxt + ' м2', '85', 'rgba(255,255,255,1)', false);
+	upLabelArea2(room.label, room.userData.room.areaTxt + ' м2', '85', 'rgba(255,255,255,1)', true);
 	
 	room.userData.room.roomType = value;
 }
