@@ -7,9 +7,11 @@ $path = "/";
 $title = 'калькулятор площади пола онлайн';
 $type = 1;
 	
-if($url == '/calculator/area_apartment')	{ $title = 'калькулятор площади квартиры онлайн 3D'; }
-if($url == '/calculator/lentochnii_fundament')	{ $title = 'калькулятор ленточного фундамента 3D'; $type = 2; }
-if($url == '/calculator/monolit_fundament')	{ $title = 'калькулятор монолитного фундамента 3D'; }
+if($url == '/calculator/area_apartment')	{ $title = 'Калькулятор площади квартиры онлайн 3D'; }
+
+if($url == '/calculator/monolit_fundament')	{ $title = 'Калькулятор монолитного фундамента 3D'; $type = 1; }
+if($url == '/calculator/lentochnii_fundament')	{ $title = 'Калькулятор ленточного фундамента 3D'; $type = 2; }
+if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фундамент калькулятор 3D'; $type = 2; }
 ?>
 
 
@@ -33,7 +35,7 @@ if($url == '/calculator/monolit_fundament')	{ $title = 'калькулятор �
     <script>
 	var vr = "<?=$vrs ?>";
 	
-	var infProject = { type : <?=$type?> };
+	var infProject = { type : <?=$type?>, title : '<?=$title?>' };
 	
 	console.log('version '+ vr);
     console.log('infProject ', infProject);
@@ -83,14 +85,11 @@ if($url == '/calculator/monolit_fundament')	{ $title = 'калькулятор �
 	
 	
 	<div class="top_panel_1" data-action ='top_panel_1'>
-		<div class="input-height">
-			<div class="text_1">объем</div>
-			<input type="text" data-action ='input-height' value = 0.2>
-		</div> 	
+		<div class="title_1"><h1><?=$title?></h1></div>
 	</div>
 	
 	<!--hidden='true'-->
-	<div class="side_panel" data-action ='side_panel'  >
+	<div class="left_panel_1" data-action ='left_panel_1'  >
 		<div class="side_panel-camera">
 			<div data-action ='2D' class="button1">2D</div>
 			<div data-action ='3D' class="button1">3D</div>		
@@ -103,14 +102,16 @@ if($url == '/calculator/monolit_fundament')	{ $title = 'калькулятор �
 			<div class="button3" data-action ='wall'>создать<br>свою<br>форму</div>
 		</div> 
 		<div class="input-height">
-			<div class="text_1">высота</div>
-			<input type="text" data-action ='input-height' value = 0.2>
+			<div class="text_1">высота (см)</div>
+			<input type="text" data-action ='input-height' value = 20>
 		</div> 
 	</div>
 	
 	
-	<div class="left_panel_1" data-action ='left_panel_1'>			
-		<a href="<?=$path?>calculator/lentochnii_fundament" class="link_page_1">калькулятор<br>ленточного<br>фундамента</a>
+	<div class="right_panel_1" data-action ='right_panel_1'>			
+		<a href="<?=$path?>calculator/monolit_fundament" class="link_page_1">монолитный<br>фундамент</a>
+		<a href="<?=$path?>calculator/lentochnii_fundament" class="link_page_1">ленточный<br>фундамент</a>
+		<a href="<?=$path?>calculator/svaynyy_fundament" class="link_page_1">свайный<br>фундамент</a>
 	</div>	
 	
 	<script>
@@ -119,7 +120,7 @@ if($url == '/calculator/monolit_fundament')	{ $title = 'калькулятор �
 		$('[data-action="3D"]').mousedown(function () { UI.setView('3D'); return false; }); 	
 		$('[data-action="wall"]').mousedown(function () { clickO.button = 'create_wall'; return false; }); 		
 		$('[data-action="save"]').mousedown(function () { saveFile(); return false; }); 
-		$('[data-action="side_panel"]').mousedown(function () { return false; });
+		$('[data-action="left_panel_1"]').mousedown(function () { return false; });
 		$('[data-action="form_0"]').mousedown(function () { resetScene(); }); 
 		$('[data-action="form_1"]').mousedown(function () { createForm('shape1'); }); 
 		$('[data-action="form_2"]').mousedown(function () { createForm('shape3'); }); 

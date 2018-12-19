@@ -232,7 +232,7 @@ var planeMath = createPlaneMath();
 var planeMath2 = createPlaneMath2();
 
 var geometryLabelWall = createGeometryPlan(0.25 * kof_rd, 0.125 * kof_rd);
-var geometryLabelFloor = createGeometryPlan(0.5 * kof_rd, 0.125 * kof_rd);
+var geometryLabelFloor = createGeometryPlan(1.0 * kof_rd, 0.25 * kof_rd);
 var arrContWD = createControllWD(); 
 var ruleVert_1 = createRulerVerticalWin();
 

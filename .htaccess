@@ -5,9 +5,5 @@ Options -Indexes
 
 Options +FollowSymLinks
 RewriteEngine On
-RewriteCond %{HTTP_HOST} ^www.remstok\.ru$ [NC]
-RewriteRule ^(.*)$ http://remstok.ru/$1 [R=301,L]
 
-
-RewriteRule ^calculator/lentochnii_fundament$ index.php
-RewriteRule ^calculator/monolit_fundament$ index.php
+RewriteRule ^calculator/[A-Za-z0-9-_/]*$ index.php
