@@ -408,6 +408,7 @@ function consoleInfo( obj )
 	}
 	else if( tag == 'wall' )
 	{ 
+		console.log(obj);
 		console.log( "wall id : " + obj.userData.id + " index : " + clickO.index + " | point : " + obj.userData.wall.p[0].userData.id + " | " + obj.userData.wall.p[1].userData.id + " | userData : ", obj.userData ); 
 	}
 	else if( tag == 'point' )

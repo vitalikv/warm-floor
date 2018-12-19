@@ -30,7 +30,11 @@ document.body.addEventListener("keydown", function (e)
 	
 	if(UI.activeInput) 
 	{ 
-		if(UI.activeInput == 'input-height' && e.keyCode == 13) { changeHeightWall( $('[data-action="input-height"]').val() ); }
+		if(e.keyCode == 13)
+		{
+			if(UI.activeInput == 'input-height') { changeHeightWall( $('[data-action="input-height"]').val() ); }
+			if(UI.activeInput == 'input-width') { changeWidthWall( $('[data-action="input-width"]').val() ); }
+		}		
 		 
 		return; 
 	}

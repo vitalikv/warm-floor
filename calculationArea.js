@@ -149,6 +149,8 @@ function upLabelPlan_1(arrWall, Zoom)
 }
 
 
+
+// подсчитваем объем у ленточного фундамента
 function calculationAreaFundament_2()
 {
 	if(infProject.type == 2)

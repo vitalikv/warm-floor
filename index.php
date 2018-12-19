@@ -99,8 +99,14 @@ if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фунд�
 			<div class="button2" data-action ='form_1'><img src="/img/f1.png"></div>
 			<div class="button2" data-action ='form_2'><img src="/img/f2.png"></div>
 			<div class="button2" data-action ='form_3'><img src="/img/f3.png"></div>	
-			<div class="button3" data-action ='wall'>создать<br>свою<br>форму</div>
+			<div class="button2" data-action ='wall'><div class="text_1">создать<br>свою<br>форму</div></div>
 		</div> 
+		<?if($type == 2){?>
+		<div class="input-height">
+			<div class="text_1">ширина (см)</div>
+			<input type="text" data-action ='input-width' value = 30>
+		</div> 
+		<?}?>
 		<div class="input-height">
 			<div class="text_1">высота (см)</div>
 			<input type="text" data-action ='input-height' value = 20>
@@ -125,8 +131,8 @@ if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фунд�
 		$('[data-action="form_1"]').mousedown(function () { createForm('shape1'); }); 
 		$('[data-action="form_2"]').mousedown(function () { createForm('shape3'); }); 
 		$('[data-action="form_3"]').mousedown(function () { createForm('shape5'); }); 
-		$('[data-action="input-height"]').mousedown(function () { $(this).focus(); UI.activeInput = $(this).data('action'); editText($(this)); });  
-
+		$('[data-action="input-width"]').mousedown(function () { $(this).focus(); UI.activeInput = $(this).data('action'); editText($(this)); });  
+		$('[data-action="input-height"]').mousedown(function () { $(this).focus(); UI.activeInput = $(this).data('action'); editText($(this)); });
 
 		$('input').on('focus', function () {  });
 		$('input').on('focus keyup change', function () { UI.activeInput = $(this).data('action'); });
