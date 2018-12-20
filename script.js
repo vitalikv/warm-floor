@@ -993,8 +993,10 @@ function createPoint( pos, id )
 	if(infProject.scene.tool.pillar)
 	{
 		var pillar = infProject.scene.tool.pillar.clone();
-		
-		point.add( pillar );
+		pillar.position.copy(point.position);
+		point.userData.point.pillar = pillar;
+		pillar.visible = (camera == camera3D) ? true : false;
+		scene.add( pillar );
 	}
 	
 	scene.add( point );	

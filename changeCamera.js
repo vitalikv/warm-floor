@@ -76,7 +76,7 @@ function changeDepthColor()
 	{
 		var depthTest = true;
 		var w2 = 0.0;
-		var visible = (infProject.scene.tool.pillar) ? true : false;
+		var visible = false;
 		var pillar = true;
 		var visible_2 = false;
 	}
@@ -94,7 +94,11 @@ function changeDepthColor()
 		for ( var i = 0; i < obj_point.length; i++ )
 		{ 
 			obj_point[i].visible = visible; 
-			if(obj_point[i].children[0]) obj_point[i].children[0].visible = pillar;
+			if(obj_point[i].userData.point.pillar) 
+			{
+				obj_point[i].userData.point.pillar.position.copy(obj_point[i].position);
+				obj_point[i].userData.point.pillar.visible = pillar;
+			}
 		}		
 	}
 	else 
