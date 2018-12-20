@@ -360,10 +360,15 @@ function mousewheel( e )
 
 	if ( type_browser == 'Chrome' || type_browser == 'Opera' ) { delta = -delta; }
 
-	cameraZoomTop( camera.zoom - ( delta * 0.1 * ( camera.zoom / 2 ) ) );
-	cameraZoom3D( delta, 1 );
-
-	if ( camera == cameraWall )
+	if(camera == cameraTop) 
+	{ 
+		cameraZoomTop( camera.zoom - ( delta * 0.1 * ( camera.zoom / 2 ) ) ); 
+	}
+	else if(camera == camera3D) 
+	{ 
+		cameraZoom3D( delta, 1 ); 
+	}
+	else if(camera == cameraWall)
 	{
 		camera.zoom = camera.zoom - ( delta * 0.1 * ( camera.zoom / 2 ) );
 		camera.updateProjectionMatrix();
@@ -385,18 +390,15 @@ function cameraZoomTopLoop()
 	
 	if ( camera == cameraTop )
 	{
-		//if(zoomLoop == 'zoomOut'){ setTimeout(cameraZoomTop( 0.3 ), 1000); }
-		//if(zoomLoop == 'zoomIn'){ setTimeout(cameraZoomTop( -0.3 ), 1000); }
-
 		if ( zoomLoop == 'zoomOut' ) { cameraZoomTop( camera.zoom - ( 0.05 * ( camera.zoom / 2 ) ) ); flag = true; }
 		if ( zoomLoop == 'zoomIn' ) { cameraZoomTop( camera.zoom - ( -0.05 * ( camera.zoom / 2 ) ) ); flag = true; }
 	}
-	if ( camera == camera3D )
+	else if ( camera == camera3D )
 	{
 		if ( zoomLoop == 'zoomOut' ) { cameraZoom3D( 0.3, 0.3 ); flag = true; }
 		if ( zoomLoop == 'zoomIn' ) { cameraZoom3D( -0.3, 0.3 ); flag = true; }
 	}
-	if ( camera == cameraWall )
+	else if ( camera == cameraWall )
 	{
 		if ( zoomLoop == 'zoomOut' ) { camera.zoom = camera.zoom - ( 0.4 * 0.1 * ( camera.zoom / 2 ) ); flag = true; }
 		if ( zoomLoop == 'zoomIn' ) { camera.zoom = camera.zoom - ( -0.4 * 0.1 * ( camera.zoom / 2 ) ); flag = true; }
@@ -410,26 +412,20 @@ function cameraZoomTopLoop()
 
 function cameraZoomTop( delta )
 {
-	if ( camera != cameraTop ) return;
+	if(camera == cameraTop)
+	{
+		camera.zoom = delta;
+		camera.updateProjectionMatrix();
+		zoom_binding = delta;	// zoom point		
+	}
 
-
-
-	camera.zoom = delta;
-	camera.updateProjectionMatrix();
-
-
-	// zoom point
-	zoom_binding = camera.zoom;
-
-	var k = 0.085 / camera.zoom;
-
-
+	var k = 0.085 / delta;
 
 	var n = 0;
 	var v = p_tool.geometry.vertices;
 	for ( var i = 0; i < circle.length; i++ )
 	{
-		v[ n ] = new THREE.Vector3().addScaledVector( circle[ i ].clone().normalize(), 0.1 / camera.zoom );
+		v[ n ] = new THREE.Vector3().addScaledVector( circle[ i ].clone().normalize(), 0.1 / delta );
 		v[ n ].y = 0;
 		n++;
 
@@ -455,8 +451,8 @@ function cameraZoomTop( delta )
 
 
 	// zoom label
-	var k = 1 / camera.zoom;
-	if ( k < 1 ) 
+	var k = 1 / delta;
+	if ( k <= 1 ) 
 	{
 		k *= kof_rd;
 

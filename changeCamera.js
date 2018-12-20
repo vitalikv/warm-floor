@@ -17,13 +17,14 @@ function changeCamera(cam)
 	{					
 		changeDepthColor();
 		objDeActiveColor_2D();		
-		showHideSizePlane('show'); 		
+		showHideSizePlane('show');
+		cameraZoomTop( camera.zoom )
 	}
 	else if(camera == camera3D)
 	{	
 		activeHover2D_2();
 		objDeActiveColor_2D();  
-
+		cameraZoomTop( 1 );
 		 
 		if(cdm == 'cameraTop')	// возращаемся в 3D режим из 2D режима
 		{
