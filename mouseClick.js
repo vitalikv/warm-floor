@@ -97,7 +97,7 @@ function onDocumentMouseDown( event )
 	
 	clickRayHit( detectRayHit( event, 'click' ) ); 
 
-	if ( camera == cameraTop ) { clickO.last_obj = clickO.obj; }	
+	if ( camera == cameraTop ) { objDeActiveColor_2D(); objActiveColor_2D(clickO.obj); clickO.last_obj = clickO.obj; }	
 	
 	renderCamera();
 }
@@ -384,6 +384,7 @@ lineAxis_2.visible = false;
 	
 	renderCamera();
 }
+
 
 
 

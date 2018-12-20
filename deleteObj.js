@@ -163,16 +163,16 @@ function deletePoint( point )
 	{
 		if(point.start[0] != 1)		
 		{
-			material = [wall.material[0], wall.material[2], wall.material[1]];
-			userData_material = [wall.userData.material[0], wall.userData.material[2], wall.userData.material[1]];			
+			material = [wall.material[0], wall.material[2], wall.material[1], wall.material[3]];
+			userData_material = [wall.userData.material[0], wall.userData.material[2], wall.userData.material[1], wall.userData.material[3]];			
 		}
 	}
 	if(res == 2)
 	{
 		if(point.start[1] != 0)
 		{
-			material = [wall.material[0], wall.material[2], wall.material[1]];
-			userData_material = [wall.userData.material[0], wall.userData.material[2], wall.userData.material[1]];			
+			material = [wall.material[0], wall.material[2], wall.material[1], wall.material[3]];
+			userData_material = [wall.userData.material[0], wall.userData.material[2], wall.userData.material[1], wall.userData.material[3]];			
 		}
 	}	
 	
@@ -233,7 +233,7 @@ function deletePoint( point )
 	}
 	
 	// накладываем материал
-	wall.material = [ material[0].clone(), material[1].clone(), material[2].clone() ]; 
+	wall.material = [ material[0].clone(), material[1].clone(), material[2].clone(), material[3].clone() ]; 
 	wall.userData.material = userData_material; 
 	
 	clickPointUP_BSP( arrW );

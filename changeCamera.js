@@ -16,13 +16,13 @@ function changeCamera(cam)
 	if(camera == cameraTop)
 	{					
 		changeDepthColor();
-				
+		objDeActiveColor_2D();		
 		showHideSizePlane('show'); 		
 	}
 	else if(camera == camera3D)
 	{	
 		activeHover2D_2();
-		 
+		objDeActiveColor_2D();  
 
 		 
 		if(cdm == 'cameraTop')	// возращаемся в 3D режим из 2D режима
@@ -68,17 +68,32 @@ function changeDepthColor()
 		var depthTest = false;
 		var w2 = 1;
 		var visible = true;
+		var pillar = false;
 	}
 	else if(camera == camera3D)
 	{
 		var depthTest = true;
 		var w2 = 0.0;
-		var visible = false;
+		var visible = (infProject.scene.tool.pillar) ? true : false;
+		var pillar = true;
 	}
 	else { return; } 
 	
-	if(abo.point.click2D) { for ( var i = 0; i < obj_point.length; i++ ){ obj_point[i].visible = visible; } }
-	else { for ( var i = 0; i < obj_point.length; i++ ){ obj_point[i].visible = false; } }
+	if(abo.point.click2D) 
+	{		
+		for ( var i = 0; i < obj_point.length; i++ )
+		{ 
+			obj_point[i].visible = visible; 
+			if(obj_point[i].children[0]) obj_point[i].children[0].visible = pillar;
+		}		
+	}
+	else 
+	{ 
+		for ( var i = 0; i < obj_point.length; i++ )
+		{ 
+			obj_point[i].visible = false; 
+		} 
+	}
 	
 	for ( var i = 0; i < arr_window.length; i++ )
 	{ 

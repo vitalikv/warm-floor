@@ -79,7 +79,7 @@ function createLabelCameraWall(cdm)
 		texture.needsUpdate = true;	
 		
 		if(cdm.materialTop == 'no') { var material = { transparent: true }; }
-		else { var material = { transparent: true, depthTest: false }; }		
+		else { var material = { transparent: true, depthTest: false, opacity: 0.5 }; }		
 		
 		material.map = texture;
 		var material = new THREE.MeshBasicMaterial(material);

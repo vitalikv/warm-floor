@@ -6,12 +6,13 @@ $path = "/";
 
 $title = 'калькулятор площади пола онлайн';
 $type = 1;
+$setting['unlock'] = '';
 	
 if($url == '/calculator/area_apartment')	{ $title = 'Калькулятор площади квартиры онлайн 3D'; }
 
 if($url == '/calculator/monolit_fundament')	{ $title = 'Калькулятор монолитного фундамента 3D'; $type = 1; }
 if($url == '/calculator/lentochnii_fundament')	{ $title = 'Калькулятор ленточного фундамента 3D'; $type = 2; }
-if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фундамент калькулятор 3D'; $type = 2; }
+if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фундамент калькулятор 3D'; $type = 2; $setting['unlock'] = 1; }
 ?>
 
 
@@ -35,7 +36,7 @@ if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фунд�
     <script>
 	var vr = "<?=$vrs ?>";
 	
-	var infProject = { type : <?=$type?>, title : '<?=$title?>' };
+	var infProject = { type : <?=$type?>, title : '<?=$title?>', unlock : '<?=$setting['unlock']?>', scene : { tool : {} } };
 	
 	console.log('version '+ vr);
     console.log('infProject ', infProject);

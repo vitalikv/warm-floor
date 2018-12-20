@@ -254,6 +254,11 @@ var offset = new THREE.Vector3();
   
 if(infProject.type == 2) { var floorLabel = createLabelCameraWall({ count : 1, text : 0, size : 65, ratio : {x:256*4, y:256}, geometry : geometryLabelFloor })[0]; floorLabel.visible = true; }   
  
+ 
+if(infProject.type == 2 && infProject.unlock == 1) 
+{
+	infProject.scene.tool.pillar = createPillar();
+}
 
 
 camera3D.position.x = radious * Math.sin( theta * Math.PI / 360 ) * Math.cos( phi * Math.PI / 360 );
@@ -267,9 +272,40 @@ camera3D.lookAt(centerCam);
 //----------- start
 
 
-$( ".ui-layer" ).mouseout(function(){
-	//console.log(333333); 	
-});
+
+
+function createPillar()
+{	
+	var n = 0;
+	var v = [];
+	for ( var i = 0; i < circle.length; i++ )
+	{
+		v[n] = new THREE.Vector3().addScaledVector( circle[i].clone().normalize(), 0.1 );
+		v[n].y = 0;		
+		n++;		
+		
+		v[n] = new THREE.Vector3();
+		v[n].y = 0;
+		n++;
+		
+		v[n] = v[n - 2].clone();
+		v[n].y = -1;
+		n++;	
+		
+		v[n] = new THREE.Vector3();
+		v[n].y = -1;
+		n++;		
+	}	
+
+	
+	var obj = new THREE.Mesh( createGeometryCircle(v), new THREE.MeshLambertMaterial( { color : 0x333333, wireframe:false } ) ); 
+	obj.userData.tag = 'pillar';
+	obj.renderOrder = 1;
+	obj.position.set(0,0,0);
+	
+	return obj;
+}
+
 
 
 function createGrid()
@@ -796,6 +832,7 @@ function createCircleSpline()
 	return circle;
 }
 
+
 function createToolPoint()
 {	
 	var n = 0;
@@ -947,10 +984,18 @@ function createPoint( pos, id )
 	point.userData.point.type = null;
 	point.userData.point.last = { pos : pos.clone(), cdm : '', cross : null };
 	point.userData.point.actList = abo.point;
+	point.userData.point.actList = abo.point;
 
 	if(!abo.point.click2D) { point.visible = false; }
 	
 	point.visible = (camera == cameraTop) ? true : false;
+	
+	if(infProject.scene.tool.pillar)
+	{
+		var pillar = infProject.scene.tool.pillar.clone();
+		
+		point.add( pillar );
+	}
 	
 	scene.add( point );	
 	
