@@ -157,7 +157,16 @@ function updateWall(wall, point_0, point_1, side)
 	var angleDeg = Math.atan2(dir.x, dir.z);
 	wall.rotation.set(0, angleDeg + Math.PI / 2, 0);
 
-	wall.position.copy( p0.position );		
+	wall.position.copy( p0.position );	
+
+	var wallMesh = wall.children[0];
+	var v = wallMesh.geometry.vertices;
+	v[0].x = v[1].x = v[6].x = v[7].x = 0;
+	v[2].x = v[3].x = v[4].x = v[5].x = dist;
+	wallMesh.geometry.verticesNeedUpdate = true; 
+	wallMesh.geometry.elementsNeedUpdate = true;
+	
+	wallMesh.geometry.computeBoundingSphere();
 }
 
 

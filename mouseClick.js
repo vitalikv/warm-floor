@@ -194,7 +194,7 @@ function clickActionBreak( rayhit )
 	
 	if ( camera == cameraTop )
 	{
-		if(tag == 'wall') { if(!obj.userData.wall.actList.click2D) return true; }
+		if(tag == 'wall') { if(obj.userData.parent) { obj = obj.userData.parent; } if(!obj.userData.wall.actList.click2D) return true; }
 		else if(tag == 'point') { if(!obj.userData.point.actList.click2D) return true; }
 		else if(tag == 'window') { if(!obj.userData.door.actList.click2D) return true; }
 		else if(tag == 'door') { if(!obj.userData.door.actList.click2D) return true; }		
@@ -409,6 +409,7 @@ function consoleInfo( obj )
 	}
 	else if( tag == 'wall' )
 	{ 
+		if(obj.userData.parent) { obj = obj.userData.parent; }
 		console.log(obj);
 		console.log( "wall id : " + obj.userData.id + " index : " + clickO.index + " | point : " + obj.userData.wall.p[0].userData.id + " | " + obj.userData.wall.p[1].userData.id + " | userData : ", obj.userData ); 
 	}

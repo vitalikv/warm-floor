@@ -22,7 +22,7 @@ function activeHover2D( event )
 		
 		if ( tag == 'door_leaf' ) { object = object.door; tag = object.userData.tag; }
 		
-		if(tag == 'wall') { if(!object.userData.wall.actList.click2D) return; }
+		if(tag == 'wall') { if(object.userData.parent) { object = object.userData.parent; } if(!object.userData.wall.actList.click2D) return; }
 		else if(tag == 'point') { if(!object.userData.point.actList.click2D) return; }
 		else if(tag == 'window') { if(!object.userData.door.actList.click2D) return; }
 		else if(tag == 'door') { if(!object.userData.door.actList.click2D) return; }			
@@ -71,7 +71,7 @@ function activeHover2D_2()
 				if ( clickO.obj.userData.wall.p[ 0 ] == object ) { n = 0; }
 				else if ( clickO.obj.userData.wall.p[ 1 ] == object ) { n = 1; }
 
-				if ( n != -1 ) { var color = ( n == 0 ) ? new THREE.Color( 0xff5d71 ) : new THREE.Color( 0x6476FC ); }
+				//if ( n != -1 ) { var color = ( n == 0 ) ? new THREE.Color( 0xff5d71 ) : new THREE.Color( 0x6476FC ); }
 			}
 		}
 	}

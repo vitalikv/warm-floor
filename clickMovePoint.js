@@ -219,8 +219,10 @@ function dragToolPoint( event, obj )
 		if(object.userData.tag == 'planeMath'){ pos = intersects[i].point; obj.position.set( pos.x, obj.position.y, pos.z ); plane = object; } 			
 		else if(object.userData.tag == 'wall')
 		{ 
+			if(object.userData.parent) continue;
+			
 			var flag = true;
-			for ( var i2 = 0; i2 < object.userData.wall.p.length; i2++ )
+			for ( var i2 = 0; i2 < object.userData.wall.p.length; i2++ ) 
 			{				
 				if(object.userData.wall.p[i2].userData.id == obj.userData.id) { flag = false; break; }									
 			}

@@ -7,10 +7,11 @@ var arrM = [];
 
 function clickWall_2D( intersect )
 {
-	var obj = intersect.object;	
+	var obj = intersect.object;
+	if(camera == cameraTop) { if(obj.userData.parent) { obj = obj.userData.parent; clickO.obj = obj; } }
 	obj_selected = obj;
 	
-	offset = new THREE.Vector3().subVectors( intersect.object.position, intersect.point );
+	offset = new THREE.Vector3().subVectors( obj.position, intersect.point );
 	planeMath.position.set( 0, intersect.point.y, 0 );	
 	planeMath.rotation.set(-Math.PI/2, 0, 0);	
 

@@ -13,7 +13,7 @@ function objActiveColor_2D(obj)
 	
 	if(tag == 'window'){ obj.material.color = actColorWin; console.log(actColorWin); }
 	else if(tag == 'point'){ obj.material.color = actColorWin; }
-	else if(tag == 'wall'){ obj.material[3].color = actColorWin; } 	
+	else if(tag == 'wall'){ if(obj.userData.parent) { obj = obj.userData.parent; } obj.material[3].color = actColorWin; } 	
 	else if(tag == 'door'){ obj.material.color = actColorWin; showHandleToolDoor(obj); }
 	else if(tag == 'room'){  } 
 	else if(tag == 'd_tool') { } 
@@ -53,7 +53,7 @@ function objDeActiveColor_2D()
 		if(clickO.obj.userData.tag == 'd_tool'){ if(clickO.obj.door == o) { return; } }     		
 	}
 	
-	if(o.userData.tag == 'wall'){ o.material[3].color = o.userData.material[3].color; }	
+	if(o.userData.tag == 'wall'){ if(o.userData.parent) { o = o.userData.parent; } o.material[3].color = o.userData.material[3].color; }	
 	else if(o.userData.tag == 'point'){ o.material.color = o.userData.point.color; }	
 	else if(o.userData.tag == 'window'){ o.material.color = new THREE.Color(colWin); }
 	else if(o.userData.tag == 'door')

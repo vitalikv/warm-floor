@@ -69,6 +69,7 @@ function changeDepthColor()
 		var w2 = 1;
 		var visible = true;
 		var pillar = false;
+		var visible_2 = true;
 	}
 	else if(camera == camera3D)
 	{
@@ -76,8 +77,16 @@ function changeDepthColor()
 		var w2 = 0.0;
 		var visible = (infProject.scene.tool.pillar) ? true : false;
 		var pillar = true;
+		var visible_2 = false;
 	}
 	else { return; } 
+	
+	
+	
+	for ( var i = 0; i < obj_line.length; i++ )
+	{
+		if(obj_line[i].children[0]) obj_line[i].children[0].visible = visible_2;
+	}
 	
 	if(abo.point.click2D) 
 	{		

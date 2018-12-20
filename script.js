@@ -1126,6 +1126,17 @@ function createOneWall3( point1, point2, width, cdm )
 	point2.start[n] = 1;
 	
 	
+	var material = new THREE.MeshLambertMaterial( { color : 0x7d7d7d, transparent: true, opacity: 0.0 } );
+	var geometry = createGeometryCube(1, height, 0.2);
+	var v = geometry.vertices;
+	v[0].x = v[1].x = v[6].x = v[7].x = 0;
+	v[2].x = v[3].x = v[4].x = v[5].x = d;
+	var wallMesh = new THREE.Mesh( geometry, material ); 
+	wallMesh.userData.tag = 'wall';
+	wallMesh.userData.parent = wall;
+	if(camera == camera3D) { wallMesh.visible = false; }
+	wall.add( wallMesh );
+	
 	scene.add( wall );
 	
 	return wall;
