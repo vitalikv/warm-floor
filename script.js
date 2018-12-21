@@ -1328,7 +1328,15 @@ function clickButton( event )
 }	
 	
 
+function clickInterface()
+{
+	clickO.obj = null;
+	objDeActiveColor_2D();
+	mouseDownRight(); 	
 	
+	clickO.last_obj = null;
+	clickO.rayhit = null;
+}	
 
 
 

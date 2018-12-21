@@ -20,7 +20,7 @@ function resetVarParam()
 }
 
 
-function mouseDownRight( event )
+function mouseDownRight()
 {
 	
 	clickO.buttonAct = null;
@@ -33,7 +33,7 @@ function mouseDownRight( event )
 		
 		if(obj_selected.userData.tag == 'point') 
 		{ 	
-			if(obj_selected.w.length == 0){ deletePointFromArr(obj_selected); scene.remove( obj_selected ); }  
+			if(obj_selected.w.length == 0){ deleteOnePoint(obj_selected); }  
 			else 
 			{ 
 				if(obj_selected.userData.point.type == 'continue_create_wall')

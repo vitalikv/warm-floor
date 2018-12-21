@@ -122,6 +122,13 @@ function deleteWall_3(wall)
 }
 
 
+// удаляем одну единственную точку (без стен), которая привязанна к мыши
+function deleteOnePoint( point )
+{
+	deletePointFromArr(point); 
+	scene.remove(point);
+}
+
 // удаление точки
 function deletePoint( point )
 {

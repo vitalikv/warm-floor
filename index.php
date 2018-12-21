@@ -123,15 +123,15 @@ if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фунд�
 	
 	<script>
 	
-		$('[data-action="2D"]').on('mousedown', function(e) { UI.setView('2D'); return false; }); 	
-		$('[data-action="3D"]').mousedown(function () { UI.setView('3D'); return false; }); 	
-		$('[data-action="wall"]').mousedown(function () { clickO.button = 'create_wall'; return false; }); 		
+		$('[data-action="2D"]').on('mousedown', function(e) { clickInterface(); UI.setView('2D'); return false; }); 	
+		$('[data-action="3D"]').mousedown(function () { clickInterface(); UI.setView('3D'); return false; }); 	
+		$('[data-action="wall"]').mousedown(function () { clickInterface(); clickO.button = 'create_wall'; return false; }); 		
 		$('[data-action="save"]').mousedown(function () { saveFile(); return false; }); 
-		$('[data-action="left_panel_1"]').mousedown(function () { return false; });
-		$('[data-action="form_0"]').mousedown(function () { resetScene(); }); 
-		$('[data-action="form_1"]').mousedown(function () { createForm('shape1'); }); 
-		$('[data-action="form_2"]').mousedown(function () { createForm('shape3'); }); 
-		$('[data-action="form_3"]').mousedown(function () { createForm('shape5'); }); 
+		$('[data-action="left_panel_1"]').mousedown(function () { clickInterface(); return false; });
+		$('[data-action="form_0"]').mousedown(function () { clickInterface(); resetScene(); }); 
+		$('[data-action="form_1"]').mousedown(function () { clickInterface(); createForm('shape1'); }); 
+		$('[data-action="form_2"]').mousedown(function () { clickInterface(); createForm('shape3'); }); 
+		$('[data-action="form_3"]').mousedown(function () { clickInterface(); createForm('shape5'); }); 
 		$('[data-action="input-width"]').mousedown(function () { $(this).focus(); UI.activeInput = $(this).data('action'); editText($(this)); });  
 		$('[data-action="input-height"]').mousedown(function () { $(this).focus(); UI.activeInput = $(this).data('action'); editText($(this)); });
 
