@@ -196,9 +196,12 @@ function deletePoint( point )
 		if(wd.userData.door.open_type) { arrO[n].open_type = wd.userData.door.open_type; }
 	}
 	
-	var oldZones = detectCommonZone_1( wall_1 );   	// определяем с какиеми зонами соприкасается стена
-	var oldZ = findNumberInArrRoom( oldZones );
-	deleteArrZone( oldZones );						// удаляем зоны  с которыми соприкасается стена							
+	if(infProject.type == 1)
+	{
+		var oldZones = detectCommonZone_1( wall_1 );   	// определяем с какиеми зонами соприкасается стена
+		var oldZ = findNumberInArrRoom( oldZones );
+		deleteArrZone( oldZones );						// удаляем зоны  с которыми соприкасается стена									
+	}
 	
 	deleteWall_3( wall_1 );		// удаляем разделяемую стену и окна/двери, которые принадлежат ей (без удаления зон)		
 	deleteWall_3( wall_2 );		// удаляем разделяемую стену и окна/двери, которые принадлежат ей (без удаления зон)	
@@ -222,8 +225,11 @@ function deletePoint( point )
 	
 	upLabelPlan_1( arrW );	
 	
-	var newZones = detectRoomZone(nameRoomDef);		// создаем пол, для новых помещений	
-	assignOldToNewZones_1(oldZ, newZones, 'delete');		// передаем параметры старых зон новым	(название зоны)			
+	if(infProject.type == 1)
+	{
+		var newZones = detectRoomZone(nameRoomDef);		// создаем пол, для новых помещений	
+		assignOldToNewZones_1(oldZ, newZones, 'delete');		// передаем параметры старых зон новым	(название зоны)			
+	}
 	
 	
 	// вставляем окна/двери (если стены параллельны)

@@ -627,6 +627,7 @@ function loadFilePL(arr)
 	calculationAreaFundament_2();
 	
 	centerCamera2D();
+	cameraZoomTop( camera.zoom );
 	
 	emitAction('load-project-end');
 	emitAction('stop-fake-loading');

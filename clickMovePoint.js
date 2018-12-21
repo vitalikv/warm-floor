@@ -577,6 +577,9 @@ function upLineUU(line1, line2, s1, s2, pointC)
 	line2.geometry.verticesNeedUpdate = true;
 	
 	line1.geometry.computeBoundingBox(); 	
+	line1.geometry.computeBoundingSphere();	
+	
+	line2.geometry.computeBoundingBox(); 	
 	line2.geometry.computeBoundingSphere();	
 }
 
@@ -681,7 +684,7 @@ function undoRedoChangeMovePoint( point, walls )
 }
 
 
-function clickPointMouseUp()
+function clickPointMouseUp(obj)
 { 
 	calculationAreaFundament_2();
 }

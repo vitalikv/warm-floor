@@ -452,44 +452,31 @@ function cameraZoomTop( delta )
 
 	// zoom label
 	var k = 1 / delta;
-	if ( k <= 1 ) 
+	if(k <= 1) 
 	{
 		k *= kof_rd;
 
 		var n1 = 0.25 * k;
-		var n2 = 0.125 * k;
-		
-		for ( var i = 0; i < obj_line.length; i++ )
-		{
-			var v1 = geometryLabelWall.vertices;
-
-			v1[ 0 ].x = v1[ 1 ].x = -n1;
-			v1[ 2 ].x = v1[ 3 ].x = n1;
-			v1[ 1 ].z = v1[ 2 ].z = n2;
-			v1[ 0 ].z = v1[ 3 ].z = -n2;
-
-			geometryLabelWall.verticesNeedUpdate = true;
-			geometryLabelWall.elementsNeedUpdate = true;
-		}
-
+		var n2 = 0.125 * k;		
+		var v1 = geometryLabelWall.vertices;
+		v1[ 0 ].x = v1[ 1 ].x = -n1;
+		v1[ 2 ].x = v1[ 3 ].x = n1;
+		v1[ 1 ].z = v1[ 2 ].z = n2;
+		v1[ 0 ].z = v1[ 3 ].z = -n2;
+		geometryLabelWall.verticesNeedUpdate = true;
+		geometryLabelWall.elementsNeedUpdate = true;
 		upLabelPlan_1( obj_line, true );
 
-		//if ( labelRuler1[ 0 ].visible ) { for ( var i = 0; i < labelRuler1.length; i++ ) { labelRuler1[ i ].scale.set( k, k, k ); } }
 
-		var n1 = 0.5 * k;
-		
-		for ( var i = 0; i < room.length; i++ )
-		{
-			var v = geometryLabelFloor.vertices;
-
-			v[ 0 ].x = v[ 1 ].x = -n1;
-			v[ 2 ].x = v[ 3 ].x = n1;
-			v[ 1 ].z = v[ 2 ].z = n2;
-			v[ 0 ].z = v[ 3 ].z = -n2;
-
-			geometryLabelFloor.verticesNeedUpdate = true;
-			geometryLabelFloor.elementsNeedUpdate = true;
-		}
+		var n1 = 1 * k;
+		var n2 = 0.25 * k;
+		var v = geometryLabelFloor.vertices;
+		v[ 0 ].x = v[ 1 ].x = -n1;
+		v[ 2 ].x = v[ 3 ].x = n1;
+		v[ 1 ].z = v[ 2 ].z = n2;
+		v[ 0 ].z = v[ 3 ].z = -n2;
+		geometryLabelFloor.verticesNeedUpdate = true;
+		geometryLabelFloor.elementsNeedUpdate = true;
 	}
 }
 
