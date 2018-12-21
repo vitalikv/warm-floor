@@ -1,7 +1,4 @@
 
-var param_pw = {};
-
-
 
 
 // пускаем луч и определяем к какой комнате принадлежит объект
@@ -347,13 +344,13 @@ function addPoint_4( point )
 			console.log('2. продолжаем создавать новую стену');
 		} 
 		else if(point.userData.point.cross.userData.tag == 'point')		// 3
-		{	
-			if(point.userData.point.cross.userData.point.last.cdm == 'new_point_1')
-			{
+		{			
+			if(point.userData.point.cross.userData.point.last.cdm == 'new_point_1' || point.userData.point.cross == point.p[0])
+			{ 
 				deleteWall_2(point.w[0]);
 				obj_selected = null;
 				clickO = resetVarParam();
-			}
+			}						
 			else
 			{
 				addPointOption_4(point);
