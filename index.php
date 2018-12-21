@@ -122,12 +122,13 @@ if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фунд�
 	</div>	
 	
 	<script>
-	
+		$('[data-action="top_panel_1"]').mousedown(function () { clickInterface(); return false; });
+		$('[data-action="left_panel_1"]').mousedown(function () { clickInterface(); return false; });
+		
 		$('[data-action="2D"]').on('mousedown', function(e) { clickInterface(); UI.setView('2D'); return false; }); 	
 		$('[data-action="3D"]').mousedown(function () { clickInterface(); UI.setView('3D'); return false; }); 	
 		$('[data-action="wall"]').mousedown(function () { clickInterface(); clickO.button = 'create_wall'; return false; }); 		
-		$('[data-action="save"]').mousedown(function () { saveFile(); return false; }); 
-		$('[data-action="left_panel_1"]').mousedown(function () { clickInterface(); return false; });
+		$('[data-action="save"]').mousedown(function () { saveFile(); return false; }); 		
 		$('[data-action="form_0"]').mousedown(function () { clickInterface(); resetScene(); }); 
 		$('[data-action="form_1"]').mousedown(function () { clickInterface(); createForm('shape1'); }); 
 		$('[data-action="form_2"]').mousedown(function () { clickInterface(); createForm('shape3'); }); 
