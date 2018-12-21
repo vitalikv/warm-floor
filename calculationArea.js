@@ -182,6 +182,8 @@ function getWallAreaTop( wall )
 	var res = 0;
 	var v = wall.userData.wall.v; 
 	
+	var v = [v[0], v[6], v[8], v[10], v[4], v[2]];
+	
 	for (var i = 0; i < v.length - 1; i++)
 	{
 		var n1 = i - 1;
@@ -196,7 +198,7 @@ function getWallAreaTop( wall )
 		res += sum;			
 	}
 	
-	res = Math.abs( res ) / 1;
+	res = Math.abs( res ) / 2;
 	//res = Math.round(res * 100) / 100;			
 	
 	wall.userData.wall.area.top = res;
