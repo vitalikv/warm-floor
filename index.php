@@ -96,10 +96,7 @@ if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фунд�
 			<div data-action ='3D' class="button1">3D</div>		
 		</div> 
 		<div class="side_panel-button">			
-			<div class="button2" data-action ='form_0'><img src="/img/f0.png"></div>
 			<div class="button2" data-action ='form_1'><img src="/img/f1.png"></div>
-			<div class="button2" data-action ='form_2'><img src="/img/f2.png"></div>
-			<div class="button2" data-action ='form_3'><img src="/img/f3.png"></div>	
 			<div class="button2" data-action ='wall'><div class="text_1">создать<br>свою<br>форму</div></div>
 		</div> 
 		<?if($type == 2){?>
@@ -121,6 +118,33 @@ if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фунд�
 		<a href="<?=$path?>calculator/svaynyy_fundament" class="link_page_1">свайный<br>фундамент</a>
 	</div>	
 	
+	
+	
+	<div class="modal" data-action ='modal'>
+		<div class="modal_wrap">
+			<div class="modal_window" data-action ='modal_window'>
+				<div class="modal_header">
+					<div class="modal_title">
+						<div class="modal_name">
+							Выберете форму 
+						</div>
+					</div>					
+				</div>
+				<div class='modal_body'>
+					<div class='modal_body_content'>
+						<?
+							for ($i=0; $i<40; $i++) 
+							{
+								echo '<div class="block_form_1">';
+								echo '</div>';
+							}
+						?>
+					</div>
+				</div>
+			</div>			
+		</div>	
+	</div>
+	
 	<script>
 		$('[data-action="top_panel_1"]').mousedown(function () { clickInterface(); return false; });
 		$('[data-action="left_panel_1"]').mousedown(function () { clickInterface(); return false; });
@@ -128,17 +152,30 @@ if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фунд�
 		$('[data-action="2D"]').on('mousedown', function(e) { clickInterface(); UI.setView('2D'); return false; }); 	
 		$('[data-action="3D"]').mousedown(function () { clickInterface(); UI.setView('3D'); return false; }); 	
 		$('[data-action="wall"]').mousedown(function () { clickInterface(); clickO.button = 'create_wall'; return false; }); 		
-		$('[data-action="save"]').mousedown(function () { saveFile(); return false; }); 		
-		$('[data-action="form_0"]').mousedown(function () { clickInterface(); resetScene(); }); 
-		$('[data-action="form_1"]').mousedown(function () { clickInterface(); createForm('shape1'); }); 
-		$('[data-action="form_2"]').mousedown(function () { clickInterface(); createForm('shape3'); }); 
-		$('[data-action="form_3"]').mousedown(function () { clickInterface(); createForm('shape5'); }); 
+		//$('[data-action="save"]').mousedown(function () { saveFile(); return false; }); 		
+		//$('[data-action="form_0"]').mousedown(function () { clickInterface(); resetScene(); }); 		 
+		//$('[data-action="form_2"]').mousedown(function () { clickInterface(); createForm('shape3'); }); 
+		
 		$('[data-action="input-width"]').mousedown(function () { $(this).focus(); UI.activeInput = $(this).data('action'); editText($(this)); });  
 		$('[data-action="input-height"]').mousedown(function () { $(this).focus(); UI.activeInput = $(this).data('action'); editText($(this)); });
 
 		$('input').on('focus', function () {  });
 		$('input').on('focus keyup change', function () { UI.activeInput = $(this).data('action'); });
-		$('input').blur(function () { UI.activeInput = ''; });		
+		$('input').blur(function () { UI.activeInput = ''; });	
+
+		$('[data-action="form_1"]').mousedown(function () 
+		{ 
+			clickInterface();
+			$('.modal').css({"display":"block"});
+		});
+		
+		$('[data-action="modal_window"]').mousedown(function () { return false; });		
+		
+		$('[data-action="modal"]').mousedown(function () 
+		{ 
+			clickInterface();
+			$('[data-action="modal"]').css({"display":"none"});
+		});			
   
   
   
