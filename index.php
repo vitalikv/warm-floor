@@ -132,6 +132,7 @@ if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фунд�
 				</div>
 				<div class='modal_body'>
 					<div class='modal_body_content'>
+						<div class='modal_body_content_grid'>
 						<?
 							for ($i=0; $i<40; $i++) 
 							{
@@ -139,6 +140,7 @@ if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фунд�
 								echo '</div>';
 							}
 						?>
+						</div>
 					</div>
 				</div>
 			</div>			
