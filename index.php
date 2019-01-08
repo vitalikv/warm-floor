@@ -134,14 +134,18 @@ if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фунд�
 					<div class='modal_body_content'>
 						<div class='modal_body_content_grid'>
 						<?
-							for ($i=0; $i<40; $i++) 
+							for ($i=0; $i<3; $i++) 
 							{
-								echo '<div class="block_form_1">';
-								echo '</div>';
+								echo '
+								<div class="block_form_1">
+								<img src="/img/f1.png">
+								</div>';
 							}
 						?>
 						</div>
 					</div>
+				</div>
+				<div class='modal_footer'>
 				</div>
 			</div>			
 		</div>	
