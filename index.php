@@ -137,7 +137,7 @@ if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фунд�
 					<div class='modal_body_content'>
 						<div class='modal_body_content_grid'>
 						<?
-							for ($i=0; $i<3; $i++) 
+							for ($i=0; $i<6; $i++) 
 							{
 								echo '
 								<div class="block_form_1" link_form = "'.($i+1).'">
@@ -168,8 +168,11 @@ if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фунд�
 		$('[data-action="wall"]').mousedown(function () { clickInterface(); clickO.button = 'create_wall'; return false; }); 		
 		//$('[data-action="save"]').mousedown(function () { saveFile(); return false; }); 		
 		//$('[data-action="form_0"]').mousedown(function () { clickInterface(); resetScene(); }); 
-		$('[link_form="1"]').mousedown(function () { createForm('shape3'); $('[data-action="modal"]').css({"display":"none"}); });
-		//$('[data-action="form_2"]').mousedown(function () { clickInterface(); createForm('shape3'); }); 
+		$('[link_form]').mousedown(function () 
+		{ 
+			createForm({form : 'shape'+$(this).attr("link_form")}); 
+			$('[data-action="modal"]').css({"display":"none"}); 
+		}); 
 		
 		$('[data-action="input-width"]').mousedown(function () { $(this).focus(); UI.activeInput = $(this).data('action'); editText($(this)); });  
 		$('[data-action="input-height"]').mousedown(function () { $(this).focus(); UI.activeInput = $(this).data('action'); editText($(this)); });
