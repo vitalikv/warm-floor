@@ -253,14 +253,23 @@ function wallAfterRender_2()
 // кликаем левой кнопокой мыши (собираем инфу для перемещения камеры в 2D режиме)
 function clickSetCamera2D( event, click )
 {
-	if ( click == 'left' ) { isMouseDown1 = true; return; }
-	if ( camera == cameraTop || camera == cameraWall ) { }
+	//if ( click == 'left' ) { isMouseDown1 = true; return; }
+	if ( camera == cameraTop) { }
 	else { return; }
 
+	isMouseDown1 = true;
 	isMouseRight1 = true;
 	onMouseDownPosition.x = event.clientX;
 	onMouseDownPosition.y = event.clientY;
 	newCameraPosition = null;
+	
+	planeMath.position.set(camera.position.x,0,camera.position.z);
+	planeMath.rotation.set(-Math.PI/2,0,0);  
+	
+	var intersects = rayIntersect( event, planeMath, 'one' );
+	
+	onMouseDownPosition.x = intersects[0].point.x;
+	onMouseDownPosition.z = intersects[0].point.z;	
 }
 
 
@@ -314,18 +323,16 @@ function clickSetCamera3D( event, click )
 
 function moveCameraTop( event ) 
 {
-	if ( !isMouseRight1 ) { return; }
+	if(isMouseRight1 || isMouseDown1) {}
+	else { return; }
 
-	var f = 1.3 / camera.zoom;
 
-	var x = ( ( event.clientX - onMouseDownPosition.x ) * 0.01 * f );
-	var y = ( ( event.clientY - onMouseDownPosition.y ) * 0.01 * f );
-
-	camera.position.x -= x;
-	camera.position.z -= y;
-	onMouseDownPosition.x = event.clientX;
-	onMouseDownPosition.y = event.clientY;
-	newCameraPosition = null;
+	newCameraPosition = null;	
+	
+	var intersects = rayIntersect( event, planeMath, 'one' );
+	
+	camera.position.x += onMouseDownPosition.x - intersects[0].point.x;
+	camera.position.z += onMouseDownPosition.z - intersects[0].point.z;	
 }
 
 
