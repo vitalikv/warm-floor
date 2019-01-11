@@ -18,10 +18,10 @@ function detectDeleteObj()
 		if ( tag == 'wall' ) return;
 	}	
 		
-	if ( tag == 'wall' ) { var ar = getInfoEvent4_before( obj ); var arrRoom = deleteWall_1( obj ).room; getInfoEvent4( ar[0], ar[1], arrRoom ); }
-	else if ( tag == 'point' ) { if(obj.p.length == 2) { var arr1 = getInfoEvent9_before( obj );  var arr2 = deletePoint( obj ); getInfoEvent9( arr1, arr2.wall ); } } 
+	if ( tag == 'wall' ) { deleteWall_1( obj ).room; }
+	else if ( tag == 'point' ) { if(obj.p.length == 2) { deletePoint( obj ); } } 
 	else if ( tag == 'obj' ) { deleteObjCatalog(obj); }
-	else if ( tag == 'window' || tag == 'door' ) { getInfoEvent5( obj ); deleteWinDoor( obj ); }
+	else if ( tag == 'window' || tag == 'door' ) { deleteWinDoor( obj ); }
 	else if ( tag == 'pivot' || tag == 'gizmo' ) { deleteObjCatalog(obj.parent.obj); }	
 
 	 renderCamera();
@@ -57,6 +57,8 @@ function deleteWall_1( wall )
 	{	
 		if(zone) { getYardageSpace([zone]); }				
 	}
+	
+	calculationAreaFundament_2();
 
 	return { room : newZones }; 
 }
@@ -252,7 +254,9 @@ function deletePoint( point )
 	clickPointUP_BSP( arrW );
 	
 	lineAxis_1.visible = false;
-	lineAxis_2.visible = false; 	
+	lineAxis_2.visible = false; 
+
+	calculationAreaFundament_2();
 	
 	return { point : { id : point.userData.id }, wall : wall }; 
 } 

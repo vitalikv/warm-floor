@@ -894,12 +894,15 @@ function createForm(cdm)
 	resetScene();
 	
 	if(form == 'shape1') { var arrP = [new THREE.Vector3(-3,0,-3), new THREE.Vector3(-3,0,3), new THREE.Vector3(3,0,3), new THREE.Vector3(3,0,-3)]; }
-	else if(form == 'shape2') { var arrP = [new THREE.Vector3(-3,0,-2), new THREE.Vector3(-3,0,2), new THREE.Vector3(3,0,2), new THREE.Vector3(3,0,-2)]; }
+	else if(form == 'shape2') { var arrP = [new THREE.Vector3(0,0,-2), new THREE.Vector3(-3,0,2), new THREE.Vector3(3,0,2)]; }
 	else if(form == 'shape3') { var arrP = [new THREE.Vector3(-3,0,-3), new THREE.Vector3(-3,0,3), new THREE.Vector3(0,0,3), new THREE.Vector3(0,0,0), new THREE.Vector3(3,0,0), new THREE.Vector3(3,0,-3)]; }
 	else if(form == 'shape4') { var arrP = [new THREE.Vector3(-3,0,0), new THREE.Vector3(-3,0,3), new THREE.Vector3(3,0,3), new THREE.Vector3(3,0,-3), new THREE.Vector3(0,0,-3), new THREE.Vector3(0,0,0)]; }	
 	else if(form == 'shape5') { var arrP = [new THREE.Vector3(-4,0,-1.5), new THREE.Vector3(-4,0,3), new THREE.Vector3(0,0,3), new THREE.Vector3(4,0,3), new THREE.Vector3(4,0,-1.5), new THREE.Vector3(2,0,-1.5), new THREE.Vector3(1,0,-3), new THREE.Vector3(-1,0,-3), new THREE.Vector3(-2,0,-1.5)]; }
 	else if(form == 'shape6') { var arrP = [new THREE.Vector3(-3,0,-3), new THREE.Vector3(-3,0,0), new THREE.Vector3(0,0,3), new THREE.Vector3(3,0,3), new THREE.Vector3(3,0,-3)]; }
-	
+	else if(form == 'shape8') { var arrP = [new THREE.Vector3(-3,0,-2), new THREE.Vector3(-3,0,2), new THREE.Vector3(-1,0,2), new THREE.Vector3(1,0,2), new THREE.Vector3(3,0,2), new THREE.Vector3(3,0,-2), new THREE.Vector3(1,0,-2), new THREE.Vector3(-1,0,-2)]; }	
+
+
+	if(form == 'shape7') { var arrP = [new THREE.Vector3(-3,0,-2), new THREE.Vector3(-3,0,2), new THREE.Vector3(0,0,2), new THREE.Vector3(3,0,2), new THREE.Vector3(3,0,-2), new THREE.Vector3(0,0,-2)]; }		
 	
 	for ( var i = 0; i < arrP.length; i++ ) { createPoint( arrP[i], 0 ); }
 	
@@ -907,7 +910,19 @@ function createForm(cdm)
 	{
 		var i2 = (i == obj_point.length - 1) ? 0 : i + 1;		
 		createOneWall3( obj_point[i], obj_point[i2], width_wall, {} );
-	}		
+	}
+
+
+	if(form == 'shape7')
+	{
+		createOneWall3( obj_point[2], obj_point[5], width_wall, {} );
+	}
+	
+	if(form == 'shape8')
+	{
+		createOneWall3( obj_point[3], obj_point[6], width_wall, {} );
+		createOneWall3( obj_point[2], obj_point[7], width_wall, {} );
+	}	
 
 	
 	if(form == 'level_2')
@@ -958,6 +973,7 @@ function createForm(cdm)
 	width_wall = 0.3;
 	
 	centerCamera2D();
+	renderCamera();
 }
 
 
@@ -1437,7 +1453,8 @@ var docReady = false;
 $(document).ready(function () 
 { 
 	docReady = true; 
-	loadFile(''); 
+	//loadFile('');
+	createForm({form:'shape7'});	
 });
 
 
