@@ -213,6 +213,10 @@ var arr_obj = [];
 var room = [];
 var ceiling = [];
 var arrWallFront = [];
+
+infProject.scene.array = { point : obj_point, wall : obj_line, window : arr_window, door : arr_door, room : room, ceiling : ceiling, obj : arr_obj };
+infProject.scene.array.fundament = [];
+
 var actColorWin = new THREE.Color('rgb(255,0,0)');
 var colorHover = new THREE.Color('rgb(55, 125, 61)');
 var colDoor = 'rgb(166, 151, 99)';
@@ -252,7 +256,7 @@ var offset = new THREE.Vector3();
   
   
   
-if(infProject.type == 2) { var floorLabel = createLabelCameraWall({ count : 1, text : 0, size : 65, ratio : {x:256*4, y:256}, geometry : geometryLabelFloor })[0]; floorLabel.visible = true; }   
+//if(infProject.type == 2) { var floorLabel = createLabelCameraWall({ count : 1, text : 0, size : 65, ratio : {x:256*4, y:256}, geometry : geometryLabelFloor })[0]; floorLabel.visible = true; }   
  
  
 if(infProject.type == 2 && infProject.unlock == 1) 
@@ -968,8 +972,9 @@ function createForm(cdm)
 	
 	for ( var i = 0; i < obj_point.length; i++ ) { upLineYY(obj_point[i]); }	
 	if(infProject.type == 1) detectRoomZone(nameRoomDef);
-	upLabelPlan_1(obj_line);	
-	calculationAreaFundament_2();
+	upLabelPlan_1(obj_line);
+	createWallZone(obj_line[0])
+	calculationAreaFundament_2(obj_line[0]); 
 	width_wall = 0.3;
 	
 	centerCamera2D();
@@ -1106,11 +1111,12 @@ function createOneWall3( point1, point2, width, cdm )
 	wall.userData.wall.height_1 = Math.round(height * 100) / 100;		
 	wall.userData.wall.offsetZ = Math.round(offsetZ * 100) / 100;
 	wall.userData.wall.outline = null;
+	wall.userData.wall.zone = null; 
 	wall.userData.wall.arrO = [];
 	wall.userData.wall.last = { pos : new THREE.Vector3(), rot : new THREE.Vector3() }; 
 	wall.userData.wall.area = { top : 0 }; 
 	
-	wall.userData.wall.room = { side : 0 };   
+	wall.userData.wall.room = { side : 0 };
 	
 	var v = wall.geometry.vertices;
 	wall.userData.wall.v = [];
@@ -1261,6 +1267,7 @@ function changeHeightWall( h2 )
 	$('input[data-action="input-height"]').val(h2*100);
 	
 	updateShapeFloor(room);
+	calculationAreaFundament_2();
 	
 	renderCamera();
 }
@@ -1454,7 +1461,7 @@ $(document).ready(function ()
 { 
 	docReady = true; 
 	//loadFile('');
-	createForm({form:'shape7'});	
+	createForm({form:'shape8'});	
 });
 
 

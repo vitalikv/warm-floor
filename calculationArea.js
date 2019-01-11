@@ -151,14 +151,18 @@ function upLabelPlan_1(arrWall, Zoom)
 
 
 // подсчитваем объем у ленточного фундамента
-function calculationAreaFundament_2()
+function calculationAreaFundament_2(wall)
 {
-	if(infProject.type == 2)
+	if(infProject.type == 2 && wall.userData.wall.zone)
 	{
 		var sum = 0;
-		for ( var i = 0; i < obj_line.length; i++ )
+		var points = wall.userData.wall.zone.points;
+		var walls = wall.userData.wall.zone.walls;
+		var label = wall.userData.wall.zone.label;
+		
+		for ( var i = 0; i < walls.length; i++ )
 		{
-			sum += obj_line[i].userData.wall.area.top;
+			sum += walls[i].userData.wall.area.top;
 		}
 		
 		sum = Math.round(sum * 100)/100;
@@ -166,11 +170,11 @@ function calculationAreaFundament_2()
 
 		var pos = new THREE.Vector3();
 		
-		for (i = 0; i < obj_point.length; i++) { pos.x += obj_point[i].position.x; pos.z += obj_point[i].position.z; }				
+		for (i = 0; i < points.length; i++) { pos.x += points[i].position.x; pos.z += points[i].position.z; }				
 		
-		floorLabel.position.set(pos.x / obj_point.length, 0.2, pos.z / obj_point.length);		
+		label.position.set(pos.x / points.length, 0.2, pos.z / points.length);		
 		
-		upLabelArea2(floorLabel, sum, '80', 'rgba(255,255,255,1)', true);
+		upLabelArea2(label, sum, '80', 'rgba(255,255,255,1)', true);
 	}	
 }
 

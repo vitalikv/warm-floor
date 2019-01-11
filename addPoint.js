@@ -329,6 +329,14 @@ function addPoint_4( point )
 			
 			//getInfoEvent10( { point : point, wall : point.w[0] } );	// undo/redo
 			
+			if(infProject.type == 2) 
+			{
+				console.log(3333, point.w[0].userData.wall.zone);
+				
+				if(!point.w[0].userData.wall.zone) { createWallZone(point.w[0]); }
+			}
+			
+			
 			point.userData.point.type = null; 			
 			var point2 = createPoint( point.position, 0 );			
 			var wall = createOneWall3( point, point2, (clickO.buttonAct == 'create_zone') ? 0.01 : width_wall, {} ); 			

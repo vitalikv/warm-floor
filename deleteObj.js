@@ -31,6 +31,9 @@ function detectDeleteObj()
 function deleteWall_1( wall )
 {	
 	//hideMenuObjUI_2D(wall);
+//calculationZoneFundament_1(wall)
+
+	var points = wall.userData.wall.p;
 
 	var arrZone = detectCommonZone_1( wall );
 	var oldZ = findNumberInArrRoom(arrZone);
@@ -59,6 +62,20 @@ function deleteWall_1( wall )
 	}
 	
 	calculationAreaFundament_2();
+	
+	
+	if(infProject.type == 2)
+	{
+		if(points[0].w.length > 0)
+		{
+			console.log(calculationZoneFundament_1(points[0].w[0]));
+		}
+		
+		if(points[1].w.length > 0)
+		{
+			console.log(calculationZoneFundament_1(points[1].w[0]));
+		}		
+	}
 
 	return { room : newZones }; 
 }

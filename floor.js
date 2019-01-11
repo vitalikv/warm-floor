@@ -11,7 +11,7 @@ function createFloor(arrP, arrW, arrS, id, roomType, material, plinth)
 	
 	for ( var i = 0; i < arrW.length; i++ ) 
 	{ 
-		arrW[i].userData.wall.room.side = arrS[i]; console.log(arrS[i], arrW[i].userData.wall.room.side); 
+		arrW[i].userData.wall.room.side = arrS[i];  
 	}
 	
 	//var str = ''; for ( var i = 0; i < arrP.length; i++ ) { str += ' | ' + arrP[i].userData.id; } console.log(str);

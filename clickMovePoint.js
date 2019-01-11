@@ -691,7 +691,7 @@ function undoRedoChangeMovePoint( point, walls )
 
 function clickPointMouseUp(obj)
 { 
-	calculationAreaFundament_2();
+	if(obj.w.length > 0) calculationAreaFundament_2(obj.w[0]);
 }
 
 
