@@ -8,7 +8,7 @@ var arrM = [];
 function clickWall_2D( intersect )
 {
 	var obj = intersect.object;
-	if(camera == cameraTop) { if(obj.userData.parent) { obj = obj.userData.parent; clickO.obj = obj; } }
+	if(camera == cameraTop) { if(obj.userData.parent) { obj = obj.userData.parent; clickO.obj = obj; clickO.rayhit.object = obj; } }
 	obj_selected = obj;
 	
 	offset = new THREE.Vector3().subVectors( obj.position, intersect.point );
