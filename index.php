@@ -96,7 +96,7 @@ if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фунд�
 			<div data-action ='3D' class="button1">3D</div>		
 		</div> 
 		<div class="side_panel-button">			
-			<div class="button2" data-action ='form_1'><img src="/img/f2.png"></div>
+			<div class="button2" data-action ='form_1'><img src="/img/f4.png"></div>
 			<div class="button2" data-action ='wall'><div class="text_1">создать<br>свою<br>форму</div></div>
 		</div> 
 		<?if($type == 2){?>
@@ -137,12 +137,12 @@ if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фунд�
 					<div class='modal_body_content'>
 						<div class='modal_body_content_grid'>
 						<?
-							for ($i=0; $i<8; $i++) 
+							for ($i=0; $i<15; $i++) 
 							{
 								echo '
 								<div class="block_form_1" link_form = "'.($i+1).'">
 									<div class="block_form_1_image_wrap">
-										<img src="/img/f1.png">
+										<img src="/img/f'.($i+1).'.png">
 									</div>
 									<div class="block_form_1_desc">
 										форма '.($i+1).'

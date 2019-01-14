@@ -229,7 +229,7 @@ var p_tool = createToolPoint();
 var d_tool = createToolDoorPoint();
 // createGrid();
 var pointGrid = createPointGrid(100);
-var pointGrid = { visible : true }
+//var pointGrid = { visible : true }
 
 
 var planeMath = createPlaneMath();
@@ -903,10 +903,12 @@ function createForm(cdm)
 	else if(form == 'shape4') { var arrP = [new THREE.Vector3(-3,0,0), new THREE.Vector3(-3,0,3), new THREE.Vector3(3,0,3), new THREE.Vector3(3,0,-3), new THREE.Vector3(0,0,-3), new THREE.Vector3(0,0,0)]; }	
 	else if(form == 'shape5') { var arrP = [new THREE.Vector3(-4,0,-1.5), new THREE.Vector3(-4,0,3), new THREE.Vector3(0,0,3), new THREE.Vector3(4,0,3), new THREE.Vector3(4,0,-1.5), new THREE.Vector3(2,0,-1.5), new THREE.Vector3(1,0,-3), new THREE.Vector3(-1,0,-3), new THREE.Vector3(-2,0,-1.5)]; }
 	else if(form == 'shape6') { var arrP = [new THREE.Vector3(-3,0,-3), new THREE.Vector3(-3,0,0), new THREE.Vector3(0,0,3), new THREE.Vector3(3,0,3), new THREE.Vector3(3,0,-3)]; }
+	else if(form == 'shape7') { var arrP = [new THREE.Vector3(-3,0,-2), new THREE.Vector3(-3,0,2), new THREE.Vector3(0,0,2), new THREE.Vector3(3,0,2), new THREE.Vector3(3,0,-2), new THREE.Vector3(0,0,-2)]; }		
 	else if(form == 'shape8') { var arrP = [new THREE.Vector3(-3,0,-2), new THREE.Vector3(-3,0,2), new THREE.Vector3(-1,0,2), new THREE.Vector3(1,0,2), new THREE.Vector3(3,0,2), new THREE.Vector3(3,0,-2), new THREE.Vector3(1,0,-2), new THREE.Vector3(-1,0,-2)]; }	
-
-
-	if(form == 'shape7') { var arrP = [new THREE.Vector3(-3,0,-2), new THREE.Vector3(-3,0,2), new THREE.Vector3(0,0,2), new THREE.Vector3(3,0,2), new THREE.Vector3(3,0,-2), new THREE.Vector3(0,0,-2)]; }		
+	else if(form == 'shape9') { var arrP = [new THREE.Vector3(-3,0,-2), new THREE.Vector3(-3,0,0), new THREE.Vector3(-3,0,2), new THREE.Vector3(-1,0,2), new THREE.Vector3(1,0,2), new THREE.Vector3(3,0,2), new THREE.Vector3(3,0,0), new THREE.Vector3(3,0,-2), new THREE.Vector3(1,0,-2), new THREE.Vector3(-1,0,-2)]; }
+	else if(form == 'shape10') { var arrP = [new THREE.Vector3(-3,0,-2), new THREE.Vector3(-3,0,0), new THREE.Vector3(-3,0,2), new THREE.Vector3(0,0,2), new THREE.Vector3(0,0,0), new THREE.Vector3(3,0,0), new THREE.Vector3(3,0,-2), new THREE.Vector3(0,0,-2)]; }
+	else if(form == 'shape11') { var arrP = [new THREE.Vector3(-2,0,-1), new THREE.Vector3(-2,0,1), new THREE.Vector3(0,0,2), new THREE.Vector3(2,0,1), new THREE.Vector3(2,0,-1), new THREE.Vector3(0,0,-2)]; }
+	
 	
 	for ( var i = 0; i < arrP.length; i++ ) { createPoint( arrP[i], 0 ); }
 	
@@ -920,12 +922,28 @@ function createForm(cdm)
 	if(form == 'shape7')
 	{
 		createOneWall3( obj_point[2], obj_point[5], width_wall, {} );
-	}
-	
-	if(form == 'shape8')
+	}	
+	else if(form == 'shape8')
 	{
 		createOneWall3( obj_point[3], obj_point[6], width_wall, {} );
 		createOneWall3( obj_point[2], obj_point[7], width_wall, {} );
+	}	
+	else if(form == 'shape9')
+	{
+		createPoint( new THREE.Vector3(-1,0,0), 0 );
+		createPoint( new THREE.Vector3(1,0,0), 0 );
+		createOneWall3( obj_point[1], obj_point[10], width_wall, {} );
+		createOneWall3( obj_point[3], obj_point[10], width_wall, {} );
+		createOneWall3( obj_point[10], obj_point[9], width_wall, {} );
+		createOneWall3( obj_point[4], obj_point[11], width_wall, {} );
+		createOneWall3( obj_point[11], obj_point[8], width_wall, {} );
+		createOneWall3( obj_point[10], obj_point[11], width_wall, {} );
+		createOneWall3( obj_point[11], obj_point[6], width_wall, {} );
+	}
+	else if(form == 'shape10')
+	{
+		createOneWall3( obj_point[1], obj_point[4], width_wall, {} );
+		createOneWall3( obj_point[4], obj_point[7], width_wall, {} );
 	}	
 
 	
@@ -973,8 +991,9 @@ function createForm(cdm)
 	for ( var i = 0; i < obj_point.length; i++ ) { upLineYY(obj_point[i]); }	
 	if(infProject.type == 1) detectRoomZone(nameRoomDef);
 	upLabelPlan_1(obj_line);
+	
 	createWallZone(obj_line[0])
-	calculationAreaFundament_2(obj_line[0]); 
+	
 	width_wall = 0.3;
 	
 	centerCamera2D();
@@ -1461,7 +1480,7 @@ $(document).ready(function ()
 { 
 	docReady = true; 
 	//loadFile('');
-	createForm({form:'shape8'});	
+	createForm({form:'shape11'});	
 });
 
 
