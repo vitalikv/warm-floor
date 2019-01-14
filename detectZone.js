@@ -663,6 +663,9 @@ function deleteOneSameZone( arrRoom, arrP, arrRoom_2 )
 // создаем и обновляем зоны
 function createWallZone(wall)
 {
+	if(infProject.type == 2) {}
+	else { return; }
+	
 	var zone = calculationZoneFundament_1(wall);	
 	zone.label = createLabelCameraWall({ count : 1, text : 0, size : 65, ratio : {x:256*4, y:256}, geometry : geometryLabelFloor })[0];
 	

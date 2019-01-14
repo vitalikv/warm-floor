@@ -348,10 +348,11 @@ function onDocumentMouseUp( event )
 	if ( obj_selected )  
 	{
 		if ( obj_selected.userData.tag == 'point' ) 
-		{  			
+		{  		
+			var point = obj_selected;
 			if(!obj_selected.userData.point.type) { clickCreateWall(obj_selected); }
 			
-			clickPointMouseUp(obj_selected);
+			clickPointMouseUp(point);
 		}
 		else if ( obj_selected.userData.tag == 'wall' ) 
 		{
