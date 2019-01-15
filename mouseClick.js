@@ -65,11 +65,18 @@ function onDocumentMouseDown( event )
 	long_click = false;
 	lastClickTime = new Date().getTime();
 
+	
+	if(event.changedTouches)
+	{
+		event.clientX = event.changedTouches[0].clientX;
+		event.clientY = event.changedTouches[0].clientY;
+		vk_click = 'left';
+	}	
 
 	switch ( event.button ) 
 	{
 		case 0: vk_click = 'left'; break;
-		case 1: /*middle*/ break;
+		case 1: vk_click = 'right'; /*middle*/ break;
 		case 2: vk_click = 'right'; break;
 	}
 
@@ -306,6 +313,13 @@ function setUIPreview( object, preview, catalog, index )
 
 function onDocumentMouseMove( event ) 
 { 
+	if(event.changedTouches)
+	{
+		event.clientX = event.changedTouches[0].clientX;
+		event.clientY = event.changedTouches[0].clientY;
+		isMouseDown2 = true;
+	}
+
 	clickButton( event );
 
 	if ( !long_click ) { long_click = ( lastClickTime - new Date().getTime() < catchTime ) ? true : false; }
