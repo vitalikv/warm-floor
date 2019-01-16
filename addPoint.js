@@ -415,7 +415,7 @@ function addPointOption_4(point)
 		else { var p1 = [point2, point1]; var p2 = [point2, point]; }		
 		
 		// undo/redo
-		getInfoEvent11({ point : point1, wall : wall, newPoint : p1, oldPoint : p2 });						 
+		//getInfoEvent11({ point : point1, wall : wall, newPoint : p1, oldPoint : p2 });						 
 	} 
 	else if(point.userData.point.cross.userData.tag == 'point') 
 	{ 
@@ -443,6 +443,8 @@ function addPointOption_4(point)
 	}
 	
 	clickPointUP_BSP( arrW );
+	
+	if(point.w.length > 0) { createWallZone(point.w[0]); }
 	
 	obj_selected = null;
 }
@@ -574,6 +576,8 @@ function addPoint_5( wall, point )
 	}
 
 	param_wall.wallR = point.w;
+	
+	if(point.w.length > 0) { createWallZone(point.w[0]); } 
 }
 
 
