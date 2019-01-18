@@ -908,6 +908,10 @@ function createForm(cdm)
 	else if(form == 'shape9') { var arrP = [new THREE.Vector3(-3,0,-2), new THREE.Vector3(-3,0,0), new THREE.Vector3(-3,0,2), new THREE.Vector3(-1,0,2), new THREE.Vector3(1,0,2), new THREE.Vector3(3,0,2), new THREE.Vector3(3,0,0), new THREE.Vector3(3,0,-2), new THREE.Vector3(1,0,-2), new THREE.Vector3(-1,0,-2)]; }
 	else if(form == 'shape10') { var arrP = [new THREE.Vector3(-3,0,-2), new THREE.Vector3(-3,0,0), new THREE.Vector3(-3,0,2), new THREE.Vector3(0,0,2), new THREE.Vector3(0,0,0), new THREE.Vector3(3,0,0), new THREE.Vector3(3,0,-2), new THREE.Vector3(0,0,-2)]; }
 	else if(form == 'shape11') { var arrP = [new THREE.Vector3(-2,0,-1), new THREE.Vector3(-2,0,1), new THREE.Vector3(0,0,2), new THREE.Vector3(2,0,1), new THREE.Vector3(2,0,-1), new THREE.Vector3(0,0,-2)]; }
+	else if(form == 'shape12') { var arrP = [new THREE.Vector3(-1,0,-2), new THREE.Vector3(-1,0,-1), new THREE.Vector3(-3,0,-1), new THREE.Vector3(-3,0,1), new THREE.Vector3(-1,0,1), new THREE.Vector3(-1,0,2), new THREE.Vector3(1,0,2), new THREE.Vector3(1,0,1), new THREE.Vector3(3,0,1), new THREE.Vector3(3,0,-1), new THREE.Vector3(1,0,-1), new THREE.Vector3(1,0,-2)]; }
+	else if(form == 'shape13') { var arrP = [new THREE.Vector3(-1,0,-2), new THREE.Vector3(-1,0,-1), new THREE.Vector3(-3,0,-1), new THREE.Vector3(-3,0,1), new THREE.Vector3(-1,0,1), new THREE.Vector3(-1,0,2), new THREE.Vector3(1,0,2), new THREE.Vector3(1,0,1), new THREE.Vector3(3,0,1), new THREE.Vector3(3,0,-1), new THREE.Vector3(1,0,-1), new THREE.Vector3(1,0,-2)]; }
+	else if(form == 'shape14') { var arrP = [new THREE.Vector3(-2,0,-1), new THREE.Vector3(-2,0,0), new THREE.Vector3(-2,0,1), new THREE.Vector3(0,0,1.5), new THREE.Vector3(2,0,1), new THREE.Vector3(2,0,0), new THREE.Vector3(2,0,-1), new THREE.Vector3(0,0,-1.5)]; }	
+	else if(form == 'shape15') { var arrP = [new THREE.Vector3(-2,0,-1), new THREE.Vector3(-2,0,1), new THREE.Vector3(0,0,2), new THREE.Vector3(2,0,1), new THREE.Vector3(2,0,-1), new THREE.Vector3(0,0,-2)]; }
 	
 	
 	for ( var i = 0; i < arrP.length; i++ ) { createPoint( arrP[i], 0 ); }
@@ -945,7 +949,32 @@ function createForm(cdm)
 		createOneWall3( obj_point[1], obj_point[4], width_wall, {} );
 		createOneWall3( obj_point[4], obj_point[7], width_wall, {} );
 	}	
-
+	else if(form == 'shape13')
+	{
+		createOneWall3( obj_point[4], obj_point[7], width_wall, {} );
+		createOneWall3( obj_point[4], obj_point[1], width_wall, {} );
+		createOneWall3( obj_point[7], obj_point[10], width_wall, {} );
+		createOneWall3( obj_point[1], obj_point[10], width_wall, {} );
+	}	
+	else if(form == 'shape14')
+	{
+		createPoint( new THREE.Vector3(0,0,0), 0 );
+		createOneWall3( obj_point[1], obj_point[8], width_wall, {} );
+		createOneWall3( obj_point[3], obj_point[8], width_wall, {} );
+		createOneWall3( obj_point[5], obj_point[8], width_wall, {} );
+		createOneWall3( obj_point[7], obj_point[8], width_wall, {} );
+	}	
+	else if(form == 'shape15')
+	{
+		createPoint( new THREE.Vector3(0,0,0), 0 );
+		createOneWall3( obj_point[0], obj_point[6], width_wall, {} );
+		createOneWall3( obj_point[1], obj_point[6], width_wall, {} );
+		createOneWall3( obj_point[2], obj_point[6], width_wall, {} );
+		createOneWall3( obj_point[3], obj_point[6], width_wall, {} );
+		createOneWall3( obj_point[4], obj_point[6], width_wall, {} );
+		createOneWall3( obj_point[5], obj_point[6], width_wall, {} );
+	}	
+	
 	
 	if(form == 'level_2')
 	{
@@ -1480,7 +1509,7 @@ $(document).ready(function ()
 { 
 	docReady = true; 
 	//loadFile('');
-	createForm({form:'shape11'});	
+	createForm({form:'shape15'});	
 });
 
 
