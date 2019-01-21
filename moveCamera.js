@@ -463,8 +463,8 @@ function cameraZoomTop( delta )
 	{
 		k *= kof_rd;
 
-		var n1 = 0.25 * k;
-		var n2 = 0.125 * k;		
+		var n1 = 0.25 * 2;
+		var n2 = 0.125 * 2;		
 		var v1 = geometryLabelWall.vertices;
 		v1[ 0 ].x = v1[ 1 ].x = -n1;
 		v1[ 2 ].x = v1[ 3 ].x = n1;

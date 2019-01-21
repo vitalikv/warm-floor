@@ -193,7 +193,7 @@ function assignBlockParam(value)
 var resolutionD_w = window.screen.availWidth;
 var resolutionD_h = window.screen.availHeight;
 
-var kof_rd = 1440 / resolutionD_h;
+var kof_rd = 1;
 
 var countId = 2;
 var levelFloor = 1;
@@ -235,7 +235,7 @@ var pointGrid = createPointGrid(100);
 var planeMath = createPlaneMath();
 var planeMath2 = createPlaneMath2();
 
-var geometryLabelWall = createGeometryPlan(0.25 * kof_rd, 0.125 * kof_rd);
+var geometryLabelWall = createGeometryPlan(0.25 * 2, 0.125 * 2);
 var geometryLabelFloor = createGeometryPlan(1.0 * kof_rd, 0.25 * kof_rd);
 var arrContWD = createControllWD(); 
 var ruleVert_1 = createRulerVerticalWin();
@@ -893,7 +893,7 @@ function createToolDoorPoint()
 function createForm(cdm) 
 {
 	var form = cdm.form;
-	console.log(111111, form);
+	
 	var arrP = [];
 	resetScene();
 	
