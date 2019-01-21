@@ -265,6 +265,31 @@ canvas
 }
 
 
+.top_panel_2
+{
+	position: absolute;
+	left: 0;
+	top: 60px;
+	width: 100%;
+	display: -webkit-box;
+	display: flex;	
+}
+
+
+.toolbar
+{
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	display: -webkit-box;
+	display: flex;
+}
+
+.toolbar ul {
+  list-style: none;
+  margin: none;
+}
+
 .title_1 h1
 {
 	display: block;
@@ -331,14 +356,7 @@ canvas
 }
 
 
-.side_panel-camera
-{
-	width: 100px;
-	height: auto;
-	margin: 20px auto 0 auto;
-	display: -webkit-box;
-	display: flex;
-}
+
 
 
 .button1:hover, .button3:hover { cursor: pointer }
@@ -369,7 +387,8 @@ canvas
 
 .button1
 {
-	width: 100%;
+	width: 50px;
+	height: 20px;
 	text-decoration:none; 
 	text-align:center; 
 	padding:11px 0; 
@@ -391,6 +410,17 @@ canvas
 	-moz-box-shadow: 0px 0px 2px #bababa,  inset 0px 0px 1px #ffffff;  
 	box-shadow:0px 0px 2px #bababa, inset 0px 0px 1px #ffffff;  
   
+}
+
+
+.button1 img 
+{
+	display: block;
+	width: 95%;
+	height: 95%;
+	margin: auto;
+	-o-object-fit: contain;
+	object-fit: contain;	
 }
   
 
@@ -442,7 +472,7 @@ a.link_page_1
 {
 	width: 100px;
 	height: auto;
-	margin: 40px auto 0 auto;
+	margin: 20px auto 0 auto;
 	display: -webkit-box;
 	display: flex;
 	flex-direction: column;
