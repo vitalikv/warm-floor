@@ -89,16 +89,20 @@ if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фунд�
 		<div class="title_1"><h1><?=$title?></h1></div>
 	</div>
 	
-	<div class="top_panel_2" data-action ='top_panel_1'>
-				
+	<div class="top_panel_2" data-action ='top_panel_1'>				
 		<div class="toolbar">	
 			<div data-action ='wall' class="button1"><img src="/img/paint.png"></div>
 			<div data-action ='2D' class="button1">2D</div>
 			<div data-action ='3D' class="button1">3D</div>		
 		</div> 
-	</div>	
+	</div>	 
 	
 	
+	<div class="estimate" data-action ='top_panel_1'>
+		<div data-action ='estimate' class="button3">
+			<div class="button3-wrap">СМЕТА</div>
+		</div>
+	</div>
 	
 	<!--hidden='true'-->
 	<div class="left_panel_1" data-action ='left_panel_1'  >
