@@ -353,7 +353,7 @@ function addPoint_4( point )
 		} 
 		else if(point.userData.point.cross.userData.tag == 'point')		// 3
 		{			
-			if(point.userData.point.cross.userData.point.last.cdm == 'new_point_1' || point.userData.point.cross == point.p[0])
+			if(point.userData.point.cross.userData.point.last.cdm == 'new_point_1' && obj_selected.userData.point.cross == point || point.userData.point.cross == point.p[0])
 			{ 
 				deleteWall_2(point.w[0]);
 				obj_selected = null;
