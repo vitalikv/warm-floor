@@ -285,21 +285,10 @@ canvas
 	display: flex;
 }
 
-.toolbar ul 
-{
-	list-style: none;
-	margin: none;
-}
 
 
-.estimate
-{
-	position: absolute;
-	right: 20px;
-	top: 60px;
-	display: -webkit-box;
-	display: flex;	
-}
+
+
 
 
 .title_1 h1
@@ -371,10 +360,10 @@ canvas
 
 
 
-.button1:hover, .button3:hover { cursor: pointer }
+.button1:hover, .button3:hover, .button4:hover { cursor: pointer }
 
 
-.button1, .button3
+.button1, .button3, .button4
 {
 	width: 50px;
 	height: 20px;
@@ -412,16 +401,26 @@ canvas
 	object-fit: contain;	
 }
 
+.button1-wrap 
+{ 
+	padding:0 15px;
+	display: -webkit-box;
+	display: flex;	
+}
 
 .button3
 {
 	width: 100%;	
 }
 
-
 .button3-wrap 
 { 
 	padding:0 35px;	
+}
+
+.button4
+{
+	width: 100px;	
 }
 	
 
@@ -563,7 +562,14 @@ a.link_page_1
 
 
 
-
+.help
+{
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+	display: -webkit-box;
+	display: flex;	
+}
 
 
 
