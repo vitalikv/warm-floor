@@ -6,7 +6,7 @@ var w_h = window.innerHeight;
 var aspect = w_w/w_h;
 var d = 5;
 
-var renderer = new THREE.WebGLRenderer( {/*antialias : true*/} );
+var renderer = new THREE.WebGLRenderer({ preserveDrawingBuffer: true, /*antialias : true*/});
 renderer.localClippingEnabled = true;
 //renderer.autoClear = false;
 renderer.setPixelRatio( window.devicePixelRatio );
@@ -1441,6 +1441,46 @@ function quaternionDirection(dir1)
 //----------- Math
  
 
+ 
+ 
+
+// screenshot
+function saveAsImage() 
+{
+	try 
+	{					
+		var strMime = "image/jpeg";
+		var imgData = renderer.domElement.toDataURL(strMime, 0.7);			
+ 
+		openFileImage(imgData.replace(strMime, "image/octet-stream"), "screenshot.jpg");
+	} 
+	catch (e) 
+	{
+		console.log(e);
+		return;
+	}
+}
+
+// открыть или сохранить screenshot
+var openFileImage = function (strData, filename) 
+{
+	var link = document.createElement('a');
+	
+	if(typeof link.download === 'string') 
+	{
+		document.body.appendChild(link); //Firefox requires the link to be in the body
+		link.download = filename;
+		link.href = strData;
+		link.click();
+		document.body.removeChild(link); //remove the link when done
+	} 
+	else 
+	{
+		location.replace(uri);
+	}
+} 
+  
+ 
 	 
 
 //https://catalog.planoplan.com/lots/search/?keys[0]=92da6c1f72c1ebca456a86d978af1dfc7db1bcb24d658d710c5c8ae25d98ba52&id[0]=9337&lang=ru

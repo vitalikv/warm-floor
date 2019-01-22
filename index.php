@@ -96,7 +96,10 @@ if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фунд�
 				<div data-action ='2D' class="button1">2D</div>
 				<div data-action ='3D' class="button1">3D</div>
 			</div>
-			<div data-action ='estimate' class="button4">СМЕТА</div>	
+			<div data-action ='estimate' class="button4">СМЕТА</div>
+			<div class="button1-wrap">
+				<div data-action ='screenshot' class="button1"><img src="/img/screenshot.png"></div>
+			</div>
 		</div> 
 	</div>	 
 	
@@ -180,7 +183,7 @@ if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фунд�
 		$('[data-action="2D"]').on('mousedown', function(e) { clickInterface(); UI.setView('2D'); return false; }); 	
 		$('[data-action="3D"]').mousedown(function () { clickInterface(); UI.setView('3D'); return false; }); 	
 		$('[data-action="wall"]').mousedown(function () { clickInterface(); clickO.button = 'create_wall'; return false; }); 		
-		//$('[data-action="save"]').mousedown(function () { saveFile(); return false; }); 		
+		$('[data-action="screenshot"]').mousedown(function () { saveAsImage(); return false; }); 		
 		//$('[data-action="form_0"]').mousedown(function () { clickInterface(); resetScene(); }); 
 		$('[link_form]').mousedown(function () 
 		{ 
