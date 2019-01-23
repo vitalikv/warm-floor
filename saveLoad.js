@@ -26,6 +26,7 @@ function resetScene()
 		scene.remove(obj_line[i].label[0]); 
 		scene.remove(obj_line[i].label[1]);
 		if(obj_line[i].userData.wall.outline) { scene.remove(obj_line[i].userData.wall.outline); }
+		if(obj_line[i].userData.wall.zone) { scene.remove(obj_line[i].userData.wall.zone.label); } 
 		scene.remove(obj_line[i]); 
 	}
 	for ( var i = 0; i < obj_point.length; i++ )

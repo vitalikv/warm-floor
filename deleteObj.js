@@ -73,7 +73,9 @@ function deleteWall_1( wall )
 		if(points[1].w.length > 0)
 		{
 			createWallZone(points[1].w[0]);
-		}		
+		}
+
+		if(points[0].w.length == 0 && points[1].w.length == 0) { scene.remove(wall.userData.wall.zone.label); }
 	}
 
 	return { room : newZones }; 
