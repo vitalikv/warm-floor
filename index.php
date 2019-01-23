@@ -146,23 +146,36 @@ if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фунд�
 				<div class="modal_header">
 					<div class="modal_title">
 						<div class="modal_name">
-							Выберете форму 
+							<div modal_title='form' style="display: block;">Выберете форму</div>
+							<div modal_title='estimate' style="display: none;">Смета</div>
 						</div>
 					</div>					
 				</div>
 				<div class='modal_body'>
-					<div class='modal_body_content'>
+					<div class='modal_body_content' modal_body='estimate' style="display: none;">
+						<div>Плита</div>
+						<div>Площадь плиты</div>
+						<div>Объем бетона</div>
+						<div>Вес бетона</div>
+						
+						<div>Опалубка</div>
+						<div>Периметр плиты</div>
+					</div>
+				
+					<div class='modal_body_content' modal_body='form' style="display: block;">
 						<div class='modal_body_content_grid'>
 						<?
 							for ($i=0; $i<15; $i++) 
 							{
 								echo '
-								<div class="block_form_1" link_form = "'.($i+1).'">
+								<div class="block_form_1" link_form = "'.$i.'">
 									<div class="block_form_1_image_wrap">
-										<img src="/img/f'.($i+1).'.png">
+										<img src="/img/f'.$i.'.png">
 									</div>
-									<div class="block_form_1_desc">
-										форма '.($i+1).'
+									<div class="block_form_1_desc">';
+										if($i == 0) { echo 'пустой план'; }
+										else { echo 'форма '.($i+1); }
+									echo '	
 									</div>
 								</div>';
 							}
@@ -183,8 +196,8 @@ if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фунд�
 		$('[data-action="2D"]').on('mousedown', function(e) { clickInterface(); UI.setView('2D'); return false; }); 	
 		$('[data-action="3D"]').mousedown(function () { clickInterface(); UI.setView('3D'); return false; }); 	
 		$('[data-action="wall"]').mousedown(function () { clickInterface(); clickO.button = 'create_wall'; return false; }); 		
-		$('[data-action="screenshot"]').mousedown(function () { saveAsImage(); return false; }); 		
-		//$('[data-action="form_0"]').mousedown(function () { clickInterface(); resetScene(); }); 
+		$('[data-action="screenshot"]').mousedown(function () { saveAsImage(); return false; }); 				
+		
 		$('[link_form]').mousedown(function () 
 		{ 
 			createForm({form : 'shape'+$(this).attr("link_form")}); 
@@ -198,10 +211,25 @@ if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фунд�
 		$('input').on('focus keyup change', function () { UI.activeInput = $(this).data('action'); });
 		$('input').blur(function () { UI.activeInput = ''; });	
 
+		
+		$('[data-action="estimate"]').mousedown(function () 
+		{ 
+			createEstimateJson();
+			$('.modal').css({"display":"block"});
+			$('[modal_body="estimate"]').css({"display":"block"});
+			$('[modal_body="form"]').css({"display":"none"});
+			$('[modal_title="estimate"]').css({"display":"block"});
+			$('[modal_title="form"]').css({"display":"none"});			
+		}); 
+		
 		$('[data-action="form_1"]').mousedown(function () 
 		{ 
 			clickInterface();
 			$('.modal').css({"display":"block"});
+			$('[modal_body="estimate"]').css({"display":"none"});
+			$('[modal_body="form"]').css({"display":"block"});
+			$('[modal_title="estimate"]').css({"display":"none"});
+			$('[modal_title="form"]').css({"display":"block"});
 		});
 		
 		$('[data-action="modal_window"]').mousedown(function () { return false; });		
