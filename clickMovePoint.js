@@ -16,7 +16,21 @@ function clickPoint( intersect )
 	var obj = intersect.object;	
 	obj_selected = obj;
 	
-	offset = new THREE.Vector3().subVectors( intersect.object.position, intersect.point );
+	$.ajax
+	({
+		url: 'checkSum.php',
+		type: 'POST',
+		data: {	pos1: {x: obj.position.x, y: obj.position.y, z: obj.position.z}, pos2: {x: intersect.point.x, y: intersect.point.y, z: intersect.point.z} },
+		dataType: 'json',
+		success: function(json)
+		{ 			
+			offset = new THREE.Vector3(json.x, json.y, json.z);
+			
+			param_win.click = true;			
+		},
+		error: function(json){ console.log(json);  }
+	});	
+	
 	planeMath.position.set( 0, intersect.point.y, 0 );
 	planeMath.rotation.set(-Math.PI/2, 0, 0);			
 
@@ -28,27 +42,8 @@ function clickPoint( intersect )
 	}			 	
 	
 	getArrM();
-	
-	param_win.click = true;
-	param_wall.wallR = detectChangeArrWall([], obj_selected);
-	
-	
-	// undo/redo
-	if(1==1)
-	{  
-		obj.userData.point.last.pos = obj.position.clone(); 		
 		
-		for ( var i = 0; i < param_wall.wallR.length; i++ )
-		{						
-			for ( var i2 = 0; i2 < param_wall.wallR[i].userData.wall.arrO.length; i2++ )
-			{
-				var wd = param_wall.wallR[i].userData.wall.arrO[i2];
-				 
-				wd.userData.door.last.pos = wd.position.clone();
-				wd.userData.door.last.rot = wd.rotation.clone(); 
-			}
-		}		 			
-	}	
+	param_wall.wallR = detectChangeArrWall([], obj_selected);	
 }
 
 
