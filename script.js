@@ -32,6 +32,7 @@ camera3D.position.set(5, 7, 5);
 camera3D.lookAt(scene.position);
 camera3D.rotation.z = 0;
 camera3D.userData.camera = { type : 'fly', height : camera3D.position.y, startProject : true };
+camera3D.userData.camera.click = { pos : new THREE.Vector3() }; 
 //----------- camera3D
 
 

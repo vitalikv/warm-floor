@@ -139,7 +139,7 @@ function updateKeyDown()
 
 var radious = 10, theta = 90, onMouseDownTheta = 0, phi = 75, onMouseDownPhi = 75;
 var centerCam = new THREE.Vector3( 0, 0, 0 );
-var cam3dDir = new THREE.Vector3( 1, 0, 0 );
+
 
 function cameraMove3D( event )
 {
@@ -165,26 +165,11 @@ function cameraMove3D( event )
 		if ( isMouseDown3 )    
 		{
 			newCameraPosition = null;
-			var mouseY = ( ( event.clientX - onMouseDownPosition.x ) * 0.01 );
-			var mouseX = ( ( event.clientY - onMouseDownPosition.y ) * 0.01 );
-
-			onMouseDownPosition.x = event.clientX;
-			onMouseDownPosition.y = event.clientY;
-
-			var pos2 = camera.position.clone();
-
-
-			var dir = new THREE.Vector3().addScaledVector( cam3dDir, -mouseX );
-			camera.position.add( dir.addScalar( 0.001 ) );
-
-
-			var x1 = camera.position.z - centerCam.z;
-			var z1 = centerCam.x - camera.position.x;
-			dir = new THREE.Vector3( x1, 0, z1 ).normalize();        // dir (перпендикуляр стены)   
-			dir = new THREE.Vector3().addScaledVector( dir, -mouseY );
-			camera.position.add( dir.addScalar( 0.001 ) );
-
-			centerCam.add( new THREE.Vector3( camera.position.x - pos2.x, camera.position.y - pos2.y, camera.position.z - pos2.z ) );
+			
+			var intersects = rayIntersect( event, planeMath, 'one' );
+			var offset = new THREE.Vector3().subVectors( camera3D.userData.camera.click.pos, intersects[0].point );
+			camera.position.add( offset );
+			centerCam.add( offset );
 
 			wallAfterRender_2();
 		}
@@ -310,10 +295,8 @@ function clickSetCamera3D( event, click )
 		planeMath.rotation.copy( camera.rotation );
 		planeMath.updateMatrixWorld();
 
-		var v = planeMath.geometry.vertices;
-		var v1 = planeMath.localToWorld( v[ 0 ].clone() );
-		var v2 = planeMath.localToWorld( v[ 2 ].clone() );
-		cam3dDir = new THREE.Vector3().subVectors( v2, v1 ).normalize();
+		var intersects = rayIntersect( event, planeMath, 'one' );	
+		camera3D.userData.camera.click.pos = intersects[0].point;  
 	}
 }
 

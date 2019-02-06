@@ -74,6 +74,7 @@ function resetScene()
 	menuUI = { open : false, type : '', select : null };
 	
 	camera3D.userData.camera = { type : 'fly', height : camera3D.position.y, startProject : true };
+	camera3D.userData.camera.click = { pos : new THREE.Vector3() }; 
 	
 	clickO = resetVarParam(); 
 	
