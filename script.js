@@ -228,9 +228,9 @@ var wallVisible = [];
 var circle = createCircleSpline();
 var p_tool = createToolPoint();
 var d_tool = createToolDoorPoint();
-// createGrid();
-var pointGrid = createPointGrid(100);
-//var pointGrid = { visible : true }
+ createGrid();
+//var pointGrid = createPointGrid(100);
+var pointGrid = { visible : true }
 
 
 var planeMath = createPlaneMath();
@@ -1022,7 +1022,7 @@ function createForm(cdm)
 	if(infProject.type == 1) detectRoomZone(nameRoomDef);
 	upLabelPlan_1(obj_line);
 	
-	createWallZone(obj_line[0])
+	if(obj_line.length > 0) createWallZone(obj_line[0])
 	
 	width_wall = 0.3;
 	

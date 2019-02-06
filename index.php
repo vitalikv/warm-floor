@@ -153,13 +153,57 @@ if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фунд�
 				</div>
 				<div class='modal_body'>
 					<div class='modal_body_content' modal_body='estimate' style="display: none;">
-						<div>Плита</div>
-						<div>Площадь плиты</div>
-						<div>Объем бетона</div>
-						<div>Вес бетона</div>
-						
-						<div>Опалубка</div>
-						<div>Периметр плиты</div>
+						<div class='modal_body_content_estimate'>
+							<div class="block_form_1">
+								<div class="block_form_1_h1">
+									Площадь
+								</div>
+								<div class="block_form_1_desc">
+									12.5 м2
+								</div>								
+							</div>
+							<div class="block_form_1">
+								<div class="block_form_1_h1">
+									Объем бетона
+								</div>
+								<div class="block_form_1_desc">
+									6.2 м3
+								</div>								
+							</div>
+							<div class="block_form_1">
+								<div class="block_form_1_h1">
+									Высота
+								</div>
+								<div class="block_form_1_desc">
+									30 cм
+								</div>								
+							</div>
+							<div class="block_form_1">
+								<div class="block_form_1_h1">
+									Вес бетона
+								</div>
+								<div class="block_form_1_desc">
+									1.2 т
+								</div>								
+							</div>
+							
+							<div class="block_form_1">
+								<div class="block_form_1_h1">
+									Опалубка
+								</div>
+								<div class="block_form_1_desc">
+									24 м
+								</div>								
+							</div>
+							<div class="block_form_1">
+								<div class="block_form_1_h1">
+									Периметр плиты
+								</div>
+								<div class="block_form_1_desc">
+									16 м
+								</div>								
+							</div>
+						</div>
 					</div>
 				
 					<div class='modal_body_content' modal_body='form' style="display: block;">
