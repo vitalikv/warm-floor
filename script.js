@@ -1486,7 +1486,36 @@ var openFileImage = function (strData, filename)
 
 function createEstimateJson()
 {
-	
+	if(infProject.type == 2)
+	{
+		var sum = 0;
+		var points = wall.userData.wall.zone.points;
+		var walls = wall.userData.wall.zone.walls;
+		var label = wall.userData.wall.zone.label;
+		
+		for ( var i = 0; i < walls.length; i++ )
+		{
+			sum += walls[i].userData.wall.area.top;
+		}
+		
+		sum = Math.round(sum * 100)/100;
+		
+		console.log('ленточный фундамент :');
+		console.log('площадь :' + sum + 'm2');
+		console.log('высота :' + height_wall + 'cm');
+		console.log('объем : '+Math.round((sum * height_wall) * 100) / 100 +' m3');
+	}	
+	else
+	{
+		
+		for (var u = 0; u < room.length; u++)
+		{
+			console.log('монолитный фундамент :');
+			console.log('площадь :' + room[u].userData.room.areaTxt + 'm2');
+			console.log('высота :' + height_wall + 'cm');
+			console.log('объем : '+Math.round((room[u].userData.room.areaTxt * height_wall) * 100) / 100 +' m3');					
+		}
+	}
 }
 
 		
