@@ -1490,20 +1490,7 @@ function createEstimateJson()
 	
 	if(infProject.type == 2)
 	{
-		var fundament = [];
-		for ( var i = 0; i < obj_line.length; i++ )
-		{
-			var zone = obj_line[i].userData.wall.zone;
-			
-			var exist = false;
-			
-			for ( var i2 = 0; i2 < fundament.length; i2++ )
-			{
-				if(fundament[i2] == zone) { exist = true; break; }
-			}
-			
-			if(!exist) { fundament[fundament.length] = zone; }
-		}
+		var fundament = infProject.scene.array.fundament;		
 		
 		for ( var i = 0; i < fundament.length; i++ )
 		{
@@ -1550,39 +1537,49 @@ function createEstimateJson()
 
 	if(arr.length > 0)
 	{
-		var html = '<div class="modal_body_content_estimate">';
+		var html = '';
 		
-		html += '<div class="block_form_1">';
-		html += '<div class="block_form_1_h1">Площадь</div>';
-		html += '<div class="block_form_1_desc" area_1="">'+arr[0].area+' м2</div>';
-		html += '</div>';
+		for (var i = 0; i < arr.length; i++)
+		{
+			html += '<div class="modal_body_content_estimate">';
+			
+			html += '<div class="block_form_1">';
+			html += '<div class="block_form_1_h1">Площадь</div>';
+			html += '<div class="block_form_1_desc" area_1="">'+arr[i].area+' м2</div>';
+			html += '</div>';
 
-		html += '<div class="block_form_1">';
-		html += '<div class="block_form_1_h1">Высота</div>';
-		html += '<div class="block_form_1_desc" area_1="">'+arr[0].height+' cм</div>';
-		html += '</div>';	
+			html += '<div class="block_form_1">';
+			html += '<div class="block_form_1_h1">Высота</div>';
+			html += '<div class="block_form_1_desc" area_1="">'+arr[i].height+' cм</div>';
+			html += '</div>';	
 
-		html += '<div class="block_form_1">';
-		html += '<div class="block_form_1_h1">Объем бетона</div>';
-		html += '<div class="block_form_1_desc" area_1="">'+arr[0].space+' м3</div>';
-		html += '</div>';	
-		
-		html += '<div class="block_form_1">';
-		html += '<div class="block_form_1_h1">Вес бетона</div>';
-		html += '<div class="block_form_1_desc" area_1="">'+((arr[0].space * 2350)/1000)+' т</div>';
-		html += '</div>';
+			html += '<div class="block_form_1">';
+			html += '<div class="block_form_1_h1">Объем бетона</div>';
+			html += '<div class="block_form_1_desc" area_1="">'+arr[i].space+' м3</div>';
+			html += '</div>';	
+			
+			html += '<div class="block_form_1">';
+			html += '<div class="block_form_1_h1">Вес бетона</div>';
+			html += '<div class="block_form_1_desc" area_1="">'+Math.round(arr[i].space * 2350/10)/100+' т</div>';
+			html += '</div>';
 
-		html += '<div class="block_form_1">';
-		html += '<div class="block_form_1_h1">Опалубка</div>';
-		html += '<div class="block_form_1_desc" area_1="">24 м</div>';
-		html += '</div>';
-		
-		html += '<div class="block_form_1">';
-		html += '<div class="block_form_1_h1">Периметр плиты</div>';
-		html += '<div class="block_form_1_desc" area_1="">24 м</div>';
-		html += '</div>';		
-		
-		html += '</div>';
+			html += '<div class="block_form_1">';
+			html += '<div class="block_form_1_h1">Опалубка</div>';
+			html += '<div class="block_form_1_desc" area_1="">24 м</div>';
+			html += '</div>';
+			
+			html += '<div class="block_form_1">';
+			html += '<div class="block_form_1_h1">Периметр плиты</div>';
+			html += '<div class="block_form_1_desc" area_1="">24 м</div>';
+			html += '</div>';		
+			
+			html += '</div>';
+
+			if(i < arr.length - 1)
+			{
+				html += '<div style="background: #444; height: 1px; width: 90%; margin: auto; box-shadow:0px 0px 2px #bababa;"></div>';
+			}				
+		}
 		
 		
 		$('[modal_body="estimate"]').html(html);

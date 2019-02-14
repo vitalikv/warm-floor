@@ -153,28 +153,48 @@ function upLabelPlan_1(arrWall, Zoom)
 // подсчитваем объем у ленточного фундамента
 function calculationAreaFundament_2(wall)
 {
-	if(infProject.type == 2 && wall.userData.wall.zone)
+	if(infProject.type == 2)
 	{
-		var sum = 0;
-		var points = wall.userData.wall.zone.points;
-		var walls = wall.userData.wall.zone.walls;
-		var label = wall.userData.wall.zone.label;
-		
-		for ( var i = 0; i < walls.length; i++ )
+		var fundament = [];
+		for ( var i = 0; i < obj_line.length; i++ )
 		{
-			sum += walls[i].userData.wall.area.top;
+			var zone = obj_line[i].userData.wall.zone;
+			
+			var exist = false;
+			
+			for ( var i2 = 0; i2 < fundament.length; i2++ )
+			{
+				if(fundament[i2] == zone) { exist = true; break; }
+			}
+			
+			if(!exist) { fundament[fundament.length] = zone; }
 		}
 		
-		sum = Math.round(sum * 100)/100;
+		infProject.scene.array.fundament = fundament;
+		
+		for ( var i = 0; i < fundament.length; i++ )
+		{
+			
+			var points = fundament[i].points;
+			var walls = fundament[i].walls;
+			var label = fundament[i].label;
+			
+			var sum = 0;
+			for ( var i2 = 0; i2 < walls.length; i2++ )
+			{
+				sum += walls[i2].userData.wall.area.top;
+			}
+			
+			sum = Math.round(sum * 100)/100;
 
-
-		var pos = new THREE.Vector3();
-		
-		for (i = 0; i < points.length; i++) { pos.x += points[i].position.x; pos.z += points[i].position.z; }				
-		
-		label.position.set(pos.x / points.length, 0.2, pos.z / points.length);		
-		
-		upLabelArea2(label, sum, '80', 'rgba(255,255,255,1)', true);
+			var pos = new THREE.Vector3();
+			
+			for (i2 = 0; i2 < points.length; i2++) { pos.x += points[i2].position.x; pos.z += points[i2].position.z; }				
+			
+			label.position.set(pos.x / points.length, 0.2, pos.z / points.length);		
+			
+			upLabelArea2(label, sum, '80', 'rgba(255,255,255,1)', true);			
+		}			
 	}	
 }
 
