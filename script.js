@@ -1486,35 +1486,115 @@ var openFileImage = function (strData, filename)
 
 function createEstimateJson()
 {
+	var arr = [];
+	
 	if(infProject.type == 2)
 	{
-		var sum = 0;
-		var points = wall.userData.wall.zone.points;
-		var walls = wall.userData.wall.zone.walls;
-		var label = wall.userData.wall.zone.label;
-		
-		for ( var i = 0; i < walls.length; i++ )
+		var fundament = [];
+		for ( var i = 0; i < obj_line.length; i++ )
 		{
-			sum += walls[i].userData.wall.area.top;
+			var zone = obj_line[i].userData.wall.zone;
+			
+			var exist = false;
+			
+			for ( var i2 = 0; i2 < fundament.length; i2++ )
+			{
+				if(fundament[i2] == zone) { exist = true; break; }
+			}
+			
+			if(!exist) { fundament[fundament.length] = zone; }
 		}
 		
-		sum = Math.round(sum * 100)/100;
-		
-		console.log('ленточный фундамент :');
-		console.log('площадь :' + sum + 'm2');
-		console.log('высота :' + height_wall + 'cm');
-		console.log('объем : '+Math.round((sum * height_wall) * 100) / 100 +' m3');
+		for ( var i = 0; i < fundament.length; i++ )
+		{
+			
+			var points = fundament[i].points;
+			var walls = fundament[i].walls;
+			
+			var sum = 0;
+			for ( var i2 = 0; i2 < walls.length; i2++ )
+			{
+				sum += walls[i2].userData.wall.area.top;
+			}
+			
+			sum = Math.round(sum * 100)/100;
+			
+			console.log(infProject.nameId);
+			console.log('площадь :' + sum + 'm2');
+			console.log('высота :' + height_wall + 'cm');
+			console.log('объем : '+Math.round((sum * height_wall) * 100) / 100 +' m3');	
+
+			var cdm = {};
+			cdm.name = infProject.nameId;	// название
+			cdm.area = sum;		// площадь
+			cdm.height = height_wall * 100;		// высота
+			cdm.space = Math.round((sum * height_wall) * 100) / 100;	// объем
+			
+			arr[arr.length] = cdm;
+		}		
 	}	
 	else
 	{
 		
 		for (var u = 0; u < room.length; u++)
 		{
-			console.log('монолитный фундамент :');
-			console.log('площадь :' + room[u].userData.room.areaTxt + 'm2');
-			console.log('высота :' + height_wall + 'cm');
-			console.log('объем : '+Math.round((room[u].userData.room.areaTxt * height_wall) * 100) / 100 +' m3');					
+			var cdm = {};
+			cdm.name = infProject.nameId;	// название
+			cdm.area = room[u].userData.room.areaTxt;		// площадь
+			cdm.height = height_wall * 100;		// высота
+			cdm.space = Math.round((room[u].userData.room.areaTxt * height_wall) * 100) / 100;	// объем
+			
+			arr[arr.length] = cdm;			
 		}
+	}
+
+	if(arr.length > 0)
+	{
+		var html = '<div class="modal_body_content_estimate">';
+		
+		html += '<div class="block_form_1">';
+		html += '<div class="block_form_1_h1">Площадь</div>';
+		html += '<div class="block_form_1_desc" area_1="">'+arr[0].area+' м2</div>';
+		html += '</div>';
+
+		html += '<div class="block_form_1">';
+		html += '<div class="block_form_1_h1">Высота</div>';
+		html += '<div class="block_form_1_desc" area_1="">'+arr[0].height+' cм</div>';
+		html += '</div>';	
+
+		html += '<div class="block_form_1">';
+		html += '<div class="block_form_1_h1">Объем бетона</div>';
+		html += '<div class="block_form_1_desc" area_1="">'+arr[0].space+' м3</div>';
+		html += '</div>';	
+		
+		html += '<div class="block_form_1">';
+		html += '<div class="block_form_1_h1">Вес бетона</div>';
+		html += '<div class="block_form_1_desc" area_1="">'+((arr[0].space * 2350)/1000)+' т</div>';
+		html += '</div>';
+
+		html += '<div class="block_form_1">';
+		html += '<div class="block_form_1_h1">Опалубка</div>';
+		html += '<div class="block_form_1_desc" area_1="">24 м</div>';
+		html += '</div>';
+		
+		html += '<div class="block_form_1">';
+		html += '<div class="block_form_1_h1">Периметр плиты</div>';
+		html += '<div class="block_form_1_desc" area_1="">24 м</div>';
+		html += '</div>';		
+		
+		html += '</div>';
+		
+		
+		$('[modal_body="estimate"]').html(html);
+	}
+	else
+	{
+		var html = '<div class="modal_body_content_estimate_error">';
+		html += '<br><br>нет данных<br><br>';
+		html += 'постройте фундамент';
+		html += '</div>';
+		
+		$('[modal_body="estimate"]').html(html);
 	}
 }
 

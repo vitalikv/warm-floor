@@ -162,6 +162,19 @@ canvas
 	padding: 50px; 
 }
 
+
+.modal_body_content_estimate_error
+{
+	margin: auto;
+	padding: 50px; 
+
+	font-family: arial,sans-serif;	
+	font-size: 46px;
+	color: #666;
+	text-align: center;
+}
+
+
 .block_form_1_h1 
 {	
 	font-family: arial,sans-serif;	

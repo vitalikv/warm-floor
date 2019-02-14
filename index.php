@@ -10,9 +10,9 @@ $setting['unlock'] = '';
 	
 if($url == '/calculator/area_apartment')	{ $title = 'Калькулятор площади квартиры онлайн 3D'; }
 
-if($url == '/calculator/monolit_fundament')	{ $title = 'Калькулятор монолитного фундамента 3D'; $type = 1; }
-if($url == '/calculator/lentochnii_fundament')	{ $title = 'Калькулятор ленточного фундамента 3D'; $type = 2; }
-if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фундамент калькулятор 3D'; $type = 2; $setting['unlock'] = 1; }
+if($url == '/calculator/monolit_fundament')	{ $title = 'Калькулятор монолитного фундамента 3D'; $type = 1; $nameId = 'монолитный фундамент'; }
+if($url == '/calculator/lentochnii_fundament')	{ $title = 'Калькулятор ленточного фундамента 3D'; $type = 2; $nameId = 'ленточный фундамент'; }
+if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фундамент калькулятор 3D'; $type = 2; $setting['unlock'] = 1; $nameId = 'свайный фундамент'; }
 ?>
 
 
@@ -36,7 +36,7 @@ if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фунд�
     <script>
 	var vr = "<?=$vrs ?>";
 	
-	var infProject = { type : <?=$type?>, title : '<?=$title?>', unlock : '<?=$setting['unlock']?>', scene : { tool : {} } };
+	var infProject = { type : <?=$type?>, title : '<?=$title?>', nameId : '<?=$nameId?>', unlock : '<?=$setting['unlock']?>', scene : { tool : {} } };
 	
 	console.log('version '+ vr);
     console.log('infProject ', infProject);
@@ -153,57 +153,7 @@ if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фунд�
 				</div>
 				<div class='modal_body'>
 					<div class='modal_body_content' modal_body='estimate' style="display: none;">
-						<div class='modal_body_content_estimate'>
-							<div class="block_form_1">
-								<div class="block_form_1_h1">
-									Площадь
-								</div>
-								<div class="block_form_1_desc">
-									12.5 м2
-								</div>								
-							</div>
-							<div class="block_form_1">
-								<div class="block_form_1_h1">
-									Объем бетона
-								</div>
-								<div class="block_form_1_desc">
-									6.2 м3
-								</div>								
-							</div>
-							<div class="block_form_1">
-								<div class="block_form_1_h1">
-									Высота
-								</div>
-								<div class="block_form_1_desc">
-									30 cм
-								</div>								
-							</div>
-							<div class="block_form_1">
-								<div class="block_form_1_h1">
-									Вес бетона
-								</div>
-								<div class="block_form_1_desc">
-									1.2 т
-								</div>								
-							</div>
-							
-							<div class="block_form_1">
-								<div class="block_form_1_h1">
-									Опалубка
-								</div>
-								<div class="block_form_1_desc">
-									24 м
-								</div>								
-							</div>
-							<div class="block_form_1">
-								<div class="block_form_1_h1">
-									Периметр плиты
-								</div>
-								<div class="block_form_1_desc">
-									16 м
-								</div>								
-							</div>
-						</div>
+
 					</div>
 				
 					<div class='modal_body_content' modal_body='form' style="display: block;">
@@ -260,7 +210,7 @@ if($url == '/calculator/svaynyy_fundament')	{ $title = 'Свайный фунд�
 		{ 
 			createEstimateJson();
 			$('.modal').css({"display":"block"});
-			$('[modal_body="estimate"]').css({"display":"block"});
+			$('[modal_body="estimate"]').css({"display":"block"}); 
 			$('[modal_body="form"]').css({"display":"none"});
 			$('[modal_title="estimate"]').css({"display":"block"});
 			$('[modal_title="form"]').css({"display":"none"});			
