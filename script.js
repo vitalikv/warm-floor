@@ -6,7 +6,7 @@ var w_h = window.innerHeight;
 var aspect = w_w/w_h;
 var d = 5;
 
-var renderer = new THREE.WebGLRenderer( /*{antialias : true}*/ );
+var renderer = new THREE.WebGLRenderer( {antialias: false} );
 renderer.localClippingEnabled = true;
 //renderer.autoClear = false;
 renderer.setPixelRatio( window.devicePixelRatio );

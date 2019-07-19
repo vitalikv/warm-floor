@@ -4,26 +4,8 @@
 
 var skeleton = { line : [], point : [], cycle : [] };
 
-// сдвиг массива на count позиций
-// если count = отрицательный => удаляем с конца массива заданное кол-во элементов и добавляем в начало
-// если count = положительный => удаляем из массива все элементы начиная с count и добавляем в начало
-function shiftArray(cdm)
-{
-	var arr = cdm.arr;
-	var count = cdm.count;
-
-	var arr2 = [];
-	for ( var i = 0; i < arr.length; i++ ){ arr2[i] = arr[i]; }	
-	
-	var arr2 = arr2.splice(count).concat(arr2);
-	
-	console.log(arr2);
-
-	return arr2;
-}
 
 
-shiftArray({arr : [1,2,3,45,8,9,7,10], count : 1});
 
 
 function getSkeleton_1(arrRoom)
@@ -31,7 +13,7 @@ function getSkeleton_1(arrRoom)
 	for ( var i = 0; i < skeleton.line.length; i ++ ){ scene.remove( skeleton.line[i] ); }
 	for ( var i = 0; i < skeleton.point.length; i ++ ){ scene.remove( skeleton.point[i] ); }
 	
-	var arrPoint = [];
+	var p = [];
 	skeleton.line = [];	
 	skeleton.point = [];		
 	
@@ -39,23 +21,18 @@ function getSkeleton_1(arrRoom)
 	for ( var s = 0; s < arrRoom.length; s++ )
 	{		
 		skeleton.cycle = [];
-		arrPoint = [];
+		p = [];
 		for ( var i = 0; i < arrRoom[s].p.length - 1; i++ ) 
 		{ 		
-			arrPoint[i] = createPoint_2(arrRoom[s].p[i].position.clone(), arrRoom[s].p[i].userData.id);				
-		}
-		
-		
-		for ( var i = 0; i < arrPoint.length; i++ ) 
-		{ 				
-			var i2 = (i == 0) ? arrPoint.length - 1 : i - 1;
-			var i3 = (i == arrPoint.length - 1) ? 0 : i + 1;
-			
-			arrPoint[i].p[0] = arrPoint[i2];			
-			arrPoint[i].p[1] = arrPoint[i3];		
+			p[i] = {pos: arrRoom[s].p[i].position.clone(), id: arrRoom[s].p[i].userData.id};			
 		}			
 		
-		getSkeleton_2(arrPoint, 0, arrRoom[s].userData.id);
+		var p = getSkeleton_2(p, 0, arrRoom[s].userData.id);
+
+		var p = getSkeleton_2(p, 0, arrRoom[s].userData.id);
+		var p = getSkeleton_2(p, 0, arrRoom[s].userData.id);
+		var p = getSkeleton_2(p, 0, arrRoom[s].userData.id);
+		var p = getSkeleton_2(p, 0, arrRoom[s].userData.id);
 
 		
 		if(skeleton.cycle.length > 0)
@@ -85,278 +62,9 @@ function getSkeleton_1(arrRoom)
 			//console.log(arrRoom[s].userData.id, skeleton);
 		}
 	}
-	
-	console.log(skeleton);
-	
-	
-	// меняем положение старта
-	if(1==1)
-	{
-		for ( var i = 0; i < skeleton.cycle.length; i++ )
-		{
-			var line_1 = skeleton.cycle[i].line;
-			
-			var arrL = [];
-			
-			for ( var i2 = 0; i2 < skeleton.cycle[i].line.length; i2++ )
-			{
-				//var n = (i2==0) ? skeleton.cycle[i].line.length - 1 : i2 - 1;
-				var n = (i2 == skeleton.cycle[i].line.length - 1) ? 0 : i2 + 1;
-				
-				arrL[arrL.length] = skeleton.cycle[i].line[n];
-			}
-			
-			skeleton.cycle[i].line = arrL;
-		}		
-	}
-	
-	
-	// ресивер
-	if(1==2)
-	{
-		for ( var i = 0; i < skeleton.cycle.length; i++ )
-		{
-			var line_1 = skeleton.cycle[i].line;
-			
-			var arrL = [];
-			
-			for ( var i2 = skeleton.cycle[i].line.length - 1; i2 >= 0; i2-- )
-			{
-				var line = skeleton.cycle[i].line[i2];
-				
-				//line.p = [line.p[1], line.p[0]];
-				
-				arrL[arrL.length] = line;
-			}
-			
-			skeleton.cycle[i].line = arrL;
-		}		
-	}	
-	
-	
-
-	
-	var p = findEquallyPipe({ line_1 : { p : [skeleton.cycle[0].p1[0].point, skeleton.cycle[0].p1[1].point]}, index : [0, 1] });
-	
-	var p1 = p;  
-	
-	for ( var i = 0; i < skeleton.cycle[0].line.length; i++ )
-	{
-		if(skeleton.cycle[0].line[i].p[1] == p[0])
-		{
-			var p = skeleton.cycle[0].line[i].p; break;
-		}
-	}	
-	
-	var p = findEquallyPipe({ line_1 : { p : p }, index : [0, 1] });
-	
-	var p2 = p; 
-	
-	
-	
-	
-	
-	
-	for ( var i = 0; i < skeleton.cycle.length; i++ )
-	{
-		var i2 = i + 2;	
-		
-		if(i2 > skeleton.cycle.length - 1) continue;
-		
-		
-		
-	var p1 = findEquallyPipe({ line_1 : { p : [skeleton.cycle[i].p1[0].point, skeleton.cycle[i].p1[1].point]}, index : [i, i+2] }); 
-	
-	console.log(p1[0].userData.id, p1[1].userData.id, ' | ', skeleton.cycle[i].p1[0].point.userData.id, skeleton.cycle[i].p1[1].point.userData.id);
-	
-	if(p1[0].userData.id != skeleton.cycle[i].p1[0].point.userData.id) { p1 = [p1[1], p1[0]] };
-	for ( var m = 0; m < skeleton.cycle[i2].line.length; m++ )
-	{
-		
-		if(skeleton.cycle[i2].line[m].p[1].userData.id == p1[0].userData.id)
-		{
-			var p = skeleton.cycle[i2].line[m].p; break;
-		}
-	}	
-	
-	var p2 = findEquallyPipe({ line_1 : { p : p }, index : [i, i+2] });		
-		
-		
-		
-		var line_1 = null;
-		var line_2 = null;
-		
-		for ( var m = 0; m < skeleton.cycle[i].line.length; m++ )
-		{
-			if(skeleton.cycle[i].line[m].p[0].userData.id == p2[0].userData.id)
-			{
-				var line_1 = skeleton.cycle[i].line[m]; break;
-			}
-		}					
-		
-		for ( var m = 0; m < skeleton.cycle[i2].line.length; m++ )
-		{
-			if(skeleton.cycle[i2].line[m].p[0].userData.id == p1[0].userData.id)
-			{
-				var line_2 = skeleton.cycle[i2].line[m]; break;
-			}
-		}
-		
-		
-
-		console.log(p1[0].userData.id, p1[1].userData.id, p2[0].userData.id, p2[1].userData.id);
-		
-		if(i == 3) line_2.obj.material[0].color.set(0x000000);
-		
-		if(!line_1 || !line_2) continue;
-		
-		p2 = [line_1.p[0], line_1.p[1]];
-		p1 = [line_2.p[0], line_2.p[1]];
-		
-		var pos = crossPointTwoLine(p1[0].position, p1[1].position, p2[0].position, p2[1].position);
-		
-		//skeleton.point[skeleton.point.length] = createPoint( pos, 0 );
-		
-		p2[1].position.copy(pos);			
-		line_2.obj.position.copy(pos);
-		
-		var d1 = p2[0].position.distanceTo( pos );
-		var d2 = p1[1].position.distanceTo( pos );
-		
-		
-		var v = line_1.obj.geometry.vertices; 
-		v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = d1;
-		line_1.obj.geometry.verticesNeedUpdate = true;
-
-		var v = line_2.obj.geometry.vertices; 
-		v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = d2;
-		line_2.obj.geometry.verticesNeedUpdate = true;	  		
-		
-		
-	
-	}
 }
 
 
-
-
-
-
-
-function findEquallyPipe(cdm)
-{
-	
-	var level_1 = skeleton.cycle[cdm.index[0]];
-	var level_2 = skeleton.cycle[cdm.index[1]];
-	
-	var line_1 = cdm.line_1;		
-	
-		
-	
-	var equally = [-1, -1];
-	for ( var i = 0; i < level_2.p1.length; i++ )
-	{
-		if(line_1.p[0].userData.id == level_2.p1[i].point.userData.id) { equally[0] = level_2.p1[i].point.userData.id; }
-		if(line_1.p[1].userData.id == level_2.p1[i].point.userData.id) { equally[1] = level_2.p1[i].point.userData.id; }
-	}
-	
-	
-	if(equally[0] == -1 || equally[1] == -1)
-	{
-		var point = (line_1.p[0].userData.id != equally[0]) ? line_1.p[0] : line_1.p[1];
-		
-		var arrP_1 = level_1.p1;
-		var arrP_2 = level_1.p2;			
-		
-		var num = 0;
-		for ( var m = 0; m < level_1.p1.length; m++ ) { if(point.userData.id == level_1.p1[m].point.userData.id) { num = m; break; } }		
-		if(num > 0) { arrP_1 = shiftArray({arr : level_1.p1, count : num}); }
-
-		var num = 0;
-		for ( var m = 0; m < level_1.p2.length; m++ ) { if(point.userData.id == level_1.p2[m].point.userData.id) { num = m; num = (level_1.p2.length - 1) - num; break; } }		
-		if(num > 0) { arrP_2 = shiftArray({arr : level_1.p2, count : -num}); }		
-		
-		
-		//for ( var m = 0; m < arrP_1.length; m++ ) { console.log(arrP_1[m].point.userData.id); }
-		//console.log('----------'); 
-		//for ( var m = 0; m < arrP_2.length; m++ ) { console.log(arrP_2[m].point.userData.id); }
-		console.log('----------'); 	
-
-		var p = [];
-		
-		for ( var m = 0; m < arrP_1.length; m++ )
-		{
-			var exist = false;
-			for ( var m2 = 0; m2 < level_2.p1.length; m2++ )
-			{
-				if(arrP_1[m].point.userData.id == level_2.p1[m2].point.userData.id)
-				{
-					exist = true; 
-					p[1] = arrP_1[m].point;
-					break;
-				}
-			}
-			if(exist) break;
-		}
-		
-		for ( var m = arrP_2.length - 1; m >= 0; m-- )
-		{
-			var exist = false;
-			for ( var m2 = 0; m2 < level_2.p1.length; m2++ )
-			{
-				if(arrP_2[m].point.userData.id == level_2.p1[m2].point.userData.id)
-				{
-					exist = true;
-					p[0] = arrP_2[m].point;
-					break;
-				}
-			}
-			if(exist) break;
-		}					
-	}
-	else
-	{
-		var p = line_1.p;
-	}
-	
-	
-	console.log('index:', cdm.index, 'pId1 : ', p[0].userData.id, 'pId2 : ', p[1].userData.id);
-	
-	return p;
-}
-
-
-
-
-function floorPipe_1(point)
-{
-	var dir = new THREE.Vector3().subVectors( point[1].position, point[0].position ).normalize();
-	dir = new THREE.Vector3().addScaledVector( dir, -0.3 );
-	
-	point[1].position.add(dir);
-	
-	var line_1 = skeleton.cycle[i].line[skeleton.cycle[i].line.length - 1];	
-	
-	var v = line_1.obj.geometry.vertices; 
-	
-	var d = v[11].x - 0.6;
-	
-	
-	if(d < 0) { d2 = d; d = 0; }
-
-		
-	v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = d;
-	line_1.obj.geometry.verticesNeedUpdate = true;
-	
-	line_1.obj.updateMatrixWorld();
-	var pos = line_1.obj.localToWorld(new THREE.Vector3(d, 0, 0));			
-
-
-	
-	line_1.p[1].position.copy(pos);
-	
-	return pos;
-}
 
 
 
@@ -379,13 +87,13 @@ function getSkeleton_2(arrP, cycle, roomId)
 	{
 		var i2 = (i == arrP.length - 1) ? 0 : i + 1;
 		
-		var x1 = arrP[i2].position.z - arrP[i].position.z;
-		var z1 = arrP[i].position.x - arrP[i2].position.x;	
+		var x1 = arrP[i2].pos.z - arrP[i].pos.z;
+		var z1 = arrP[i].pos.x - arrP[i2].pos.x;	
 		var dir = new THREE.Vector3(x1, 0, z1).normalize();						// перпендикуляр стены	
 		dir = new THREE.Vector3().addScaledVector( dir, 0.3 );
 		
-		var pos1 = arrP[i].position.clone();
-		var pos2 = arrP[i2].position.clone();
+		var pos1 = arrP[i].pos.clone();
+		var pos2 = arrP[i2].pos.clone();
 		pos1.add( dir );
 		pos2.add( dir );
 		
@@ -397,15 +105,32 @@ function getSkeleton_2(arrP, cycle, roomId)
 	
 	
 	// 2. создаем точки в местах пересечения математических линий
+	var geometry = new THREE.Geometry();
 	var arr = [];
 	for ( var i = 0; i < arrLine.length; i++ )
 	{
 		var i2 = (i == arrLine.length - 1) ? 0 : i + 1;					
 		
-		var id = arrP[ i2 ].userData.id;
+		var p = {};
+		p.pos = crossPointTwoLine(arrLine[i].p[0].position, arrLine[i].p[1].position, arrLine[i2].p[0].position, arrLine[i2].p[1].position);
+		p.id = arrP[ i2 ].id;
+		arr[arr.length] = p;
 		
-		arr[arr.length] = createPoint_2( crossPointTwoLine(arrLine[i].p[0].position, arrLine[i].p[1].position, arrLine[i2].p[0].position, arrLine[i2].p[1].position), id );
+		geometry.vertices.push(p.pos);
+
+		skeleton.point[skeleton.point.length] = createPoint( p.pos, p.id );
 	}
+	
+	
+	color = (color == 0xff0000) ? 0x0422c9 : 0xff0000;
+	var line = skeleton.line[skeleton.line.length] = new THREE.LineLoop(geometry, new THREE.LineBasicMaterial({color: color }));
+	scene.add(line);
+
+		
+	
+	
+	console.log('--------------');
+	
 	
 	
 	// 3. назначаем точки линиям (в свойства), чтобы понимать, из каких точек состоит отрезок 
@@ -415,74 +140,7 @@ function getSkeleton_2(arrP, cycle, roomId)
 		
 		arrLine[i2].p[0] = arr[i];
 		arrLine[i2].p[1] = arr[i2];
-	}
-	//showSkeleton2(arrLine, cycle, roomId);
-	
-
-
-	for ( var i = 0; i < arrLine.length; i++ )
-	{		
-		var dir = new THREE.Vector3().subVectors( arrLine[i].p[1].position, arrLine[i].p[0].position ).normalize();		
-		dir = new THREE.Vector3(Math.round(dir.x * 100) / 100, Math.round(dir.y * 100) / 100, Math.round(dir.z * 100) / 100);	
-
-		
-		if(!comparePos(arrLine[i].dir, dir)) 
-		{			
-			var i2 = (i == 0) ? arrLine.length - 1 : i - 1;
-			var i3 = (i == arrLine.length - 1) ? 0 : i + 1;	
-
-			var dir1 = new THREE.Vector3().subVectors( arrLine[i3].p[1].position, arrLine[i3].p[0].position ).normalize();
-			if(roomId == 6) console.log(999, arrLine[i].p[0].userData.id, arrLine[i].p[1].userData.id, ' | ', arrLine[i3].p[0].userData.id, arrLine[i3].p[1].userData.id, comparePos(arrLine[i3].dir, dir) )
-					
-		}
-	}
-	
-	
-	// 4. находим линии, которые после пересечения перевернулись
-	// удаляем эти линии, объединяем соседнии линии (если они не параллельны) 
-	for ( var i = 0; i < arrLine.length; i++ )
-	{		
-		var dir = new THREE.Vector3().subVectors( arrLine[i].p[1].position, arrLine[i].p[0].position ).normalize();		
-		dir = new THREE.Vector3(Math.round(dir.x * 100) / 100, Math.round(dir.y * 100) / 100, Math.round(dir.z * 100) / 100);	
-
-		if(roomId == 6) console.log(i, arrLine[i].p[0].userData.id, arrLine[i].p[1].userData.id);
-		if(!comparePos(arrLine[i].dir, dir)) 
-		{			
-			var i2 = (i == 0) ? arrLine.length - 1 : i - 1;
-			var i3 = (i == arrLine.length - 1) ? 0 : i + 1;
-			
-			var saveDir = arrLine[i2].dir;
-			
-			var res = crossPointTwoLine_2(arrLine[i2].p[0].position, arrLine[i2].p[1].position, arrLine[i3].p[0].position, arrLine[i3].p[1].position);	
-
-
-			var dirA1 = new THREE.Vector3().subVectors( arrLine[i2].p[1].position, arrLine[i2].p[0].position ).normalize();
-			var dirB1 = new THREE.Vector3().subVectors( arrLine[i3].p[1].position, arrLine[i3].p[0].position ).normalize();
-			
-			
-			var dirA2 = new THREE.Vector3().subVectors( res[0], arrLine[i2].p[0].position ).normalize();
-			var dirB2 = new THREE.Vector3().subVectors( arrLine[i3].p[1].position, res[0] ).normalize();				
-			
-			arrLine.splice(i, 1);
-			
-			if(arrLine.length < 3) return; // если после удаления линий, в зоен осталось, только 2 точки, то прекращаем строить
-			
-			if(!comparePos(dirA1, dirA2))  { i--; continue; }
-			if(!comparePos(dirB1, dirB2))  { i--; continue; }
-			
-			if(res[1]) { i--; continue; }	// линии НЕ пересеклись (параллельны), пропускаем и идем дальше по циклу
-			
-			// линии пересеклись, объединяем линии (делаем их соседями)
-			var i2 = (i2 > arrLine.length - 1) ? i2-1 : i2;  
-			var i3 = (i > arrLine.length - 1) ? 0 : i;	
-			
-			arrLine[i3].p[0].position = res[0].clone();
-			arrLine[i2].p[1] = arrLine[i3].p[0];
-			arrLine[i2].dir = saveDir;
-
-			i = -1;			
-		}
-	}
+	}	
 	
 	
 	// 5. после того, как все точки и линии выстроины , ищем пересечения между уже построенными отрезками
@@ -498,7 +156,7 @@ function getSkeleton_2(arrP, cycle, roomId)
 			if(arrLine[i].p[1] == arrLine[i2].p[1]) continue;	
  			
 
-			if( CrossLine(arrLine[i].p[0].position, arrLine[i].p[1].position, arrLine[i2].p[0].position, arrLine[i2].p[1].position) )
+			if( CrossLine(arrLine[i].p[0].pos, arrLine[i].p[1].pos, arrLine[i2].p[0].pos, arrLine[i2].p[1].pos) )
 			{ 
 				var flag = true;
 				for ( var i3 = 0; i3 < arrLine[i].cross.length; i3++ )
@@ -512,101 +170,23 @@ function getSkeleton_2(arrP, cycle, roomId)
 				
 				if(flag)
 				{
-					var pos = crossPointTwoLine(arrLine[i].p[0].position, arrLine[i].p[1].position, arrLine[i2].p[0].position, arrLine[i2].p[1].position);	
+					var pos = crossPointTwoLine(arrLine[i].p[0].pos, arrLine[i].p[1].pos, arrLine[i2].p[0].pos, arrLine[i2].p[1].pos);	
 					
-					var point = createPoint_2( pos, 0 );					
+					var point = skeleton.point[skeleton.point.length] = createPoint( pos, 0 );;					
 
 					arrLine[i].cross[arrLine[i].cross.length] = { wall : arrLine[i2], point : point };
 					arrLine[i2].cross[arrLine[i2].cross.length] = { wall : arrLine[i], point : point };						
 				}
 			}
 		}
-	}
-
-
-
-	// 6. находим отрезки, которые пересеклись и делим эти отрезки
-	for ( var i = arrLine.length - 1; i >= 0; i-- )
-	{		
-
-
-		if(arrLine[i].cross.length == 1)
-		{
-			var line = { p : [arrLine[i].cross[0].point, arrLine[i].p[1]] };
-			
-			arrLine.splice(i+1, 0, line);
-			
-			arrLine[i].p[1] = arrLine[i].cross[0].point;
-		}
-		else if(arrLine[i].cross.length > 1)
-		{
-			var arrP = [];
-			
-			arrP[0] = { p : arrLine[i].p[0], dist : 0 };
-			arrP[1] = { p : arrLine[i].p[1], dist : arrLine[i].p[0].position.distanceTo( arrLine[i].p[1].position ) };
-			
-			for ( var i2 = 0; i2 < arrLine[i].cross.length; i2++ )
-			{
-				arrP[arrP.length] = { p : arrLine[i].cross[i2].point, dist : arrLine[i].p[0].position.distanceTo( arrLine[i].cross[i2].point.position ) };
-			}
-			
-			arrP.sort(function (a, b) { return b.dist - a.dist; });	// сортируем поубыванию
-			
-			for ( var i2 = 0; i2 < arrP.length - 2; i2++ )
-			{
-				var line = { p : [arrP[i2 + 1].p, arrP[i2].p] };
-				
-				arrLine.splice(i + 1, 0, line);
-			}			
-			
-			arrLine[i].p[1] = arrP[arrP.length - 2].p;
-		}			
-	}
-
-
-	// вытаскиваем из отрезков точки и переносим в массив
-	var arrP = [];
-	var arrP2 = [];		// точки которые относятся к 2 и более отрезкам
-	for ( var i = 0; i < arrLine.length; i++ )
-	{  //if(roomId == 6) console.log(arrLine[i].p[0].userData.id, arrLine[i].p[1].userData.id);
-		var n = -1;
-		for ( var i2 = 0; i2 < arrP.length; i2++ ) 
-		{ 
-			if(arrP[i2] == arrLine[i].p[0]) { n = i2; break; }
-		}
-		
-		if(n == -1) 
-		{ 		
-			var i2 = arrP.length;
-			arrP[i2] = arrLine[i].p[0]; 
-			arrP[i2].p = [arrLine[i].p[1]];
-		}
-		else 
-		{
-			arrP[i2].p[arrP[i2].p.length] = arrLine[i].p[1];
-
-			var flag = true;
-			for ( var i3 = 0; i3 < arrP2.length; i3++ )
-			{
-				if(arrP2[i3] == arrP[i2]) { flag = false; break; }
-			}
-			if(flag) { arrP2[arrP2.length] = arrP[i2]; }
-		}
 	}	
 	
 	
-	if(arrP2.length == 0) { var zone = [arrP]; }
-	else { var zone = detectRoomZone_2(arrP2, []); }
 	
 	
-	cccc3 = (cccc3 == cccc1) ? cccc2 : cccc1;
-	console.log('--------------');
-	for ( var i = 0; i < zone.length; i++ ) { showSkeleton(zone[i], cycle, roomId); getSkeleton_2(zone[i], cycle + 1, roomId); }
-
-
-	
+	return arr;
 }
-
+var color = 0xff0000;
 
 
 // отображаем информация в console
@@ -647,36 +227,17 @@ function showConsoleSkeleton(arr, roomId)
 function showSkeleton(arrP, cycle, roomId)
 {
 	var n2 = skeleton.cycle.length;
-	skeleton.cycle[n2] = { num : cycle, p : [], line : [], p1 : [], p2 : [] };
+	skeleton.cycle[n2] = { num : cycle, p : [] };
 	
 	for ( var i = 0; i < arrP.length; i++ )
 	{
 		var i2 = (i == arrP.length - 1) ? 0 : i + 1;
 		
-		var point = createPoint( arrP[i].position, arrP[i].userData.id );
-		
-		skeleton.point[skeleton.point.length] = point;
+		skeleton.point[skeleton.point.length] = createPoint( arrP[i].position, arrP[i].userData.id );
 		
 		skeleton.cycle[n2].p[skeleton.cycle[n2].p.length] = arrP[i].position;		
 		
-		var line = createOneWall_4( arrP[i].position, arrP[i2].position, 0x0000FF );
-
-		skeleton.line[skeleton.line.length] = line;
-
-		skeleton.cycle[n2].line[i] = { obj : line, p : [point] };
-		
-		skeleton.cycle[n2].p1[i] = { point : point, line : line };
-	}	
-	
-	
-	
-	for ( var i = 0; i < skeleton.cycle[n2].line.length; i++ )
-	{
-		var i2 = (i == skeleton.cycle[n2].line.length - 1) ? 0 : i + 1;
-		
-		skeleton.cycle[n2].line[i].p[1] = skeleton.cycle[n2].line[i2].p[0];
-		
-		skeleton.cycle[n2].p2[i] = { point : skeleton.cycle[n2].line[i2].p[0], line : skeleton.cycle[n2].line[i] };
+		skeleton.line[skeleton.line.length] = createOneWall_4( arrP[i].position, arrP[i2].position, 0x0000FF );						
 	}	
 }
 
@@ -826,10 +387,9 @@ function checkClockWise_2( arrP )
 
 
 
-//var cccc1 = new THREE.Color('#aaf0d1');
-var cccc1 = 0xff0000;
-var cccc2 = 0x0037ff;
-var cccc3 = cccc2;
+var cccc1 = new THREE.Color('#aaf0d1');
+var cccc2 = 0x808080;
+var cccc3 = cccc1;
 
 
 // создание визуальных точек
@@ -851,7 +411,7 @@ function createPoint_2( pos, id )
 
 
 // создание визуальных линий
-function createOneWall_4( pos1, pos2, color ) 
+function createOneWall_4( pos1, pos2, cccc3 ) 
 {	
 	var d = pos1.distanceTo( pos2 );	
 	
@@ -870,65 +430,6 @@ function createOneWall_4( pos1, pos2, color )
 	
 	return wall;
 }
-
-
-
-
-function showWarmF_1()
-{
-	
-	for ( var i = 0; i < skeleton.cycle.length; i++ )
-	{
-		var i2 = i + 2;	
-
-		if(i+2 > skeleton.cycle.length - 1) 
-		{
-			var line_1 = skeleton.cycle[i].line[skeleton.cycle[i].line.length - 1];
-			
-			var d = (i+1 > skeleton.cycle.length - 1) ? 0.4 : 0.7;
-			
-			var v = line_1.obj.geometry.vertices; 
-			v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = v[11].x - d;
-			line_1.obj.geometry.verticesNeedUpdate = true;	
-
-			var dir = new THREE.Vector3().subVectors( line_1.p[1].position, line_1.p[0].position ).normalize();
-			dir = new THREE.Vector3().addScaledVector( dir, -d );
-			
-			line_1.p[1].position.add(dir);	
-			continue;
-		}
-		
-		if(i2 > skeleton.cycle.length - 1) continue;
-		
-		var line_1 = skeleton.cycle[i].line[skeleton.cycle[i].line.length - 1];		
-		var line_2 = skeleton.cycle[i2].line[0];
-		
-		var pos = crossPointTwoLine(line_1.p[0].position, line_1.p[1].position, line_2.p[0].position, line_2.p[1].position);
-		
-		//skeleton.point[skeleton.point.length] = createPoint( pos, 0 );
-		
-		line_1.p[1].position.copy(pos);			
-		line_2.obj.position.copy(pos);
-		
-		var d1 = line_1.p[0].position.distanceTo( pos );
-		var d2 = line_2.p[1].position.distanceTo( pos );
-		
-		
-		var v = line_1.obj.geometry.vertices; 
-		v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = d1;
-		line_1.obj.geometry.verticesNeedUpdate = true;
-
-		var v = line_2.obj.geometry.vertices; 
-		v[6].x = v[7].x = v[8].x = v[9].x = v[10].x = v[11].x = d2;
-		line_2.obj.geometry.verticesNeedUpdate = true;			
-		
-	console.log(line_1.p[0].userData.id, line_1.p[1].userData.id, line_2.p[0].userData.id, line_2.p[1].userData.id);
-	}
-		
-				
-}
-
-
 
 
  

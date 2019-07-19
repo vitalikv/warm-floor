@@ -156,7 +156,7 @@ canvas {
     <script src="js/overlay.js?<?=$vrs?>"></script>
 	
 	
-	
+	<div style="display:none">
 	<div class="toolbar-wrap">
 	<div class="toolbar">
 	<ul class="toolbar__group">
@@ -167,6 +167,7 @@ canvas {
 	<li data-action ='window' class="button17">окно</li>
 	<li data-action ='door' class="button17">дверь</li>		
 	</ul>
+	</div>
 	</div>
 	</div>
 	
