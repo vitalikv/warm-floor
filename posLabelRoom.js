@@ -111,7 +111,7 @@ function getSkeleton_2(arrP, cycle, roomId)
 	{
 		var i2 = (i == arrLine.length - 1) ? 0 : i + 1;					
 		
-		var p = {};
+		var p = { p: [], pos: [], id: 0 };
 		p.pos = crossPointTwoLine(arrLine[i].p[0].position, arrLine[i].p[1].position, arrLine[i2].p[0].position, arrLine[i2].p[1].position);
 		p.id = arrP[ i2 ].id;
 		p.line = [];
@@ -140,10 +140,7 @@ function getSkeleton_2(arrP, cycle, roomId)
 		var i2 = (i == arr.length - 1) ? 0 : i + 1;	
 		
 		arrLine[i2].p[0] = arr[i];
-		arrLine[i2].p[1] = arr[i2];
-		
-		arr[i].line[arr[i].line.length] = arrLine[i2];
-		arr[i2].line[arr[i2].line.length] = arrLine[i2];	
+		arrLine[i2].p[1] = arr[i2];	
 	}	
 	
 	
@@ -180,14 +177,11 @@ function getSkeleton_2(arrP, cycle, roomId)
 					
 					var point = skeleton.point[skeleton.point.length] = createPoint( pos, 0 );					
 					
-					var p = {pos: point.position.clone(), id: point.userData.id, line: []};
+					var p = {pos: point.position.clone(), p: [], id: point.userData.id, line: []};
 					arr[arr.length] = p;
 					
 					arrLine[i].cross[arrLine[i].cross.length] = { wall : arrLine[i2], point : p };
 					arrLine[i2].cross[arrLine[i2].cross.length] = { wall : arrLine[i], point : p };
-
-					p.line[0] = arrLine[i];
-					p.line[1] = arrLine[i2];
 					
 					exist = true;
 				}
@@ -195,52 +189,115 @@ function getSkeleton_2(arrP, cycle, roomId)
 		}
 	}
 
-
-
-	for ( var i = 0; i < arr.length; i++ )
-	{
-		var p = arr[i];	
-		
-		if(!p.p) { p.p = []; }
-		
-		for ( var i2 = 0; i2 < p.line.length; i2++ )
-		{
-			var line = p.line[i2];
-			
-			if(line.cross.length > 0)
-			{
-				var max = 999999;
-				var pp = null;
-				
-				for ( var i3 = 0; i3 < line.cross.length; i3++ )
-				{
-					if(p == line.cross[i3].point) continue;
-					
-					var d = p.pos.distanceTo( line.cross[i3].point.pos );
-					
-					if(max > d) { pp = line.cross[i3].point; max = d; console.log(p.id, pp.id, d); }
-				}
-				
-				var p2 = (line.p[0] == p) ? line.p[1] : line.p[0];
-				
-				p.p[p.p.length] = pp;
-			}
-			else
-			{ 
-				var p2 = (line.p[0] == p) ? line.p[1] : line.p[0];
-				
-				p.p[p.p.length] = p2;
-			}
-		}
-	}		
+	
 	
 	
 	
 	if(exist)
 	{
+		var arrLine2 = [];
+		
+		// делим точки на отрезки
+		for ( var i = 0; i < arrLine.length; i++ )
+		{
+			var p = [arrLine[i].p[0]];	
+			
+			//if(!p.p) { p.p = []; }
+			
+			for ( var i2 = 0; i2 < arrLine[i].cross.length; i2++ )
+			{
+				p[p.length] = arrLine[i].cross[i2].point; 
+			}
+			
+			p[p.length] = arrLine[i].p[1];
+			
+			var arrP = [];
+			
+			
+			for ( var i2 = 0; i2 < p.length; i2++ )
+			{				
+				arrP[i2] = { p: p[i2], dist: (i2 == 0) ? 0 : p[0].pos.distanceTo( p[i2].pos ) };
+			}
+			
+			arrP.sort(function (a, b) { return a.dist - b.dist; });
+			
+			
+			
+			for ( var i2 = 0; i2 < arrP.length - 1; i2++ )
+			{
+				arrLine2[arrLine2.length] = { p1: arrP[i2].p, p2: arrP[i2+1].p };
+			}
+		}	
+
+		
+		// назначаем токам линии к которым они относятся
 		for ( var i = 0; i < arr.length; i++ )
 		{
-			console.log(arr[i].id, arr[i].p);
+			for ( var i2 = 0; i2 < arrLine2.length; i2++ )
+			{
+				if(arr[i] == arrLine2[i2].p1) { arr[i].line[arr[i].line.length] = arrLine2[i2]; }
+				if(arr[i] == arrLine2[i2].p2) { arr[i].line[arr[i].line.length] = arrLine2[i2]; }
+			}			
+		}
+
+
+		var list = [];
+		
+		for ( var i = 0; i < arrLine2.length; i++ )
+		{
+			var res = getlistPoint(arrLine2[i], arrLine2, [arrLine2[i].p1], 0);
+			
+			if(!detectSameZone_3( list, res )) { list[list.length] = res; }
+			
+			
+			function getlistPoint(startLine, arrLine, list, num)
+			{
+				num++;
+				//if(num>12) return list;
+				
+
+				var arrA = [];
+				
+				for ( var i = 0; i < startLine.p2.line.length; i++ )
+				{
+					var line = startLine.p2.line[i];
+					
+					if(startLine == line) continue;
+					
+					var p2 = (line.p1 == startLine.p2) ? line.p2 : line.p1;
+					
+					var dir1 = new THREE.Vector3().subVectors( p2.pos, startLine.p2.pos ).normalize();
+					var dir2 = new THREE.Vector3().subVectors( startLine.p1.pos, startLine.p2.pos ).normalize();
+					
+					var angle = dir1.angleTo( dir2 );
+					
+					//console.log(angle, p2.id, startLine.p2.id, startLine.p1.id);												
+					
+					arrA[arrA.length] = { angle: angle, line: line };					
+				}
+
+				arrA.sort(function (a, b) { return a.angle - b.angle; });
+				
+				
+				if(arrA[0].line.p1 != list[0]) 
+				{
+					list[list.length] = arrA[0].line.p1;
+					
+					getlistPoint(arrA[0].line, arrLine, list, num);
+				}
+				
+
+				return list;
+			}
+		}
+		
+		
+		console.log(list);
+		
+		
+		for ( var i = 0; i < arrLine2.length; i++ )
+		{
+			//console.log(arrLine2[i]);
 		}
 		
 	}
@@ -255,7 +312,37 @@ var color = 0xff0000;
 
 
 
-
+// проверяем если зона с такими же точками
+function detectSameZone_3( arrRoom, arrP )
+{
+	var flag = false;
+	
+	for ( var i = 0; i < arrRoom.length; i++ )
+	{
+		var ln = 0;
+		
+		if(arrRoom[i].length != arrP.length) { continue; }
+			
+		for ( var i2 = 0; i2 < arrRoom[i].length; i2++ )
+		{
+			for ( var i3 = 0; i3 < arrP.length; i3++ )
+			{
+				if(arrRoom[i][i2] == arrP[i3]) { ln++; }
+			}
+		}
+		
+		if(ln == arrP.length) 
+		{ console.log(ln, arrP.length, arrRoom[i], arrP);
+			//console.log(ln);
+			//var txt = '---p---'; for ( var i3 = 0; i3 < arrP.length; i3++ ) { txt += ' | ' + arrP[i3].userData.id; } console.log(txt);	
+			//var txt = '---zone---'; for ( var i3 = 0; i3 < arrRoom[i].p.length; i3++ ) { txt += ' | ' + arrRoom[i].p[i3].userData.id; } console.log(txt); 
+			flag = true; 
+			break; 
+		}
+	}
+	
+	return flag;
+}
 
 
 
