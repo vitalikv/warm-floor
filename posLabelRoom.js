@@ -114,6 +114,7 @@ function getSkeleton_2(arrP, cycle, roomId)
 		var p = {};
 		p.pos = crossPointTwoLine(arrLine[i].p[0].position, arrLine[i].p[1].position, arrLine[i2].p[0].position, arrLine[i2].p[1].position);
 		p.id = arrP[ i2 ].id;
+		p.line = [];
 		arr[arr.length] = p;
 		
 		geometry.vertices.push(p.pos);
@@ -133,17 +134,22 @@ function getSkeleton_2(arrP, cycle, roomId)
 	
 	
 	
-	// 3. назначаем точки линиям (в свойства), чтобы понимать, из каких точек состоит отрезок 
+	// 3. создаем виртуальные линии
 	for ( var i = 0; i < arr.length; i++ )
 	{
 		var i2 = (i == arr.length - 1) ? 0 : i + 1;	
 		
 		arrLine[i2].p[0] = arr[i];
 		arrLine[i2].p[1] = arr[i2];
+		
+		arr[i].line[arr[i].line.length] = arrLine[i2];
+		arr[i2].line[arr[i2].line.length] = arrLine[i2];	
 	}	
 	
 	
-	// 5. после того, как все точки и линии выстроины , ищем пересечения между уже построенными отрезками
+	var exist = false;
+	
+	// 4. находим пересечения линий (если есть) и создаем точки
 	for ( var i = 0; i < arrLine.length; i++ )
 	{		
 		for ( var i2 = 0; i2 < arrLine.length; i2++ )
@@ -172,15 +178,72 @@ function getSkeleton_2(arrP, cycle, roomId)
 				{
 					var pos = crossPointTwoLine(arrLine[i].p[0].pos, arrLine[i].p[1].pos, arrLine[i2].p[0].pos, arrLine[i2].p[1].pos);	
 					
-					var point = skeleton.point[skeleton.point.length] = createPoint( pos, 0 );;					
+					var point = skeleton.point[skeleton.point.length] = createPoint( pos, 0 );					
+					
+					var p = {pos: point.position.clone(), id: point.userData.id, line: []};
+					arr[arr.length] = p;
+					
+					arrLine[i].cross[arrLine[i].cross.length] = { wall : arrLine[i2], point : p };
+					arrLine[i2].cross[arrLine[i2].cross.length] = { wall : arrLine[i], point : p };
 
-					arrLine[i].cross[arrLine[i].cross.length] = { wall : arrLine[i2], point : point };
-					arrLine[i2].cross[arrLine[i2].cross.length] = { wall : arrLine[i], point : point };						
+					p.line[0] = arrLine[i];
+					p.line[1] = arrLine[i2];
+					
+					exist = true;
 				}
 			}
 		}
-	}	
+	}
+
+
+
+	for ( var i = 0; i < arr.length; i++ )
+	{
+		var p = arr[i];	
+		
+		if(!p.p) { p.p = []; }
+		
+		for ( var i2 = 0; i2 < p.line.length; i2++ )
+		{
+			var line = p.line[i2];
+			
+			if(line.cross.length > 0)
+			{
+				var max = 999999;
+				var pp = null;
+				
+				for ( var i3 = 0; i3 < line.cross.length; i3++ )
+				{
+					if(p == line.cross[i3].point) continue;
+					
+					var d = p.pos.distanceTo( line.cross[i3].point.pos );
+					
+					if(max > d) { pp = line.cross[i3].point; max = d; console.log(p.id, pp.id, d); }
+				}
+				
+				var p2 = (line.p[0] == p) ? line.p[1] : line.p[0];
+				
+				p.p[p.p.length] = pp;
+			}
+			else
+			{ 
+				var p2 = (line.p[0] == p) ? line.p[1] : line.p[0];
+				
+				p.p[p.p.length] = p2;
+			}
+		}
+	}		
 	
+	
+	
+	if(exist)
+	{
+		for ( var i = 0; i < arr.length; i++ )
+		{
+			console.log(arr[i].id, arr[i].p);
+		}
+		
+	}
 	
 	
 	
@@ -189,247 +252,21 @@ function getSkeleton_2(arrP, cycle, roomId)
 var color = 0xff0000;
 
 
-// отображаем информация в console
-function showConsoleSkeleton(arr, roomId)
-{
-	var str = '[' +roomId+ '] ';
-	for ( var i = 0; i < arr.length; i++ )
-	{		
-		str += ' | ';
-		
-		var l = [];
-		var r = [];
-		
-		for ( var i2 = 0; i2 < arr[i].p.length; i2++ )
-		{ 
-			if(arr[i].start[i2] == 1) { l[l.length] = arr[i].p[i2].userData.id; }
-			if(arr[i].start[i2] == 0) { r[r.length] = arr[i].p[i2].userData.id; }
-		}
-		
-		for ( var i2 = 0; i2 < l.length; i2++ )
-		{
-			str += ' '+ l[i2];
-		}
-
-		str += ' ('+arr[i].userData.id +')';
-		
-		for ( var i2 = 0; i2 < r.length; i2++ )
-		{
-			str += ' '+ r[i2];
-		}		
-	}	
-	console.log(str);		
-}
-
-
-
-// показываем линии скелетона
-function showSkeleton(arrP, cycle, roomId)
-{
-	var n2 = skeleton.cycle.length;
-	skeleton.cycle[n2] = { num : cycle, p : [] };
-	
-	for ( var i = 0; i < arrP.length; i++ )
-	{
-		var i2 = (i == arrP.length - 1) ? 0 : i + 1;
-		
-		skeleton.point[skeleton.point.length] = createPoint( arrP[i].position, arrP[i].userData.id );
-		
-		skeleton.cycle[n2].p[skeleton.cycle[n2].p.length] = arrP[i].position;		
-		
-		skeleton.line[skeleton.line.length] = createOneWall_4( arrP[i].position, arrP[i2].position, 0x0000FF );						
-	}	
-}
-
-// показываем линии скелетона
-function showSkeleton2(arrLine, cycle, roomId)
-{
-	
-	for ( var i = 0; i < arrLine.length; i++ )
-	{
-		var f1 = true, f2 = true;
-		for ( var i2 = 0; i2 < skeleton.point.length; i2++ )
-		{
-			if(skeleton.point[i2].position == arrLine[i].p[0].position) f1 = false;
-			if(skeleton.point[i2].position == arrLine[i].p[1].position) f2 = false;
-		}
-		
-		skeleton.point[skeleton.point.length] = createPoint( arrLine[i].p[0].position, arrLine[i].p[0].userData.id );
-		//if(f2) skeleton.point[skeleton.point.length] = createPoint( arrLine[i].p[1].position, arrLine[i].p[1].userData.id );
-		
-		skeleton.line[skeleton.line.length] = createOneWall_4( arrLine[i].p[1].position, arrLine[i].p[0].position, 0x0000FF );						
-	}	
-}
-
-
-
-// находим новые зоны
-function detectRoomZone_2(arrP, zone)
-{			
-	for ( var i = 0; i < arrP.length; i++ )
-	{
-		for ( var m = 0; m < arrP[i].p.length; m++ )
-		{
-			var p = getContour_3([arrP[i], arrP[i].p[m]]);
-			
-			if(p.length < 2){ continue; }
-			if(p[0] != p[p.length - 1]){ continue; }	
-			//if(p.length > 5){ if(p[1] == p[p.length - 2]) continue; }  		
-			if(checkClockWise_2(p) <= 0){ continue; }				
-			
-			
-			var flag = false;
-			for ( var i2 = 0; i2 < zone.length; i2++ )
-			{
-				var num = 0;
-				for ( var i3 = 0; i3 < p.length - 1; i3++ )
-				{
-					for ( var i4 = 0; i4 < zone[i2].length; i4++ )
-					{
-						if(zone[i2][i4] == p[i3]) { num++; break; }
-					}			
-				}
-				if(num == p.length - 1) { flag = true; break; }
-			}
-			if(flag) { continue; }
-
-			
-			var n = zone.length;
-			zone[n] = [];
-			for ( var i2 = 0; i2 < p.length - 1; i2++ )
-			{
-				zone[n][i2] = p[i2];
-			}						
-		}
-	}
-
-	//console.log(zone);
-	
-	return zone;
-}
-
-
-// ищем замкнутый контур (рекурсия)
-function getContour_3(arr)
-{
-	var point = arr[arr.length - 1];	
-	
-
-	if(1==1)
-	{
-		
-		for ( var i = 0; i < point.p.length; i++ )
-		{
-			
-			
-			if(arr[0] == point.p[i]) { arr[arr.length] = point.p[i]; break; }
-			else 
-			{  	
-				var flag = false;
-				for ( var i2 = 0; i2 < arr.length; i2++ )
-				{
-					if(arr[i2] == point.p[i]) { flag = true; break; }
-				}
-				if(flag) continue;
-				
-				var arr2 = [];
-				for ( var i2 = 0; i2 < arr.length; i2++ ) { arr2[i2] = arr[i2]; }
-				arr2[arr2.length] = point.p[i]; 
-				//console.log(i, arr[0].userData.id, point.p[i].userData.id, arr.length);
-				arr2 = getContour_3(arr2);
-				if(arr2.length > 1) if(arr2[0] == arr2[arr2.length - 1]) { arr = arr2; break; };
-			}						
-		}
-	}
-	
-	return arr;
-}
 
 
 
 
-//площадь многоугольника (нужно чтобы понять положительное значение или отрецательное, для того чтобы понять напрвление по часовой или проитв часовой)
-function checkClockWise_2( arrP )
-{  
-	var res = 0;
-	var n = arrP.length;
-	
-	for (var i = 0; i < n; i++) 
-	{		
-		var p1 = arrP[i].position;
-		
-		if (i == 0)
-		{
-			var p2 = arrP[n-1].position;
-			var p3 = arrP[i+1].position;					
-		}
-		else if (i == n-1)
-		{
-			var p2 = arrP[i-1].position;
-			var p3 = arrP[0].position;			
-		}
-		else
-		{
-			var p2 = arrP[i-1].position;
-			var p3 = arrP[i+1].position;			
-		}
-		
-		res += p1.x*(p2.z - p3.z);
-	}
-	
-	
-	res = res / 2;
-	//res = Math.round(res * 10) / 10;
-	
-	return res;
-}
 
 
 
 
-var cccc1 = new THREE.Color('#aaf0d1');
-var cccc2 = 0x808080;
-var cccc3 = cccc1;
 
 
-// создание визуальных точек
-function createPoint_2( pos, id )
-{
-	var point = {};		
-
-	point.position = pos;
-	point.p = [];
-	
-	
-	if(id == 0) { id = countId; countId++; }
-	point.userData = {};	
-	point.userData.id = id;	
-	point.userData.tag = 'point';		
-	
-	return point;
-}
 
 
-// создание визуальных линий
-function createOneWall_4( pos1, pos2, cccc3 ) 
-{	
-	var d = pos1.distanceTo( pos2 );	
-	
-	var material = new THREE.MeshLambertMaterial( { color : 0xedded4, clippingPlanes : [ clippingMaskWall ], lightMap : lightMap_1 } );		
-	var materials = [ new THREE.MeshLambertMaterial( { color: cccc3, clippingPlanes: [ clippingMaskWall ], lightMap : lightMap_1 } ), material.clone(), material.clone() ];		
-	var geometry = createGeometryWall(d, 1, 0.04, 0);	
-	var wall = new THREE.Mesh( geometry, materials ); 
-	
-	wall.position.copy( pos1 );
-	
-	var dir = new THREE.Vector3().subVectors( pos1, pos2 ).normalize();
-	var angleDeg = Math.atan2(dir.x, dir.z);
-	wall.rotation.set(0, angleDeg + Math.PI / 2, 0);			
-	
-	scene.add( wall );
-	
-	return wall;
-}
+
+
+
 
 
  
