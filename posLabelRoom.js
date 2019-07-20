@@ -247,6 +247,8 @@ function getSkeleton_2(arrP, cycle, roomId)
 		{
 			var res = getlistPoint(arrLine2[i], arrLine2, [arrLine2[i].p1], 0);
 			
+			
+			if(checkClockWise_2(res) <= 0){ continue; }
 			if(!detectSameZone_3( list, res )) { list[list.length] = res; }
 			
 			
@@ -347,7 +349,49 @@ function detectSameZone_3( arrRoom, arrP )
 
 
 
-
+//площадь многоугольника (нужно чтобы понять положительное значение или отрецательное, для того чтобы понять напрвление по часовой или проитв часовой)
+function checkClockWise_2( arrP2 )
+{  
+	var res = 0;
+	var arrP = [];
+	
+	for (i = 0; i < arrP2.length; i++)
+	{
+		arrP[arrP.length] = arrP2[i];
+	}
+	arrP[arrP.length] = arrP2[0];
+	
+	var n = arrP.length;
+	
+	for (i = 0; i < n; i++) 
+	{
+		var p1 = arrP[i].pos;
+		
+		if (i == 0)
+		{
+			var p2 = arrP[n-1].pos;
+			var p3 = arrP[i+1].pos;					
+		}
+		else if (i == n-1)
+		{
+			var p2 = arrP[i-1].pos;
+			var p3 = arrP[0].pos;			
+		}
+		else
+		{
+			var p2 = arrP[i-1].pos;
+			var p3 = arrP[i+1].pos;			
+		}
+		
+		res += p1.x*(p2.z - p3.z);
+	}
+	
+	
+	res = res / 2;
+	res = Math.round(res * 10) / 10;
+	
+	return res;
+}
 
 
 
