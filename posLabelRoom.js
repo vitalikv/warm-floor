@@ -29,11 +29,11 @@ function getSkeleton_1(arrRoom)
 		
 		var p = getSkeleton_2(p, 0, arrRoom[s].userData.id);
 
-		var p = getSkeleton_2(p, 0, arrRoom[s].userData.id);
-		var p = getSkeleton_2(p, 0, arrRoom[s].userData.id);
-		var p = getSkeleton_2(p, 0, arrRoom[s].userData.id);
-		var p = getSkeleton_2(p, 0, arrRoom[s].userData.id);
-
+		var p = getSkeleton_2(p[0], 0, arrRoom[s].userData.id);
+		var p = getSkeleton_2(p[0], 0, arrRoom[s].userData.id);
+		var p = getSkeleton_2(p[0], 0, arrRoom[s].userData.id);
+		var p = getSkeleton_2(p[0], 0, arrRoom[s].userData.id);
+var p = getSkeleton_2(p[0], 0, arrRoom[s].userData.id);
 		
 		if(skeleton.cycle.length > 0)
 		{
@@ -104,8 +104,7 @@ function getSkeleton_2(arrP, cycle, roomId)
 	}
 	
 	
-	// 2. создаем точки в местах пересечения математических линий
-	var geometry = new THREE.Geometry();
+	// 2. создаем точки в местах пересечения математических линий	
 	var arr = [];
 	for ( var i = 0; i < arrLine.length; i++ )
 	{
@@ -116,18 +115,9 @@ function getSkeleton_2(arrP, cycle, roomId)
 		p.id = arrP[ i2 ].id;
 		p.line = [];
 		arr[arr.length] = p;
-		
-		geometry.vertices.push(p.pos);
 
-		skeleton.point[skeleton.point.length] = createPoint( p.pos, p.id );
+		//skeleton.point[skeleton.point.length] = createPoint( p.pos, p.id );
 	}
-	
-	
-	color = (color == 0xff0000) ? 0x0422c9 : 0xff0000;
-	var line = skeleton.line[skeleton.line.length] = new THREE.LineLoop(geometry, new THREE.LineBasicMaterial({color: color }));
-	scene.add(line);
-
-		
 	
 	
 	console.log('--------------');
@@ -175,9 +165,10 @@ function getSkeleton_2(arrP, cycle, roomId)
 				{
 					var pos = crossPointTwoLine(arrLine[i].p[0].pos, arrLine[i].p[1].pos, arrLine[i2].p[0].pos, arrLine[i2].p[1].pos);	
 					
-					var point = skeleton.point[skeleton.point.length] = createPoint( pos, 0 );					
+					//var point = skeleton.point[skeleton.point.length] = createPoint( pos, 0 );					
 					
-					var p = {pos: point.position.clone(), p: [], id: point.userData.id, line: []};
+					var id = countId; countId++;
+					var p = {pos: pos, p: [], id: id, line: []};
 					arr[arr.length] = p;
 					
 					arrLine[i].cross[arrLine[i].cross.length] = { wall : arrLine[i2], point : p };
@@ -230,7 +221,7 @@ function getSkeleton_2(arrP, cycle, roomId)
 		}	
 
 		
-		// назначаем токам линии к которым они относятся
+		// назначаем точкам отрезки к которым они относятся
 		for ( var i = 0; i < arr.length; i++ )
 		{
 			for ( var i2 = 0; i2 < arrLine2.length; i2++ )
@@ -241,6 +232,7 @@ function getSkeleton_2(arrP, cycle, roomId)
 		}
 
 
+		// находим контуры
 		var list = [];
 		
 		for ( var i = 0; i < arrLine2.length; i++ )
@@ -294,16 +286,37 @@ function getSkeleton_2(arrP, cycle, roomId)
 		}
 		
 		
-		console.log(list);
+		console.log('list', list);
 		
 		
-		for ( var i = 0; i < arrLine2.length; i++ )
-		{
-			//console.log(arrLine2[i]);
-		}
+		arr = list;
 		
 	}
+	else
+	{
+		var arr = [arr];  console.log('arr', arr);
+	}
 	
+	
+	color = (color == 0xff0000) ? 0x0422c9 : 0xff0000;
+	
+	for ( var i = 0; i < arr.length; i++ )
+	{ 
+		var geometry = new THREE.Geometry();
+		
+		
+		for ( var i2 = 0; i2 < arr[i].length; i2++ )
+		{
+			skeleton.point[skeleton.point.length] = createPoint( arr[i][i2].pos, arr[i][i2].id );
+			geometry.vertices.push(arr[i][i2].pos);
+		}
+
+
+		var line = skeleton.line[skeleton.line.length] = new THREE.LineLoop(geometry, new THREE.LineBasicMaterial({color: color }));
+		scene.add(line);	
+		
+	}
+
 	
 	
 	return arr;
