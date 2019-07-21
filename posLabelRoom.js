@@ -105,7 +105,7 @@ function getSkeleton_2(arrP, cycle, roomId)
 	{
 		var i2 = (i == arrLine.length - 1) ? 0 : i + 1;					
 		
-		var p = { p: [], pos: [], id: 0 };
+		var p = { p: [], pos: new THREE.Vector3(), id: 0 };
 		p.pos = crossPointTwoLine(arrLine[i].p[0].pos, arrLine[i].p[1].pos, arrLine[i2].p[0].pos, arrLine[i2].p[1].pos);
 		p.id = arrP[ i2 ].id;
 		p.line = [];
@@ -127,54 +127,50 @@ function getSkeleton_2(arrP, cycle, roomId)
 	}
 
 
+
 	// 4. находим линии, которые после пересечения перевернулись
 	// удаляем эти линии, объединяем соседнии линии (если они не параллельны) 
 	for ( var i = 0; i < arrLine.length; i++ )
 	{		
 		var dir = new THREE.Vector3().subVectors( arrLine[i].p[1].pos, arrLine[i].p[0].pos ).normalize();		
 		dir = new THREE.Vector3(Math.round(dir.x * 100) / 100, Math.round(dir.y * 100) / 100, Math.round(dir.z * 100) / 100);	
-
 		
-		console.log(arrLine[i].p[0].id, arrLine[i].p[1].id, arrLine[i].dir.clone(), dir);
-		
-		if(!comparePos(arrLine[i].dir, dir)&& 1==2) 
+		if(!comparePos(arrLine[i].dir, dir)&& 1==1) 
 		{			
 			var i2 = (i == 0) ? arrLine.length - 1 : i - 1;
 			var i3 = (i == arrLine.length - 1) ? 0 : i + 1;
 			
-			var saveDir = arrLine[i2].dir;
+			var line1 = arrLine[i2];
+			var line2 = arrLine[i3];
 			
-			var res = crossPointTwoLine_2(arrLine[i2].p[0].pos, arrLine[i2].p[1].pos, arrLine[i3].p[0].pos, arrLine[i3].p[1].pos);	
-
-
-			var dirA1 = new THREE.Vector3().subVectors( arrLine[i2].p[1].pos, arrLine[i2].p[0].pos ).normalize();
-			var dirB1 = new THREE.Vector3().subVectors( arrLine[i3].p[1].pos, arrLine[i3].p[0].pos ).normalize();
+			var saveDir = arrLine[i2].dir;				
 			
+			var res = crossPointTwoLine_2(arrLine[i2].p[0].pos, arrLine[i2].p[1].pos, arrLine[i3].p[0].pos, arrLine[i3].p[1].pos);				
 			
-			var dirA2 = new THREE.Vector3().subVectors( res[0], arrLine[i2].p[0].pos ).normalize();
-			var dirB2 = new THREE.Vector3().subVectors( arrLine[i3].p[1].pos, res[0] ).normalize();				
+			var num = 0;
+			for(var m = 0; m < arr.length; m++) { if(arrLine[i].p[0] == arr[m]) { arr.splice(m, 1); num = m; } }
+			for(var m = 0; m < arr.length; m++) { if(arrLine[i].p[1] == arr[m]) arr.splice(m, 1); }
 			
-			arrLine.splice(i, 1);
+			arrLine.splice(i, 1);			
 			
-			if(arrLine.length < 3) return; // если после удаления линий, в зоен осталось, только 2 точки, то прекращаем строить
-			
-			if(!comparePos(dirA1, dirA2))  { i--; continue; }
-			if(!comparePos(dirB1, dirB2))  { i--; continue; }
-			
-			if(res[1]) { i--; continue; }	// линии НЕ пересеклись (параллельны), пропускаем и идем дальше по циклу
+			if(res[1]) { i = -1; continue; }	// линии НЕ пересеклись (параллельны), пропускаем и идем дальше по циклу
 			
 			// линии пересеклись, объединяем линии (делаем их соседями)
-			var i2 = (i2 > arrLine.length - 1) ? i2-1 : i2;  
-			var i3 = (i > arrLine.length - 1) ? 0 : i;	
 			
-			arrLine[i3].p[0].pos = res[0].clone();
-			arrLine[i2].p[1] = arrLine[i3].p[0];
-			arrLine[i2].dir = saveDir;
+			var p = { p: [], pos: res[0].clone(), id: countId++ };
+			arr.splice(num, 0, p);
+			
+			line2.p[0] = p;
+			line1.p[1] = p;
+			line1.dir = saveDir;
+			
+			console.log(num);
+			console.log(line1.p[0].id, line1.p[1].id);
+			console.log(line2.p[0].id, line2.p[1].id);				
 
 			i = -1;			
 		}
 	}
-
 	
 	
 	
@@ -206,22 +202,16 @@ function getSkeleton_2(arrP, cycle, roomId)
 				}
 				
 				if(flag)
-				{
-					var pos = crossPointTwoLine(arrLine[i].p[0].pos, arrLine[i].p[1].pos, arrLine[i2].p[0].pos, arrLine[i2].p[1].pos);	
-					
-					//var point = skeleton.point[skeleton.point.length] = createPoint( pos, 0 );					
-					
-					var id = countId; countId++;
-					var p = {pos: pos, p: [], id: id, line: []};
-					arr[arr.length] = p;
-					
+				{					
 					arrLine[i].cross[arrLine[i].cross.length] = { wall : arrLine[i2], point : p };
 					arrLine[i2].cross[arrLine[i2].cross.length] = { wall : arrLine[i], point : p };
 					
 					exist = true;
+					break;
 				}
 			}
 		}
+		if(exist)break;
 	}
 
 	
@@ -230,6 +220,10 @@ function getSkeleton_2(arrP, cycle, roomId)
 	
 	if(!exist)
 	{
+		
+		
+		console.log(arr, arrLine);
+		
 		color = (color == 0xff0000) ? 0x0422c9 : 0xff0000;
 		
 		var geometry = new THREE.Geometry();
@@ -240,7 +234,7 @@ function getSkeleton_2(arrP, cycle, roomId)
 			geometry.vertices.push(arr[i].pos);
 		}
 		
-		var line = skeleton.line[skeleton.line.length] = new THREE.LineLoop(geometry, new THREE.LineBasicMaterial({color: color }));
+		var line = skeleton.line[skeleton.line.length] = new THREE.LineLoop(geometry, new THREE.LineBasicMaterial({color: color, depthTest: false, transparent: true }));
 		scene.add(line);	
 		
 		getSkeleton_2(arr, cycle++, roomId);
