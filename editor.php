@@ -156,7 +156,7 @@ canvas {
     <script src="js/overlay.js?<?=$vrs?>"></script>
 	
 	
-	<div style="display:none">
+	<div >
 	<div class="toolbar-wrap">
 	<div class="toolbar">
 	<ul class="toolbar__group">
