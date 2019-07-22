@@ -20,7 +20,6 @@ function getSkeleton_1(arrRoom)
 	
 	for ( var s = 0; s < arrRoom.length; s++ )
 	{		
-		skeleton.cycle = [];
 		p = [];
 		for ( var i = 0; i < arrRoom[s].p.length - 1; i++ ) 
 		{ 		
@@ -29,34 +28,10 @@ function getSkeleton_1(arrRoom)
 		
 		var p = getSkeleton_2(p, 0, arrRoom[s].userData.id);
 
-		
-		if(skeleton.cycle.length > 0)
-		{
-			var res = { max : skeleton.cycle[0].num, n : 0 };
-			
-			for ( var i = 0; i < skeleton.cycle.length; i++ )
-			{
-				if(res.max < skeleton.cycle[i].num) { res.max = skeleton.cycle[i].num; res.n = i; }
-			}
-			
-			//console.log(arrRoom[s].userData.id, res.n, skeleton.cycle);
-			
-			
-			var sumX = 0;
-			var sumZ = 0;
-			for ( var i = 0; i < skeleton.cycle[res.n].p.length; i++ ) 
-			{ 
-				sumX += skeleton.cycle[res.n].p[i].x; 
-				sumZ += skeleton.cycle[res.n].p[i].z;
-			}			
-			
-			arrRoom[s].label.position.set(sumX / skeleton.cycle[res.n].p.length, 0.2, sumZ / skeleton.cycle[res.n].p.length);						
-		}
-		else
-		{
-			//console.log(arrRoom[s].userData.id, skeleton);
-		}
+		console.log(skeleton);
 	}
+	
+	enterTubeBoxWF();
 }
 
 
@@ -111,10 +86,7 @@ function getSkeleton_2(arrP, cycle, roomId)
 		p.line = [];
 		arr[arr.length] = p;
 	}
-	
-	
-	console.log('--------------');
-	
+		
 	
 	
 	// 3. создаем виртуальные линии
@@ -220,10 +192,6 @@ function getSkeleton_2(arrP, cycle, roomId)
 	
 	if(!exist)
 	{
-		
-		
-		console.log(arr, arrLine);
-		
 		color = (color == 0xff0000) ? 0x0422c9 : 0xff0000;
 		
 		var geometry = new THREE.Geometry();
@@ -249,9 +217,46 @@ var color = 0xff0000;
 
 
 
+function enterTubeBoxWF()
+{
+	var offset = 0.3;
+	
+	var geometry = new THREE.Geometry();
+	geometry.vertices.push(new THREE.Vector3(0, 0, -4));
+	geometry.vertices.push(new THREE.Vector3(0, 0, 0));
+	var line_1 = new THREE.Line( geometry, new THREE.LineBasicMaterial({color: 0xff0000, linewidth: 2, depthTest: false, transparent: true }) );
+	scene.add( line_1 );
+
+	var geometry = new THREE.Geometry();
+	geometry.vertices.push(new THREE.Vector3(offset, 0, -4));
+	geometry.vertices.push(new THREE.Vector3(offset, 0, 0));
+	var line_2 = new THREE.Line( geometry, new THREE.LineBasicMaterial({color: 0x0422c9, linewidth: 2, depthTest: false, transparent: true }) );
+	scene.add( line_2 );
 
 
+	intersectTubeBoxWF(line_1, skeleton.line[0]);
+	intersectTubeBoxWF(line_2, skeleton.line[1]);
 
+
+	function intersectTubeBoxWF(line, contour)
+	{
+		var v = contour.geometry.vertices;
+		
+		for ( var i = 0; i < v.length; i++ ) 
+		{ 
+			var i2 = (i == v.length - 1) ? 0 : i + 1;
+			
+			if( CrossLine(v[i], v[i2], line.geometry.vertices[0], line.geometry.vertices[1]) )
+			{
+				var pos = crossPointTwoLine(v[i], v[i2], line.geometry.vertices[0], line.geometry.vertices[1]);
+				
+				skeleton.point[skeleton.point.length] = createPoint( pos, 0 );
+			}
+			
+		}		
+	}
+	
+}
 
 
 
