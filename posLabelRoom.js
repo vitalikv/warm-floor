@@ -16,7 +16,8 @@ function getSkeleton_1(arrRoom)
 	var p = [];
 	skeleton.line = [];	
 	skeleton.point = [];		
-	
+	skeleton.arrP = [];
+	var offset = 0.3;
 	
 	for ( var s = 0; s < arrRoom.length; s++ )
 	{		
@@ -26,12 +27,12 @@ function getSkeleton_1(arrRoom)
 			p[i] = {pos: arrRoom[s].p[i].position.clone(), id: arrRoom[s].p[i].userData.id};			
 		}			
 		
-		var p = getSkeleton_2(p, 0, arrRoom[s].userData.id);
+		var p = getSkeleton_2(p, 0, arrRoom[s].userData.id, offset);
 
 		console.log(skeleton);
 	}
 	
-	enterTubeBoxWF();
+	enterTubeBoxWF(offset);
 }
 
 
@@ -45,7 +46,7 @@ function getSkeleton_1(arrRoom)
 // 4. находим линии, которые после пересечения перевернулись, удаляем эти линии, объединяем соседнии линии (если они не параллельны) 
 // 5. после того, как все точки и линии выстроины , ищем пересечения между уже построенными прямыми
 // 6. находим отрезки, которые пересеклись и делим эти отрезки
-function getSkeleton_2(arrP, cycle, roomId)
+function getSkeleton_2(arrP, cycle, roomId, offset)
 {
 	if(arrP.length == 0) return;
 	
@@ -60,7 +61,7 @@ function getSkeleton_2(arrP, cycle, roomId)
 		var x1 = arrP[i2].pos.z - arrP[i].pos.z;
 		var z1 = arrP[i].pos.x - arrP[i2].pos.x;	
 		var dir = new THREE.Vector3(x1, 0, z1).normalize();						// перпендикуляр стены	
-		dir = new THREE.Vector3().addScaledVector( dir, 0.3 );
+		dir = new THREE.Vector3().addScaledVector( dir, offset );
 		
 		var pos1 = arrP[i].pos.clone();
 		var pos2 = arrP[i2].pos.clone();
@@ -192,20 +193,11 @@ function getSkeleton_2(arrP, cycle, roomId)
 	
 	if(!exist)
 	{
-		color = (color == 0xff0000) ? 0x0422c9 : 0xff0000;
+		color = (color == 0xff0000) ? 0x0422c9 : 0xff0000;		
 		
-		var geometry = new THREE.Geometry();
+		skeleton.arrP[skeleton.arrP.length] = arr;	
 		
-		for ( var i = 0; i < arr.length; i++ )
-		{ 
-			skeleton.point[skeleton.point.length] = createPoint( arr[i].pos, arr[i].id );
-			geometry.vertices.push(arr[i].pos);
-		}
-		
-		var line = skeleton.line[skeleton.line.length] = new THREE.LineLoop(geometry, new THREE.LineBasicMaterial({color: color, depthTest: false, transparent: true }));
-		scene.add(line);	
-		
-		getSkeleton_2(arr, cycle++, roomId);
+		getSkeleton_2(arr, cycle++, roomId, offset);
 	}
 	
 	
@@ -217,26 +209,46 @@ var color = 0xff0000;
 
 
 
-function enterTubeBoxWF()
+function enterTubeBoxWF(offset)
 {
-	var offset = 0.3;
 	
 	var geometry = new THREE.Geometry();
 	geometry.vertices.push(new THREE.Vector3(0, 0, -4));
 	geometry.vertices.push(new THREE.Vector3(0, 0, 0));
-	var line_1 = new THREE.Line( geometry, new THREE.LineBasicMaterial({color: 0xff0000, linewidth: 2, depthTest: false, transparent: true }) );
+	var line_1 = new THREE.Line( geometry, new THREE.LineBasicMaterial({color: 0x0422c9, linewidth: 2, depthTest: false, transparent: true }) );
 	scene.add( line_1 );
 
 	var geometry = new THREE.Geometry();
 	geometry.vertices.push(new THREE.Vector3(offset, 0, -4));
 	geometry.vertices.push(new THREE.Vector3(offset, 0, 0));
-	var line_2 = new THREE.Line( geometry, new THREE.LineBasicMaterial({color: 0x0422c9, linewidth: 2, depthTest: false, transparent: true }) );
+	var line_2 = new THREE.Line( geometry, new THREE.LineBasicMaterial({color: 0xff0000, linewidth: 2, depthTest: false, transparent: true }) );
 	scene.add( line_2 );
+
+
+
+	for ( var i = 0; i < skeleton.arrP.length; i++ )
+	{
+		var arr = skeleton.arrP[i];
+		
+		color = (color == 0xff0000) ? 0x0422c9 : 0xff0000;
+		
+		var geometry = new THREE.Geometry();		
+	
+		for ( var i2 = 0; i2 < arr.length; i2++ )
+		{ 
+			skeleton.point[skeleton.point.length] = createPoint( arr[i2].pos, arr[i2].id );
+			geometry.vertices.push(arr[i2].pos);
+		}
+		
+		var line = skeleton.line[skeleton.line.length] = new THREE.LineLoop(geometry, new THREE.LineBasicMaterial({color: color, depthTest: false, transparent: true }));
+		scene.add(line);	
+	}
+
 
 
 	intersectTubeBoxWF(line_1, skeleton.line[0]);
 	intersectTubeBoxWF(line_2, skeleton.line[1]);
-
+	intersectTubeBoxWF(line_2, skeleton.line[0]);
 
 	function intersectTubeBoxWF(line, contour)
 	{
