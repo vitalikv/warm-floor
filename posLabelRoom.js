@@ -108,7 +108,7 @@ function getSkeleton_2(arrP, cycle, roomId, offset)
 		var dir = new THREE.Vector3().subVectors( arrLine[i].p[1].pos, arrLine[i].p[0].pos ).normalize();		
 		dir = new THREE.Vector3(Math.round(dir.x * 100) / 100, Math.round(dir.y * 100) / 100, Math.round(dir.z * 100) / 100);	
 		
-		if(!comparePos(arrLine[i].dir, dir)&& 1==1) 
+		if(!comparePos(arrLine[i].dir, dir)) 
 		{			
 			var i2 = (i == 0) ? arrLine.length - 1 : i - 1;
 			var i3 = (i == arrLine.length - 1) ? 0 : i + 1;
@@ -191,10 +191,8 @@ function getSkeleton_2(arrP, cycle, roomId, offset)
 	
 	
 	
-	if(!exist)
+	if(!exist && arr.length > 0)
 	{
-		color = (color == 0xff0000) ? 0x0422c9 : 0xff0000;		
-		
 		skeleton.arrP[skeleton.arrP.length] = arr;	
 		
 		getSkeleton_2(arr, cycle++, roomId, offset);
@@ -211,62 +209,148 @@ var color = 0xff0000;
 
 function enterTubeBoxWF(offset)
 {
-	
-	var geometry = new THREE.Geometry();
-	geometry.vertices.push(new THREE.Vector3(0, 0, -4));
-	geometry.vertices.push(new THREE.Vector3(0, 0, 0));
-	var line_1 = new THREE.Line( geometry, new THREE.LineBasicMaterial({color: 0x0422c9, linewidth: 2, depthTest: false, transparent: true }) );
-	scene.add( line_1 );
-
-	var geometry = new THREE.Geometry();
-	geometry.vertices.push(new THREE.Vector3(offset, 0, -4));
-	geometry.vertices.push(new THREE.Vector3(offset, 0, 0));
-	var line_2 = new THREE.Line( geometry, new THREE.LineBasicMaterial({color: 0xff0000, linewidth: 2, depthTest: false, transparent: true }) );
-	scene.add( line_2 );
+	var line = [];	
+	line[0] = {p1: new THREE.Vector3(1, 0, -3), p2: new THREE.Vector3(1, 0, 0)};
+	line[1] = {p1: new THREE.Vector3(offset + 1, 0, -3), p2: new THREE.Vector3(offset + 1, 0, 0)};
 
 
-
+	console.log(skeleton.arrP.length);
 	for ( var i = 0; i < skeleton.arrP.length; i++ )
 	{
-		var arr = skeleton.arrP[i];
-		
-		color = (color == 0xff0000) ? 0x0422c9 : 0xff0000;
-		
-		var geometry = new THREE.Geometry();		
+		var arr = skeleton.arrP[i];		
 	
 		for ( var i2 = 0; i2 < arr.length; i2++ )
 		{ 
 			skeleton.point[skeleton.point.length] = createPoint( arr[i2].pos, arr[i2].id );
-			geometry.vertices.push(arr[i2].pos);
+		}
+
+		// назначаем точка, соседние точки, чтобы можно было построить отдельные отрезки
+		for ( var i2 = 0; i2 < arr.length; i2++ )
+		{
+			var i3 = (i2 == arr.length - 1) ? 0 : i2 + 1;	
+			
+			arr[i2].p = arr[i3];
 		}
 		
-		var line = skeleton.line[skeleton.line.length] = new THREE.LineLoop(geometry, new THREE.LineBasicMaterial({color: color, depthTest: false, transparent: true }));
-		scene.add(line);	
 	}
 
+	
+	var arrP2 = [];
+	intersectTubeBoxWF(line[0], 1, offset*2);
+	intersectTubeBoxWF(line[1], 0, offset*2);
 
-
-	intersectTubeBoxWF(line_1, skeleton.line[0]);
-	intersectTubeBoxWF(line_2, skeleton.line[1]);
-	intersectTubeBoxWF(line_2, skeleton.line[0]);
-
-	function intersectTubeBoxWF(line, contour)
-	{
-		var v = contour.geometry.vertices;
+	// добавляем врезку, чтобы могли подключиться к трубам
+	function intersectTubeBoxWF(line, num, offset)
+	{		
+		var arrP = skeleton.arrP[num];
 		
-		for ( var i = 0; i < v.length; i++ ) 
+		for ( var i = 0; i < arrP.length; i++ ) 
 		{ 
-			var i2 = (i == v.length - 1) ? 0 : i + 1;
+			var i2 = (i == arrP.length - 1) ? 0 : i + 1;
 			
-			if( CrossLine(v[i], v[i2], line.geometry.vertices[0], line.geometry.vertices[1]) )
+			if( CrossLine(arrP[i].pos, arrP[i2].pos, line.p1, line.p2) )
 			{
-				var pos = crossPointTwoLine(v[i], v[i2], line.geometry.vertices[0], line.geometry.vertices[1]);
+				var point = skeleton.point[skeleton.point.length] = createPoint( line.p1, 0 );				
+				var p1 = { p: null, pos: line.p1.clone(), id: point.userData.id };
+				skeleton.arrP[num][skeleton.arrP[num].length] = p1;				
 				
-				skeleton.point[skeleton.point.length] = createPoint( pos, 0 );
+				var pos = crossPointTwoLine(arrP[i].pos, arrP[i2].pos, line.p1, line.p2);
+				
+				var d1 = pos.distanceTo( arrP[i].pos );
+				var d2 = pos.distanceTo( arrP[i2].pos );
+				
+				var n = (d1 > d2)? i2 : i;					
+				var n2 = (d1 > d2)? i : i2;
+				
+				var point = skeleton.point[skeleton.point.length] = createPoint( pos, 0 );				
+				var p = { p: null, pos: pos.clone(), id: point.userData.id };
+				skeleton.arrP[num][skeleton.arrP[num].length] = p;
+				
+				p.p = p1;
+				
+				arrP[n].p = p;
+				
+				
+				
+				if(offset)
+				{					
+					var dir = new THREE.Vector3().subVectors( arrP[n2].pos, pos ).normalize();  
+					var v1 = new THREE.Vector3().addScaledVector( dir, offset );
+					var pos2 = new THREE.Vector3().addVectors( pos, v1 );
+
+					var point = skeleton.point[skeleton.point.length] = createPoint( pos2, 0 );
+					
+					var p = { p: arrP[n2], pos: pos2.clone(), id: point.userData.id };
+					
+					skeleton.arrP[num][skeleton.arrP[num].length] = p;
+					
+					arrP2[arrP2.length] = p;
+				}
+				
+				break;
 			}
 			
 		}		
 	}
+	
+	var num = 2;
+	
+	// пускаем перпендикуляр от точки на прямую
+	for(var i = 0; i < arrP2.length; i++)
+	{
+		var arrP = skeleton.arrP[num];
+		
+		for(var i2 = 0; i2 < arrP.length; i2++)
+		{
+			if(!arrP[i2].p) continue;
+				
+			if(!calScal(arrP[i2].pos, arrP[i2].p.pos, arrP2[i].pos)) continue;	// проверяем попадает ли перпендикуляр от точки на прямую
+			
+			var pos = spPoint(arrP[i2].pos, arrP[i2].p.pos, arrP2[i].pos);  
+			var pos = new THREE.Vector3(pos.x, arrP[i2].pos.y, pos.z);
+			
+			createPoint( pos, 0 );			
+		}
+	}
+			
+	
+	var arrLine = [];
+	
+	for ( var i = 0; i < skeleton.arrP.length; i++ )
+	{
+		var arr = skeleton.arrP[i];		
+		arrLine[i] = [];
+		
+		for ( var i2 = 0; i2 < arr.length; i2++ )
+		{ 
+			if(arr[i2].p) arrLine[i][arrLine[i].length] = { p1: arr[i2], p2: arr[i2].p };
+		}
+		
+	}
+	
+	console.log(arrLine);
+	
+	// рисуем линии
+	for ( var i = 0; i < arrLine.length; i++ )
+	{
+		var arr = arrLine[i];
+		
+		color = (color == 0xff0000) ? 0x0422c9 : 0xff0000;
+		
+		for ( var i2 = 0; i2 < arr.length; i2++ )
+		{  
+			var geometry = new THREE.Geometry();		
+			geometry.vertices.push(arr[i2].p1.pos);
+			geometry.vertices.push(arr[i2].p2.pos);
+			
+			var line = skeleton.line[skeleton.line.length] = new THREE.Line(geometry, new THREE.LineBasicMaterial({color: color, depthTest: false, transparent: true }));
+			scene.add(line);
+			
+		}
+	}	
+	
+
+		
 	
 }
 
