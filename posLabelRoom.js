@@ -195,7 +195,7 @@ function getSkeleton_2(arrP, cycle, roomId, offset)
 	{
 		skeleton.arrP[skeleton.arrP.length] = arr;	
 		
-		getSkeleton_2(arr, cycle++, roomId, offset);
+		//getSkeleton_2(arr, cycle++, roomId, offset);
 	}
 	
 	
@@ -209,6 +209,8 @@ var color = 0xff0000;
 
 function enterTubeBoxWF(offset)
 {
+	if(skeleton.arrP.length == 0) return;
+	
 	var line = [];	
 	line[0] = {p1: new THREE.Vector3(1, 0, -3), p2: new THREE.Vector3(1, 0, 0)};
 	line[1] = {p1: new THREE.Vector3(offset + 1, 0, -3), p2: new THREE.Vector3(offset + 1, 0, 0)};
@@ -236,28 +238,43 @@ function enterTubeBoxWF(offset)
 
 	
 	var arrP2 = [];
-	intersectTubeBoxWF(line[0], 1, offset*2);
-	intersectTubeBoxWF(line[1], 0, offset*2);
+	if(skeleton.arrP.length == 1)
+	{
+		intersectTubeBoxWF(line[0], 0);
+		intersectTubeBoxWF(line[1], 0);		
+	}
+	else
+	{
+		intersectTubeBoxWF(line[0], 1, offset*2);
+		intersectTubeBoxWF(line[1], 0, offset*2);		
+	}
 
-	// добавляем врезку, чтобы могли подключиться к трубам
+	// добавляем врезку, точки подключения к трубам
 	function intersectTubeBoxWF(line, num, offset)
 	{		
-		var arrP = skeleton.arrP[num];
+		var arrP = [];
+		
+		for ( var i = 0; i < skeleton.arrP[num].length; i++ )
+		{
+			arrP[i] = skeleton.arrP[num][i];
+		}
 		
 		for ( var i = 0; i < arrP.length; i++ ) 
 		{ 
 			var i2 = (i == arrP.length - 1) ? 0 : i + 1;
 			
-			if( CrossLine(arrP[i].pos, arrP[i2].pos, line.p1, line.p2) )
+			if(!arrP[i].p) continue;
+			
+			if( CrossLine(arrP[i].pos, arrP[i].p.pos, line.p1, line.p2) )
 			{
 				var point = skeleton.point[skeleton.point.length] = createPoint( line.p1, 0 );				
 				var p1 = { p: null, pos: line.p1.clone(), id: point.userData.id };
 				skeleton.arrP[num][skeleton.arrP[num].length] = p1;				
 				
-				var pos = crossPointTwoLine(arrP[i].pos, arrP[i2].pos, line.p1, line.p2);
+				var pos = crossPointTwoLine(arrP[i].pos, arrP[i].p.pos, line.p1, line.p2);
 				
 				var d1 = pos.distanceTo( arrP[i].pos );
-				var d2 = pos.distanceTo( arrP[i2].pos );
+				var d2 = pos.distanceTo( arrP[i].p.pos );
 				
 				var n = (d1 > d2)? i2 : i;					
 				var n2 = (d1 > d2)? i : i2;
@@ -295,22 +312,26 @@ function enterTubeBoxWF(offset)
 	
 	var num = 2;
 	
-	// пускаем перпендикуляр от точки на прямую
-	for(var i = 0; i < arrP2.length; i++)
+	if(skeleton.arrP.length > num)
 	{
-		var arrP = skeleton.arrP[num];
-		
-		for(var i2 = 0; i2 < arrP.length; i2++)
+		// пускаем перпендикуляр от точки на прямую
+		for(var i = 0; i < arrP2.length; i++)
 		{
-			if(!arrP[i2].p) continue;
+			var arrP = skeleton.arrP[num];
+			
+			for(var i2 = 0; i2 < arrP.length; i2++)
+			{
+				if(!arrP[i2].p) continue;
+					
+				if(!calScal(arrP[i2].pos, arrP[i2].p.pos, arrP2[i].pos)) continue;	// проверяем попадает ли перпендикуляр от точки на прямую
 				
-			if(!calScal(arrP[i2].pos, arrP[i2].p.pos, arrP2[i].pos)) continue;	// проверяем попадает ли перпендикуляр от точки на прямую
-			
-			var pos = spPoint(arrP[i2].pos, arrP[i2].p.pos, arrP2[i].pos);  
-			var pos = new THREE.Vector3(pos.x, arrP[i2].pos.y, pos.z);
-			
-			createPoint( pos, 0 );			
+				var pos = spPoint(arrP[i2].pos, arrP[i2].p.pos, arrP2[i].pos);  
+				var pos = new THREE.Vector3(pos.x, arrP[i2].pos.y, pos.z);
+				
+				createPoint( pos, 0 );			
+			}
 		}
+		
 	}
 			
 	
