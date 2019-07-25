@@ -195,7 +195,7 @@ function getSkeleton_2(arrP, cycle, roomId, offset)
 	{
 		skeleton.arrP[skeleton.arrP.length] = arr;	
 		
-		//getSkeleton_2(arr, cycle++, roomId, offset);
+		getSkeleton_2(arr, cycle++, roomId, offset);
 	}
 	
 	
@@ -207,6 +207,62 @@ var color = 0xff0000;
 
 
 
+offsetArray_1({arr: [0,1,2,3,4,5,6], val:2, reverse: true});
+
+
+// смещаем массив так, чтобы искомое значение было на 0 месте, а затем все последовательны шли за ним
+// arr = [0,1,2,3,4,5,6]; val = 2; результат смещения массива => [ 2, 3, 4, 5, 6, 0, 1 ]
+// если вкл reverse, то в обратную сторону arr = [0,1,2,3,4,5,6]; val = 2; результат смещения массива => [ 2, 1, 0, 6, 5, 4, 3 ]
+function offsetArray_1(cdm)
+{
+	var newArrTgt = [];
+	
+	var arr = cdm.arr;
+	var val = cdm.val;
+	
+	var num = -1;
+
+	for( var i = 0; i < arr.length; i++ )
+	{
+		if(val == arr[i]) { num = i; break; }
+	}
+
+	if(num != -1)
+	{
+		
+		var flag = true;
+
+		if(cdm.reverse)
+		{
+			var end = 0;
+			
+			for( var i = num; i >= end; i-- )
+			{
+				newArrTgt[newArrTgt.length] = arr[i];
+				
+				if(i == 0 && flag) { end = num + 1; i = arr.length; flag = false; }
+			}					
+		}
+		else
+		{
+			var count = arr.length;
+			
+			for( var i = num; i < count; i++ )
+			{
+				newArrTgt[newArrTgt.length] = arr[i];
+				
+				if(i == count - 1 && flag) { count = num; i = -1; flag = false; }
+			}					
+		}
+	}
+
+	console.log(newArrTgt);
+	
+	return newArrTgt;
+}
+
+
+
 function enterTubeBoxWF(offset)
 {
 	if(skeleton.arrP.length == 0) return;
@@ -214,17 +270,15 @@ function enterTubeBoxWF(offset)
 	var line = [];	
 	line[0] = {p1: new THREE.Vector3(1, 0, -3), p2: new THREE.Vector3(1, 0, 0)};
 	line[1] = {p1: new THREE.Vector3(offset + 1, 0, -3), p2: new THREE.Vector3(offset + 1, 0, 0)};
+	
+	
+	//var startline = {p1: new THREE.Vector3(0, 0, -3), p2: new THREE.Vector3(0, 0, 0)};
 
 
 	console.log(skeleton.arrP.length);
 	for ( var i = 0; i < skeleton.arrP.length; i++ )
 	{
 		var arr = skeleton.arrP[i];		
-	
-		for ( var i2 = 0; i2 < arr.length; i2++ )
-		{ 
-			skeleton.point[skeleton.point.length] = createPoint( arr[i2].pos, arr[i2].id );
-		}
 
 		// назначаем точка, соседние точки, чтобы можно было построить отдельные отрезки
 		for ( var i2 = 0; i2 < arr.length; i2++ )
@@ -235,22 +289,103 @@ function enterTubeBoxWF(offset)
 		}
 		
 	}
+	
+	
+	intersectTubeBoxWF({ pos: new THREE.Vector3(1, 0, -3), arrPoint: skeleton.arrP, offset: offset, num: 0 });
 
 	
 	var arrP2 = [];
-	if(skeleton.arrP.length == 1)
-	{
-		intersectTubeBoxWF(line[0], 0);
-		intersectTubeBoxWF(line[1], 0);		
+
+	
+	
+	// добавляем врезку, точки подключения к трубам
+	function intersectTubeBoxWF(cdm)
+	{			
+		var pointPos = cdm.pos;		
+		var num = cdm.num;
+		var arrPoint = cdm.arrPoint[num];
+		var offset = cdm.offset;
+		
+		
+		// перпендикуляр на прямые
+		var p = [];		
+		for(var i = 0; i < arrPoint.length; i++)
+		{
+			var crPos = spPoint(arrPoint[i].pos, arrPoint[i].p.pos, pointPos);
+			var crPos = new THREE.Vector3(crPos.x, pointPos.y, crPos.z);
+
+			if(!CrossLine(arrPoint[i].pos, arrPoint[i].p.pos, pointPos, crPos)) continue;
+			
+			p[p.length] = { pos: crPos, dist: crPos.distanceTo(pointPos), line: {p1: arrPoint[i], p2: arrPoint[i].p} };  			
+		}	
+	
+		// ищем саму ближайшую точку
+		var dist = p[0].dist;
+		var stP = p[0].pos;
+		for(var i = 0; i < p.length; i++)
+		{
+			if(dist > p[i].dist) { dist = p[i].dist; stP = p[i]; }			
+		}
+
+			
+		var d1 = stP.pos.distanceTo(stP.line.p1.pos);
+		var d2 = stP.pos.distanceTo(stP.line.p2.pos);
+		
+		var p = (d1 < d2) ? stP.line.p1 : stP.line.p2;
+		
+		if(d1 < d2) { var p = stP.line.p1; var reverse = true; }
+		else { var p = stP.line.p2; var reverse = false; }
+		
+		var arr = offsetArray_1({arr: arrPoint, val: p, reverse: reverse});
+		
+		arr[arr.length - 1].loopP = stP.pos;
+		
+		arr.unshift({ p: null, pos: stP.pos, id: countId++ });
+		arr.unshift({ p: null, pos: pointPos, id: countId++ });
+		
+		
+		var dir = new THREE.Vector3().subVectors( arr[arr.length - 1].pos, stP.pos ).normalize();  
+		var v1 = new THREE.Vector3().addScaledVector( dir, offset );
+		var pos = new THREE.Vector3().addVectors( stP.pos, v1 );	
+		
+		arr.push({ p: null, pos: pos, id: countId++ });		
+		
+		
+		
+		// выводим конец обратки
+		if(1==1)
+		{
+			var x = arr[1].pos.z - arr[0].pos.z;
+			var z = arr[0].pos.x - arr[1].pos.x;	
+			var dir = new THREE.Vector3(x, 0, z).normalize();		// перпендикуляр стены
+
+			var k = (reverse)? -1 : 1;
+			
+			var v1 = new THREE.Vector3().addScaledVector( dir, offset * k );
+			var pos = new THREE.Vector3().addVectors( arr[0].pos, v1 );
+			
+			arr.push({ p: null, pos: pos, id: countId++ });			
+		}
+		
+		
+		// назначаем точка, соседние точки, чтобы можно было построить отдельные отрезки
+		for ( var i2 = 0; i2 < arr.length - 1; i2++ )
+		{
+			var i3 = i2 + 1;	
+			
+			arr[i2].p = arr[i3];
+			arr[i3].p = null;
+		}
+		
+		skeleton.arrP[num] = arr;
+		console.log(arr);		
+
 	}
-	else
-	{
-		intersectTubeBoxWF(line[0], 1, offset*2);
-		intersectTubeBoxWF(line[1], 0, offset*2);		
-	}
+		
+	
 
 	// добавляем врезку, точки подключения к трубам
-	function intersectTubeBoxWF(line, num, offset)
+	function intersectTubeBoxWF_2(line, num, offset)
 	{		
 		var arrP = [];
 		
@@ -310,29 +445,7 @@ function enterTubeBoxWF(offset)
 		}		
 	}
 	
-	var num = 2;
-	
-	if(skeleton.arrP.length > num)
-	{
-		// пускаем перпендикуляр от точки на прямую
-		for(var i = 0; i < arrP2.length; i++)
-		{
-			var arrP = skeleton.arrP[num];
-			
-			for(var i2 = 0; i2 < arrP.length; i2++)
-			{
-				if(!arrP[i2].p) continue;
-					
-				if(!calScal(arrP[i2].pos, arrP[i2].p.pos, arrP2[i].pos)) continue;	// проверяем попадает ли перпендикуляр от точки на прямую
-				
-				var pos = spPoint(arrP[i2].pos, arrP[i2].p.pos, arrP2[i].pos);  
-				var pos = new THREE.Vector3(pos.x, arrP[i2].pos.y, pos.z);
-				
-				createPoint( pos, 0 );			
-			}
-		}
-		
-	}
+
 			
 	
 	var arrLine = [];
@@ -345,6 +458,8 @@ function enterTubeBoxWF(offset)
 		for ( var i2 = 0; i2 < arr.length; i2++ )
 		{ 
 			if(arr[i2].p) arrLine[i][arrLine[i].length] = { p1: arr[i2], p2: arr[i2].p };
+			
+			skeleton.point[skeleton.point.length] = createPoint( arr[i2].pos, arr[i2].id );
 		}
 		
 	}
