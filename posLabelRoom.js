@@ -297,6 +297,40 @@ function enterTubeBoxWF(offset)
 	var arrP2 = [];
 
 	
+	// находим точку пересечения с контуром линий и находим самую ближайшую 
+	function getCrossPoint(cdm)
+	{
+		var point = null;
+		
+		var pointPos = cdm.pos;		
+		var num = cdm.num;
+		var arrPoint = cdm.arrPoint[num];
+		
+		// перпендикуляр на прямые
+		var p = [];		
+		for(var i = 0; i < arrPoint.length; i++)
+		{
+			var pos = spPoint(arrPoint[i].pos, arrPoint[i].p.pos, pointPos);
+			var pos = new THREE.Vector3(pos.x, pointPos.y, pos.z);
+
+			if(!CrossLine(arrPoint[i].pos, arrPoint[i].p.pos, pointPos, pos)) continue;
+			
+			p[p.length] = { pos: pos, dist: pos.distanceTo(pointPos), line: {p1: arrPoint[i], p2: arrPoint[i].p} };  			
+		}	
+	
+		// ищем саму ближайшую точку
+		if(p.length > 0)
+		{
+			var dist = p[0].dist;
+			var point = p[0];
+			for(var i = 0; i < p.length; i++)
+			{
+				if(dist > p[i].dist) { dist = p[i].dist; point = p[i]; }			
+			}			
+		}
+
+		return point;
+	}
 	
 	// добавляем врезку, точки подключения к трубам
 	function intersectTubeBoxWF(cdm)
@@ -307,31 +341,15 @@ function enterTubeBoxWF(offset)
 		var offset = cdm.offset;
 		
 		
-		// перпендикуляр на прямые
-		var p = [];		
-		for(var i = 0; i < arrPoint.length; i++)
-		{
-			var crPos = spPoint(arrPoint[i].pos, arrPoint[i].p.pos, pointPos);
-			var crPos = new THREE.Vector3(crPos.x, pointPos.y, crPos.z);
+		var stP = getCrossPoint(cdm);
 
-			if(!CrossLine(arrPoint[i].pos, arrPoint[i].p.pos, pointPos, crPos)) continue;
-			
-			p[p.length] = { pos: crPos, dist: crPos.distanceTo(pointPos), line: {p1: arrPoint[i], p2: arrPoint[i].p} };  			
-		}	
-	
-		// ищем саму ближайшую точку
-		var dist = p[0].dist;
-		var stP = p[0].pos;
-		for(var i = 0; i < p.length; i++)
-		{
-			if(dist > p[i].dist) { dist = p[i].dist; stP = p[i]; }			
-		}
-
-			
-		var d1 = stP.pos.distanceTo(stP.line.p1.pos);
-		var d2 = stP.pos.distanceTo(stP.line.p2.pos);
+		if(!stP) return;
 		
-		var p = (d1 < d2) ? stP.line.p1 : stP.line.p2;
+
+		// находим самую ближнию точку из контура с точкой пересечения
+		// полуаем массив начинающийся с точки пересечения
+		var d1 = stP.pos.distanceTo(stP.line.p1.pos);
+		var d2 = stP.pos.distanceTo(stP.line.p2.pos);		
 		
 		if(d1 < d2) { var p = stP.line.p1; var reverse = true; }
 		else { var p = stP.line.p2; var reverse = false; }
@@ -340,20 +358,22 @@ function enterTubeBoxWF(offset)
 		
 		arr[arr.length - 1].loopP = stP.pos;
 		
-		arr.unshift({ p: null, pos: stP.pos, id: countId++ });
-		arr.unshift({ p: null, pos: pointPos, id: countId++ });
+		arr.unshift({ p: null, pos: stP.pos, id: countId++ });		// точка вход в контур
+		//arr.unshift({ p: null, pos: pointPos, id: countId++ });		// точка начала трубы, которая подключается к точки входа
 		
 		
+		// получаем смещение для последней точки в цикле
+		var offset_2 = (cdm.arrPoint.length - 1 >= num + 1) ? offset * 2 : offset;  console.log((cdm.arrPoint.length - 1 >= num + 1), cdm.arrPoint.length - 1, num + 1 );
 		var dir = new THREE.Vector3().subVectors( arr[arr.length - 1].pos, stP.pos ).normalize();  
-		var v1 = new THREE.Vector3().addScaledVector( dir, offset );
+		var v1 = new THREE.Vector3().addScaledVector( dir, offset_2 );
 		var pos = new THREE.Vector3().addVectors( stP.pos, v1 );	
 		
 		arr.push({ p: null, pos: pos, id: countId++ });		
 		
 		
 		
-		// выводим конец обратки
-		if(1==1)
+		// выводим (кусок трубы) конец обратки
+		if(cdm.arrPoint.length - 1 < num + 1)
 		{
 			var x = arr[1].pos.z - arr[0].pos.z;
 			var z = arr[0].pos.x - arr[1].pos.x;	
@@ -365,6 +385,14 @@ function enterTubeBoxWF(offset)
 			var pos = new THREE.Vector3().addVectors( arr[0].pos, v1 );
 			
 			arr.push({ p: null, pos: pos, id: countId++ });			
+		}
+		else
+		{
+			var num2 = (cdm.arrPoint.length - 1 >= num + 2)? num + 2 : num + 1;
+			
+			//var stP = getCrossPoint({pos: pos, arrPoint: cdm.arrPoint, num: num2});
+			
+			//createPoint( stP.pos, 0 );
 		}
 		
 		
@@ -378,8 +406,16 @@ function enterTubeBoxWF(offset)
 		}
 		
 		skeleton.arrP[num] = arr;
-		console.log(arr);		
-
+		//console.log(arr);		
+		
+		
+		if(cdm.arrPoint.length - 1 >= num + 1)
+		{
+			var num2 = (cdm.arrPoint.length - 1 >= num + 2)? num + 2 : num + 1;
+			
+			cdm.num = num2;
+			intersectTubeBoxWF(cdm)
+		}
 	}
 		
 	
