@@ -256,7 +256,7 @@ function offsetArray_1(cdm)
 		}
 	}
 
-	console.log(newArrTgt);
+	//console.log(newArrTgt);
 	
 	return newArrTgt;
 }
@@ -345,14 +345,22 @@ function enterTubeBoxWF(offset)
 
 		if(!stP) return;
 		
-
+		
 		// находим самую ближнию точку из контура с точкой пересечения
 		// полуаем массив начинающийся с точки пересечения
-		var d1 = stP.pos.distanceTo(stP.line.p1.pos);
-		var d2 = stP.pos.distanceTo(stP.line.p2.pos);		
-		
-		if(d1 < d2) { var p = stP.line.p1; var reverse = true; }
-		else { var p = stP.line.p2; var reverse = false; }
+		if(cdm.reverse != undefined)
+		{
+			var reverse = cdm.reverse;
+			var p = (cdm.reverse)? stP.line.p1 : stP.line.p2;
+		}
+		else
+		{
+			var d1 = stP.pos.distanceTo(stP.line.p1.pos);
+			var d2 = stP.pos.distanceTo(stP.line.p2.pos);	
+			
+			if(d1 < d2) { var p = stP.line.p1; var reverse = true; }
+			else { var p = stP.line.p2; var reverse = false; }			
+		}
 		
 		var arr = offsetArray_1({arr: arrPoint, val: p, reverse: reverse});
 		
@@ -361,14 +369,14 @@ function enterTubeBoxWF(offset)
 		arr.unshift({ p: null, pos: stP.pos, id: countId++ });		// точка вход в контур
 		//arr.unshift({ p: null, pos: pointPos, id: countId++ });		// точка начала трубы, которая подключается к точки входа
 		
-		
+		console.log(pointPos, reverse);
 		// получаем смещение для последней точки в цикле
-		var offset_2 = (cdm.arrPoint.length - 1 >= num + 1) ? offset * 2 : offset;  console.log((cdm.arrPoint.length - 1 >= num + 1), cdm.arrPoint.length - 1, num + 1 );
+		var offset_2 = (cdm.arrPoint.length - 1 >= num + 1) ? offset * 2 : offset;  
 		var dir = new THREE.Vector3().subVectors( arr[arr.length - 1].pos, stP.pos ).normalize();  
 		var v1 = new THREE.Vector3().addScaledVector( dir, offset_2 );
-		var pos = new THREE.Vector3().addVectors( stP.pos, v1 );	
+		var posEnd = new THREE.Vector3().addVectors( stP.pos, v1 );	
 		
-		arr.push({ p: null, pos: pos, id: countId++ });		
+		arr.push({ p: null, pos: posEnd, id: countId++ });		
 		
 		
 		
@@ -392,7 +400,7 @@ function enterTubeBoxWF(offset)
 			
 			//var stP = getCrossPoint({pos: pos, arrPoint: cdm.arrPoint, num: num2});
 			
-			//createPoint( stP.pos, 0 );
+			//createPoint( posEnd, 0 );
 		}
 		
 		
@@ -412,9 +420,11 @@ function enterTubeBoxWF(offset)
 		if(cdm.arrPoint.length - 1 >= num + 1)
 		{
 			var num2 = (cdm.arrPoint.length - 1 >= num + 2)? num + 2 : num + 1;
-			
+						
+			cdm.pos = posEnd;
 			cdm.num = num2;
-			intersectTubeBoxWF(cdm)
+			cdm.reverse = reverse;  
+			intersectTubeBoxWF(cdm);
 		}
 	}
 		
