@@ -263,6 +263,7 @@ function offsetArray_1(cdm)
 
 
 
+
 function enterTubeBoxWF(offset)
 {
 	if(skeleton.arrP.length == 0) return;
@@ -313,7 +314,7 @@ function enterTubeBoxWF(offset)
 			var pos = spPoint(arrPoint[i].pos, arrPoint[i].p.pos, pointPos);
 			var pos = new THREE.Vector3(pos.x, pointPos.y, pos.z);
 
-			if(!CrossLine(arrPoint[i].pos, arrPoint[i].p.pos, pointPos, pos)) continue;
+			if(!CrossLine(arrPoint[i].pos, arrPoint[i].p.pos, pointPos, pos)) continue;		// определяем, точка попала в пределы отрезка
 			
 			p[p.length] = { pos: pos, dist: pos.distanceTo(pointPos), line: {p1: arrPoint[i], p2: arrPoint[i].p} };  			
 		}	
@@ -328,9 +329,42 @@ function enterTubeBoxWF(offset)
 				if(dist > p[i].dist) { dist = p[i].dist; point = p[i]; }			
 			}			
 		}
+		else	// нету точки пересечения
+		{
+			var p = [];
+			
+			for(var i = 0; i < arrPoint.length; i++)
+			{
+				p[p.length] = { pos: arrPoint[i].pos, dist: arrPoint[i].pos.distanceTo(pointPos), id: arrPoint[i].id };
+			}
+			
+			var dist = p[0].dist;
+			var point = p[0];
+			for(var i = 0; i < p.length; i++)
+			{
+				if(dist > p[i].dist) { dist = p[i].dist; point = p[i]; }			
+			}
+
+			console.log('point', point);
+			
+			var p1 = cdm.arrPoint[cdm.num1][cdm.arrPoint[cdm.num1].length - 1];
+			var p2 = cdm.arrPoint[cdm.num1][cdm.arrPoint[cdm.num1].length - 2];
+			
+			var pos = spPoint(pointPos, p2.pos, point.pos);
+			var pos = new THREE.Vector3(pos.x, pointPos.y, pos.z);
+			
+			p1.pos.copy(pos);
+			
+			console.log('point2',pointPos, p2.pos);
+
+			
+			return null;
+		}
 
 		return point;
 	}
+
+
 	
 	// добавляем врезку, точки подключения к трубам
 	function intersectTubeBoxWF(cdm)
@@ -369,15 +403,26 @@ function enterTubeBoxWF(offset)
 		arr.unshift({ p: null, pos: stP.pos, id: countId++ });		// точка вход в контур
 		//arr.unshift({ p: null, pos: pointPos, id: countId++ });		// точка начала трубы, которая подключается к точки входа
 		
-		console.log(pointPos, reverse);
+		
 		// получаем смещение для последней точки в цикле
 		var offset_2 = (cdm.arrPoint.length - 1 >= num + 1) ? offset * 2 : offset;  
 		var dir = new THREE.Vector3().subVectors( arr[arr.length - 1].pos, stP.pos ).normalize();  
 		var v1 = new THREE.Vector3().addScaledVector( dir, offset_2 );
 		var posEnd = new THREE.Vector3().addVectors( stP.pos, v1 );	
 		
-		arr.push({ p: null, pos: posEnd, id: countId++ });		
+		// определяем напрвление, куда смотрит новая точка, относительно последеней
+		var dir2 = new THREE.Vector3().subVectors( arr[arr.length - 1].pos, posEnd ).normalize();	
 		
+		
+		// если смотрят в одном направлении, то линия не перевернута, то добавляем последнюю точку
+		if(dir.dot(dir2) > 0.98)
+		{
+			arr.push({ p: null, pos: posEnd, id: countId++ });
+		}
+		else
+		{
+			posEnd = arr[arr.length - 1].pos;
+		}
 		
 		
 		// выводим (кусок трубы) конец обратки
@@ -391,7 +436,7 @@ function enterTubeBoxWF(offset)
 			
 			var v1 = new THREE.Vector3().addScaledVector( dir, offset * k );
 			var pos = new THREE.Vector3().addVectors( arr[0].pos, v1 );
-			
+			console.log('222222');
 			arr.push({ p: null, pos: pos, id: countId++ });			
 		}
 		else
@@ -423,73 +468,12 @@ function enterTubeBoxWF(offset)
 						
 			cdm.pos = posEnd;
 			cdm.num = num2;
+			cdm.num1 = num;
 			cdm.reverse = reverse;  
 			intersectTubeBoxWF(cdm);
 		}
 	}
 		
-	
-
-	// добавляем врезку, точки подключения к трубам
-	function intersectTubeBoxWF_2(line, num, offset)
-	{		
-		var arrP = [];
-		
-		for ( var i = 0; i < skeleton.arrP[num].length; i++ )
-		{
-			arrP[i] = skeleton.arrP[num][i];
-		}
-		
-		for ( var i = 0; i < arrP.length; i++ ) 
-		{ 
-			var i2 = (i == arrP.length - 1) ? 0 : i + 1;
-			
-			if(!arrP[i].p) continue;
-			
-			if( CrossLine(arrP[i].pos, arrP[i].p.pos, line.p1, line.p2) )
-			{
-				var point = skeleton.point[skeleton.point.length] = createPoint( line.p1, 0 );				
-				var p1 = { p: null, pos: line.p1.clone(), id: point.userData.id };
-				skeleton.arrP[num][skeleton.arrP[num].length] = p1;				
-				
-				var pos = crossPointTwoLine(arrP[i].pos, arrP[i].p.pos, line.p1, line.p2);
-				
-				var d1 = pos.distanceTo( arrP[i].pos );
-				var d2 = pos.distanceTo( arrP[i].p.pos );
-				
-				var n = (d1 > d2)? i2 : i;					
-				var n2 = (d1 > d2)? i : i2;
-				
-				var point = skeleton.point[skeleton.point.length] = createPoint( pos, 0 );				
-				var p = { p: null, pos: pos.clone(), id: point.userData.id };
-				skeleton.arrP[num][skeleton.arrP[num].length] = p;
-				
-				p.p = p1;
-				
-				arrP[n].p = p;
-				
-				
-				
-				if(offset)
-				{					
-					var dir = new THREE.Vector3().subVectors( arrP[n2].pos, pos ).normalize();  
-					var v1 = new THREE.Vector3().addScaledVector( dir, offset );
-					var pos2 = new THREE.Vector3().addVectors( pos, v1 );
-
-					var point = skeleton.point[skeleton.point.length] = createPoint( pos2, 0 );
-					
-					var p = { p: arrP[n2], pos: pos2.clone(), id: point.userData.id };
-					
-					skeleton.arrP[num][skeleton.arrP[num].length] = p;
-					
-					arrP2[arrP2.length] = p;
-				}
-				
-				break;
-			}
-			
-		}		
-	}
 	
 
 			
