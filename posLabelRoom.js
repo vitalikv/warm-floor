@@ -314,9 +314,12 @@ function enterTubeBoxWF(offset)
 			var pos = spPoint(arrPoint[i].pos, arrPoint[i].p.pos, pointPos);
 			var pos = new THREE.Vector3(pos.x, pointPos.y, pos.z);
 
-			if(!CrossLine(arrPoint[i].pos, arrPoint[i].p.pos, pointPos, pos)) continue;		// определяем, точка попала в пределы отрезка
+			var replacePoint = false;
+			if(comparePos(pos, arrPoint[i].pos)) { replacePoint = true; }
+			else if(comparePos(pos, arrPoint[i].p.pos)) { replacePoint = true; }
+			else if(!CrossLine(arrPoint[i].pos, arrPoint[i].p.pos, pointPos, pos)) continue;		// определяем, точка попала в пределы отрезка
 			
-			p[p.length] = { pos: pos, dist: pos.distanceTo(pointPos), line: {p1: arrPoint[i], p2: arrPoint[i].p} };  			
+			p[p.length] = { pos: pos, dist: pos.distanceTo(pointPos), line: {p1: arrPoint[i], p2: arrPoint[i].p}, replacePoint: replacePoint };  			
 		}	
 	
 		// ищем саму ближайшую точку
@@ -357,8 +360,8 @@ function enterTubeBoxWF(offset)
 			
 			console.log('point2',pointPos, p2.pos);
 
-			
-			return null;
+			cdm.pos = pos;
+			return getCrossPoint(cdm);
 		}
 
 		return point;
@@ -376,7 +379,7 @@ function enterTubeBoxWF(offset)
 		
 		
 		var stP = getCrossPoint(cdm);
-
+console.log('----------');
 		if(!stP) return;
 		
 		
@@ -385,7 +388,7 @@ function enterTubeBoxWF(offset)
 		if(cdm.reverse != undefined)
 		{
 			var reverse = cdm.reverse;
-			var p = (cdm.reverse)? stP.line.p1 : stP.line.p2;
+			var p = (cdm.reverse)? stP.line.p1 : stP.line.p2;  console.log('-ddd-', p.id);
 		}
 		else
 		{
@@ -398,30 +401,35 @@ function enterTubeBoxWF(offset)
 		
 		var arr = offsetArray_1({arr: arrPoint, val: p, reverse: reverse});
 		
-		arr[arr.length - 1].loopP = stP.pos;
-		
-		arr.unshift({ p: null, pos: stP.pos, id: countId++ });		// точка вход в контур
-		//arr.unshift({ p: null, pos: pointPos, id: countId++ });		// точка начала трубы, которая подключается к точки входа
-		
-		
-		// получаем смещение для последней точки в цикле
-		var offset_2 = (cdm.arrPoint.length - 1 >= num + 1) ? offset * 2 : offset;  
-		var dir = new THREE.Vector3().subVectors( arr[arr.length - 1].pos, stP.pos ).normalize();  
-		var v1 = new THREE.Vector3().addScaledVector( dir, offset_2 );
-		var posEnd = new THREE.Vector3().addVectors( stP.pos, v1 );	
-		
-		// определяем напрвление, куда смотрит новая точка, относительно последеней
-		var dir2 = new THREE.Vector3().subVectors( arr[arr.length - 1].pos, posEnd ).normalize();	
-		
-		
-		// если смотрят в одном направлении, то линия не перевернута, то добавляем последнюю точку
-		if(dir.dot(dir2) > 0.98)
+		if(!stP.replacePoint) 
 		{
-			arr.push({ p: null, pos: posEnd, id: countId++ });
+			arr[arr.length - 1].loopP = stP.pos;
+		
+			arr.unshift({ p: null, pos: stP.pos, id: countId++ });		// точка вход в контур
+			//arr.unshift({ p: null, pos: pointPos, id: countId++ });		// точка начала трубы, которая подключается к точки входа
 		}
-		else
+		
+		if(!stP.replacePoint) 
 		{
-			posEnd = arr[arr.length - 1].pos;
+			// получаем смещение для последней точки в цикле
+			var offset_2 = (cdm.arrPoint.length - 1 >= num + 1) ? offset * 2 : offset;  
+			var dir = new THREE.Vector3().subVectors( arr[arr.length - 1].pos, stP.pos ).normalize();  
+			var v1 = new THREE.Vector3().addScaledVector( dir, offset_2 );
+			var posEnd = new THREE.Vector3().addVectors( stP.pos, v1 );	
+			
+			// определяем напрвление, куда смотрит новая точка, относительно последеней
+			var dir2 = new THREE.Vector3().subVectors( arr[arr.length - 1].pos, posEnd ).normalize();	
+			
+			
+			// если смотрят в одном направлении, то линия не перевернута, то добавляем последнюю точку
+			if(dir.dot(dir2) > 0.98)
+			{
+				arr.push({ p: null, pos: posEnd, id: countId++ });
+			}
+			else
+			{
+				posEnd = arr[arr.length - 1].pos;
+			}			
 		}
 		
 		
@@ -466,7 +474,7 @@ function enterTubeBoxWF(offset)
 		{
 			var num2 = (cdm.arrPoint.length - 1 >= num + 2)? num + 2 : num + 1;
 						
-			cdm.pos = posEnd;
+			cdm.pos = arr[arr.length - 1].pos;
 			cdm.num = num2;
 			cdm.num1 = num;
 			cdm.reverse = reverse;  
