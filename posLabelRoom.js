@@ -388,7 +388,7 @@ console.log('----------');
 		if(cdm.reverse != undefined)
 		{
 			var reverse = cdm.reverse;
-			var p = (cdm.reverse)? stP.line.p1 : stP.line.p2;  console.log('-ddd-', p.id);
+			var p = (cdm.reverse)? stP.line.p1 : stP.line.p2;  
 		}
 		else
 		{
@@ -399,7 +399,18 @@ console.log('----------');
 			else { var p = stP.line.p2; var reverse = false; }			
 		}
 		
+		
+		if(stP.replacePoint)
+		{
+			var d1 = stP.pos.distanceTo(stP.line.p1.pos);
+			var d2 = stP.pos.distanceTo(stP.line.p2.pos);	
+			
+			if(d1 < d2) { var p = stP.line.p1; }
+			else { var p = stP.line.p2; }
+		}
+		
 		var arr = offsetArray_1({arr: arrPoint, val: p, reverse: reverse});
+		console.log('-ddd-', arr, p);
 		
 		if(!stP.replacePoint) 
 		{
@@ -408,8 +419,9 @@ console.log('----------');
 			arr.unshift({ p: null, pos: stP.pos, id: countId++ });		// точка вход в контур
 			//arr.unshift({ p: null, pos: pointPos, id: countId++ });		// точка начала трубы, которая подключается к точки входа
 		}
+
 		
-		if(!stP.replacePoint) 
+		if(1==1) 
 		{
 			// получаем смещение для последней точки в цикле
 			var offset_2 = (cdm.arrPoint.length - 1 >= num + 1) ? offset * 2 : offset;  
@@ -434,7 +446,7 @@ console.log('----------');
 		
 		
 		// выводим (кусок трубы) конец обратки
-		if(cdm.arrPoint.length - 1 < num + 1)
+		if(cdm.arrPoint.length - 1 < num + 1 && 1==2)
 		{
 			var x = arr[1].pos.z - arr[0].pos.z;
 			var z = arr[0].pos.x - arr[1].pos.x;	
@@ -446,14 +458,6 @@ console.log('----------');
 			var pos = new THREE.Vector3().addVectors( arr[0].pos, v1 );
 			console.log('222222');
 			arr.push({ p: null, pos: pos, id: countId++ });			
-		}
-		else
-		{
-			var num2 = (cdm.arrPoint.length - 1 >= num + 2)? num + 2 : num + 1;
-			
-			//var stP = getCrossPoint({pos: pos, arrPoint: cdm.arrPoint, num: num2});
-			
-			//createPoint( posEnd, 0 );
 		}
 		
 		
