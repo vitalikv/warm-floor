@@ -292,7 +292,7 @@ function enterTubeBoxWF(offset)
 	}
 	
 	
-	intersectTubeBoxWF({ pos: new THREE.Vector3(1, 0, -3), arrPoint: skeleton.arrP, offset: offset, num: 0 });
+	intersectTubeBoxWF({ pos: new THREE.Vector3(0, 0, -3), arrPoint: skeleton.arrP, offset: offset, num: 0 });
 
 	
 	var arrP2 = [];
@@ -399,7 +399,7 @@ console.log('----------');
 			else { var p = stP.line.p2; var reverse = false; }			
 		}
 		
-		
+		// точка пересечения находится на другой точки. поэтому новую точку не создаем
 		if(stP.replacePoint)
 		{
 			var d1 = stP.pos.distanceTo(stP.line.p1.pos);
@@ -421,9 +421,10 @@ console.log('----------');
 		}
 
 		
+		
+		// получаем смещение для последней точки в цикле
 		if(1==1) 
-		{
-			// получаем смещение для последней точки в цикле
+		{			
 			var offset_2 = (cdm.arrPoint.length - 1 >= num + 1) ? offset * 2 : offset;  
 			var dir = new THREE.Vector3().subVectors( arr[arr.length - 1].pos, stP.pos ).normalize();  
 			var v1 = new THREE.Vector3().addScaledVector( dir, offset_2 );
@@ -470,8 +471,15 @@ console.log('----------');
 			arr[i3].p = null;
 		}
 		
+		// соединяем линии между конечными и начальными точками соседних контуров 
+		if(cdm.num1 != undefined)
+		{
+			skeleton.arrP[cdm.num1][skeleton.arrP[cdm.num1].length - 1].p = arr[0];
+		}
+		
+		
 		skeleton.arrP[num] = arr;
-		//console.log(arr);		
+		console.log(arr);		
 		
 		
 		if(cdm.arrPoint.length - 1 >= num + 1)
@@ -488,8 +496,90 @@ console.log('----------');
 		
 	
 
+	// находим точку пересечения с контуром линий и находим самую ближайшую 
+	function getCrossPoint_2(cdm)
+	{
+		var point = null;
+		
+		var pointPos = cdm.pos;		
+		var num = cdm.num;
+		var arrPoint = cdm.arrPoint[num];
+		
+		// перпендикуляр на прямые
+		var p = [];		
+		for(var i = 0; i < arrPoint.length; i++)
+		{
+			var pos = spPoint(arrPoint[i].pos, arrPoint[i].p.pos, pointPos);
+			var pos = new THREE.Vector3(pos.x, pointPos.y, pos.z);
+
+			var replacePoint = false;
+			if(comparePos(pos, arrPoint[i].pos)) { replacePoint = true; }
+			else if(comparePos(pos, arrPoint[i].p.pos)) { replacePoint = true; }
+			else if(!CrossLine(arrPoint[i].pos, arrPoint[i].p.pos, pointPos, pos)) continue;		// определяем, точка попала в пределы отрезка
+			
+			p[p.length] = { pos: pos, dist: pos.distanceTo(pointPos), line: {p1: arrPoint[i], p2: arrPoint[i].p}, replacePoint: replacePoint };  			
+		}	
+	
+		// ищем саму ближайшую точку
+		if(p.length > 0)
+		{
+			var dist = p[0].dist;
+			var point = p[0];
+			for(var i = 0; i < p.length; i++)
+			{
+				if(dist > p[i].dist) { dist = p[i].dist; point = p[i]; }			
+			}			
+		}
+
+		return point;
+	}
+
+		
+		
+	intersectTubeBoxWF_2({ pos: skeleton.arrP[skeleton.arrP.length-1][skeleton.arrP[skeleton.arrP.length-1].length-1].pos, arrPoint: skeleton.arrP, offset: offset, num: skeleton.arrP.length-2 });	
+		
+	function intersectTubeBoxWF_2(cdm)
+	{			
+		var pointPos = cdm.pos;		
+		var num = cdm.num;
+		var arrPoint = cdm.arrPoint[num];
+		var offset = cdm.offset;
+		
+		
+		var stP = getCrossPoint_2(cdm);
+
+		if(!stP) return;
+		createPoint( stP.pos, 0 );
+		if(cdm.reverse != undefined)
+		{
+			var reverse = cdm.reverse;
+			var p = (cdm.reverse)? stP.line.p1 : stP.line.p2;  
+		}
+		else
+		{
+			var d1 = stP.pos.distanceTo(stP.line.p1.pos);
+			var d2 = stP.pos.distanceTo(stP.line.p2.pos);	
+			
+			if(d1 < d2) { var p = stP.line.p1; var reverse = true; }
+			else { var p = stP.line.p2; var reverse = false; }			
+		}
+
+		var arr = offsetArray_1({arr: arrPoint, val: p, reverse: reverse});
+		
+		
+		if(!stP.replacePoint) 
+		{	
+			arr.unshift({ p: null, pos: stP.pos, id: countId++ });		// точка вход в контур
+			//arr.unshift({ p: null, pos: pointPos, id: countId++ });		// точка начала трубы, которая подключается к точки входа
+		}
+		
+		console.log('-ooo-', stP.pos);
+	}
 			
 	
+	
+	
+	// конвертируем из точек в линии 
 	var arrLine = [];
 	
 	for ( var i = 0; i < skeleton.arrP.length; i++ )
@@ -506,7 +596,6 @@ console.log('----------');
 		
 	}
 	
-	console.log(arrLine);
 	
 	// рисуем линии
 	for ( var i = 0; i < arrLine.length; i++ )
