@@ -292,11 +292,6 @@ function enterTubeBoxWF(offset)
 	}
 	
 	
-	var geometry = new THREE.Geometry();		
-	geometry.vertices.push(new THREE.Vector3(0, 0, -3));
-	geometry.vertices.push(new THREE.Vector3(0, 0, 0));	
-	var line = new THREE.Line(geometry, new THREE.LineBasicMaterial({color: color, depthTest: false, transparent: true }));
-	scene.add(line);	
 	
 	
 	intersectTubeBoxWF({ pos: new THREE.Vector3(0, 0, -3), arrPoint: skeleton.arrP, offset: offset, num: 0 });
@@ -555,7 +550,7 @@ console.log('----------');
 
 		
 		
-	intersectTubeBoxWF_2({ pos: skeleton.arrP[skeleton.arrP.length-1][skeleton.arrP[skeleton.arrP.length-1].length-1].pos, arrPoint: skeleton.arrP, offset: offset, num: skeleton.arrP.length-2 });	
+	//intersectTubeBoxWF_2({ pos: skeleton.arrP[skeleton.arrP.length-1][skeleton.arrP[skeleton.arrP.length-1].length-1].pos, arrPoint: skeleton.arrP, offset: offset, num: skeleton.arrP.length-2 });	
 		
 	function intersectTubeBoxWF_2(cdm)
 	{			
@@ -593,6 +588,20 @@ console.log('----------');
 		}
 		
 		console.log('-ooo-', stP.pos);
+			
+		
+		var num2 = num - 1;
+		
+		if(num2 >= 0)
+		{
+			var arrP2 = skeleton.arrP[num2];
+			
+			var pc = new THREE.Vector3().subVectors( arrP2[arrP2.length - 1].pos, arrP2[0].pos ).divideScalar( 2 ).add( arrP2[0].pos );
+			
+			//arr[arr.length - 1].pos.copy(pc);
+
+			arr.push({ p: null, pos: pc, id: countId++ });
+		}
 		
 		// назначаем точка, соседние точки, чтобы можно было построить отдельные отрезки
 		for ( var i2 = 0; i2 < arr.length - 1; i2++ )
@@ -601,20 +610,35 @@ console.log('----------');
 			
 			arr[i2].p = arr[i3];
 			arr[i3].p = null;
-		}		
+		}			
 		
 		skeleton.arrP[num] = arr;
+		
+		
+		if(num - 2 >= 0)
+		{						
+			cdm.pos = arr[arr.length - 1].pos;
+			cdm.num = num - 2;
+			cdm.num1 = num;
+			cdm.reverse = reverse;  
+			intersectTubeBoxWF_2(cdm);	console.log(33333);		
+		}
 	}
 			
 	
-	
+	//var arrP = skeleton.arrP;	
+	var arrP = [];
+	for ( var i = 0; i < skeleton.arrP.length; i+=2 )
+	{
+		arrP[arrP.length] = skeleton.arrP[i];
+	}
 	
 	// конвертируем из точек в линии 
 	var arrLine = [];
 	
-	for ( var i = 0; i < skeleton.arrP.length; i++ )
+	for ( var i = 0; i < arrP.length; i++ )
 	{
-		var arr = skeleton.arrP[i];		
+		var arr = arrP[i];		
 		arrLine[i] = [];
 		
 		for ( var i2 = 0; i2 < arr.length; i2++ )
