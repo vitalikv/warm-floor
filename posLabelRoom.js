@@ -292,6 +292,13 @@ function enterTubeBoxWF(offset)
 	}
 	
 	
+	var geometry = new THREE.Geometry();		
+	geometry.vertices.push(new THREE.Vector3(0, 0, -3));
+	geometry.vertices.push(new THREE.Vector3(0, 0, 0));	
+	var line = new THREE.Line(geometry, new THREE.LineBasicMaterial({color: color, depthTest: false, transparent: true }));
+	scene.add(line);	
+	
+	
 	intersectTubeBoxWF({ pos: new THREE.Vector3(0, 0, -3), arrPoint: skeleton.arrP, offset: offset, num: 0 });
 
 	
@@ -314,12 +321,19 @@ function enterTubeBoxWF(offset)
 			var pos = spPoint(arrPoint[i].pos, arrPoint[i].p.pos, pointPos);
 			var pos = new THREE.Vector3(pos.x, pointPos.y, pos.z);
 
+console.log('p', num, pos.distanceTo(pointPos), pos, {p1: arrPoint[i], p2: arrPoint[i].p}, CrossLine(arrPoint[i].pos, arrPoint[i].p.pos, pointPos, pos));
+
+			var dir = new THREE.Vector3().subVectors( pos, pointPos ).normalize();
+			var v1 = new THREE.Vector3().addScaledVector( dir, 10.2 );
+			var p3 = new THREE.Vector3().addVectors( pos, v1 );	
+
 			var replacePoint = false;
 			if(comparePos(pos, arrPoint[i].pos)) { replacePoint = true; }
 			else if(comparePos(pos, arrPoint[i].p.pos)) { replacePoint = true; }
-			else if(!CrossLine(arrPoint[i].pos, arrPoint[i].p.pos, pointPos, pos)) continue;		// определяем, точка попала в пределы отрезка
+			else if(!CrossLine(arrPoint[i].pos, arrPoint[i].p.pos, pointPos, p3)) continue;		// определяем, точка попала за пределы отрезка
 			
-			p[p.length] = { pos: pos, dist: pos.distanceTo(pointPos), line: {p1: arrPoint[i], p2: arrPoint[i].p}, replacePoint: replacePoint };  			
+			p[p.length] = { pos: pos, dist: pos.distanceTo(pointPos), line: {p1: arrPoint[i], p2: arrPoint[i].p}, replacePoint: replacePoint };  
+			
 		}	
 	
 		// ищем саму ближайшую точку
@@ -329,6 +343,7 @@ function enterTubeBoxWF(offset)
 			var point = p[0];
 			for(var i = 0; i < p.length; i++)
 			{
+				//console.log('p', num, p[i]);
 				if(dist > p[i].dist) { dist = p[i].dist; point = p[i]; }			
 			}			
 		}
@@ -348,7 +363,7 @@ function enterTubeBoxWF(offset)
 				if(dist > p[i].dist) { dist = p[i].dist; point = p[i]; }			
 			}
 
-			console.log('point', point);
+			//console.log('point', point);
 			
 			var p1 = cdm.arrPoint[cdm.num1][cdm.arrPoint[cdm.num1].length - 1];
 			var p2 = cdm.arrPoint[cdm.num1][cdm.arrPoint[cdm.num1].length - 2];
@@ -358,7 +373,7 @@ function enterTubeBoxWF(offset)
 			
 			p1.pos.copy(pos);
 			
-			console.log('point2',pointPos, p2.pos);
+			//console.log('point2',pointPos, p2.pos);
 
 			cdm.pos = pos;
 			return getCrossPoint(cdm);
@@ -511,11 +526,15 @@ console.log('----------');
 		{
 			var pos = spPoint(arrPoint[i].pos, arrPoint[i].p.pos, pointPos);
 			var pos = new THREE.Vector3(pos.x, pointPos.y, pos.z);
+			
+			var dir = new THREE.Vector3().subVectors( pos, pointPos ).normalize();
+			var v1 = new THREE.Vector3().addScaledVector( dir, 10.2 );
+			var p3 = new THREE.Vector3().addVectors( pos, v1 );				
 
 			var replacePoint = false;
 			if(comparePos(pos, arrPoint[i].pos)) { replacePoint = true; }
 			else if(comparePos(pos, arrPoint[i].p.pos)) { replacePoint = true; }
-			else if(!CrossLine(arrPoint[i].pos, arrPoint[i].p.pos, pointPos, pos)) continue;		// определяем, точка попала в пределы отрезка
+			else if(!CrossLine(arrPoint[i].pos, arrPoint[i].p.pos, pointPos, p3)) continue;		// определяем, точка попала в пределы отрезка
 			
 			p[p.length] = { pos: pos, dist: pos.distanceTo(pointPos), line: {p1: arrPoint[i], p2: arrPoint[i].p}, replacePoint: replacePoint };  			
 		}	
@@ -549,7 +568,7 @@ console.log('----------');
 		var stP = getCrossPoint_2(cdm);
 
 		if(!stP) return;
-		createPoint( stP.pos, 0 );
+		//createPoint( stP.pos, 0 );
 		if(cdm.reverse != undefined)
 		{
 			var reverse = cdm.reverse;
@@ -574,6 +593,17 @@ console.log('----------');
 		}
 		
 		console.log('-ooo-', stP.pos);
+		
+		// назначаем точка, соседние точки, чтобы можно было построить отдельные отрезки
+		for ( var i2 = 0; i2 < arr.length - 1; i2++ )
+		{
+			var i3 = i2 + 1;	
+			
+			arr[i2].p = arr[i3];
+			arr[i3].p = null;
+		}		
+		
+		skeleton.arrP[num] = arr;
 	}
 			
 	
