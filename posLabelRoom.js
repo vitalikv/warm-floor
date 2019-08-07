@@ -633,6 +633,12 @@ console.log('----------');
 		arrP[arrP.length] = skeleton.arrP[i];
 	}
 	
+	
+	
+	offsetTube_2({arrP: arrP});
+	
+	
+	
 	// конвертируем из точек в линии 
 	var arrLine = [];
 	
@@ -668,12 +674,87 @@ console.log('----------');
 			scene.add(line);
 			
 		}
+	}		
+}
+
+
+
+function offsetTube_2(cdm)
+{
+	var arrP = cdm.arrP;
+	var arrP_2 = [];
+	
+	for ( var i = arrP.length - 1; i > 0; i-- )
+	{
+		var arr = arrP[i];		
+		
+		for ( var i2 = arr.length - 1; i2 > -1; i2-- )
+		{ 
+			arrP_2[arrP_2.length] = arr[i2];			
+		}		
+	}
+	
+	arrP_2.push(arrP[0][arrP[0].length - 1]);
+	arrP = arrP_2;
+	var offset = 0.15;
+	// 1. создаем контур из линий, который смещен во внутрь помещения
+	// создаем 2 точки смещенные во внутрь помещения (имитация прямой линии)
+	var arrLine = [];
+	
+	for ( var i = 0; i < arrP.length - 1; i++ )
+	{
+		var i2 = i + 1;
+		
+		var x1 = arrP[i2].pos.z - arrP[i].pos.z;
+		var z1 = arrP[i].pos.x - arrP[i2].pos.x;	
+		var dir = new THREE.Vector3(x1, 0, z1).normalize();						// перпендикуляр стены	
+		dir = new THREE.Vector3().addScaledVector( dir, offset );
+		
+		var pos1 = arrP[i].pos.clone();
+		var pos2 = arrP[i2].pos.clone();
+		pos1.add( dir );
+		pos2.add( dir );
+				
+		arrLine[arrLine.length] = { p : [ { pos : pos1, id: arrP[i].id }, { pos : pos2, id: arrP[i2].id }] };
+	}
+	
+	
+	// 2. создаем точки в местах пересечения математических линий	
+	var arr = [];
+	for ( var i = 0; i < arrLine.length - 1; i++ )
+	{
+		var i2 =  i + 1;					
+		
+		var p = { p: [], pos: new THREE.Vector3(), id: 0 };
+		p.pos = crossPointTwoLine(arrLine[i].p[0].pos, arrLine[i].p[1].pos, arrLine[i2].p[0].pos, arrLine[i2].p[1].pos);
+		p.id = arrP[ i2 ].id;
+		p.line = [];
+		arr[arr.length] = p;
+	}
+
+
+	arr.unshift(arrLine[0].p[0]);
+	arr.push(arrLine[arrLine.length - 1].p[1]);
+	
+	
+	// рисуем линии
+	for ( var i = 0; i < arr.length-1; i++ )
+	{		
+		var color = 0x000000;
+		
+		var geometry = new THREE.Geometry();		
+		geometry.vertices.push(arr[i].pos);
+		geometry.vertices.push(arr[i+1].pos);
+		console.log(arr[i].id, arr[i+1].id );
+		var line = skeleton.line[skeleton.line.length] = new THREE.Line(geometry, new THREE.LineBasicMaterial({color: color, depthTest: false, transparent: true }));
+		scene.add(line);
+
 	}	
 	
-
-		
-	
 }
+
+
+
 
 
 
