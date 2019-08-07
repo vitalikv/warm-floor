@@ -696,7 +696,7 @@ function offsetTube_2(cdm)
 	
 	arrP_2.push(arrP[0][arrP[0].length - 1]);
 	arrP = arrP_2;
-	var offset = 0.15;
+	var offset = 0.3;
 	// 1. создаем контур из линий, который смещен во внутрь помещения
 	// создаем 2 точки смещенные во внутрь помещения (имитация прямой линии)
 	var arrLine = [];
