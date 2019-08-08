@@ -19,18 +19,14 @@ function getSkeleton_1(arrRoom)
 	skeleton.arrP = [];
 	var offset = 0.3;
 	
-	for ( var s = 0; s < arrRoom.length; s++ )
-	{		
-		p = [];
-		for ( var i = 0; i < arrRoom[s].p.length - 1; i++ ) 
-		{ 		
-			p[i] = {pos: arrRoom[s].p[i].position.clone(), id: arrRoom[s].p[i].userData.id};			
-		}			
-		
-		var p = getSkeleton_2(p, 0, arrRoom[s].userData.id, offset);
+	p = [];
+	for ( var i = 0; i < arrRoom[0].p.length - 1; i++ ) 
+	{ 		
+		p[i] = {pos: arrRoom[0].p[i].position.clone(), id: arrRoom[0].p[i].userData.id};			
+	}			
+	
+	var p = getSkeleton_2(p, 0, arrRoom[0].userData.id, offset);
 
-		console.log(skeleton);
-	}
 	
 	enterTubeBoxWF(offset);
 }
@@ -135,11 +131,7 @@ function getSkeleton_2(arrP, cycle, roomId, offset)
 			
 			line2.p[0] = p;
 			line1.p[1] = p;
-			line1.dir = saveDir;
-			
-			console.log(num);
-			console.log(line1.p[0].id, line1.p[1].id);
-			console.log(line2.p[0].id, line2.p[1].id);				
+			line1.dir = saveDir;			
 
 			i = -1;			
 		}
@@ -275,8 +267,6 @@ function enterTubeBoxWF(offset)
 	
 	//var startline = {p1: new THREE.Vector3(0, 0, -3), p2: new THREE.Vector3(0, 0, 0)};
 
-
-	console.log(skeleton.arrP.length);
 	for ( var i = 0; i < skeleton.arrP.length; i++ )
 	{
 		var arr = skeleton.arrP[i];		
@@ -294,11 +284,11 @@ function enterTubeBoxWF(offset)
 	
 	
 	
-	intersectTubeBoxWF({ pos: new THREE.Vector3(0, 0, -3), arrPoint: skeleton.arrP, offset: offset, num: 0 });
+	var inf = intersectTubeBoxWF({ pos: new THREE.Vector3(-1, 0, -3), arrPoint: skeleton.arrP, offset: offset, num: 0 });
 
+	entryOutlineTool({pos: new THREE.Vector3(-1, 0, -3)});
 	
 	var arrP2 = [];
-
 	
 	// находим точку пересечения с контуром линий и находим самую ближайшую 
 	function getCrossPoint(cdm)
@@ -315,8 +305,6 @@ function enterTubeBoxWF(offset)
 		{
 			var pos = spPoint(arrPoint[i].pos, arrPoint[i].p.pos, pointPos);
 			var pos = new THREE.Vector3(pos.x, pointPos.y, pos.z);
-
-console.log('p', num, pos.distanceTo(pointPos), pos, {p1: arrPoint[i], p2: arrPoint[i].p}, CrossLine(arrPoint[i].pos, arrPoint[i].p.pos, pointPos, pos));
 
 			var dir = new THREE.Vector3().subVectors( pos, pointPos ).normalize();
 			var v1 = new THREE.Vector3().addScaledVector( dir, 10.2 );
@@ -379,6 +367,7 @@ console.log('p', num, pos.distanceTo(pointPos), pos, {p1: arrPoint[i], p2: arrPo
 
 
 	
+	
 	// добавляем врезку, точки подключения к трубам
 	function intersectTubeBoxWF(cdm)
 	{			
@@ -390,7 +379,7 @@ console.log('p', num, pos.distanceTo(pointPos), pos, {p1: arrPoint[i], p2: arrPo
 		
 		var stP = getCrossPoint(cdm);
 console.log('----------');
-		if(!stP) return;
+		if(!stP) return cdm;
 		
 		
 		// находим самую ближнию точку из контура с точкой пересечения
@@ -406,7 +395,7 @@ console.log('----------');
 			var d2 = stP.pos.distanceTo(stP.line.p2.pos);	
 			
 			if(d1 < d2) { var p = stP.line.p1; var reverse = true; }
-			else { var p = stP.line.p2; var reverse = false; }			
+			else { var p = stP.line.p2; var reverse = false; } 
 		}
 		
 		// точка пересечения находится на другой точки. поэтому новую точку не создаем
@@ -420,7 +409,6 @@ console.log('----------');
 		}
 		
 		var arr = offsetArray_1({arr: arrPoint, val: p, reverse: reverse});
-		console.log('-ddd-', arr, p);
 		
 		if(!stP.replacePoint) 
 		{
@@ -488,8 +476,7 @@ console.log('----------');
 		}
 		
 		
-		skeleton.arrP[num] = arr;
-		console.log(arr);		
+		skeleton.arrP[num] = arr;		
 		
 		
 		if(cdm.arrPoint.length - 1 >= num + 1)
@@ -502,130 +489,13 @@ console.log('----------');
 			cdm.reverse = reverse;  
 			intersectTubeBoxWF(cdm);
 		}
+		
+		return cdm;
 	}
 		
 	
 
-	// находим точку пересечения с контуром линий и находим самую ближайшую 
-	function getCrossPoint_2(cdm)
-	{
-		var point = null;
-		
-		var pointPos = cdm.pos;		
-		var num = cdm.num;
-		var arrPoint = cdm.arrPoint[num];
-		
-		// перпендикуляр на прямые
-		var p = [];		
-		for(var i = 0; i < arrPoint.length; i++)
-		{
-			var pos = spPoint(arrPoint[i].pos, arrPoint[i].p.pos, pointPos);
-			var pos = new THREE.Vector3(pos.x, pointPos.y, pos.z);
-			
-			var dir = new THREE.Vector3().subVectors( pos, pointPos ).normalize();
-			var v1 = new THREE.Vector3().addScaledVector( dir, 10.2 );
-			var p3 = new THREE.Vector3().addVectors( pos, v1 );				
 
-			var replacePoint = false;
-			if(comparePos(pos, arrPoint[i].pos)) { replacePoint = true; }
-			else if(comparePos(pos, arrPoint[i].p.pos)) { replacePoint = true; }
-			else if(!CrossLine(arrPoint[i].pos, arrPoint[i].p.pos, pointPos, p3)) continue;		// определяем, точка попала в пределы отрезка
-			
-			p[p.length] = { pos: pos, dist: pos.distanceTo(pointPos), line: {p1: arrPoint[i], p2: arrPoint[i].p}, replacePoint: replacePoint };  			
-		}	
-	
-		// ищем саму ближайшую точку
-		if(p.length > 0)
-		{
-			var dist = p[0].dist;
-			var point = p[0];
-			for(var i = 0; i < p.length; i++)
-			{
-				if(dist > p[i].dist) { dist = p[i].dist; point = p[i]; }			
-			}			
-		}
-
-		return point;
-	}
-
-		
-		
-	//intersectTubeBoxWF_2({ pos: skeleton.arrP[skeleton.arrP.length-1][skeleton.arrP[skeleton.arrP.length-1].length-1].pos, arrPoint: skeleton.arrP, offset: offset, num: skeleton.arrP.length-2 });	
-		
-	function intersectTubeBoxWF_2(cdm)
-	{			
-		var pointPos = cdm.pos;		
-		var num = cdm.num;
-		var arrPoint = cdm.arrPoint[num];
-		var offset = cdm.offset;
-		
-		
-		var stP = getCrossPoint_2(cdm);
-
-		if(!stP) return;
-		//createPoint( stP.pos, 0 );
-		if(cdm.reverse != undefined)
-		{
-			var reverse = cdm.reverse;
-			var p = (cdm.reverse)? stP.line.p1 : stP.line.p2;  
-		}
-		else
-		{
-			var d1 = stP.pos.distanceTo(stP.line.p1.pos);
-			var d2 = stP.pos.distanceTo(stP.line.p2.pos);	
-			
-			if(d1 < d2) { var p = stP.line.p1; var reverse = true; }
-			else { var p = stP.line.p2; var reverse = false; }			
-		}
-
-		var arr = offsetArray_1({arr: arrPoint, val: p, reverse: reverse});
-		
-		
-		if(!stP.replacePoint) 
-		{	
-			arr.unshift({ p: null, pos: stP.pos, id: countId++ });		// точка вход в контур
-			//arr.unshift({ p: null, pos: pointPos, id: countId++ });		// точка начала трубы, которая подключается к точки входа
-		}
-		
-		console.log('-ooo-', stP.pos);
-			
-		
-		var num2 = num - 1;
-		
-		if(num2 >= 0)
-		{
-			var arrP2 = skeleton.arrP[num2];
-			
-			var pc = new THREE.Vector3().subVectors( arrP2[arrP2.length - 1].pos, arrP2[0].pos ).divideScalar( 2 ).add( arrP2[0].pos );
-			
-			//arr[arr.length - 1].pos.copy(pc);
-
-			arr.push({ p: null, pos: pc, id: countId++ });
-		}
-		
-		// назначаем точка, соседние точки, чтобы можно было построить отдельные отрезки
-		for ( var i2 = 0; i2 < arr.length - 1; i2++ )
-		{
-			var i3 = i2 + 1;	
-			
-			arr[i2].p = arr[i3];
-			arr[i3].p = null;
-		}			
-		
-		skeleton.arrP[num] = arr;
-		
-		
-		if(num - 2 >= 0)
-		{						
-			cdm.pos = arr[arr.length - 1].pos;
-			cdm.num = num - 2;
-			cdm.num1 = num;
-			cdm.reverse = reverse;  
-			intersectTubeBoxWF_2(cdm);	console.log(33333);		
-		}
-	}
-			
-	
 	//var arrP = skeleton.arrP;	
 	var arrP = [];
 	for ( var i = 0; i < skeleton.arrP.length; i+=2 )
@@ -634,8 +504,8 @@ console.log('----------');
 	}
 	
 	
-	
-	offsetTube_2({arrP: arrP});
+	// создаем обратку
+	offsetTube_2({arrP: arrP, reverse: inf.reverse});
 	
 	
 	
@@ -674,7 +544,7 @@ console.log('----------');
 			scene.add(line);
 			
 		}
-	}		
+	} 		
 }
 
 
@@ -693,7 +563,7 @@ function offsetTube_2(cdm)
 			arrP_2[arrP_2.length] = arr[i2];			
 		}		
 	}
-	
+	console.log('reverse', cdm.reverse);
 	arrP_2.push(arrP[0][arrP[0].length - 1]);
 	arrP = arrP_2;
 	var offset = 0.3;
@@ -708,7 +578,9 @@ function offsetTube_2(cdm)
 		var x1 = arrP[i2].pos.z - arrP[i].pos.z;
 		var z1 = arrP[i].pos.x - arrP[i2].pos.x;	
 		var dir = new THREE.Vector3(x1, 0, z1).normalize();						// перпендикуляр стены	
-		dir = new THREE.Vector3().addScaledVector( dir, offset );
+		
+		var kof = (cdm.reverse) ? -1 : 1;
+		dir = new THREE.Vector3().addScaledVector( dir, offset * kof );
 		
 		var pos1 = arrP[i].pos.clone();
 		var pos2 = arrP[i2].pos.clone();
@@ -745,13 +617,107 @@ function offsetTube_2(cdm)
 		var geometry = new THREE.Geometry();		
 		geometry.vertices.push(arr[i].pos);
 		geometry.vertices.push(arr[i+1].pos);
-		console.log(arr[i].id, arr[i+1].id );
+		
 		var line = skeleton.line[skeleton.line.length] = new THREE.Line(geometry, new THREE.LineBasicMaterial({color: color, depthTest: false, transparent: true }));
 		scene.add(line);
-
 	}	
 	
 }
+
+
+
+
+
+// интсрумент указывающий вход в контур
+function entryOutlineTool(cdm)
+{
+	var arrPoint = [];
+	arrPoint[arrPoint.length] = new THREE.Vector2(0, 0);
+	arrPoint[arrPoint.length] = new THREE.Vector2(0.2, 0.3);
+	arrPoint[arrPoint.length] = new THREE.Vector2(0.08, 0.3);
+	arrPoint[arrPoint.length] = new THREE.Vector2(0.08, 1.0);
+	arrPoint[arrPoint.length] = new THREE.Vector2(-0.08, 1.0);
+	arrPoint[arrPoint.length] = new THREE.Vector2(-0.08, 0.3);
+	arrPoint[arrPoint.length] = new THREE.Vector2(-0.2, 0.3);
+	
+	var shape = new THREE.Shape( arrPoint );
+	var material = new THREE.MeshLambertMaterial( { color : 0xff0000, lightMap : lightMap_1 } );
+	
+	var tool = new THREE.Mesh( new THREE.ExtrudeGeometry( shape, { bevelEnabled: false, amount: -0.1 } ), material );
+	tool.userData.tag = 'tool_strelka_wf';
+	scene.add(tool);
+	
+	var pos = (cdm.pos) ? cdm.pos : new THREE.Vector3();
+	
+	tool.position.copy(pos); 
+	tool.rotation.x = Math.PI/2;
+	tool.rotation.z = Math.PI;
+}
+
+
+
+// перемещение стрелки
+function clickToolEntryOutline(intersect)
+{
+	var obj = intersect.object;
+	
+	obj_selected = obj;
+	
+	//offset = new THREE.Vector3().subVectors( obj.position, intersect.point );	
+	
+	planeMath2.position.copy( intersect.point );
+	planeMath2.rotation.set( 0, 0, 0 );
+	
+	
+}
+
+
+
+// перемещение стрелки
+function moveToolEntryOutline(event)
+{
+	var intersects = rayIntersect( event, planeMath2, 'one' );
+	
+	//var pos = new THREE.Vector3().addVectors( intersects[0].point, offset );
+	
+	//obj_selected.position.copy( pos );
+	
+	
+	var p = [];
+	var arrP = room[0].p; 
+	for ( var i = 0; i < arrP.length - 1; i++ ) 
+	{ 		
+		var pos2 = spPoint(arrP[i].position, arrP[i+1].position, intersects[0].point);				// перпендикуляр от точки на отрезок
+		var pos2 = new THREE.Vector3(pos2.x, pos.y, pos2.z);
+
+		var dir = new THREE.Vector3().subVectors( pos2, pos ).normalize();
+		var v1 = new THREE.Vector3().addScaledVector( dir, 10.2 );
+		var p3 = new THREE.Vector3().addVectors( pos, v1 );	
+
+		if(!CrossLine(arrP[i].position, arrP[i+1].position, pos, p3)) continue;		// определяем, точка попала за пределы отрезка	
+
+		p[p.length] = { pos: pos2, dist: pos.distanceTo(pos2) }; 
+	}		
+
+	// ищем саму ближайшую точку
+	if(p.length > 0)
+	{
+		var dist = p[0].dist;
+		var pos2 = p[0].pos;
+		for(var i = 0; i < p.length; i++)
+		{
+			if(dist > p[i].dist) { dist = p[i].dist; pos2 = p[i].pos; }			
+		}			
+		
+		var dir = new THREE.Vector3().subVectors( intersects[0].point, pos2 ).normalize();
+		var angleDeg = Math.atan2(dir.z, dir.x);
+		obj_selected.rotation.z = angleDeg - Math.PI/2;
+
+		obj_selected.position.copy( pos2 );
+	}
+	
+}
+
 
 
 

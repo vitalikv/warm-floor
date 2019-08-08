@@ -123,7 +123,7 @@ function detectRayHit( event, cdm )
 
 	if ( cdm == 'click' )
 	{
-		var cdm = { intersects: um, tag: [ 'toggle_gp', 'pivot', 'gizmo', 'move_control', 'd_tool', 'controll_wd' ] };		
+		var cdm = { intersects: um, tag: [ 'tool_strelka_wf', 'toggle_gp', 'pivot', 'gizmo', 'move_control', 'd_tool', 'controll_wd' ] };		
 		if ( camera == cameraTop ) { cdm.tag[ cdm.tag.length ] = 'window'; cdm.tag[ cdm.tag.length ] = 'door'; }
 		num = clickFirstHit_1( cdm );
 		
@@ -143,12 +143,12 @@ function detectRayHit( event, cdm )
 			}
 		}
 
-		var cdm = { intersects: um, tag: [ 'window', 'door', 'toggle_gp', 'move_control', 'gizmo', 'door_leaf', 'obj', 'point', 'wall', 'room', 'ceiling', 'group_pop' ] };
+		var cdm = { intersects: um, tag: [ 'window', 'door', 'tool_strelka_wf', 'toggle_gp', 'move_control', 'gizmo', 'door_leaf', 'obj', 'point', 'wall', 'room', 'ceiling', 'group_pop' ] };
 		if ( num == -1 ) { num = clickFirstHit_2( cdm ); }
 	}
 	else
 	{
-		var cdm = { intersects: um, tag: [ 'controll_wd', 'window', 'door', 'toggle_gp', 'move_control', 'gizmo', 'door_leaf', 'point', 'wall' ] };
+		var cdm = { intersects: um, tag: [ 'controll_wd', 'window', 'door', 'tool_strelka_wf', 'toggle_gp', 'move_control', 'gizmo', 'door_leaf', 'point', 'wall' ] };
 		num = clickFirstHit_1( cdm );  
 	}
 
@@ -238,6 +238,7 @@ function clickRayHit( rayhit )
 		else if ( tag == 'wall' ) { clickWall_2D( rayhit ); }
 		else if ( tag == 'point' ) { clickPoint( rayhit ); }
 		else if ( tag == 'obj' ) { clickPopObj( rayhit ); }
+		else if ( tag == 'tool_strelka_wf' ) { clickToolEntryOutline(rayhit); }
 		else if ( tag == 'group_pop' ) { clickPopObj( rayhit ); }
 		else if ( tag == 'window' ) { clickWD( rayhit ); }
 		else if ( tag == 'door' ) { clickWD( rayhit ); }
@@ -360,6 +361,7 @@ function onDocumentMouseMove( event )
 		else if ( tag == 'room' ) { cameraMove3D( event ); }
 		else if ( tag == 'toggle_gp' ) { moveToggleGp( event ); }
 		else if ( tag == 'free_dw' ) { dragWD_2( event, obj ); }
+		else if ( tag == 'tool_strelka_wf' ) { moveToolEntryOutline(event); }
 	}
 	else 
 	{
