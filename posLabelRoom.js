@@ -500,7 +500,49 @@ console.log('----------');
 	var arrP = [];
 	for ( var i = 0; i < skeleton.arrP.length; i+=2 )
 	{
+		console.log(skeleton.arrP[i]);
 		arrP[arrP.length] = skeleton.arrP[i];
+	}
+	
+	
+	var p = arrP[arrP.length - 1];
+	
+	arrP[arrP.length - 1] = checkAngle(p);
+	
+	function checkAngle(p)
+	{
+		for ( var i = 0; i < p.length; i++ )
+		{
+			var p1 = p[i];
+			
+			var p2 = p1.p;
+			if(!p2) continue;		
+			
+			var p3 = p2.p;
+			if(!p3) continue;
+			
+			var dir1 = new THREE.Vector3().subVectors( p1.pos, p2.pos ).normalize();
+			var dir2 = new THREE.Vector3().subVectors( p3.pos, p2.pos ).normalize();
+			
+			var angle = dir1.angleTo( dir2 );
+			console.log(angle, p1.id, p2.id, p3.id);
+			
+			if(angle < 0.03) 
+			{
+				p1.p = p3;
+				var pN = [];
+				for( var i2 = 0; i2 < p.length; i2++ ) 
+				{ 
+					if(p2 == p[i2]) continue; 
+					
+					pN[pN.length] = p[i2];
+				}
+				console.log('-000-');
+				p = checkAngle(pN);
+			}
+		}	
+		
+		return p;
 	}
 	
 	
@@ -679,7 +721,7 @@ function moveToolEntryOutline(event)
 	var intersects = rayIntersect( event, planeMath2, 'one' );
 	
 	//var pos = new THREE.Vector3().addVectors( intersects[0].point, offset );
-	
+	var pos = intersects[0].point;
 	//obj_selected.position.copy( pos );
 	
 	
@@ -687,7 +729,7 @@ function moveToolEntryOutline(event)
 	var arrP = room[0].p; 
 	for ( var i = 0; i < arrP.length - 1; i++ ) 
 	{ 		
-		var pos2 = spPoint(arrP[i].position, arrP[i+1].position, intersects[0].point);				// перпендикуляр от точки на отрезок
+		var pos2 = spPoint(arrP[i].position, arrP[i+1].position, pos);				// перпендикуляр от точки на отрезок
 		var pos2 = new THREE.Vector3(pos2.x, pos.y, pos2.z);
 
 		var dir = new THREE.Vector3().subVectors( pos2, pos ).normalize();
@@ -709,7 +751,7 @@ function moveToolEntryOutline(event)
 			if(dist > p[i].dist) { dist = p[i].dist; pos2 = p[i].pos; }			
 		}			
 		
-		var dir = new THREE.Vector3().subVectors( intersects[0].point, pos2 ).normalize();
+		var dir = new THREE.Vector3().subVectors( pos, pos2 ).normalize();
 		var angleDeg = Math.atan2(dir.z, dir.x);
 		obj_selected.rotation.z = angleDeg - Math.PI/2;
 
