@@ -25,8 +25,7 @@ function getSkeleton_1(arrRoom)
 		p[i] = {pos: arrRoom[0].p[i].position.clone(), id: arrRoom[0].p[i].userData.id};			
 	}			
 	
-	var p = getSkeleton_2(p, 0, arrRoom[0].userData.id, offset);
-
+	var p = getSkeleton_2(p, 0, arrRoom[0].userData.id, offset);	
 	
 	enterTubeBoxWF(offset);
 }
@@ -110,7 +109,7 @@ function getSkeleton_2(arrP, cycle, roomId, offset)
 			var i3 = (i == arrLine.length - 1) ? 0 : i + 1;
 			
 			var line1 = arrLine[i2];
-			var line2 = arrLine[i3];
+			var line2 = arrLine[i3];		
 			
 			var saveDir = arrLine[i2].dir;				
 			
@@ -136,8 +135,6 @@ function getSkeleton_2(arrP, cycle, roomId, offset)
 			i = -1;			
 		}
 	}
-	
-	
 	
 	var exist = false;
 	
@@ -183,7 +180,7 @@ function getSkeleton_2(arrP, cycle, roomId, offset)
 	
 	
 	
-	if(!exist && arr.length > 0)
+	if(!exist && arr.length > 2)
 	{
 		skeleton.arrP[skeleton.arrP.length] = arr;	
 		
@@ -328,12 +325,34 @@ function enterTubeBoxWF(offset)
 			{
 				//console.log('p', num, p[i]);
 				if(dist > p[i].dist) { dist = p[i].dist; point = p[i]; }			
-			}			
+			}
+
+			var p = [];		
+			for(var i = 0; i < arrPoint.length; i++)
+			{
+				if(!CrossLine(arrPoint[i].pos, arrPoint[i].p.pos, pointPos, point.pos)) continue;		// определяем пересекаются ли отрезки
+				
+				var pos = spPoint(arrPoint[i].pos, arrPoint[i].p.pos, point.pos);
+				var pos = new THREE.Vector3(pos.x, pointPos.y, pos.z);				
+				
+				p[p.length] = { pos: pos, dist: pos.distanceTo(pointPos), line: {p1: arrPoint[i], p2: arrPoint[i].p}, replacePoint: false };  	
+			}
+
+			if(p.length > 0)
+			{
+				var dist = p[0].dist;
+				var point = p[0];
+				for(var i = 0; i < p.length; i++)
+				{
+					//console.log('p', num, p[i]);
+					if(dist > p[i].dist) { dist = p[i].dist; point = p[i]; }			
+				}				
+			}
 		}
-		else	// нету точки пересечения
+		else if(1==2)	// нету точки пересечения
 		{
 			var p = [];
-			
+			console.log(22, arrPoint);
 			for(var i = 0; i < arrPoint.length; i++)
 			{
 				p[p.length] = { pos: arrPoint[i].pos, dist: arrPoint[i].pos.distanceTo(pointPos), id: arrPoint[i].id };
@@ -351,6 +370,7 @@ function enterTubeBoxWF(offset)
 			var p1 = cdm.arrPoint[cdm.num1][cdm.arrPoint[cdm.num1].length - 1];
 			var p2 = cdm.arrPoint[cdm.num1][cdm.arrPoint[cdm.num1].length - 2];
 			
+			
 			var pos = spPoint(pointPos, p2.pos, point.pos);
 			var pos = new THREE.Vector3(pos.x, pointPos.y, pos.z);
 			
@@ -360,6 +380,22 @@ function enterTubeBoxWF(offset)
 
 			cdm.pos = pos;
 			return getCrossPoint(cdm);
+		}
+		else  if(1==1)
+		{
+			for(var i = 0; i < arrPoint.length; i++)
+			{
+				p[p.length] = { pos: pos, dist: arrPoint[i].pos.distanceTo(pointPos), line: {p1: arrPoint[i], p2: arrPoint[i].p}, replacePoint: true };  				
+			}
+
+			var dist = p[0].dist;
+			var point = p[0];
+			for(var i = 0; i < p.length; i++)
+			{
+				if(dist > p[i].dist) { dist = p[i].dist; point = p[i]; }			
+			}
+
+			console.log('p', point);
 		}
 
 		return point;
@@ -434,7 +470,7 @@ console.log('----------');
 			
 			// если смотрят в одном направлении, то линия не перевернута, то добавляем последнюю точку
 			if(dir.dot(dir2) > 0.98)
-			{
+			{ 
 				arr.push({ p: null, pos: posEnd, id: countId++ });
 			}
 			else
@@ -480,7 +516,7 @@ console.log('----------');
 		
 		
 		if(cdm.arrPoint.length - 1 >= num + 1)
-		{
+		{ 
 			var num2 = (cdm.arrPoint.length - 1 >= num + 2)? num + 2 : num + 1;
 						
 			cdm.pos = arr[arr.length - 1].pos;
@@ -500,16 +536,16 @@ console.log('----------');
 	var arrP = [];
 	for ( var i = 0; i < skeleton.arrP.length; i+=2 )
 	{
-		console.log(skeleton.arrP[i]);
 		arrP[arrP.length] = skeleton.arrP[i];
 	}
 	
 	
-	var p = arrP[arrP.length - 1];
+
 	
-	arrP[arrP.length - 1] = checkAngle(p);
+	arrP[arrP.length - 1] = checkAngle_2(arrP[arrP.length - 1]);
 	
-	function checkAngle(p)
+	// удаляем точку, если у нее острый угол
+	function checkAngle_1(p)
 	{
 		for ( var i = 0; i < p.length; i++ )
 		{
@@ -538,13 +574,60 @@ console.log('----------');
 					pN[pN.length] = p[i2];
 				}
 				console.log('-000-');
-				p = checkAngle(pN);
+				p = checkAngle_1(pN);
 			}
 		}	
 		
 		return p;
 	}
 	
+
+
+	// добавляем точку, если острый угол
+	function checkAngle_2(p)
+	{
+		for ( var i = 0; i < p.length; i++ )
+		{
+			var p1 = p[i];
+			
+			var p2 = p1.p;
+			if(!p2) continue;		
+			
+			var p3 = p2.p;
+			if(!p3) continue;
+			
+			var dir1 = new THREE.Vector3().subVectors( p1.pos, p2.pos ).normalize();
+			var dir2 = new THREE.Vector3().subVectors( p3.pos, p2.pos ).normalize();
+			
+			var angle = dir1.angleTo( dir2 );
+			console.log(angle, p1.id, p2.id, p3.id);
+			
+			if(angle < 0.5) 
+			{
+				var dir = new THREE.Vector3().subVectors( dir2, dir1 ).normalize();
+				var dir1 = new THREE.Vector3().addScaledVector( dir, 0.025 );
+				var dir2 = new THREE.Vector3().addScaledVector( dir, -0.025 );
+				
+				var p4 = {p: null, pos: p2.pos.clone().add(dir1), id: countId++};
+				p2.pos.add(dir2);
+				
+				p2.p = p4;
+				p4.p = p3;
+				
+				p.splice(i+2, 0, p4);
+				
+
+				console.log('-000-');
+				p = checkAngle_2(p);
+			}
+		}	
+		
+		return p;
+	}
+	
+	
+
+
 	
 	// создаем обратку
 	offsetTube_2({arrP: arrP, reverse: inf.reverse});
