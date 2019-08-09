@@ -310,7 +310,15 @@ function enterTubeBoxWF(offset)
 			var replacePoint = false;
 			if(comparePos(pos, arrPoint[i].pos)) { replacePoint = true; }
 			else if(comparePos(pos, arrPoint[i].p.pos)) { replacePoint = true; }
-			else if(!CrossLine(arrPoint[i].pos, arrPoint[i].p.pos, pointPos, p3)) continue;		// определяем, точка попала за пределы отрезка
+			else if(!CrossLine(arrPoint[i].pos, arrPoint[i].p.pos, pointPos, p3))		// определяем, точка попала за пределы отрезка
+			{
+				replacePoint = true;
+				
+				var d1 = pos.distanceTo(arrPoint[i].pos);
+				var d2 = pos.distanceTo(arrPoint[i].p.pos);	
+				
+				pos = (d1 < d2) ? arrPoint[i].pos : arrPoint[i].p.pos;
+			}
 			
 			p[p.length] = { pos: pos, dist: pos.distanceTo(pointPos), line: {p1: arrPoint[i], p2: arrPoint[i].p}, replacePoint: replacePoint };  
 			
@@ -327,75 +335,6 @@ function enterTubeBoxWF(offset)
 				if(dist > p[i].dist) { dist = p[i].dist; point = p[i]; }			
 			}
 
-			var p = [];		
-			for(var i = 0; i < arrPoint.length; i++)
-			{
-				if(!CrossLine(arrPoint[i].pos, arrPoint[i].p.pos, pointPos, point.pos)) continue;		// определяем пересекаются ли отрезки
-				
-				var pos = spPoint(arrPoint[i].pos, arrPoint[i].p.pos, point.pos);
-				var pos = new THREE.Vector3(pos.x, pointPos.y, pos.z);				
-				
-				p[p.length] = { pos: pos, dist: pos.distanceTo(pointPos), line: {p1: arrPoint[i], p2: arrPoint[i].p}, replacePoint: false };  	
-			}
-
-			if(p.length > 0)
-			{
-				var dist = p[0].dist;
-				var point = p[0];
-				for(var i = 0; i < p.length; i++)
-				{
-					//console.log('p', num, p[i]);
-					if(dist > p[i].dist) { dist = p[i].dist; point = p[i]; }			
-				}				
-			}
-		}
-		else if(1==2)	// нету точки пересечения
-		{
-			var p = [];
-			console.log(22, arrPoint);
-			for(var i = 0; i < arrPoint.length; i++)
-			{
-				p[p.length] = { pos: arrPoint[i].pos, dist: arrPoint[i].pos.distanceTo(pointPos), id: arrPoint[i].id };
-			}
-			
-			var dist = p[0].dist;
-			var point = p[0];
-			for(var i = 0; i < p.length; i++)
-			{
-				if(dist > p[i].dist) { dist = p[i].dist; point = p[i]; }			
-			}
-
-			//console.log('point', point);
-			
-			var p1 = cdm.arrPoint[cdm.num1][cdm.arrPoint[cdm.num1].length - 1];
-			var p2 = cdm.arrPoint[cdm.num1][cdm.arrPoint[cdm.num1].length - 2];
-			
-			
-			var pos = spPoint(pointPos, p2.pos, point.pos);
-			var pos = new THREE.Vector3(pos.x, pointPos.y, pos.z);
-			
-			p1.pos.copy(pos);
-			
-			//console.log('point2',pointPos, p2.pos);
-
-			cdm.pos = pos;
-			return getCrossPoint(cdm);
-		}
-		else  if(1==1)
-		{
-			for(var i = 0; i < arrPoint.length; i++)
-			{
-				p[p.length] = { pos: pos, dist: arrPoint[i].pos.distanceTo(pointPos), line: {p1: arrPoint[i], p2: arrPoint[i].p}, replacePoint: true };  				
-			}
-
-			var dist = p[0].dist;
-			var point = p[0];
-			for(var i = 0; i < p.length; i++)
-			{
-				if(dist > p[i].dist) { dist = p[i].dist; point = p[i]; }			
-			}
-
-			console.log('p', point);
 		}
 
 		return point;
